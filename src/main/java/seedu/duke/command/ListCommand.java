@@ -1,4 +1,4 @@
 package seedu.duke.command;
 
-public class ListCommand {
+public class ListCommand extends Command{
 }

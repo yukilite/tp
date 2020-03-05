@@ -1,4 +1,4 @@
 package seedu.duke.command;
 
-public class UpdateCommand {
+public class UpdateCommand extends Command{
 }
