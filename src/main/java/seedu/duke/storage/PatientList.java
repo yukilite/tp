@@ -1,19 +1,12 @@
 package seedu.duke.storage;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import seedu.duke.record.Patient;
 
 public class PatientList {
-    private List<Patient> patientList;
+    private static List<Patient> patientList;
 
-    //constructor if no existing save file, create new list
-    public PatientList(){
-        this.patientList = new ArrayList<>();
-    }
-
-    //constructor if there is existing save file
     public PatientList(List<Patient> savedPatientList) {
         this.patientList = savedPatientList;
     }
@@ -30,7 +23,7 @@ public class PatientList {
         return this.getPatientList().get(patientIndex);
     }
 
-    public int getTotalPatients() {
-        return this.patientList.size();
+    public static int getTotalPatients() {
+        return patientList.size();
     }
 }

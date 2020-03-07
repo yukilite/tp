@@ -15,24 +15,23 @@ public class Storage {
 
     private String appointmentListSaveLocation;
     private String patientListSaveLocation;
-    private PatientList patientList = new PatientList();
-    private AppointmentList appointmentList = new AppointmentList();
+    private static PatientList patientList;
+    private static AppointmentList appointmentList;
 
-    private static final String APPOINTMENT_LIST_SAVE_DIRECTORY = "saves";
+    private static final String SAVE_DIRECTORY = "saves";
     private static final String APPOINTMENT_LIST_SAVE_FILEPATH = "saves/appointments.txt";
-    private static final String PATIENT_LIST_SAVE_DIRECTORY = "saves";
     private static final String PATIENT_LIST_SAVE_FILEPATH = "saves/patients.txt";
 
-    public Storage(String filePathApptList, String filePathPatientList) {
-        this.appointmentListSaveLocation = filePathApptList;
-        this.patientListSaveLocation = filePathPatientList;
+    public Storage() {
+        this.appointmentListSaveLocation = APPOINTMENT_LIST_SAVE_FILEPATH;
+        this.patientListSaveLocation = PATIENT_LIST_SAVE_FILEPATH;
     }
 
     //load save file for Appointments list
     public List<Appointment> loadSavedAppointments() throws FileNotFoundException {
         File appointmentSave = new File(this.appointmentListSaveLocation);
         if (!appointmentSave.exists()) {
-            File newDirectory = new File(APPOINTMENT_LIST_SAVE_DIRECTORY);
+            File newDirectory = new File(SAVE_DIRECTORY);
             boolean isNewDirectoryCreated = newDirectory.mkdir();
             if (isNewDirectoryCreated) {
                 File newFile = new File(APPOINTMENT_LIST_SAVE_FILEPATH);
@@ -67,7 +66,7 @@ public class Storage {
     public List<Patient> loadSavedPatients() throws FileNotFoundException {
         File patientSave = new File(this.patientListSaveLocation);
         if (!patientSave.exists()) {
-            File newDirectory = new File(PATIENT_LIST_SAVE_DIRECTORY);
+            File newDirectory = new File(SAVE_DIRECTORY);
             boolean isNewDirectoryCreated = newDirectory.mkdir();
             if (isNewDirectoryCreated) {
                 File newFile = new File(PATIENT_LIST_SAVE_FILEPATH);
@@ -81,6 +80,7 @@ public class Storage {
                 System.out.println("Failed to create directory");
             }
             throw new FileNotFoundException();
+
         }
         //TODO: parse the text file, return List of Patients
         List<Patient> patientListToReturn = new ArrayList<>();
