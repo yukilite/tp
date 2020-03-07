@@ -48,5 +48,8 @@ public class AddCommand extends Command{
         /** Autosaving upon each add **/
         storage.savePatientList(PatientList.getPatientList());
 
+        /** Assuming that there is a confimation message indicating the adding of patient is a susccess **/
+        ui.showSuccessAdd();
+
     }
 }
