@@ -1,5 +1,8 @@
 package seedu.duke.ui;
 
+import seedu.duke.record.Patient;
+
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -54,10 +57,27 @@ public class Ui {
      * Returns a string that captures the entire user input
      *
      * @return entire user input
-     *
      */
     public String readFromUser() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
+    }
+
+    /**
+     * This method prints whenever an unknownCommand Exception is caught.
+     * TODO: Maybe can improve this to echo the last string that user input
+     */
+    public void showUnknownCommandError() {
+        System.out.println("Unknown command");
+    }
+
+    /**
+     * This method prints the entire patientList
+     */
+    public static void showEntireList() {
+        List<Patient> patientList = getPatientList(); //getPatientList() method by @Brandonnn
+        for (Patient p : patientList) {
+            System.out.println(p); //override Patient class toString by @Sammmmm
+        }
     }
 }
