@@ -4,11 +4,6 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 public class ListCommand extends Command{
-    public static final String COMMAND_WORD = "listp";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
-
     public static final String MESSAGE_USAGE = "listp : Shows program usage instructions.\n"
             + "Example: listp";
     /**
