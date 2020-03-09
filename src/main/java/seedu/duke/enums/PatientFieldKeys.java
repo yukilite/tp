@@ -12,7 +12,8 @@ public enum PatientFieldKeys {
 
     NAME,
     AGE,
-    ADDRESS;
+    ADDRESS,
+    CONTACT_NUMBER;
 
     public String toString() {
         switch(this) {
@@ -22,8 +23,10 @@ public enum PatientFieldKeys {
             return "age";
         case ADDRESS :
             return "address";
+        case CONTACT_NUMBER :
+            return "phone";
         default :
-            return null;//TODO
+            return null;
         }
     }
 }
