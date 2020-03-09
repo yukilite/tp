@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 
@@ -22,6 +23,8 @@ public class Storage {
     private static final String SAVE_DIRECTORY = "saves";
     private static final String APPOINTMENT_LIST_SAVE_FILEPATH = "saves/appointments.txt";
     private static final String PATIENT_LIST_SAVE_FILEPATH = "saves/patients.txt";
+    private static final String PIPE_DELIMITER = " | ";
+    private static final String LS = System.lineSeparator();
 
     public Storage() {
         this.appointmentListSaveLocation = APPOINTMENT_LIST_SAVE_FILEPATH;
@@ -53,11 +56,15 @@ public class Storage {
         while (s.hasNext()) {
             //TODO: parse savefile substring, update Appointment constructor
             //process each line, construct new Appointment object
-            String taskString = s.nextLine();
-            //......: parse substring into different fields. update a String array whose fields initialized to null
-            Appointment newAppointmentToLoad = new Appointment();
+            String appointmentString = s.nextLine();
+            String[] patientFields = appointmentString.split(" \\| ");
+            for (String field: patientFields) {
+                if (field.trim().isEmpty()) {
+                    field = null;
+                }
+            }
+            Appointment newAppointmentToLoad = new Appointment(patientFields[0], patientFields[1]);
             appointmentListToReturn.add(newAppointmentToLoad);
-
         }
 
         return appointmentListToReturn;
@@ -89,10 +96,16 @@ public class Storage {
         while (s.hasNext()) {
             //TODO: parse savefile substring, update Patient constructor
             //process each line, construct new Appointment object
-            String taskString = s.nextLine();
-            //......
-            Patient newAppointmentToLoad = new Patient();
-            patientListToReturn.add(newAppointmentToLoad);
+            String patientString = s.nextLine();
+            String[] patientFields = patientString.split(" \\| ");
+            for (String field: patientFields) {
+                if (field.trim().isEmpty()) {
+                    field = null;
+                }
+            }
+            Patient newPatientToLoad = new Patient(patientFields[0], Integer.parseInt(patientFields[1]),
+                    patientFields[2], patientFields[3]);
+            patientListToReturn.add(newPatientToLoad);
 
         }
 
@@ -110,7 +123,7 @@ public class Storage {
 
         for (int i=0; i < appointmentList.getTotalAppointments(); i++) {
             Appointment newAppointmentData = appointmentList.getAppointmentRecord(i);
-            //....: add different fields to newPatientData with pipe string as separator
+            newAppointmentString = newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + LS;
             fwAppointmentSave.write(newAppointmentString);
 
         }
@@ -118,7 +131,7 @@ public class Storage {
         fwAppointmentSave.close();
     }
 
-    public void savePatientList(PatientList patientListToSave) throws IOException {
+    public void savePatientList() throws IOException {
 
         FileWriter fwPatientSave;
         try {
@@ -130,7 +143,10 @@ public class Storage {
 
         for (int i=0; i < patientList.getTotalPatients(); i++) {
             Patient newPatientData = patientList.getPatientRecord(i);
-            //....: add different fields to newPatientData with pipe string as separator
+            newPatientString = newPatientData.getName() + PIPE_DELIMITER +
+                    newPatientData.getAge() + PIPE_DELIMITER +
+                    newPatientData.getAddress() + PIPE_DELIMITER +
+                    newPatientData.getContactNumber() + LS;
             fwPatientSave.write(newPatientString);
 
         }

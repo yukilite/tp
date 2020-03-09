@@ -152,7 +152,7 @@ public class Parser {
             assert fieldsToChange != null;
             return new UpdateCommand(fieldsToChange);
         case DELETE_PATIENT:
-            return new DeleteCommand();
+            return new DeleteCommand(fieldsToChange);
         case LIST_PATIENT:
             return new ListCommand();
         default:

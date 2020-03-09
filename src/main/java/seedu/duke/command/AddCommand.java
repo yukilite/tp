@@ -2,9 +2,11 @@ package seedu.duke.command;
 
 
 import seedu.duke.record.Patient;
+import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class AddCommand extends Command{
@@ -13,9 +15,13 @@ public class AddCommand extends Command{
     private static final String AGE = "age";
     private static final String ADDRESS = "address";
     private static final String CONTACT_NUMBER = "phone";
+    public static final String COMMAND_WORD = "addp";
+    private static final String EXAMPLE = "addp \\name Justin \\address Pasir Ris \\age 20 \\contact 98889888";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+            + "Example: " + EXAMPLE;
 
     private String patientName;
-    private String age;
+    private int age;
     private String address;
     private String contactNumber;
 
@@ -25,7 +31,7 @@ public class AddCommand extends Command{
      */
     public AddCommand(Map<String,String> patientInfo) {
         this.patientName = patientInfo.get(PATIENT_NAME);
-        this.age = patientInfo.get(AGE);
+        this.age = Integer.parseInt(patientInfo.get(AGE));
         this.address = patientInfo.get(ADDRESS);
         this.contactNumber = patientInfo.get(CONTACT_NUMBER);
     }
@@ -39,7 +45,7 @@ public class AddCommand extends Command{
      * @see Storage#savePatientList
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
+    public void execute(Ui ui, Storage storage) throws IOException {
 
         Patient newPatient = new Patient(this.patientName, this.age, this.address, this.contactNumber);
 
@@ -47,9 +53,9 @@ public class AddCommand extends Command{
         PatientList.getPatientList().add(newPatient);
 
         /** Autosaving upon each add **/
-        storage.savePatientList(PatientList.getPatientList());
+        storage.savePatientList();
 
         /** Assuming that there is a confimation message indicating the adding of patient is a susccess **/
-        ui.showSuccessAdd();
+        //todo justin ui.showSuccessAdd();
     }
 }

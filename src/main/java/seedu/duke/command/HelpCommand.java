@@ -24,12 +24,11 @@ public class HelpCommand extends Command {
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @param patientList the patient list object which is used for modification to the patients
      * @throws IOException when there is error in the index's input
      * @see IOException
      */
     @Override
-    public void execute(Ui ui, Storage storage, PatientList patientList) throws IOException {
+    public void execute(Ui ui, Storage storage) throws IOException {
         String helpCommandPrinter = AddCommand.MESSAGE_USAGE
                             + "\n" + UpdateCommand.MESSAGE_USAGE
                             + "\n" + DeleteCommand.MESSAGE_USAGE
