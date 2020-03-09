@@ -65,20 +65,21 @@ public class UpdateCommand extends Command{
      * @see Storage#savePatientList
      */
     @Override
-    public void execute(Ui ui, Storage storage, PatientList patientList) throws IOException {
+    public void execute(Ui ui, Storage storage) throws IOException {
 
         // Get the patient's record based on its index from the list
-        Patient patient = patientList.getPatientRecord(patientIndex - 1);
+        Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
         // Updating the information
         patient.setPatientInfo(patientName,age,address,contactNumber);
 
         // Updating it back to its corresponding index in the patient's list
-        patientList.getPatientList().set(patientIndex - 1,patient);
+        PatientList.getPatientList().set(patientIndex - 1,patient);
 
         //Auto-save the changes
-        storage.savePatientList(patientList);
+        storage.savePatientList(PatientList.getPatientList());
 
         //ui.showUpdateSuccess(); To be implemented later
+
     }
 }
