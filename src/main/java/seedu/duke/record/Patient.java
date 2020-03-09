@@ -6,6 +6,7 @@ public class Patient {
     private String address;
     private String contactNumber;
 
+
 /**
  * This part is implemented for the UpdateCommand class by Duc
  */
@@ -68,4 +69,35 @@ public class Patient {
         setAddress(address);
         setContactNumber(contactNumber);
     }
+
+    public Patient (String name, int age, String address, String contactNumber) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.contactNumber = contactNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "{" + "[Name]:"+ " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
+                + " " + "[Address]:" + " " +  getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
+                + getContactNumber() + "}";
+    }
 }
+
