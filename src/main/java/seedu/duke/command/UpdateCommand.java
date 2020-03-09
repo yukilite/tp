@@ -46,7 +46,13 @@ public class UpdateCommand extends Command{
     public UpdateCommand(Map<String, String> fieldsToChange) {
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
         this.patientName = fieldsToChange.get(PATIENT_NAME);
-        this.age = Integer.parseInt(fieldsToChange.get(AGE));
+        boolean isAgeEqualNull = fieldsToChange.get(AGE).equals(null);
+        if(isAgeEqualNull) {
+            this.age = -1;
+        }
+        else {
+            this.age = Integer.parseInt(fieldsToChange.get(AGE));
+        }
         this.address = fieldsToChange.get(ADDRESS);
         this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
     }
