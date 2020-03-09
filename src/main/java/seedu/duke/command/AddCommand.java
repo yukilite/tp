@@ -11,7 +11,7 @@ public class AddCommand extends Command{
     private static final String PATIENT_NAME = "name";
     private static final String AGE = "age";
     private static final String ADDRESS = "address";
-    private static final String CONTACT_NUMBER = "contactNumber";
+    private static final String CONTACT_NUMBER = "phone";
 
     private String patientName;
     private String age;
