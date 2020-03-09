@@ -53,6 +53,7 @@ public class Duke {
     }
 
     public void run() {
+        startup();
         boolean isExit = false;
         while (!isExit) {
             try {
