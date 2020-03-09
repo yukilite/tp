@@ -17,7 +17,7 @@ public class AddCommand extends Command{
     private static final String CONTACT_NUMBER = "phone";
     public static final String COMMAND_WORD = "addp";
     private static final String EXAMPLE = "addp \\name Justin \\address Pasir Ris \\age 20 \\contact 98889888";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a patient to the patient's list.\n"
             + "Example: " + EXAMPLE;
 
     private String patientName;

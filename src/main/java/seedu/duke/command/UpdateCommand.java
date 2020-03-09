@@ -19,13 +19,13 @@ public class UpdateCommand extends Command{
 
     public static final String COMMAND_WORD = "updatep";
     public static final String EXAMPLE = "updatep \\index 5  \\address Clementi \\number 83487846  ";
-    private static final String PATIENT_INDEX = "index";
-    private static final String PATIENT_NAME = "name";
-    private static final String AGE = "age";
-    private static final String ADDRESS = "address";
-    private static final String CONTACT_NUMBER = "contactNumber";
+    public static final String PATIENT_INDEX = "index";
+    public static final String PATIENT_NAME = "name";
+    public static final String AGE = "age";
+    public static final String ADDRESS = "address";
+    public static final String CONTACT_NUMBER = "contactNumber";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update the information of patient in the list.\n"
             + "Example: " + EXAMPLE;
 
     private int patientIndex;
@@ -46,7 +46,7 @@ public class UpdateCommand extends Command{
     public UpdateCommand(Map<String, String> fieldsToChange) {
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
         this.patientName = fieldsToChange.get(PATIENT_NAME);
-        boolean isAgeEqualNull = fieldsToChange.get(AGE).equals(null);
+        boolean isAgeEqualNull = fieldsToChange.get(AGE) == null;
         if(isAgeEqualNull) {
             this.age = -1;
         }
@@ -71,7 +71,6 @@ public class UpdateCommand extends Command{
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
-
         // Get the patient's record based on its index from the list
         Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
@@ -82,7 +81,7 @@ public class UpdateCommand extends Command{
         PatientList.getPatientList().set(patientIndex - 1,patient);
 
         //Auto-save the changes
-        storage.savePatientList();
+        //storage.savePatientList();
 
         //ui.showUpdateSuccess(); To be implemented later
 
