@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 
@@ -118,6 +119,7 @@ public class Storage {
     }
 
     public void savePatientList(PatientList patientListToSave) throws IOException {
+
         FileWriter fwPatientSave;
         try {
             fwPatientSave = new FileWriter(this.appointmentListSaveLocation);

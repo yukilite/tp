@@ -1,8 +1,9 @@
 package seedu.duke.storage;
 
-import java.util.List;
-
 import seedu.duke.record.Patient;
+
+import java.io.IOException;
+import java.util.List;
 
 public class PatientList {
     private static List<Patient> patientList;
@@ -10,10 +11,11 @@ public class PatientList {
     public PatientList(List<Patient> savedPatientList) {
         this.patientList = savedPatientList;
     }
-
+  
     public List<Patient> getPatientList() {
         return this.patientList;
     }
+
 
     public void setPatientList(List patientListInput) {
         this.patientList = patientListInput;
