@@ -5,6 +5,8 @@ import seedu.duke.ui.Ui;
 
 public class ListCommand extends Command{
 
+    public static final String MESSAGE_USAGE = "listp : Shows program usage instructions.\n"
+            + "Example: listp";
     /**
      * Empty constructor. Only used to create the ListCommand object
      */

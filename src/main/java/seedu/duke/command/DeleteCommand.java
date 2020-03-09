@@ -43,23 +43,22 @@ public class DeleteCommand extends Command{
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @param patientList the patient list object which is used for modification to the patients
      * @throws IOException when there is error in the index's input
      * @see IOException
      * @see PatientList#getPatientRecord
      * @see Storage#savePatientList  
      */
     @Override
-    public void execute(Ui ui, Storage storage, PatientList patientList) throws IOException {
+    public void execute(Ui ui, Storage storage) throws IOException {
 
         // Get the patient's record based on its index from the list
-        Patient patient = patientList.getPatientRecord(patientIndex - 1);
+        Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
         // Remove the patient's information from the patient's list
-        patientList.getPatientList().remove(patient);
+        PatientList.getPatientList().remove(patient);
 
         //Auto-save the changes
-        storage.savePatientList(patientList);
+        storage.savePatientList();
 
         //ui.showDeleteSuccess(); To be implemented later
     }
