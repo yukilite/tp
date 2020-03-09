@@ -18,7 +18,7 @@ import java.util.Map;
 public class UpdateCommand extends Command{
 
     public static final String COMMAND_WORD = "updatep";
-    public static final String EXAMPLE = "updatep \\index 5  \\address Clementi \\number 83487846";
+    public static final String EXAMPLE = "updatep \\index 5  \\address Clementi \\number 83487846  ";
     private static final String PATIENT_INDEX = "index";
     private static final String PATIENT_NAME = "name";
     private static final String AGE = "age";
@@ -63,7 +63,6 @@ public class UpdateCommand extends Command{
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @param patientList the patient list object which is used for modification to the patients
      * @throws IOException when there is error in the index's input
      * @see IOException
      * @see PatientList#getPatientRecord
@@ -83,7 +82,7 @@ public class UpdateCommand extends Command{
         PatientList.getPatientList().set(patientIndex - 1,patient);
 
         //Auto-save the changes
-        storage.savePatientList(PatientList.getPatientList());
+        storage.savePatientList();
 
         //ui.showUpdateSuccess(); To be implemented later
 

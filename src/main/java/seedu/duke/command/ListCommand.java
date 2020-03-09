@@ -9,6 +9,8 @@ public class ListCommand extends Command{
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
+    public static final String MESSAGE_USAGE = "listp : Shows program usage instructions.\n"
+            + "Example: listp";
     /**
      * Empty constructor. Only used to create the ListCommand object
      */

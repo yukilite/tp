@@ -1,5 +1,7 @@
 package seedu.duke.storage;
 
+import seedu.duke.record.Appointment;
+
 import java.util.List;
 
 public class AppointmentList {
@@ -17,6 +19,7 @@ public class AppointmentList {
     public void setAppointmentList(List appointmentListInput) {
         this.appointmentList = appointmentListInput;
     }
+
     public Appointment getAppointmentRecord(int appointmentIndex) {
         return this.getAppointmentList().get(appointmentIndex);
     }
