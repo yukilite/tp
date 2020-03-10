@@ -12,8 +12,8 @@ public class PatientList {
         this.patientList = savedPatientList;
     }
   
-    public List<Patient> getPatientList() {
-        return this.patientList;
+    public static List<Patient> getPatientList() {
+        return patientList;
     }
 
 
@@ -21,8 +21,8 @@ public class PatientList {
         this.patientList = patientListInput;
     }
 
-    public Patient getPatientRecord(int patientIndex) {
-        return this.getPatientList().get(patientIndex);
+    public static Patient getPatientRecord(int patientIndex) {
+        return getPatientList().get(patientIndex);
     }
 
     public static int getTotalPatients() {
