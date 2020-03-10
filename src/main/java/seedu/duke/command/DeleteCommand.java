@@ -21,7 +21,7 @@ public class DeleteCommand extends Command{
     public static final String EXAMPLE = "deletep \\index 12";
     private static final String PATIENT_INDEX = "index";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a patient from the list.\n"
             + "Example: " + EXAMPLE;
 
     private int patientIndex;
