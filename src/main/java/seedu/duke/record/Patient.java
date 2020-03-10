@@ -1,5 +1,9 @@
 package seedu.duke.record;
 
+/**
+ * This class contains the patient information such as name, age, address and contact number.
+ */
+
 public class Patient {
     private String name;
     private int age;
@@ -29,11 +33,17 @@ public class Patient {
         return contactNumber;
     }
 
+    /**
+     * Overrides the default toString command so that the patient information can be printed
+     * in a specific string format.
+     * @return newToString The formatted string
+     */
     @Override
     public String toString() {
-        return "{" + "[Name]:"+ " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
+        String newToString = "{" + "[Name]:"+ " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
                 + " " + "[Address]:" + " " +  getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
                 + getContactNumber() + "}";
+        return newToString;
     }
 
 /**
