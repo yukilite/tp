@@ -34,6 +34,7 @@ public class HelpCommand extends Command {
                             + "\n" + DeleteCommand.MESSAGE_USAGE
                             + "\n" + ListCommand.MESSAGE_USAGE
                             + "\n" + HelpCommand.MESSAGE_USAGE;
+        //todo move this to UI for printing
         System.out.println(helpCommandPrinter);
     }
 }
