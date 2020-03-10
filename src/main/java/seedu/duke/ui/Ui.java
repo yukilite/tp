@@ -1,6 +1,7 @@
 package seedu.duke.ui;
 
 import seedu.duke.record.Patient;
+import seedu.duke.storage.PatientList;
 
 import java.util.List;
 import java.util.Scanner;
@@ -19,12 +20,12 @@ public class Ui {
      * name and greeting him.
      */
     public Ui() {
-        this.logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        startUpGreetings();
+//        this.logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        startUpGreetings();
     }
 
     /**
@@ -75,7 +76,7 @@ public class Ui {
      * This method prints the entire patientList
      */
     public static void showEntireList() {
-        List<Patient> patientList = getPatientList(); //getPatientList() method by @Brandonnn
+        List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn
         for (Patient p : patientList) {
             System.out.println(p); //override Patient class toString by @Sammmmm
         }
