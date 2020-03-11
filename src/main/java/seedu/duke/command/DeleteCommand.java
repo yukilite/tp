@@ -60,6 +60,6 @@ public class DeleteCommand extends Command{
         //Auto-save the changes
         storage.savePatientList();
 
-        //ui.showDeleteSuccess(); To be implemented later
+        //TODO Justin ui.showDeleteSuccess(); To be implemented later
     }
 }
