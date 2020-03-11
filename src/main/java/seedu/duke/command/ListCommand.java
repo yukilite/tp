@@ -21,7 +21,7 @@ public class ListCommand extends Command{
     public void execute(Ui ui, Storage storage) {
 
         /** Show the enitre list. This is the onlu method in Ui that is static for some reason **/
-        ui.showEntireList();
+        Ui.showEntireList();
 
     }
 }

@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppointmentTest {
 
     @Test
-    void getDate() {
+    void testGetDate() {
         Appointment appointment = new Appointment("22 July 2020", "12.30pm");
         assertEquals("22 July 2020", appointment.getDate());
     }
 
     @Test
-    void getTime() {
+    void testGetTime() {
         Appointment appointment = new Appointment("22 July 2020", "12:30pm");
         assertEquals("12:30pm", appointment.getTime());
     }
