@@ -81,7 +81,7 @@ public class UpdateCommand extends Command{
         PatientList.getPatientList().set(patientIndex - 1,patient);
 
         //Auto-save the changes
-        //storage.savePatientList();
+        storage.savePatientList();
 
         //ui.showUpdateSuccess(); To be implemented later
 

@@ -52,10 +52,10 @@ public class DeleteCommand extends Command{
     public void execute(Ui ui, Storage storage) throws IOException {
 
         // Get the patient's record based on its index from the list
-        Patient patient = PatientList.getPatientRecord(patientIndex - 1);
+        //Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
         // Remove the patient's information from the patient's list
-        PatientList.getPatientList().remove(patient);
+        PatientList.getPatientList().remove(patientIndex - 1);
 
         //Auto-save the changes
         storage.savePatientList();
