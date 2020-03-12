@@ -1,5 +1,9 @@
 package seedu.duke.record;
 
+/**
+ * This class contains the date and time for each patient.
+ */
+
 public class Appointment {
     private String date;
     private String time;
@@ -17,8 +21,14 @@ public class Appointment {
         return time;
     }
 
+    /**
+     * Overrides the default toString command so that the patient's appointment
+     * details can be printed in a specific string format.
+     * @return newToString The formatted string
+     */
     @Override
     public String toString() {
-        return "{" + "[Date]:" + " " + getDate() + " "+ "|" + "[Time]:" + " " + getTime() + "}";
+        String newToString = "{" + "[Date]:" + " " + getDate() + " "+ "|" + "[Time]:" + " " + getTime() + "}";
+        return newToString;
     }
 }

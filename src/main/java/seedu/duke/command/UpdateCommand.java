@@ -17,15 +17,15 @@ import java.util.Map;
  */
 public class UpdateCommand extends Command{
 
-    public static final String COMMAND_WORD = "updatep";
-    public static final String EXAMPLE = "updatep \\index 5  \\address Clementi \\number 83487846  ";
-    private static final String PATIENT_INDEX = "index";
-    private static final String PATIENT_NAME = "name";
-    private static final String AGE = "age";
-    private static final String ADDRESS = "address";
-    private static final String CONTACT_NUMBER = "contactNumber";
+    public static final String COMMAND_WORD = "editp";
+    public static final String EXAMPLE = "editp \\index 5  \\address Clementi \\phone 83487846";
+    public static final String PATIENT_INDEX = "index";
+    public static final String PATIENT_NAME = "name";
+    public static final String AGE = "age";
+    public static final String ADDRESS = "address";
+    public static final String CONTACT_NUMBER = "contactNumber";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update the information of patient in the list.\n"
             + "Example: " + EXAMPLE;
 
     private int patientIndex;
@@ -46,7 +46,13 @@ public class UpdateCommand extends Command{
     public UpdateCommand(Map<String, String> fieldsToChange) {
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
         this.patientName = fieldsToChange.get(PATIENT_NAME);
-        this.age = Integer.parseInt(fieldsToChange.get(AGE));
+        boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
+        if(isAgeEqualNull) {
+            this.age = -1;
+        }
+        else {
+            this.age = Integer.parseInt(fieldsToChange.get(AGE));
+        }
         this.address = fieldsToChange.get(ADDRESS);
         this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
     }
@@ -65,7 +71,6 @@ public class UpdateCommand extends Command{
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
-
         // Get the patient's record based on its index from the list
         Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
@@ -78,7 +83,7 @@ public class UpdateCommand extends Command{
         //Auto-save the changes
         storage.savePatientList();
 
-        //ui.showUpdateSuccess(); To be implemented later
+        //TODO Justin ui.showUpdateSuccess(); To be implemented later
 
     }
 }

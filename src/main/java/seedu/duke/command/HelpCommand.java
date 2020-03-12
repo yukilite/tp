@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -18,6 +17,11 @@ public class HelpCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
+    public static final String COMMANDS_MESSAGE_USAGE = AddCommand.MESSAGE_USAGE
+            + "\n" + UpdateCommand.MESSAGE_USAGE
+            + "\n" + DeleteCommand.MESSAGE_USAGE
+            + "\n" + ListCommand.MESSAGE_USAGE
+            + "\n" + HelpCommand.MESSAGE_USAGE;
 
     /**
      * Method to print out all the commands that user can input with usage and examples of them
@@ -29,11 +33,6 @@ public class HelpCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
-        String helpCommandPrinter = AddCommand.MESSAGE_USAGE
-                            + "\n" + UpdateCommand.MESSAGE_USAGE
-                            + "\n" + DeleteCommand.MESSAGE_USAGE
-                            + "\n" + ListCommand.MESSAGE_USAGE
-                            + "\n" + HelpCommand.MESSAGE_USAGE;
-        System.out.println(helpCommandPrinter);
+        System.out.println(COMMANDS_MESSAGE_USAGE);
     }
 }
