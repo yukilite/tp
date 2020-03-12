@@ -150,14 +150,14 @@ public class Parser {
         switch (command) {
         case ADD_PATIENT:
             assert fieldsToChange != null;
-            return new AddCommand(fieldsToChange);
+            return new AddPatientCommand(fieldsToChange);
         case EDIT_PATIENT:
             assert fieldsToChange != null;
-            return new UpdateCommand(fieldsToChange);
+            return new UpdatePatientCommand(fieldsToChange);
         case DELETE_PATIENT:
-            return new DeleteCommand(fieldsToChange);
+            return new DeletePatientCommand(fieldsToChange);
         case LIST_PATIENT:
-            return new ListCommand();
+            return new ListPatientCommand();
         default:
             DukeExceptions.unknownCommand();
             return null;
