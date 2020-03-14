@@ -10,6 +10,7 @@ package seedu.duke.enums;
  */
 public enum PatientFieldKeys {
 
+    INDEX,
     NAME,
     AGE,
     ADDRESS,
@@ -17,6 +18,8 @@ public enum PatientFieldKeys {
 
     public String toString() {
         switch(this) {
+        case INDEX:
+            return "index";
         case NAME :
             return "name";
         case AGE :

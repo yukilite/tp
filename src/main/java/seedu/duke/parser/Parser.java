@@ -103,10 +103,12 @@ public class Parser {
             String key = WHITESPACE + REGEX_BACKSLASH + field; // String key = "\key";
             String value = findValue(fullCommand, key);
             fieldsToChange.put(field, value);
+            if(field.equals(ADD_PATIENT)) {
+                Duke.indexNumber++;
+                fieldsToChange.put(INDEX, Integer.toString(Duke.indexNumber));
+            }
         }
 
-        Duke.indexNumber++;
-        fieldsToChange.put(INDEX, Integer.toString(Duke.indexNumber));
 
         return fieldsToChange;
     }
@@ -128,6 +130,7 @@ public class Parser {
         case ADD_PATIENT :
             //fallthrough
         case EDIT_PATIENT :
+        case DELETE_PATIENT:
             fieldsToChange = getPatientFields(fullCommand);
             command = getCommandObject(commandAsString, fieldsToChange);
             break;

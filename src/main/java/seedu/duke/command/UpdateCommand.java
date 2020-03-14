@@ -17,8 +17,8 @@ import java.util.Map;
  */
 public class UpdateCommand extends Command{
 
-    public static final String COMMAND_WORD = "updatep";
-    public static final String EXAMPLE = "updatep \\index 5  \\address Clementi \\number 83487846  ";
+    public static final String COMMAND_WORD = "editp";
+    public static final String EXAMPLE = "editp \\index 5  \\address Clementi \\phone 83487846";
     public static final String PATIENT_INDEX = "index";
     public static final String PATIENT_NAME = "name";
     public static final String AGE = "age";
@@ -46,7 +46,7 @@ public class UpdateCommand extends Command{
     public UpdateCommand(Map<String, String> fieldsToChange) {
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
         this.patientName = fieldsToChange.get(PATIENT_NAME);
-        boolean isAgeEqualNull = fieldsToChange.get(AGE) == null;
+        boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
         if(isAgeEqualNull) {
             this.age = -1;
         }
@@ -81,9 +81,11 @@ public class UpdateCommand extends Command{
         PatientList.getPatientList().set(patientIndex - 1,patient);
 
         //Auto-save the changes
-        //storage.savePatientList();
+        storage.savePatientList();
 
         //ui.showUpdateSuccess(); todo To be implemented later
+
+        //TODO Justin ui.showUpdateSuccess(); To be implemented later
 
     }
 }
