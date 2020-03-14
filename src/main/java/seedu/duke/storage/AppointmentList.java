@@ -26,7 +26,7 @@ public class AppointmentList {
     }
 
     public Appointment getAppointmentRecord(int appointmentIndex) {
-        return this.getAppointmentList().get(appointmentIndex);
+        return this.getAppointmentList().get(appointmentIndex-1);
     }
 
     public static int getTotalAppointments() {

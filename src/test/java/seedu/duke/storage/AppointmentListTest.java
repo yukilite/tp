@@ -23,7 +23,7 @@ class AppointmentListTest {
     void appointmentListTest_GetInfo() {
         testAppointmentList.getAppointmentList().add(testAppointment1);
         assertEquals("april 1", testAppointmentList.getAppointmentRecord(1).getDate());
-        assertEquals(11, testAppointmentList.getAppointmentRecord(1).getTime());
+        assertEquals("13:00", testAppointmentList.getAppointmentRecord(1).getTime());
     }
 
     @Test
