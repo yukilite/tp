@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.DukeExceptions;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -44,17 +46,39 @@ public class UpdatePatientCommand extends Command{
      *                       as key and content as values
      */
     public UpdatePatientCommand(Map<String, String> fieldsToChange) {
-        this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-        this.patientName = fieldsToChange.get(PATIENT_NAME);
-        boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
-        if(isAgeEqualNull) {
-            this.age = -1;
+        try {
+            DukeExceptions.noFieldCommand(fieldsToChange);
+            try {
+                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+                if(patientIndex > PatientList.getTotalPatients() && patientIndex <= 0) {
+                    throw new IndexOutOfBoundsException();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please input an integer for index");
+                //TODO Justin include this ui.showNumberError();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Index out of bound, please check the correct index from the list");
+                //TODO Justin include this ui.showIndexError();
+            }
+            this.patientName = fieldsToChange.get(PATIENT_NAME);
+            boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
+            if (isAgeEqualNull) {
+                this.age = -1;
+            } else {
+                try {
+                    this.age = Integer.parseInt(fieldsToChange.get(AGE));
+                } catch (NumberFormatException e) {
+                    /** TODO: Justin please add this error message too **/
+                    System.out.println("Received string for age. Setting age to be -1");
+                    this.age = -1;
+                }
+            }
+            this.address = fieldsToChange.get(ADDRESS);
+            this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
+        } catch (NoFieldCommandException e) {
+            System.out.println("Please do not let the information be empty");
+            //TODO Justin include this ui.showEmptyFieldError();
         }
-        else {
-            this.age = Integer.parseInt(fieldsToChange.get(AGE));
-        }
-        this.address = fieldsToChange.get(ADDRESS);
-        this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
     }
 
     /**
@@ -70,20 +94,23 @@ public class UpdatePatientCommand extends Command{
      * @see Storage#savePatientList
      */
     @Override
-    public void execute(Ui ui, Storage storage) throws IOException {
+    public void execute(Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
         // Get the patient's record based on its index from the list
-        Patient patient = PatientList.getPatientRecord(patientIndex - 1);
+        try {
+            Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
-        // Updating the information
-        patient.setPatientInfo(patientName,age,address,contactNumber);
+            // Updating the information
+            patient.setPatientInfo(patientName, age, address, contactNumber);
 
-        // Updating it back to its corresponding index in the patient's list
-        PatientList.getPatientList().set(patientIndex - 1,patient);
+            // Updating it back to its corresponding index in the patient's list
+            PatientList.getPatientList().set(patientIndex - 1, patient);
 
-        //Auto-save the changes
-        storage.savePatientList();
+            //Auto-save the changes
+            storage.savePatientList();
 
-        //TODO Justin ui.showUpdatePatientSuccess(); To be implemented later
-
+            //TODO Justin ui.showUpdatePatientSuccess(); To be implemented later
+        } catch (IndexOutOfBoundsException e) {
+            return;
+        }
     }
 }

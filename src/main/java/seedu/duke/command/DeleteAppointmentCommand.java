@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.DukeExceptions;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -33,8 +35,24 @@ public class DeleteAppointmentCommand extends Command{
      * @param fieldsToChange a hash map with only 1 item which is a field called
      *                       "index" and the value of the index needed to delete
      */
-    public DeleteAppointmentCommand(Map<String, String> fieldsToChange) {
-        this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
+    public DeleteAppointmentCommand(Map<String, String> fieldsToChange) throws IndexOutOfBoundsException{
+        try {
+            DukeExceptions.noFieldCommand(fieldsToChange);
+            try {
+                this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
+                if (index > AppointmentList.getTotalAppointments() && index <= 0) {
+                    throw new IndexOutOfBoundsException();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please input an integer for index");
+                //TODO Justin include this ui.showNumberError();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Index out of bound, please check the correct index from the list");
+                //TODO Justin include this ui.showIndexError();
+            }
+        } catch (NoFieldCommandException e) {
+            System.out.println("Please do not let the information be empty");
+        }
     }
 
     /**
@@ -50,16 +68,19 @@ public class DeleteAppointmentCommand extends Command{
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
+        try {
+            // Get the appointment's record based on its index from the list
+            Appointment appointment = AppointmentList.getAppointmentRecord(index - 1);
 
-        // Get the appointment's record based on its index from the list
-        Appointment appointment = AppointmentList.getAppointmentRecord(index - 1);
+            // Remove the appointment's information from the patient's list
+            AppointmentList.getAppointmentList().remove(appointment);
 
-        // Remove the appointment's information from the patient's list
-        AppointmentList.getAppointmentList().remove(appointment);
+            //Auto-save the changes
+            storage.saveAppointmentsList();
 
-        //Auto-save the changes
-        storage.saveAppointmentsList();
-
-        //TODO Justin ui.showDeleteAppointmentSuccess(); To be implemented later
+            //TODO Justin ui.showDeleteAppointmentSuccess(); To be implemented later
+        } catch (IndexOutOfBoundsException e) {
+            return;
+        }
     }
 }

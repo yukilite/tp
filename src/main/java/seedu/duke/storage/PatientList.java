@@ -2,7 +2,6 @@ package seedu.duke.storage;
 
 import seedu.duke.record.Patient;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

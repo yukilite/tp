@@ -1,4 +1,4 @@
 package seedu.duke.exceptions;
 
-public class NoFieldCommandException {
+public class NoFieldCommandException extends Exception{
 }
