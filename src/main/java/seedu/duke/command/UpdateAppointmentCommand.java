@@ -39,7 +39,7 @@ public class UpdateAppointmentCommand extends Command{
      *                       as key and content as values
      */
     public UpdateAppointmentCommand(Map<String, String> fieldsToChange) {
-        this.index = Integer.parseInt(APPOINTMENT_INDEX);
+        this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
         this.date = fieldsToChange.get(APPOINTMENT_DATE);
         this.time = fieldsToChange.get(APPOINTMENT_TIME);
     }

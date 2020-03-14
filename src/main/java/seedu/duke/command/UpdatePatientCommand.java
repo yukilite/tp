@@ -83,7 +83,7 @@ public class UpdatePatientCommand extends Command{
         //Auto-save the changes
         storage.savePatientList();
 
-        //TODO Justin ui.showUpdateSuccess(); To be implemented later
+        //TODO Justin ui.showUpdatePatientSuccess(); To be implemented later
 
     }
 }
