@@ -71,7 +71,6 @@ public class Parser {
 
             String delimiter = WHITESPACE + REGEX_BACKSLASH;
             String[] b = valueString.split(delimiter, LIMIT);
-
             String value = b[VALUE_INDEX];
             return value.trim();
 
@@ -153,9 +152,9 @@ public class Parser {
             return new AddCommand(fieldsToChange);
         case EDIT_PATIENT:
             assert fieldsToChange != null;
-            return new UpdateCommand(fieldsToChange);
+            return new UpdatePatientCommand(fieldsToChange);
         case DELETE_PATIENT:
-            return new DeleteCommand(fieldsToChange);
+            return new DeletePatientCommand(fieldsToChange);
         case LIST_PATIENT:
             return new ListCommand();
         default:

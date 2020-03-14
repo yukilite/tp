@@ -112,7 +112,7 @@ public class Storage {
         return patientListToReturn;
     }
 
-    public void saveAppointmentsList(AppointmentList appointmentListToSave) throws IOException {
+    public void saveAppointmentsList() throws IOException {
         FileWriter fwAppointmentSave;
         try {
             fwAppointmentSave = new FileWriter(this.appointmentListSaveLocation);
