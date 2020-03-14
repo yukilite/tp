@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.UpdateCommand.*;
+import static seedu.duke.command.UpdatePatientCommand.*;
 
-class DeleteCommandTest {
+class DeletePatientCommandTest {
 
     //Test case 1
     @Test
@@ -27,7 +27,7 @@ class DeleteCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         fieldsToChange.put(PATIENT_INDEX, "3");
-        Command command = new DeleteCommand(fieldsToChange);
+        Command command = new DeletePatientCommand(fieldsToChange);
         command.execute(ui,storage);
         assertEquals(4, patientList.getTotalPatients());
         assertEquals("{[Name]: peony | [Age]: 33 | [Address]: clementi road | [Contact Number]: 61234567}",
