@@ -12,16 +12,16 @@ public class AppointmentList {
     }
 
     //getter and setter
-    public List<Appointment> getAppointmentList() {
-        return this.appointmentList;
+    public static List<Appointment> getAppointmentList() {
+        return appointmentList;
     }
 
     public void setAppointmentList(List appointmentListInput) {
         this.appointmentList = appointmentListInput;
     }
 
-    public Appointment getAppointmentRecord(int appointmentIndex) {
-        return this.getAppointmentList().get(appointmentIndex);
+    public static Appointment getAppointmentRecord(int appointmentIndex) {
+        return getAppointmentList().get(appointmentIndex);
     }
 
     public static int getTotalAppointments() {

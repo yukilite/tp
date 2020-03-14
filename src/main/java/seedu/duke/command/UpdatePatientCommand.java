@@ -15,7 +15,7 @@ import java.util.Map;
  * @version 0.1
  * @since 2020-03-08
  */
-public class UpdateCommand extends Command{
+public class UpdatePatientCommand extends Command{
 
     public static final String COMMAND_WORD = "editp";
     public static final String EXAMPLE = "editp \\index 5  \\address Clementi \\phone 83487846";
@@ -23,7 +23,7 @@ public class UpdateCommand extends Command{
     public static final String PATIENT_NAME = "name";
     public static final String AGE = "age";
     public static final String ADDRESS = "address";
-    public static final String CONTACT_NUMBER = "contactNumber";
+    public static final String CONTACT_NUMBER = "phone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update the information of patient in the list.\n"
             + "Example: " + EXAMPLE;
@@ -43,7 +43,7 @@ public class UpdateCommand extends Command{
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
      */
-    public UpdateCommand(Map<String, String> fieldsToChange) {
+    public UpdatePatientCommand(Map<String, String> fieldsToChange) {
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
         this.patientName = fieldsToChange.get(PATIENT_NAME);
         boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
