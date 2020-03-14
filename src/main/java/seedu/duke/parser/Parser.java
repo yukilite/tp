@@ -36,7 +36,7 @@ public class Parser {
      * @param fullCommand the user input string
      * @return the actual command to execute
      */
-    protected String getCommand(String fullCommand) {
+    private String getCommand(String fullCommand) {
         String[] splits = fullCommand.split(" " + REGEX_BACKSLASH, LIMIT);
         return splits[COMMAND_INDEX].trim();
     }
@@ -65,7 +65,7 @@ public class Parser {
      * @param key         the patient field, prepended with REGEX_BACKSLASH. This key is an enum.
      * @return the String that is between key and " \" delimiter
      */
-    protected String findValue(String fullCommand, String key) {
+    private String findValue(String fullCommand, String key) {
         String[] keyValue = fullCommand.split(key, LIMIT);
 
         try {
@@ -94,7 +94,7 @@ public class Parser {
      * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap
      * @see #findValue(String fullCommand, String key) value returned by this method will be stored at key.
      */
-    protected Map<String, String> getPatientFields(String fullCommand) {
+    private Map<String, String> getPatientFields(String fullCommand) {
         Map<String, String> fieldsToChange = new HashMap<>();
 
         for (PatientFieldKeys pf : PatientFieldKeys.values()) {
@@ -110,6 +110,37 @@ public class Parser {
         return fieldsToChange;
     }
 
+    /**
+     * This method returns the specific type of command object.
+     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
+     *
+     * @param command        the command that was specified
+     * @param fieldsToChange the HashMap of what to add or edit
+     * @return a specific command object that is specified by @param command.
+     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
+     */
+    private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws unknownCommandException {
+        switch (command) {
+        case ADD_PATIENT:
+            assert fieldsToChange != null;
+            return new AddCommand(fieldsToChange);
+        case EDIT_PATIENT:
+            assert fieldsToChange != null;
+            return new UpdateCommand(fieldsToChange);
+        case DELETE_PATIENT:
+            return new DeleteCommand(fieldsToChange);
+        case LIST_PATIENT:
+            return new ListCommand();
+        case HELP:
+            return new HelpCommand();
+        case BYE:
+            //TODO execute save methods and print out bye message
+        default:
+            DukeExceptions.unknownCommand();
+            return null;
+        }
+    }
+    
     /**
      * This method returns the command object to be executed.
      * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
@@ -137,36 +168,5 @@ public class Parser {
             break;
         }
         return command; //return a command object to @andyyy/@duccc
-    }
-
-    /**
-     * This method returns the specific type of command object.
-     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
-     *
-     * @param command        the command that was specified
-     * @param fieldsToChange the HashMap of what to add or edit
-     * @return a specific command object that is specified by @param command.
-     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
-     */
-    protected Command getCommandObject(String command, Map<String, String> fieldsToChange) throws unknownCommandException {
-        switch (command) {
-        case ADD_PATIENT:
-            assert fieldsToChange != null;
-            return new AddCommand(fieldsToChange);
-        case EDIT_PATIENT:
-            assert fieldsToChange != null;
-            return new UpdateCommand(fieldsToChange);
-        case DELETE_PATIENT:
-            return new DeleteCommand(fieldsToChange);
-        case LIST_PATIENT:
-            return new ListCommand();
-        case HELP:
-            return new HelpCommand();
-        case BYE:
-            //TODO execute save methods and print out bye message
-        default:
-            DukeExceptions.unknownCommand();
-            return null;
-        }
     }
 }
