@@ -50,7 +50,7 @@ public class UpdatePatientCommand extends Command{
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {
                 this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if(patientIndex > PatientList.getTotalPatients() && patientIndex <= 0) {
+                if(patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (NumberFormatException e) {

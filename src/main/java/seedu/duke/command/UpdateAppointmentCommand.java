@@ -46,7 +46,7 @@ public class UpdateAppointmentCommand extends Command{
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {
                 this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-                if(index > PatientList.getTotalPatients() && index <= 0) {
+                if(index > PatientList.getTotalPatients() || index <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (NumberFormatException e) {

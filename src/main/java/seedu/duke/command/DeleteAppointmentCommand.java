@@ -40,7 +40,7 @@ public class DeleteAppointmentCommand extends Command{
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {
                 this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-                if (index > AppointmentList.getTotalAppointments() && index <= 0) {
+                if (index > AppointmentList.getTotalAppointments() || index <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (NumberFormatException e) {
