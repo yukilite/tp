@@ -22,8 +22,8 @@ class AppointmentListTest {
     @Test
     void appointmentListTest_GetInfo() {
         testAppointmentList.getAppointmentList().add(testAppointment1);
-        assertEquals("april 1", testAppointmentList.getAppointmentRecord(1).getDate());
-        assertEquals("13:00", testAppointmentList.getAppointmentRecord(1).getTime());
+        assertEquals("april 1", testAppointmentList.getAppointmentRecord(0).getDate());
+        assertEquals("13:00", testAppointmentList.getAppointmentRecord(0).getTime());
     }
 
     @Test
@@ -31,9 +31,9 @@ class AppointmentListTest {
         testAppointmentList.getAppointmentList().add(testAppointment1);
         testAppointmentList.getAppointmentList().add(testAppointment2);
         testAppointmentList.getAppointmentList().add(testAppointment3);
-        testAppointmentList.removeAppointmentRecord(1);
+        testAppointmentList.removeAppointmentRecord(0);
         assertEquals(2, testAppointmentList.getTotalAppointments());
-        assertEquals("jun 4", testAppointmentList.getAppointmentRecord(1).getDate());
+        assertEquals("jun 4", testAppointmentList.getAppointmentRecord(0).getDate());
 
     }
 }
