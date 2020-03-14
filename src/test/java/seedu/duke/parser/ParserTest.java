@@ -2,9 +2,7 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.EnumSource;
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.UpdateCommand;
+import seedu.duke.command.*;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.unknownCommandException;
 import seedu.duke.record.Patient;
@@ -40,6 +38,7 @@ class ParserTest {
         try {
             Command type1 = p.parseCommand(addPatientUserInput1);
             Command type2 = p.parseCommand(addPatientUserInput2);
+
             assertTrue(type1 instanceof AddCommand);
             assertTrue(type2 instanceof AddCommand);
         } catch (Exception e) {
@@ -47,11 +46,10 @@ class ParserTest {
         }
     }
 
-    /* checks the return type of command. It should not be an AddCommand. */
     @Test
     void testParseCommand_addPatientCommand_isNotAddCommand() {
         String addPatientUserInput1 = "deletep \\index 3";
-        String addPatientUserInput2 = "editp \\index -100 \\name Justin \\age 23 \\address Pasir Ris";
+        String addPatientUserInput2 = "edip \\index -100 \\name Justin \\age 23 \\address Pasir Ris";
         String addPatientUserInput3 = "listp";
 
         try {
@@ -64,7 +62,7 @@ class ParserTest {
             assertFalse(type3 instanceof AddCommand);
 
         } catch (Exception e) {
-            fail("Should not have thrown any exceptions");
+            assertEquals("unknownCommandException", e.getLocalizedMessage());
         }
     }
 
@@ -92,7 +90,7 @@ class ParserTest {
     void testParseCommand_editPatientCommand_isNotEditCommand() {
         String editPatientUserInput1 = "deletep \\index 3";
         String editPatientUserInput2 = "addp                        \\unknown \\age \\name \\12333";
-        String editPatientUserInput3 = "listp";
+        String editPatientUserInput3 = "list";
 
         try {
             Command type1 = p.parseCommand(editPatientUserInput1);
@@ -104,14 +102,107 @@ class ParserTest {
             assertFalse(type3 instanceof UpdateCommand);
 
         } catch (Exception e) {
-            fail("Should not have thrown any exceptions");
+            assertEquals("unknownCommandException", e.getLocalizedMessage());
         }
     }
 
     @Test
     void testParseCommand_deletePatientCommand_isDeleteCommand() {
-        String deletePatientUserInput1 = "deletep \\index 3";
-        String deletePatientUserInput2 = "           deletep";
-        String deletePatientUserInput3 = "";
+        String deletePatientUserInput1 = "         deletep  \\index 4      \\\\\\\\\\";
+        String deletePatientUserInput2 = "           deletep \\index 10";
+        String deletePatientUserInput3 = "deletep               \\index 0";
+
+        try {
+            Command type1 = p.parseCommand(deletePatientUserInput1);
+            Command type2 = p.parseCommand(deletePatientUserInput2);
+            Command type3 = p.parseCommand(deletePatientUserInput3);
+
+            assertTrue(type1 instanceof DeleteCommand);
+            assertTrue(type2 instanceof DeleteCommand);
+            assertTrue(type3 instanceof DeleteCommand);
+
+        } catch (Exception e) {
+            fail("Should not have thrown any exceptions");
+        }
+    }
+
+    @Test
+    void testParseCommand_deletePatientCommand_isNotDeleteCommand() {
+        String deletePatientUserInput1 = "addp                        \\unknown \\age \\name \\12333";
+        String deletePatientUserInput2 = "           listp";
+        String deletePatientUserInput3 = "edipt               \\index 0";
+
+        try {
+            Command type1 = p.parseCommand(deletePatientUserInput1);
+            Command type2 = p.parseCommand(deletePatientUserInput2);
+            Command type3 = p.parseCommand(deletePatientUserInput3);
+
+            assertFalse(type1 instanceof DeleteCommand);
+            assertFalse(type2 instanceof DeleteCommand);
+            assertFalse(type3 instanceof DeleteCommand);
+
+        } catch (Exception e) {
+            assertEquals("unknownCommandException", e.getLocalizedMessage());
+        }
+    }
+
+    @Test
+    void testParseCommand_listPatientCommand() {
+        String listPatientUserInput1 = "listp";
+        String listPatientUserInput2 = "          listp                  ";
+        String listPatientUserInput3 = "listp \\name Justin";
+        String listPatientUserInput4 = "list";
+        String listPatientUserInput5 = "addp \\name Justin \\address";
+        String listPatientUserInput6 = "list\\";
+
+        try {
+            Command type1 = p.parseCommand(listPatientUserInput1);
+            Command type2 = p.parseCommand(listPatientUserInput2);
+            Command type3 = p.parseCommand(listPatientUserInput3);
+            Command type4 = p.parseCommand(listPatientUserInput4);
+            Command type5 = p.parseCommand(listPatientUserInput5);
+            Command type6 = p.parseCommand(listPatientUserInput6);
+
+            assertTrue(type1 instanceof ListCommand);
+            assertTrue(type2 instanceof ListCommand);
+            assertTrue(type3 instanceof ListCommand);
+
+            assertFalse(type4 instanceof DeleteCommand);
+            assertFalse(type5 instanceof DeleteCommand);
+            assertFalse(type6 instanceof DeleteCommand);
+
+        } catch (Exception e) {
+            assertEquals("unknownCommandException", e.getLocalizedMessage());
+        }
+    }
+
+    @Test
+    void testParseCommand_helpCommand() {
+        String helpUserInput1 = "help";
+        String helpUserInput2 = "       help";
+        String helpUserInput3 = "help          \\name Justin \\age 23 \\address pasir ris";
+        String helpUserInput4 = "elp";
+        String helpUserInput5 = "addp \\name Justin \\age 23 \\address pasir ris \\phone 999";
+        String helpUserInput6 ="editp \\sam \\age 99 \\address sentosa cove";
+
+        try {
+            Command type1 = p.parseCommand(helpUserInput1);
+            Command type2 = p.parseCommand(helpUserInput2);
+            Command type3 = p.parseCommand(helpUserInput3);
+            Command type4 = p.parseCommand(helpUserInput4);
+            Command type5 = p.parseCommand(helpUserInput5);
+            Command type6 = p.parseCommand(helpUserInput6);
+
+            assertTrue(type1 instanceof HelpCommand);
+            assertTrue(type2 instanceof HelpCommand);
+            assertTrue(type3 instanceof HelpCommand);
+
+            assertFalse(type4 instanceof HelpCommand);
+            assertFalse(type5 instanceof HelpCommand);
+            assertFalse(type6 instanceof HelpCommand);
+
+        } catch (Exception e) {
+            assertEquals("unknownCommandException", e.getLocalizedMessage());
+        }
     }
 }
