@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Edit the information of the appointment existed in the appointment's list
+ * Edit the information of the appointment existed in the appointment's list.
  *
  * @author Nguyen Thanh Duc
  * @version 1.0
  * @since 2020-03-14
  */
-public class UpdateAppointmentCommand extends Command{
+public class UpdateAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "edita";
     public static final String EXAMPLE = "edita \\index 5  \\date 01/03/2020 \\time 10am";
     public static final String APPOINTMENT_INDEX = "index";
@@ -33,7 +33,7 @@ public class UpdateAppointmentCommand extends Command{
      * Constructor which pass a hash map with keys as fields to change and values
      * as content in that fields that needs to be changed. If there is no need to
      * change in a field in the appointment's record, it will be automatically set as
-     * null
+     * null.
      *
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
@@ -46,7 +46,7 @@ public class UpdateAppointmentCommand extends Command{
 
     /**
      * Method to update the appointment by getting the appointment's record based on its index
-     * and update it based on the queries by users, and auto-save it to the data file
+     * and update it based on the queries by users, and auto-save it to the data file.
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function

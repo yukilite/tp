@@ -1,11 +1,17 @@
 package seedu.duke.parser;
 
 import seedu.duke.Duke;
-import seedu.duke.command.*;
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeletePatientCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.UpdatePatientCommand;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.noKeyExistException;
-import seedu.duke.exceptions.unknownCommandException;
+import seedu.duke.exceptions.NoKeyExistException;
+import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,7 +82,7 @@ public class Parser {
             String value = b[VALUE_INDEX];
             return value.trim();
 
-        } catch (noKeyExistException e) {
+        } catch (NoKeyExistException e) {
             return BLANK_STRING;
         }
     }
@@ -100,7 +106,7 @@ public class Parser {
             String key = WHITESPACE + REGEX_BACKSLASH + field; // String key = "\key";
             String value = findValue(fullCommand, key);
             fieldsToChange.put(field, value);
-            if(field.equals(ADD_PATIENT)) {
+            if (field.equals(ADD_PATIENT)) {
                 Duke.indexNumber++;
                 fieldsToChange.put(INDEX, Integer.toString(Duke.indexNumber));
             }
@@ -112,13 +118,13 @@ public class Parser {
 
     /**
      * This method returns the command object to be executed.
-     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
+     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command.
      *
      * @param fullCommand the user input that the user provided
      * @return a command object to be executed
-     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
+     * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
-    public Command parseCommand(String fullCommand) throws unknownCommandException {
+    public Command parseCommand(String fullCommand) throws UnknownCommandException {
         String commandAsString = getCommand(fullCommand);
 
         Command command;
@@ -145,9 +151,9 @@ public class Parser {
      * @param command the command that was specified
      * @param fieldsToChange the HashMap of what to add or edit
      * @return a specific command object that is specified by @param command.
-     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
+     * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
-    private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws unknownCommandException {
+    private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws UnknownCommandException {
         switch (command) {
         case ADD_PATIENT:
             assert fieldsToChange != null;

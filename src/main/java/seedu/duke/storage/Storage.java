@@ -121,7 +121,7 @@ public class Storage {
         }
         String newAppointmentString = null;
 
-        for (int i=0; i < appointmentList.getTotalAppointments(); i++) {
+        for (int i = 0; i < appointmentList.getTotalAppointments(); i++) {
             Appointment newAppointmentData = appointmentList.getAppointmentRecord(i);
             newAppointmentString = newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + LS;
             fwAppointmentSave.write(newAppointmentString);
@@ -141,12 +141,12 @@ public class Storage {
         }
         String newPatientString = null;
 
-        for (int i=0; i < patientList.getTotalPatients(); i++) {
+        for (int i = 0; i < patientList.getTotalPatients(); i++) {
             Patient newPatientData = patientList.getPatientRecord(i);
-            newPatientString = newPatientData.getName() + PIPE_DELIMITER +
-                    newPatientData.getAge() + PIPE_DELIMITER +
-                    newPatientData.getAddress() + PIPE_DELIMITER +
-                    newPatientData.getContactNumber() + LS;
+            newPatientString = newPatientData.getName() + PIPE_DELIMITER
+                    + newPatientData.getAge() + PIPE_DELIMITER
+                    + newPatientData.getAddress() + PIPE_DELIMITER
+                    + newPatientData.getContactNumber() + LS;
             fwPatientSave.write(newPatientString);
 
         }

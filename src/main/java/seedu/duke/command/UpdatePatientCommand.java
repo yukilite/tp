@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Edit the information of the patient existed in the patient's list
+ * Edit the information of the patient existed in the patient's list.
  *
  * @author Nguyen Thanh Duc
  * @version 0.1
  * @since 2020-03-08
  */
-public class UpdatePatientCommand extends Command{
+public class UpdatePatientCommand extends Command {
 
     public static final String COMMAND_WORD = "editp";
     public static final String EXAMPLE = "editp \\index 5  \\address Clementi \\phone 83487846";
@@ -47,10 +47,9 @@ public class UpdatePatientCommand extends Command{
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
         this.patientName = fieldsToChange.get(PATIENT_NAME);
         boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
-        if(isAgeEqualNull) {
+        if (isAgeEqualNull) {
             this.age = -1;
-        }
-        else {
+        } else {
             this.age = Integer.parseInt(fieldsToChange.get(AGE));
         }
         this.address = fieldsToChange.get(ADDRESS);
@@ -59,7 +58,7 @@ public class UpdatePatientCommand extends Command{
 
     /**
      * Method to update the patient by getting the patient's record based on its index
-     * and update it based on the queries by users, and auto-save it to the data file
+     * and update it based on the queries by users, and auto-save it to the data file.
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function

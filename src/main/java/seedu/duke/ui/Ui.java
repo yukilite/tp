@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Represents the user interface that will interact with the user
+ * Represents the user interface that will interact with the user.
  *
  * @author Justin
  */
@@ -25,7 +25,7 @@ public class Ui {
 ////                + "| | | | | | | |/ / _ \\\n"
 ////                + "| |_| | |_| |   <  __/\n"
 ////                + "|____/ \\__,_|_|\\_\\___|\n";
-////        startUpGreetings();
+////       startUpGreetings();
     }
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
     }
 
     /**
-     * Returns a string that captures the entire user input
+     * Returns a string that captures the entire user input.
      *
      * @return entire user input
      */
@@ -73,7 +73,7 @@ public class Ui {
     }
 
     /**
-     * This method prints the entire patientList
+     * This method prints the entire patientList.
      */
     public static void showEntireList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn

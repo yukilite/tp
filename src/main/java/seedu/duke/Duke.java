@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.unknownCommandException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -63,7 +63,7 @@ public class Duke {
                 assert c != null;
                 c.execute(ui, storage);
                 isExit = c.isExit();
-            } catch (unknownCommandException e) {
+            } catch (UnknownCommandException e) {
                 ui.showUnknownCommandError();
             } catch (IOException e) {
                 //todo justin ui print error message

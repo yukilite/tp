@@ -12,7 +12,7 @@ public class Patient {
     private String address;
     private String contactNumber;
 
-    public Patient (String name, int age, String address, String contactNumber) {
+    public Patient(String name, int age, String address, String contactNumber) {
         this.name = name;
         this.age = age;
         this.address = address;
@@ -42,18 +42,18 @@ public class Patient {
      */
     @Override
     public String toString() {
-        String newToString = "{" + "[Name]:"+ " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
+        String newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
                 + " " + "[Address]:" + " " +  getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
                 + getContactNumber() + "}";
         return newToString;
     }
 
-/**
- * This part is implemented for the UpdatePatientCommand class by Duc
- */
+     /**
+     * This part is implemented for the UpdatePatientCommand class by Duc.
+     */
 
     /**
-     * Update the name if it is not null
+     * Update the name if it is not null.
      *
      * @param name name that needs to be updated
      */
@@ -64,40 +64,40 @@ public class Patient {
     }
 
     /**
-     * Update the age if it is a positive integer
+     * Update the age if it is a positive integer.
      *
      * @param age age that needs to be updated
      */
     public void setAge(int age) {
-        if(age >= 0) {
+        if (age >= 0) {
             this.age = age;
         }
     }
 
     /**
-     * Update the address if it is not null
+     * Update the address if it is not null.
      *
      * @param address address that needs to be updated
      */
     public void setAddress(String address) {
-        if(!address.isBlank()) {
+        if (!address.isBlank()) {
             this.address = address;
         }
     }
 
     /**
-     * Update the contact number if it is not null
+     * Update the contact number if it is not null.
      *
      * @param contactNumber contact number that needs to be updated
      */
     public void setContactNumber(String contactNumber) {
-        if(!contactNumber.isBlank()) {
+        if (!contactNumber.isBlank()) {
             this.contactNumber = contactNumber;
         }
     }
 
     /**
-     * Method to update all the patient's information
+     * Method to update all the patient's information.
      *
      * @param name name that needs to be updated
      * @param age age that needs to be updated
