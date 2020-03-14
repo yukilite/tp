@@ -135,7 +135,7 @@ public class Storage {
 
         FileWriter fwPatientSave;
         try {
-            fwPatientSave = new FileWriter(this.appointmentListSaveLocation);
+            fwPatientSave = new FileWriter(this.patientListSaveLocation);
         } catch (IOException e) {
             throw new IOException();
         }

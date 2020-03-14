@@ -2,10 +2,15 @@ package seedu.duke.storage;
 
 import seedu.duke.record.Appointment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentList {
     private static List<Appointment> appointmentList;
+
+    public AppointmentList() {
+        this.appointmentList = new ArrayList<>();
+    }
 
     public AppointmentList(List<Appointment> savedPatientList) {
         this.appointmentList = savedPatientList;
@@ -26,5 +31,9 @@ public class AppointmentList {
 
     public static int getTotalAppointments() {
         return appointmentList.size();
+    }
+
+    public void removeAppointmentRecord(int appointmentIndex) {
+        this.getAppointmentList().remove(appointmentIndex);
     }
 }
