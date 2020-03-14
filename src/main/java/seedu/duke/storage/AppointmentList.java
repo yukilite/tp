@@ -9,7 +9,7 @@ public class AppointmentList {
     private static List<Appointment> appointmentList;
 
     public AppointmentList() {
-        appointmentList = new ArrayList<>();
+        this.appointmentList = new ArrayList<>();
     }
 
     public AppointmentList(List<Appointment> savedPatientList) {
@@ -31,5 +31,9 @@ public class AppointmentList {
 
     public static int getTotalAppointments() {
         return appointmentList.size();
+    }
+
+    public void removeAppointmentRecord(int appointmentIndex) {
+        this.getAppointmentList().remove(appointmentIndex);
     }
 }
