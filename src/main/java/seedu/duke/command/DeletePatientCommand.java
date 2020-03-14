@@ -46,7 +46,7 @@ public class DeletePatientCommand extends Command{
      * @throws IOException when there is error in the index's input
      * @see IOException
      * @see PatientList#getPatientRecord
-     * @see Storage#savePatientList  
+     * @see Storage#savePatientList
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {

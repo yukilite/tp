@@ -151,14 +151,14 @@ public class Parser {
         switch (command) {
         case ADD_PATIENT:
             assert fieldsToChange != null;
-            return new AddCommand(fieldsToChange);
+            return new AddPatientCommand(fieldsToChange);
         case EDIT_PATIENT:
             assert fieldsToChange != null;
             return new UpdatePatientCommand(fieldsToChange);
         case DELETE_PATIENT:
             return new DeletePatientCommand(fieldsToChange);
         case LIST_PATIENT:
-            return new ListCommand();
+            return new ListPatientCommand();
         case HELP_COMMAND:
             return new HelpCommand();
         case BYE_COMMAND:
