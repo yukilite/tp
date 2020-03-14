@@ -22,10 +22,10 @@ class PatientListTest {
     @Test
     void patientListTest_GetInfo() {
         testPatientList.getPatientList().add(testPatient1);
-        assertEquals("alice", testPatientList.getPatientRecord(1).getName());
-        assertEquals(11, testPatientList.getPatientRecord(1).getAge());
-        assertEquals("bukit timah", testPatientList.getPatientRecord(1).getAddress());
-        assertEquals("61111111", testPatientList.getPatientRecord(1).getContactNumber());
+        assertEquals("alice", testPatientList.getPatientRecord(0).getName());
+        assertEquals(11, testPatientList.getPatientRecord(0).getAge());
+        assertEquals("bukit timah", testPatientList.getPatientRecord(0).getAddress());
+        assertEquals("61111111", testPatientList.getPatientRecord(0).getContactNumber());
     }
 
     @Test
@@ -33,9 +33,9 @@ class PatientListTest {
         testPatientList.getPatientList().add(testPatient1);
         testPatientList.getPatientList().add(testPatient2);
         testPatientList.getPatientList().add(testPatient3);
-        testPatientList.removePatientRecord(1);
+        testPatientList.removePatientRecord(0);
         assertEquals(2, testPatientList.getTotalPatients());
-        assertEquals("bob", testPatientList.getPatientRecord(1).getName());
+        assertEquals("bob", testPatientList.getPatientRecord(0).getName());
     }
 
 }

@@ -27,7 +27,7 @@ public class PatientList {
     }
 
     public static Patient getPatientRecord(int patientIndex) {
-        return getPatientList().get(patientIndex-1);
+        return getPatientList().get(patientIndex);
     }
 
     public static int getTotalPatients() {
@@ -35,6 +35,6 @@ public class PatientList {
     }
 
     public void removePatientRecord(int patientIndex) {
-        this.getPatientList().remove(patientIndex-1);
+        this.getPatientList().remove(patientIndex);
     }
 }
