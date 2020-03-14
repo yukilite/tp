@@ -75,7 +75,7 @@ public class Ui {
     /**
      * This method prints the entire patientList
      */
-    public static void showEntireList() {
+    public void showEntireList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn
         for (Patient p : patientList) {
             System.out.println(p); //override Patient class toString by @Sammmmm

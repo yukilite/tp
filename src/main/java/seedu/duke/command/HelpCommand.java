@@ -34,5 +34,6 @@ public class HelpCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
         System.out.println(COMMANDS_MESSAGE_USAGE);
+        //todo move this to UI for printing
     }
 }

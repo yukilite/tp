@@ -20,11 +20,15 @@ public class Parser {
     private static final String EDIT_PATIENT = "editp";
     private static final String DELETE_PATIENT = "deletep";
     private static final String LIST_PATIENT = "listp";
+    public static final String HELP = "help";
+    public static final String BYE = "bye";
 
     public static final String REGEX_BACKSLASH = "\\\\";
     private static final String BLANK_STRING = "";
     private static final String WHITESPACE = " ";
     private static final String INDEX = "index";
+
+
 
     /**
      * This methods returns the command from the user input string.
@@ -151,10 +155,14 @@ public class Parser {
         case EDIT_PATIENT:
             assert fieldsToChange != null;
             return new UpdateCommand(fieldsToChange);
-        case DELETE_PATIENT:
+        case DELETE_PATIENT :
             return new DeleteCommand(fieldsToChange);
-        case LIST_PATIENT:
+        case LIST_PATIENT :
             return new ListCommand();
+        case HELP :
+            return new HelpCommand();
+        case BYE:
+            //TODO execute save methods and print out bye message
         default:
             DukeExceptions.unknownCommand();
             return null;
