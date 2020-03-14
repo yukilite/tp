@@ -20,13 +20,7 @@ public class ListCommand extends Command{
     @Override
     public void execute(Ui ui, Storage storage) {
 
-<<<<<<< HEAD
         /** Show the enitre list. This is the onlu method in Ui that is static for some reason **/
-        Ui.showEntireList();
-=======
-        /** Show the enitre list. This is the only method in Ui that is static for some reason **/
         ui.showEntireList();
->>>>>>> Parser_branch
-
     }
 }
