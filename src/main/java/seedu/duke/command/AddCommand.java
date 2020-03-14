@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     private String contactNumber;
 
     /**
-     * Constructor for the AddCommand
+     * Constructor for the AddCommand.
      * @param patientInfo the map containing the patient information
      */
     public AddCommand(Map<String, String> patientInfo) {

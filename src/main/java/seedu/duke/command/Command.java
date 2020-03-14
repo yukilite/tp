@@ -7,7 +7,7 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 /**
- * Super class for all the types of command sub-classes
+ * Super class for all the types of command sub-classes.
  */
 
 public abstract class Command {
