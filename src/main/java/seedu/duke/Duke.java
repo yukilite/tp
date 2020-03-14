@@ -30,7 +30,6 @@ public class Duke {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage();
-        patientList = new PatientList();
     }
 
 
