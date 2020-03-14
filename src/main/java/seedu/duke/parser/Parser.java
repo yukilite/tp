@@ -53,11 +53,13 @@ public class Parser {
      * Supplied key is "\name"
      * Default delimiter is "\"
      * Returns String value "Justin" since it is the value behind the first key
+     *
      * <p>
      * Note: This method only searches of known keys (key values in the patient field enum). Therefore, any
      * unknown keys in the full command will be ignore.
      * For example: param fullCommand = "addp \name Justin \adress Pasir Ris \age 20"
      * "\adress" will be ignored as it is a mis-spelling of the enum fieldKeys "address".
+     *
      * <p>
      * Note: The default delimiter in this method is exactly " \". Any sequence of characters that does not follow this
      * delimiter will be considered as the value to the key.
