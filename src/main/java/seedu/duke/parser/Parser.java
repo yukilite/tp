@@ -20,6 +20,8 @@ public class Parser {
     private static final String EDIT_PATIENT = "editp";
     private static final String DELETE_PATIENT = "deletep";
     private static final String LIST_PATIENT = "listp";
+    private static final String HELP_COMMAND = "help";
+    private static final String BYE_COMMAND = "exit";
 
     public static final String REGEX_BACKSLASH = "\\\\";
     private static final String BLANK_STRING = "";
@@ -157,6 +159,10 @@ public class Parser {
             return new DeletePatientCommand(fieldsToChange);
         case LIST_PATIENT:
             return new ListCommand();
+        case HELP_COMMAND:
+            return new HelpCommand();
+        case BYE_COMMAND:
+            return new ExitCommand();
         default:
             DukeExceptions.unknownCommand();
             return null;
