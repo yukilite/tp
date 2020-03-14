@@ -54,14 +54,12 @@ public class Parser {
      * Default delimiter is "\"
      * Returns String value "Justin" since it is the value behind the first key
      *
-     * <p>
-     * Note: This method only searches of known keys (key values in the patient field enum). Therefore, any
+     * <p>Note: This method only searches of known keys (key values in the patient field enum). Therefore, any
      * unknown keys in the full command will be ignore.
      * For example: param fullCommand = "addp \name Justin \adress Pasir Ris \age 20"
      * "\adress" will be ignored as it is a mis-spelling of the enum fieldKeys "address".
      *
-     * <p>
-     * Note: The default delimiter in this method is exactly " \". Any sequence of characters that does not follow this
+     * <p>Note: The default delimiter in this method is exactly " \". Any sequence of characters that does not follow this
      * delimiter will be considered as the value to the key.
      * For example: param fullCommand = "\name Justin\age 24",
      * The value returned for key "\name" will be "Justin\age 24".
@@ -155,7 +153,9 @@ public class Parser {
      * @return a specific command object that is specified by @param command.
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
-    private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws UnknownCommandException {
+    private Command getCommandObject
+    (String command, Map<String, String> fieldsToChange) throws UnknownCommandException {
+
         switch (command) {
         case ADD_PATIENT:
             assert fieldsToChange != null;

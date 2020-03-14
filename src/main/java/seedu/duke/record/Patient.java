@@ -12,6 +12,7 @@ public class Patient {
     private String address;
     private String contactNumber;
 
+
     public Patient(String name, int age, String address, String contactNumber) {
         this.name = name;
         this.age = age;
@@ -52,7 +53,7 @@ public class Patient {
      * This part is implemented for the UpdatePatientCommand class by Duc.
      */
 
-    /**
+     /**
      * Update the name if it is not null.
      *
      * @param name name that needs to be updated
