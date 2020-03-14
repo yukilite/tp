@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.unknownCommandException;
+import seedu.duke.exceptions.wrongCommandFormat;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -68,7 +69,6 @@ public class Duke {
             } catch (IOException e) {
                 //todo justin ui print error message
             }
-
         }
     }
 

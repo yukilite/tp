@@ -81,4 +81,8 @@ public class Ui {
             System.out.println(p); //override Patient class toString by @Sammmmm
         }
     }
+
+    public void showWrongCommandFormatError() {
+        System.out.println("Wrong Command Format");
+    }
 }

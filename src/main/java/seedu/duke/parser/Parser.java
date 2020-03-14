@@ -37,7 +37,7 @@ public class Parser {
      * @return the actual command to execute
      */
     protected String getCommand(String fullCommand) {
-        String[] splits = fullCommand.split(REGEX_BACKSLASH, LIMIT);
+        String[] splits = fullCommand.split(" " + REGEX_BACKSLASH, LIMIT);
         return splits[COMMAND_INDEX].trim();
     }
 

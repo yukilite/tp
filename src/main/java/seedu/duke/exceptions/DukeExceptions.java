@@ -29,4 +29,10 @@ public class DukeExceptions {
     public static void unknownCommand() throws unknownCommandException {
         throw new unknownCommandException();
     }
+
+    public static void isCommandFormatCorrect(String[] splits) throws wrongCommandFormat {
+        if (splits.length != 2) {
+            throw new wrongCommandFormat();
+        }
+    }
 }
