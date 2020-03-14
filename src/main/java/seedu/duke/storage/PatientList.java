@@ -33,4 +33,8 @@ public class PatientList {
     public static int getTotalPatients() {
         return patientList.size();
     }
+
+    public void removePatientRecord(int patientIndex) {
+        this.getPatientList().remove(patientIndex);
+    }
 }
