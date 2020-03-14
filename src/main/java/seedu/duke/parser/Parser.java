@@ -108,7 +108,6 @@ public class Parser {
                 fieldsToChange.put(INDEX, Integer.toString(Duke.indexNumber));
             }
         }
-
         return fieldsToChange;
     }
 
