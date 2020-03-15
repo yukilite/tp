@@ -4,9 +4,8 @@ import seedu.duke.Duke;
 import seedu.duke.command.*;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.noKeyExistException;
-import seedu.duke.exceptions.unknownCommandException;
-import seedu.duke.exceptions.wrongCommandFormat;
+import seedu.duke.exceptions.NoKeyExistException;
+import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,7 +78,7 @@ public class Parser {
             String value = b[VALUE_INDEX];
             return value.trim();
 
-        } catch (noKeyExistException e) {
+        } catch (NoKeyExistException e) {
             return BLANK_STRING;
         }
     }
@@ -112,30 +111,30 @@ public class Parser {
 
     /**
      * This method returns the specific type of command object.
-     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
+     * Throws an UnknownCommandException for the caller to catch when user supplied an unknown command
      *
      * @param command        the command that was specified
      * @param fieldsToChange the HashMap of what to add or edit
      * @return a specific command object that is specified by @param command.
-     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
+     * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
-    private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws unknownCommandException {
+    private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws UnknownCommandException {
         switch (command) {
         case ADD_PATIENT:
             assert fieldsToChange != null;
-            return new AddCommand(fieldsToChange);
+            return new AddPatientCommand(fieldsToChange);
         case EDIT_PATIENT:
             assert fieldsToChange != null;
-            return new UpdateCommand(fieldsToChange);
+            return new UpdatePatientCommand(fieldsToChange);
         case DELETE_PATIENT:
-            return new DeleteCommand(fieldsToChange);
+            return new DeletePatientCommand(fieldsToChange);
         case LIST_PATIENT:
-            return new ListCommand();
+            return new ListPatientCommand();
         case HELP:
             return new HelpCommand();
         case BYE:
             return new ByeCommand();
-            //TODO execute save methods and print out bye message
+            //TODO bye message
         default:
             DukeExceptions.unknownCommand();
             return null;
@@ -144,13 +143,13 @@ public class Parser {
 
     /**
      * This method returns the command object to be executed.
-     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
+     * Throws an UnknownCommandException for the caller to catch when user supplied an unknown command
      *
      * @param fullCommand the user input that the user provided
      * @return a command object to be executed
-     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
+     * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
-    public Command parseCommand(String fullCommand) throws unknownCommandException {
+    public Command parseCommand(String fullCommand) throws UnknownCommandException {
         String commandAsString = getCommand(fullCommand);
 
         Command command;

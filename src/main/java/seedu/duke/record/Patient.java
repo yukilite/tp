@@ -47,7 +47,7 @@ public class Patient {
     }
 
 /**
- * This part is implemented for the UpdateCommand class by Duc
+ * This part is implemented for the UpdatePatientCommand class by Duc
  */
 
     /**
