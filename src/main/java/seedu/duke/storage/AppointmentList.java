@@ -5,6 +5,14 @@ import seedu.duke.record.Appointment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class acts an ADT for the list containing existing Appointment objects. It contains various getter/setter methods
+ * for accessing the different attributes and methods for manipulating the data structure.
+ *
+ * @author Brandon Chong
+ * @version 1.0
+ * @since 2020-03-14
+ */
 public class AppointmentList {
     private static List<Appointment> appointmentList;
 
