@@ -4,7 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exceptions.DescriptionIsEmptyException;
 import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.exceptions.InvalidIndexError;
+import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -70,7 +70,7 @@ public class Duke {
                 c.execute(ui, storage);
                 isExit = c.isExit();
 
-            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexError |
+            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexException |
                     IndexNotIntegerException e) {
                 ui.showExceptionError(e.getLocalizedMessage());
 

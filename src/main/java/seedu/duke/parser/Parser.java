@@ -1,17 +1,33 @@
 package seedu.duke.parser;
 
 import seedu.duke.Duke;
-import seedu.duke.command.*;
+
+import seedu.duke.command.Command;
+
+import seedu.duke.command.AddAppointmentCommand;
+import seedu.duke.command.DeleteAppointmentCommand;
+import seedu.duke.command.ListAppointmentCommand;
+import seedu.duke.command.UpdateAppointmentCommand;
+
 import seedu.duke.command.AddPatientCommand;
 import seedu.duke.command.DeletePatientCommand;
 import seedu.duke.command.ListPatientCommand;
 import seedu.duke.command.UpdatePatientCommand;
-import seedu.duke.enums.AppointmentFieldKeys;
-import seedu.duke.enums.PatientFieldKeys;
-import seedu.duke.exceptions.*;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.HelpCommand;
+
+import seedu.duke.exceptions.DukeExceptions;
+import seedu.duke.exceptions.DescriptionIsEmptyException;
+import seedu.duke.exceptions.IndexNotIntegerException;
+import seedu.duke.exceptions.InvalidIndexException;
+import seedu.duke.exceptions.NoKeyExistException;
+import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import seedu.duke.enums.AppointmentFieldKeys;
+import seedu.duke.enums.PatientFieldKeys;
 
 public class Parser {
     private static final int COMMAND_INDEX = 0;
@@ -50,28 +66,11 @@ public class Parser {
     }
 
     /**
-     * This method returns strictly the String that is between the fieldKey and " \" delimiter.
-     * It will only return the value that is behind the first key.
-     * Returns an empty String if the key supplied cannot be found in the fullCommand.
-     * For example: param fullCommand = "addp \name Justin \address Pasir Ris \name Ananda".
-     * Supplied key is "\name".
-     * Default delimiter is "\".
-     * Returns String value "Justin" since it is the value behind the first key.
-     * <p>
-     * Note: This method only searches of known keys (key values in the patient field enum). Therefore, any
-     * unknown keys in the full command will be ignore.
-     * For example: param fullCommand = "addp \name Justin \adress Pasir Ris \age 20"
-     * "\adress" will be ignored as it is a mis-spelling of the enum fieldKeys "address".
-     * <p>
-     * Note: The default delimiter in this method is exactly " \". Any sequence of characters that does not follow this
-     * delimiter will be considered as the value to the key.
-     * For example: param fullCommand = "\name Justin\age 24",
-     * The value returned for key "\name" will be "Justin\age 24".
-     * The value return for key "\age" will be EMPTY_STRING.
+     * Returns strictly the String that is between the fieldKey and " \" delimiter.
      *
-     * @param fullCommand the entire command that the user supplied
-     * @param key         the patient field, prepended with REGEX_BACKSLASH. This key is an enum.
-     * @return the String that is between key and " \" delimiter
+     * @param fullCommand the entire command that the user supplied.
+     * @param key the patient field, prepended with REGEX_BACKSLASH.
+     * @return the String that is between key and " \" delimiter.
      */
     private String findValue(String fullCommand, String key) {
         String[] keyValue = fullCommand.split(key, LIMIT);
@@ -92,7 +91,7 @@ public class Parser {
     }
 
     /**
-     * This method returns a HashMap that matches the Patient fields to edit to the values to edit in.
+     * Returns a HashMap that matches the Patient fields to edit to the values to edit in.
      * The HashMap is guaranteed to contain the keys found in the enum PatientFieldKeys.
      * The values however will be determined by the user.
      *
@@ -114,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * This method returns a HashMap that matches the Appointment fields to edit to the values to edit in.
+     * Returns a HashMap that matches the Appointment fields to edit to the values to edit in.
      * The HashMap is guaranteed to contain the keys found in the enum AppointmentFieldKeys.
      * The values however will be determined by the user. If not provided, EMPTY_STRING will be stored
      *
@@ -136,7 +135,7 @@ public class Parser {
     }
 
     /**
-     * This method returns the specific type of command object.
+     * Returns the specific type of command object.
      * Throws an UnknownCommandException for the caller to catch when user supplied an unknown command.
      * Throws InvalidIndexError when the index supplied for edit and delete commands are invalid (alphabets, <= 0).
      *
@@ -144,10 +143,10 @@ public class Parser {
      * @param fieldsToChange the HashMap of what to add or edit.
      * @return a specific command object that is specified by @param command.
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
-     * @throws InvalidIndexError Throws a custom duke exception to catch and print error message.
+     * @throws InvalidIndexException       Throws a custom duke exception to catch and print error message.
      */
     private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws UnknownCommandException,
-            InvalidIndexError, IndexNotIntegerException {
+            InvalidIndexException, IndexNotIntegerException {
         switch (command) {
         case ADD_PATIENT:
             Duke.patientIndexNumber++;
@@ -194,7 +193,7 @@ public class Parser {
     }
 
     /**
-     * This method returns the command object to be executed.
+     * Returns the command object to be executed.
      * Throws an UnknownCommandException for the caller to catch when user supplied an unknown command.
      *
      * @param fullCommand the user input that the user provided.
@@ -202,7 +201,7 @@ public class Parser {
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
     public Command parseCommand(String fullCommand) throws UnknownCommandException, DescriptionIsEmptyException,
-            InvalidIndexError, IndexNotIntegerException {
+            InvalidIndexException, IndexNotIntegerException {
         String[] commandParsed = getCommand(fullCommand);
         String commandAsString = commandParsed[COMMAND_INDEX].trim();
 
