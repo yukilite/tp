@@ -1,6 +1,8 @@
 package seedu.duke.ui;
 
+import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
+import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 
 import java.util.List;
@@ -26,6 +28,13 @@ public class Ui {
 ////                + "| |_| | |_| |   <  __/\n"
 ////                + "|____/ \\__,_|_|\\_\\___|\n";
 ////        startUpGreetings();
+    }
+
+    public static void showEntireAppointmentList() {
+        List<Appointment> appointmentList = AppointmentList.getAppointmentList();
+        for (Appointment a : appointmentList) {
+            System.out.println(a);
+        }
     }
 
     /**
