@@ -10,13 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.UpdateAppointmentCommand.*;
+import static seedu.duke.command.EditAppointmentCommand.*;
 
-class UpdateAppointmentCommandTest {
+class DeleteAppointmentCommandTest {
 
-    //Test case 1
     @Test
-    void execute_1() throws Exception{
+    void execute() throws Exception{
         AppointmentList appointmentList = new AppointmentList();
         appointmentList.getAppointmentList().add(new Appointment("14/03/2020","10am"));
         appointmentList.getAppointmentList().add(new Appointment("15/03/2020","11am"));
@@ -27,11 +26,15 @@ class UpdateAppointmentCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         fieldsToChange.put(APPOINTMENT_INDEX, "3");
-        fieldsToChange.put(APPOINTMENT_DATE,"31/12/2020");
-        fieldsToChange.put(APPOINTMENT_TIME, "11pm");
-        Command command = new UpdateAppointmentCommand(fieldsToChange);
+        Command command = new DeleteAppointmentCommand(fieldsToChange);
         command.execute(ui,storage);
-        assertEquals("{[Date]: 31/12/2020 |[Time]: 11pm}",
+        assertEquals("{[Date]: 14/03/2020 |[Time]: 10am}",
+                appointmentList.getAppointmentRecord(0).toString());
+        assertEquals("{[Date]: 15/03/2020 |[Time]: 11am}",
+                appointmentList.getAppointmentRecord(1).toString());
+        assertEquals("{[Date]: 17/03/2020 |[Time]: 1pm}",
                 appointmentList.getAppointmentRecord(2).toString());
+        assertEquals("{[Date]: 18/03/2020 |[Time]: 2pm}",
+                appointmentList.getAppointmentRecord(3).toString());
     }
 }

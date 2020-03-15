@@ -154,7 +154,7 @@ public class Parser {
             return new AddPatientCommand(fieldsToChange);
         case EDIT_PATIENT:
             assert fieldsToChange != null;
-            return new UpdatePatientCommand(fieldsToChange);
+            return new EditPatientCommand(fieldsToChange);
         case DELETE_PATIENT:
             return new DeletePatientCommand(fieldsToChange);
         case LIST_PATIENT:
