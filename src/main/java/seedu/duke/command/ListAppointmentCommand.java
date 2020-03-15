@@ -10,6 +10,7 @@ public class ListAppointmentCommand extends Command {
 
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
+        System.out.println("ListAppointmentCommand is executed (placeholder code)");
 
     }
 }
