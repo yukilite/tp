@@ -134,13 +134,14 @@ public class Parser {
         case HELP:
             return new HelpCommand();
         case BYE:
+            return new ByeCommand();
             //TODO execute save methods and print out bye message
         default:
             DukeExceptions.unknownCommand();
             return null;
         }
     }
-    
+
     /**
      * This method returns the command object to be executed.
      * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
