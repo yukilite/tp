@@ -101,14 +101,11 @@ class AddPatientCommandTest {
 
     @Test
     void testAddNormalString() throws IOException {
-        Ui ui = null;
-        Storage storage = new Storage();
         Map<String, String> tempMap = new HashMap<>();
         tempMap.put("name", "asd");
         tempMap.put("age", "23");
         tempMap.put("address", "asdsds");
         tempMap.put("phone", "asdsadsad");
-        AddPatientCommand addPatientCommand = new AddPatientCommand(tempMap);
         Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121");
         Patient newPatient2 = new Patient(" ", 15, " ", "15454455");
         Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989");
@@ -121,6 +118,9 @@ class AddPatientCommandTest {
         savedPatientList.add(newPatient4);
         savedPatientList.add(newPatient5);
         PatientList patientList = new PatientList(savedPatientList);
+        Ui ui = null;
+        Storage storage = new Storage();
+        AddPatientCommand addPatientCommand = new AddPatientCommand(tempMap);
         addPatientCommand.execute(ui, storage);
         Patient temppatient = patientList.getPatientList().get(patientList.getPatientList().size() - 1);
         Patient newPatient = new Patient("asd", 23, "asdsds", "asdsadsad");
@@ -132,14 +132,12 @@ class AddPatientCommandTest {
 
     @Test
     void testAddEmptyString() throws IOException {
-        Ui ui = null;
-        Storage storage = new Storage();
+
         Map<String, String> tempMap = new HashMap<>();
         tempMap.put("name", "");
         tempMap.put("age", "");
         tempMap.put("address", "");
         tempMap.put("phone", "");
-        AddPatientCommand addPatientCommand = new AddPatientCommand(tempMap);
         Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121");
         Patient newPatient2 = new Patient(" ", 15, " ", "15454455");
         Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989");
@@ -152,6 +150,9 @@ class AddPatientCommandTest {
         savedPatientList.add(newPatient4);
         savedPatientList.add(newPatient5);
         PatientList patientList = new PatientList(savedPatientList);
+        Ui ui = null;
+        Storage storage = new Storage();
+        AddPatientCommand addPatientCommand = new AddPatientCommand(tempMap);
         addPatientCommand.execute(ui, storage);
         Patient temppatient = patientList.getPatientList().get(patientList.getPatientList().size() - 1);
         Patient newPatient = new Patient("", -1, "", "");

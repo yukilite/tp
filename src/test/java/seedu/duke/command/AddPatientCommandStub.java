@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Stub class for fake addCommand class
+ * Stub class for fake addCommand class.
  */
 class AddPatientCommandStub {
 

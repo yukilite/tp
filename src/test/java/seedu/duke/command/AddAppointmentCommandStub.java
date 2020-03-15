@@ -15,6 +15,10 @@ public class AddAppointmentCommandStub {
         this.time = appointmentInfo.get(TIME);
     }
 
+    /**
+     * This method is a stub.
+     * @see AddAppointmentCommand
+     */
     public static Map<String, String> generateMap(int choice) {
         Map<String, String> tempMap = new HashMap<>();
         if (choice == 1) {
@@ -27,7 +31,10 @@ public class AddAppointmentCommandStub {
         return tempMap;
     }
 
-
+    /**
+     * This method is a stub.
+     * @see AddAppointmentCommand
+     */
     public void execute(int ui, int storage) {
         AppointmentStub newAppointment = new AppointmentStub(this.date, this.time);
 
