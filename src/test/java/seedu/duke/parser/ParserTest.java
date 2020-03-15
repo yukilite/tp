@@ -7,6 +7,8 @@ import seedu.duke.command.DeletePatientCommand;
 import seedu.duke.command.ListPatientCommand;
 import seedu.duke.command.UpdatePatientCommand;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.record.Patient;
+import seedu.duke.storage.PatientList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,6 +68,12 @@ class ParserTest {
         String editPatientUserInput2 = "editp       \\index 3 \\name \\age 23 \\address pasir ris";
         String editPatientUserInput3 = "         editp  \\index 4      \\\\\\\\\\";
 
+        PatientList stub = new PatientList();
+        Patient newPatient = new Patient("1", 1, "1", "1");
+        for (int i = 0; i < 10; i += 1) {
+            PatientList.getPatientList().add(newPatient);
+        }
+
         try {
             Command type1 = p.parseCommand(editPatientUserInput1);
             Command type2 = p.parseCommand(editPatientUserInput2);
@@ -82,7 +90,7 @@ class ParserTest {
 
     @Test
     void testParseCommand_editPatientCommand_isNotEditCommand() {
-        String editPatientUserInput1 = "deletep \\index 3";
+        String editPatientUserInput1 = "adda \\index 3";
         String editPatientUserInput2 = "addp                        \\unknown \\age \\name \\12333";
         String editPatientUserInput3 = "list";
 
@@ -96,7 +104,7 @@ class ParserTest {
             assertFalse(type3 instanceof UpdatePatientCommand);
 
         } catch (Exception e) {
-            //assertEquals("Unknown Command", e.getLocalizedMessage());
+            assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
 
@@ -105,6 +113,12 @@ class ParserTest {
         String deletePatientUserInput1 = "         deletep  \\index 4      \\\\\\\\\\";
         String deletePatientUserInput2 = "           deletep \\index 10";
         String deletePatientUserInput3 = "deletep               \\index 1";
+
+        PatientList stub = new PatientList();
+        Patient newPatient = new Patient("1", 1, "1", "1");
+        for (int i = 0; i < 10; i += 1) {
+            PatientList.getPatientList().add(newPatient);
+        }
 
         try {
             Command type1 = p.parseCommand(deletePatientUserInput1);
