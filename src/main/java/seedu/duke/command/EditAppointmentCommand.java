@@ -18,14 +18,14 @@ import java.util.Map;
  * @version 1.0
  * @since 2020-03-14
  */
-public class UpdateAppointmentCommand extends Command{
+public class EditAppointmentCommand extends Command{
     public static final String COMMAND_WORD = "edita";
     public static final String EXAMPLE = "edita \\index 5  \\date 01/03/2020 \\time 10am";
     public static final String APPOINTMENT_INDEX = "index";
     public static final String APPOINTMENT_DATE = "date";
     public static final String APPOINTMENT_TIME = "time";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update the information of appointment in the list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit the information of appointment in the list.\n"
             + "Example: " + EXAMPLE;
 
     private int index;
@@ -41,7 +41,7 @@ public class UpdateAppointmentCommand extends Command{
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
      */
-    public UpdateAppointmentCommand(Map<String, String> fieldsToChange) {
+    public EditAppointmentCommand(Map<String, String> fieldsToChange) {
         try {
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {

@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.UpdateAppointmentCommand.*;
+import static seedu.duke.command.EditAppointmentCommand.*;
 
-class UpdateAppointmentCommandTest {
+class EditAppointmentCommandTest {
 
     //Test case 1
     @Test
@@ -29,7 +29,7 @@ class UpdateAppointmentCommandTest {
         fieldsToChange.put(APPOINTMENT_INDEX, "3");
         fieldsToChange.put(APPOINTMENT_DATE,"31/12/2020");
         fieldsToChange.put(APPOINTMENT_TIME, "11pm");
-        Command command = new UpdateAppointmentCommand(fieldsToChange);
+        Command command = new EditAppointmentCommand(fieldsToChange);
         command.execute(ui,storage);
         assertEquals("{[Date]: 31/12/2020 |[Time]: 11pm}",
                 appointmentList.getAppointmentRecord(2).toString());
@@ -50,7 +50,7 @@ class UpdateAppointmentCommandTest {
         fieldsToChange.put(APPOINTMENT_INDEX, "5");
         fieldsToChange.put(APPOINTMENT_DATE,"");
         fieldsToChange.put(APPOINTMENT_TIME, "11pm");
-        Command command = new UpdateAppointmentCommand(fieldsToChange);
+        Command command = new EditAppointmentCommand(fieldsToChange);
         command.execute(ui,storage);
         assertEquals("{[Date]: 18/03/2020 |[Time]: 11pm}",
                 appointmentList.getAppointmentRecord(4).toString());

@@ -17,7 +17,7 @@ import java.util.Map;
  * @version 0.1
  * @since 2020-03-08
  */
-public class UpdatePatientCommand extends Command{
+public class EditPatientCommand extends Command{
 
     public static final String COMMAND_WORD = "editp";
     public static final String EXAMPLE = "editp \\index 5  \\address Clementi \\phone 83487846";
@@ -45,7 +45,7 @@ public class UpdatePatientCommand extends Command{
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
      */
-    public UpdatePatientCommand(Map<String, String> fieldsToChange) {
+    public EditPatientCommand(Map<String, String> fieldsToChange) {
         try {
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {

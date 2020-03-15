@@ -33,7 +33,7 @@ public class Appointment {
     }
 
     /**
-     * This part is implemented for the UpdatePatientCommand class by Duc
+     * This part is implemented for the EditPatientCommand class by Duc
      */
 
     /**

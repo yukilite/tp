@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.UpdateAppointmentCommand.*;
+import static seedu.duke.command.EditAppointmentCommand.*;
 
 class DeleteAppointmentCommandTest {
 
