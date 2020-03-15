@@ -17,6 +17,7 @@ public class HelpCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
+
     public static final String COMMANDS_MESSAGE_USAGE = AddPatientCommand.MESSAGE_USAGE
             + "\n" + UpdatePatientCommand.MESSAGE_USAGE
             + "\n" + DeletePatientCommand.MESSAGE_USAGE
@@ -34,6 +35,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
         System.out.println(COMMANDS_MESSAGE_USAGE);
-        //todo move this to UI for printing
+
+        //TODO Justin ui.showHelpUsage(): can use the printing I just implemented
     }
 }

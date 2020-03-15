@@ -31,4 +31,41 @@ public class Appointment {
         String newToString = "{" + "[Date]:" + " " + getDate() + " "+ "|" + "[Time]:" + " " + getTime() + "}";
         return newToString;
     }
+
+    /**
+     * This part is implemented for the UpdatePatientCommand class by Duc
+     */
+
+    /**
+     * Update the name if it is not null
+     *
+     * @param date date that needs to be updated
+     */
+    public void setDate(String date) {
+        if (!date.isBlank()) {
+            this.date = date;
+        }
+    }
+
+    /**
+     * Update the age if it is a positive integer
+     *
+     * @param time time that needs to be updated
+     */
+    public void setTime(String time) {
+        if (!time.isBlank()) {
+            this.time = time;
+        }
+    }
+
+    /**
+     * Method to update all the patient's information
+     *
+     * @param date date that needs to be updated
+     * @param time time that needs to be updated
+     */
+    public void setAppointmentInfo(String date, String time) {
+        setDate(date);
+        setTime(time);
+    }
 }

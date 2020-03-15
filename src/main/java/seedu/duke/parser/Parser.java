@@ -20,14 +20,13 @@ public class Parser {
     private static final String EDIT_PATIENT = "editp";
     private static final String DELETE_PATIENT = "deletep";
     private static final String LIST_PATIENT = "listp";
-    private static final String HELP = "help";
-    private static final String BYE = "bye";
+    private static final String HELP_COMMAND = "help";
+    private static final String EXIT_COMMAND = "exit";
 
     private static final String REGEX_BACKSLASH = "\\\\";
     private static final String BLANK_STRING = "";
     private static final String WHITESPACE = " ";
     private static final String INDEX = "index";
-
 
     /**
      * This methods returns the command from the user input string.
@@ -74,7 +73,6 @@ public class Parser {
 
             String delimiter = WHITESPACE + REGEX_BACKSLASH;
             String[] b = valueString.split(delimiter, LIMIT);
-
             String value = b[VALUE_INDEX];
             return value.trim();
 
@@ -130,11 +128,10 @@ public class Parser {
             return new DeletePatientCommand(fieldsToChange);
         case LIST_PATIENT:
             return new ListPatientCommand();
-        case HELP:
+        case HELP_COMMAND:
             return new HelpCommand();
-        case BYE:
+        case EXIT_COMMAND:
             return new ByeCommand();
-            //TODO bye message
         default:
             DukeExceptions.unknownCommand();
             return null;

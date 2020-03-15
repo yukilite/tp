@@ -23,7 +23,7 @@ public class UpdatePatientCommand extends Command{
     public static final String PATIENT_NAME = "name";
     public static final String AGE = "age";
     public static final String ADDRESS = "address";
-    public static final String CONTACT_NUMBER = "contactNumber";
+    public static final String CONTACT_NUMBER = "phone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update the information of patient in the list.\n"
             + "Example: " + EXAMPLE;
@@ -83,9 +83,6 @@ public class UpdatePatientCommand extends Command{
         //Auto-save the changes
         storage.savePatientList();
 
-        //ui.showUpdateSuccess(); todo To be implemented later
-
-        //TODO Justin ui.showUpdateSuccess(); To be implemented later
-
+        //TODO Justin ui.showUpdatePatientSuccess(); To be implemented later
     }
 }

@@ -61,9 +61,11 @@ public class Duke {
                 Command c = parser.parseCommand(fullCommand); //return what type of command you should execute
                 assert c != null;
                 c.execute(ui, storage);
+                isExit = c.isExit();
 
             } catch (UnknownCommandException e) {
                 ui.showUnknownCommandError();
+
             } catch (IOException e) {
                 //todo justin ui print error message
             }
