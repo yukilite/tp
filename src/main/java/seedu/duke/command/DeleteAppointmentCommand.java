@@ -36,20 +36,22 @@ public class DeleteAppointmentCommand extends Command {
     public DeleteAppointmentCommand(Map<String, String> fieldsToChange) throws IndexOutOfBoundsException {
         try {
             DukeExceptions.noFieldCommand(fieldsToChange);
+
             try {
                 this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
                 if (index > AppointmentList.getTotalAppointments() || index <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
+
             } catch (NumberFormatException e) {
-                System.out.println("Please input an integer for index");
-                //TODO Justin include this ui.showNumberError();
+                Ui.showNumberError();
+
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Index out of bound, please check the correct index from the list");
-                //TODO Justin include this ui.showIndexError();
+                Ui.showIndexError();
             }
+
         } catch (NoFieldCommandException e) {
-            System.out.println("Please do not let the information be empty");
+            Ui.showNoFieldError();
         }
     }
 
@@ -76,7 +78,8 @@ public class DeleteAppointmentCommand extends Command {
             //Auto-save the changes
             storage.saveAppointmentsList();
 
-            //TODO Justin ui.showDeleteAppointmentSuccess(); To be implemented later
+            Ui.showDeleteAppointmentSuccess();
+
         } catch (IndexOutOfBoundsException e) {
             return;
         }

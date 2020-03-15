@@ -85,6 +85,6 @@ public class AddPatientCommand extends Command {
         storage.savePatientList();
 
         /** Assuming that there is a confimation message indicating the adding of patient is a susccess **/
-        //TODO: justin ui.showPatientAddSuccess();
+        ui.showPatientAddSuccess();
     }
 }

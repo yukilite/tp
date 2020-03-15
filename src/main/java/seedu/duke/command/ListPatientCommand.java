@@ -24,9 +24,7 @@ public class ListPatientCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) {
 
-
         /** Show the enitre list. This is the only method in Ui that is static for some reason **/
-        Ui.showEntireList();
-
+        Ui.showEntirePatientList();
     }
 }

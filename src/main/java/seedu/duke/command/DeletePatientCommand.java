@@ -36,20 +36,22 @@ public class DeletePatientCommand extends Command {
     public DeletePatientCommand(Map<String, String> fieldsToChange) {
         try {
             DukeExceptions.noFieldCommand(fieldsToChange);
+
             try {
                 this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
                 if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
+
             } catch (NumberFormatException e) {
-                System.out.println("Please input an integer for index");
-                //TODO Justin include this ui.showNumberError();
+                Ui.showNumberError();
+
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Index out of bound, please check the correct index from the list");
-                //TODO Justin include this ui.showIndexError();
+                Ui.showIndexError();
             }
+
         } catch (NoFieldCommandException e) {
-            System.out.println("Please do not let the information be empty");
+            Ui.showNoFieldError();
         }
     }
 
@@ -76,7 +78,7 @@ public class DeletePatientCommand extends Command {
             //Auto-save the changes
             storage.savePatientList();
 
-            //TODO Justin ui.showDeletePatientSuccess(); To be implemented later
+            Ui.showDeletePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
         }
