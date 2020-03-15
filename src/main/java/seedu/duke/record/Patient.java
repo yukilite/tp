@@ -1,9 +1,8 @@
 package seedu.duke.record;
 
-import java.io.IOException;
-
 /**
  * This class contains the patient information such as name, age, address and contact number.
+ *
  * @author yukilite
  */
 
@@ -15,9 +14,10 @@ public class Patient {
 
     /**
      * This method stores the patient information when the user enters an input.
-     * @param name the name of the patient
-     * @param age the age of the patient
-     * @param address the address of the patient
+     *
+     * @param name          the name of the patient
+     * @param age           the age of the patient
+     * @param address       the address of the patient
      * @param contactNumber the phone number of the patient
      */
     public Patient(String name, int age, String address, String contactNumber) {
@@ -31,35 +31,6 @@ public class Patient {
         return name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    /**
-     * Overrides the default toString command so that the patient information can be printed
-     * in a specific string format.
-     * @return newToString The formatted string
-     */
-    @Override
-    public String toString() {
-        String newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
-                + " " + "[Address]:" + " " +  getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
-                + getContactNumber() + "}";
-        return newToString;
-    }
-
-    /**
-     * This part is implemented for the EditPatientCommand class by Duc
-     */
-
     /**
      * Update the name if it is not null.
      *
@@ -69,6 +40,10 @@ public class Patient {
         if (!name.isBlank()) {
             this.name = name;
         }
+    }
+
+    public int getAge() {
+        return age;
     }
 
     /**
@@ -82,6 +57,14 @@ public class Patient {
         }
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * This part is implemented for the EditPatientCommand class by Duc
+     */
+
     /**
      * Update the address if it is not null.
      *
@@ -91,6 +74,10 @@ public class Patient {
         if (!address.isBlank()) {
             this.address = address;
         }
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
     }
 
     /**
@@ -105,11 +92,25 @@ public class Patient {
     }
 
     /**
+     * Overrides the default toString command so that the patient information can be printed
+     * in a specific string format.
+     *
+     * @return newToString The formatted string
+     */
+    @Override
+    public String toString() {
+        String newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
+                + " " + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
+                + getContactNumber() + "}";
+        return newToString;
+    }
+
+    /**
      * Method to update all the patient's information.
      *
-     * @param name name that needs to be updated
-     * @param age age that needs to be updated
-     * @param address address that needs to be updated
+     * @param name          name that needs to be updated
+     * @param age           age that needs to be updated
+     * @param address       address that needs to be updated
      * @param contactNumber contact number that needs to be updated
      */
     public void setPatientInfo(String name, int age, String address, String contactNumber) {

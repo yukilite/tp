@@ -21,11 +21,9 @@ public class DeletePatientCommand extends Command {
 
     public static final String COMMAND_WORD = "deletep";
     public static final String EXAMPLE = "deletep \\index 12";
-    private static final String PATIENT_INDEX = "index";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a patient from the list.\n"
             + "Example: " + EXAMPLE;
-
+    private static final String PATIENT_INDEX = "index";
     private int patientIndex;
 
     /**
@@ -59,7 +57,7 @@ public class DeletePatientCommand extends Command {
      * Method to delete the patient from the list by getting that patient's index then
      * remove it and auto-save the changes.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException

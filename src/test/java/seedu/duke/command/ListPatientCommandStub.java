@@ -1,8 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.record.Patient;
-import seedu.duke.storage.PatientList;
-
 import java.util.List;
 
 /**
@@ -15,7 +12,7 @@ public class ListPatientCommandStub {
     /**
      * Stub to simulate adding patients into list.
      *
-     * @param ui stub ui
+     * @param ui      stub ui
      * @param storage stub storage
      */
     public void execute(int ui, int storage) {

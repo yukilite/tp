@@ -1,12 +1,10 @@
 package seedu.duke.ui;
 
-import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
-import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * Represents the user interface that will interact with the user.
@@ -35,5 +33,9 @@ public class Ui {
 
     public void showExceptionError(String localizedMessage) {
         System.out.println(localizedMessage);
+    }
+
+    public void showAppointmentAddSuccess() {
+        System.out.println("Appointment add success!");
     }
 }

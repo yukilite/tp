@@ -1,9 +1,8 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.duke.command.Command;
 import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.Command;
 import seedu.duke.command.DeletePatientCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListPatientCommand;

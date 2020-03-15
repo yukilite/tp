@@ -1,23 +1,21 @@
 package seedu.duke.parser;
 
 import seedu.duke.Duke;
-
-import seedu.duke.command.Command;
-
 import seedu.duke.command.AddAppointmentCommand;
-import seedu.duke.command.DeleteAppointmentCommand;
-import seedu.duke.command.ListAppointmentCommand;
-import seedu.duke.command.UpdateAppointmentCommand;
-
 import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteAppointmentCommand;
 import seedu.duke.command.DeletePatientCommand;
-import seedu.duke.command.ListPatientCommand;
-import seedu.duke.command.UpdatePatientCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
-
-import seedu.duke.exceptions.DukeExceptions;
+import seedu.duke.command.ListAppointmentCommand;
+import seedu.duke.command.ListPatientCommand;
+import seedu.duke.command.UpdateAppointmentCommand;
+import seedu.duke.command.UpdatePatientCommand;
+import seedu.duke.enums.AppointmentFieldKeys;
+import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DescriptionIsEmptyException;
+import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.NoKeyExistException;
@@ -25,9 +23,6 @@ import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import seedu.duke.enums.AppointmentFieldKeys;
-import seedu.duke.enums.PatientFieldKeys;
 
 public class Parser {
     private static final int COMMAND_INDEX = 0;
