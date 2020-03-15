@@ -19,7 +19,7 @@ class ParserTest {
         try {
             p.parseCommand(userInputWithUnknownCommand);
         } catch (Exception e) {
-            assertEquals("UnknownCommandException", e.getLocalizedMessage());
+            assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
 
@@ -55,7 +55,7 @@ class ParserTest {
             assertFalse(type3 instanceof AddPatientCommand);
 
         } catch (Exception e) {
-            assertEquals("UnknownCommandException", e.getLocalizedMessage());
+            assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
 
@@ -95,7 +95,7 @@ class ParserTest {
             assertFalse(type3 instanceof UpdatePatientCommand);
 
         } catch (Exception e) {
-            assertEquals("UnknownCommandException", e.getLocalizedMessage());
+            assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
 
@@ -135,7 +135,7 @@ class ParserTest {
             assertFalse(type3 instanceof DeletePatientCommand);
 
         } catch (Exception e) {
-            assertEquals("UnknownCommandException", e.getLocalizedMessage());
+            assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
 
@@ -165,7 +165,7 @@ class ParserTest {
             assertFalse(type6 instanceof DeletePatientCommand);
 
         } catch (Exception e) {
-            assertEquals("UnknownCommandException", e.getLocalizedMessage());
+            assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
 
@@ -195,7 +195,7 @@ class ParserTest {
             assertFalse(type6 instanceof HelpCommand);
 
         } catch (Exception e) {
-            assertEquals("UnknownCommandException", e.getLocalizedMessage());
+            assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
 }
