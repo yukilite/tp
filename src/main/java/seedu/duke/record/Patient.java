@@ -56,15 +56,9 @@ public class Patient {
         return newToString;
     }
 
-<<<<<<< HEAD
-    /**
-     * This part is implemented for the UpdatePatientCommand class by Duc.
-     */
-=======
 /**
  * This part is implemented for the EditPatientCommand class by Duc
  */
->>>>>>> deec80bbafadfb9fa0b889dc6b74c32ad147c0b5
 
     /**
      * Update the name if it is not null.
