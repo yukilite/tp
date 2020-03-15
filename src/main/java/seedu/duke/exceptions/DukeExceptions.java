@@ -42,15 +42,15 @@ public class DukeExceptions {
         }
     }
 
-    public static void checkIndexValidity(String indexAsString, String command) throws InvalidIndexError {
+    public static void checkIndexValidity(String indexAsString, String command) throws InvalidIndexError, IndexNotIntegerException {
         try {
             int index = Integer.parseInt(indexAsString);
             if (index <= 0) {
                 throw new InvalidIndexError(command);
             }
 
-        } catch (Exception e) {
-            throw new InvalidIndexError(command);
+        } catch (NumberFormatException e) {
+            throw new IndexNotIntegerException(command);
         }
     }
 }
