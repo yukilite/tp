@@ -161,27 +161,30 @@ class ParserTest {
 
     @Test
     void testParseCommand_listPatientCommand() {
-        String listPatientUserInput1 = "listp";
-        String listPatientUserInput2 = "          listp                  ";
-        String listPatientUserInput3 = "listp \\name Justin";
-        String listPatientUserInput4 = "list";
-        String listPatientUserInput5 = "addp \\name Justin \\address";
-        String listPatientUserInput6 = "list\\";
+        final String listPatientUserInput1 = "listp";
+        final String listPatientUserInput2 = "          listp                  ";
+        final String listPatientUserInput3 = "listp \\name Justin";
+        final String listPatientUserInput4 = "list";
+        final String listPatientUserInput5 = "addp \\name Justin \\address";
+        final String listPatientUserInput6 = "list\\";
 
         try {
             Command type1 = p.parseCommand(listPatientUserInput1);
-            Command type2 = p.parseCommand(listPatientUserInput2);
-            Command type3 = p.parseCommand(listPatientUserInput3);
-            Command type4 = p.parseCommand(listPatientUserInput4);
-            Command type5 = p.parseCommand(listPatientUserInput5);
-            Command type6 = p.parseCommand(listPatientUserInput6);
-
             assertTrue(type1 instanceof ListPatientCommand);
+
+            Command type2 = p.parseCommand(listPatientUserInput2);
             assertTrue(type2 instanceof ListPatientCommand);
+
+            Command type3 = p.parseCommand(listPatientUserInput3);
             assertTrue(type3 instanceof ListPatientCommand);
 
+            Command type4 = p.parseCommand(listPatientUserInput4);
             assertFalse(type4 instanceof DeletePatientCommand);
+
+            Command type5 = p.parseCommand(listPatientUserInput5);
             assertFalse(type5 instanceof DeletePatientCommand);
+
+            Command type6 = p.parseCommand(listPatientUserInput6);
             assertFalse(type6 instanceof DeletePatientCommand);
 
         } catch (Exception | UnknownCommandException e) {
@@ -191,27 +194,30 @@ class ParserTest {
 
     @Test
     void testParseCommand_helpCommand() {
-        String helpUserInput1 = "help";
-        String helpUserInput2 = "       help";
-        String helpUserInput3 = "help          \\name Justin \\age 23 \\address pasir ris";
-        String helpUserInput4 = "elp";
-        String helpUserInput5 = "addp \\name Justin \\age 23 \\address pasir ris \\phone 999";
-        String helpUserInput6 = "editp \\sam \\age 99 \\address sentosa cove";
+        final String helpUserInput1 = "help";
+        final String helpUserInput2 = "       help";
+        final String helpUserInput3 = "help          \\name Justin \\age 23 \\address pasir ris";
+        final String helpUserInput4 = "elp";
+        final String helpUserInput5 = "addp \\name Justin \\age 23 \\address pasir ris \\phone 999";
+        final String helpUserInput6 = "editp \\sam \\age 99 \\address sentosa cove";
 
         try {
             Command type1 = p.parseCommand(helpUserInput1);
-            Command type2 = p.parseCommand(helpUserInput2);
-            Command type3 = p.parseCommand(helpUserInput3);
-            Command type4 = p.parseCommand(helpUserInput4);
-            Command type5 = p.parseCommand(helpUserInput5);
-            Command type6 = p.parseCommand(helpUserInput6);
-
             assertTrue(type1 instanceof HelpCommand);
+
+            Command type2 = p.parseCommand(helpUserInput2);
             assertTrue(type2 instanceof HelpCommand);
+
+            Command type3 = p.parseCommand(helpUserInput3);
             assertTrue(type3 instanceof HelpCommand);
 
+            Command type4 = p.parseCommand(helpUserInput4);
             assertFalse(type4 instanceof HelpCommand);
+
+            Command type5 = p.parseCommand(helpUserInput5);
             assertFalse(type5 instanceof HelpCommand);
+
+            Command type6 = p.parseCommand(helpUserInput6);
             assertFalse(type6 instanceof HelpCommand);
 
         } catch (Exception | UnknownCommandException e) {

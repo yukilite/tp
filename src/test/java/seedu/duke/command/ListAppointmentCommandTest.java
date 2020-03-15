@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ListAppointmentCommandTest {
 
     private static final String EMPTY = "";
-    private static final String EXPECTED_OUTPUT = "{[Date]: s;dlskd;l |[Time]: Li}" + System.lineSeparator() +
-            "{[Date]:   |[Time]:  }" + System.lineSeparator() +
-            "{[Date]: ewuioaiwoe |[Time]: Lo}" + System.lineSeparator() +
-            "{[Date]: aeiwae |[Time]: to}" + System.lineSeparator() +
-            "{[Date]: LSDs |[Time]: Lis}" + System.lineSeparator();
+    private static final String EXPECTED_OUTPUT = "{[Date]: s;dlskd;l |[Time]: Li}" + System.lineSeparator()
+            + "{[Date]:   |[Time]:  }" + System.lineSeparator()
+            + "{[Date]: ewuioaiwoe |[Time]: Lo}" + System.lineSeparator()
+            + "{[Date]: aeiwae |[Time]: to}" + System.lineSeparator()
+            + "{[Date]: LSDs |[Time]: Lis}" + System.lineSeparator();
 
     @Test
     void testListWithPatients() {
