@@ -46,7 +46,7 @@ public class Ui {
     /**
      * Final modifier to prevent method overriding.
      *
-     * @see #startUpGreetings().
+     * @see #startUpGreetings()
      */
     public final void getUserName() {
         System.out.println("What is your name?");

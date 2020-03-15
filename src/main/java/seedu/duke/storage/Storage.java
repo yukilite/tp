@@ -31,7 +31,11 @@ public class Storage {
         this.patientListSaveLocation = PATIENT_LIST_SAVE_FILEPATH;
     }
 
-    //load save file for Appointments list
+    /**
+     * load save file for Appointments list.
+     * @return appointmentListToReturn returns the appointment list in the save file
+     * @throws FileNotFoundException this exception occurs when a file is not found
+     */
     public List<Appointment> loadSavedAppointments() throws FileNotFoundException {
         File appointmentSave = new File(this.appointmentListSaveLocation);
         if (!appointmentSave.exists()) {
@@ -70,7 +74,11 @@ public class Storage {
         return appointmentListToReturn;
     }
 
-    //load save file for Patients list
+    /**
+     * load save file for Patients list.
+     * @return patientListToReturn the patient list for the save file
+     * @throws FileNotFoundException this exception occurs if a file is not found
+     */
     public List<Patient> loadSavedPatients() throws FileNotFoundException {
         File patientSave = new File(this.patientListSaveLocation);
         if (!patientSave.exists()) {
