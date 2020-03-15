@@ -59,9 +59,10 @@ public class Duke {
     public void run() {
         startup();
         boolean isExit = false;
+        Scanner in = new Scanner(System.in);
         while (!isExit) {
             try {
-                String fullCommand = ui.readFromUser();
+                String fullCommand = in.nextLine();
 
                 Command c = parser.parseCommand(fullCommand); //return what type of command you should execute
                 assert c != null;
