@@ -85,4 +85,8 @@ public class Ui {
     public void showWrongCommandFormatError() {
         System.out.println("Wrong Command Format");
     }
+
+    public void showExceptionError(String localizedMessage) {
+        System.out.println(localizedMessage);
+    }
 }
