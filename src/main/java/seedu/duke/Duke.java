@@ -1,7 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.DescriptionIsEmptyException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.InvalidIndexError;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -65,8 +67,8 @@ public class Duke {
                 c.execute(ui, storage);
                 isExit = c.isExit();
 
-            } catch (UnknownCommandException e) {
-                ui.showUnknownCommandError();
+            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexError e) {
+                ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
                 //todo justin ui print error message
