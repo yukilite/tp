@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.storage.AppointmentList;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +26,6 @@ public class AddAppointmentCommandStub {
         }
         return tempMap;
     }
-
 
 
     public void execute(int ui, int storage) {

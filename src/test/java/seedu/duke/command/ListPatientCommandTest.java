@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListPatientCommandTest {
 
@@ -29,9 +29,8 @@ class ListPatientCommandTest {
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        listPatientCommandStub.execute(ui,storage);
+        listPatientCommandStub.execute(ui, storage);
         assertEquals(EXPECTED_OUTPUT, outContent.toString());
-
 
 
     }
@@ -49,9 +48,8 @@ class ListPatientCommandTest {
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        listPatientCommandStub.execute(ui,storage);
+        listPatientCommandStub.execute(ui, storage);
         assertEquals(EMPTY, outContent.toString());
-
 
 
     }

@@ -1,16 +1,21 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.*;
+
+import seedu.duke.command.Command;
 import seedu.duke.command.AddPatientCommand;
 import seedu.duke.command.DeletePatientCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListPatientCommand;
 import seedu.duke.command.UpdatePatientCommand;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
@@ -21,8 +26,8 @@ class ParserTest {
         String userInputWithUnknownCommand = "factorial 100000";
         try {
             p.parseCommand(userInputWithUnknownCommand);
-        } catch (Exception e) {
-            assertEquals("Unknown Command", e.getLocalizedMessage());
+        } catch (Exception | UnknownCommandException e) {
+            assertEquals("Unknown command", e.getLocalizedMessage());
         }
     }
 
@@ -37,7 +42,7 @@ class ParserTest {
 
             assertTrue(type1 instanceof AddPatientCommand);
             assertTrue(type2 instanceof AddPatientCommand);
-        } catch (Exception e) {
+        } catch (Exception | UnknownCommandException e) {
             fail("Should not have thrown any exceptions");
         }
     }
@@ -57,8 +62,8 @@ class ParserTest {
             assertFalse(type2 instanceof AddPatientCommand);
             assertFalse(type3 instanceof AddPatientCommand);
 
-        } catch (Exception e) {
-            assertEquals("Unknown Command", e.getLocalizedMessage());
+        } catch (Exception | UnknownCommandException e) {
+            assertEquals("Unknown command", e.getLocalizedMessage());
         }
     }
 
@@ -83,7 +88,7 @@ class ParserTest {
             assertTrue(type2 instanceof UpdatePatientCommand);
             assertTrue(type3 instanceof UpdatePatientCommand);
 
-        } catch (Exception e) {
+        } catch (Exception | UnknownCommandException e) {
             fail("Should not have thrown any exception");
         }
     }
@@ -103,8 +108,8 @@ class ParserTest {
             assertFalse(type2 instanceof UpdatePatientCommand);
             assertFalse(type3 instanceof UpdatePatientCommand);
 
-        } catch (Exception e) {
-            assertEquals("Unknown Command", e.getLocalizedMessage());
+        } catch (Exception | UnknownCommandException e) {
+            assertEquals("Unknown command", e.getLocalizedMessage());
         }
     }
 
@@ -129,7 +134,7 @@ class ParserTest {
             assertTrue(type2 instanceof DeletePatientCommand);
             assertTrue(type3 instanceof DeletePatientCommand);
 
-        } catch (Exception e) {
+        } catch (Exception | UnknownCommandException e) {
             fail("Should not have thrown any exceptions");
         }
     }
@@ -149,8 +154,8 @@ class ParserTest {
             assertFalse(type2 instanceof DeletePatientCommand);
             assertFalse(type3 instanceof DeletePatientCommand);
 
-        } catch (Exception e) {
-            assertEquals("Unknown Command", e.getLocalizedMessage());
+        } catch (Exception | UnknownCommandException e) {
+            assertEquals("Unknown command", e.getLocalizedMessage());
         }
     }
 
@@ -179,8 +184,8 @@ class ParserTest {
             assertFalse(type5 instanceof DeletePatientCommand);
             assertFalse(type6 instanceof DeletePatientCommand);
 
-        } catch (Exception e) {
-            assertEquals("Unknown Command", e.getLocalizedMessage());
+        } catch (Exception | UnknownCommandException e) {
+            assertEquals("Unknown command", e.getLocalizedMessage());
         }
     }
 
@@ -191,7 +196,7 @@ class ParserTest {
         String helpUserInput3 = "help          \\name Justin \\age 23 \\address pasir ris";
         String helpUserInput4 = "elp";
         String helpUserInput5 = "addp \\name Justin \\age 23 \\address pasir ris \\phone 999";
-        String helpUserInput6 ="editp \\sam \\age 99 \\address sentosa cove";
+        String helpUserInput6 = "editp \\sam \\age 99 \\address sentosa cove";
 
         try {
             Command type1 = p.parseCommand(helpUserInput1);
@@ -209,8 +214,8 @@ class ParserTest {
             assertFalse(type5 instanceof HelpCommand);
             assertFalse(type6 instanceof HelpCommand);
 
-        } catch (Exception e) {
-            assertEquals("Unknown Command", e.getLocalizedMessage());
+        } catch (Exception | UnknownCommandException e) {
+            assertEquals("Unknown command", e.getLocalizedMessage());
         }
     }
 

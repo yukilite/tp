@@ -9,14 +9,15 @@ import seedu.duke.ui.Ui;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.EditPatientCommand.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.duke.command.EditPatientCommand.PATIENT_INDEX;
+
 
 class DeletePatientCommandTest {
 
     //Test case 1
     @Test
-    void execute_1() throws Exception{
+    void execute_1() throws Exception {
         PatientList patientList = new PatientList();
         patientList.getPatientList().add(new Patient("peony", 33, "clementi road", "61234567"));
         patientList.getPatientList().add(new Patient("yoshino", 8, "shibuya", "13182371"));
@@ -28,7 +29,7 @@ class DeletePatientCommandTest {
         Storage storage = new Storage();
         fieldsToChange.put(PATIENT_INDEX, "3");
         Command command = new DeletePatientCommand(fieldsToChange);
-        command.execute(ui,storage);
+        command.execute(ui, storage);
         assertEquals(4, patientList.getTotalPatients());
         assertEquals("{[Name]: peony | [Age]: 33 | [Address]: clementi road | [Contact Number]: 61234567}",
                 patientList.getPatientRecord(0).toString());

@@ -1,17 +1,18 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.record.Appointment;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddAppointmentCommandTest {
     @Test
     void testNormalInput() {
-        Map<String,String> tempMap = new HashMap<>();
+        Map<String, String> tempMap = new HashMap<>();
         tempMap.put("date", "asdasd");
         tempMap.put("time", "lklklk");
         try {
@@ -24,9 +25,10 @@ class AddAppointmentCommandTest {
             fail();
         }
     }
+
     @Test
     void testEmptyString() {
-        Map<String,String> tempMap = new HashMap<>();
+        Map<String, String> tempMap = new HashMap<>();
         tempMap.put("date", "");
         tempMap.put("time", "");
         try {
@@ -39,7 +41,7 @@ class AddAppointmentCommandTest {
 
     @Test
     void testEmptyStringValue() {
-        Map<String,String> tempMap = new HashMap<>();
+        Map<String, String> tempMap = new HashMap<>();
         tempMap.put("date", "");
         tempMap.put("time", "");
         try {
@@ -52,32 +54,33 @@ class AddAppointmentCommandTest {
             fail(e);
         }
     }
+
     @Test
     void testAddNormalString() {
         int ui = 1;
         int storage = 1;
-        Map<String,String> tempMap = AddAppointmentCommandStub.generateMap(1);
+        Map<String, String> tempMap = AddAppointmentCommandStub.generateMap(1);
         AddAppointmentCommandStub addCommand = new AddAppointmentCommandStub(tempMap);
-        addCommand.execute(ui,storage);
+        addCommand.execute(ui, storage);
         AppointmentStub tempAppointment =
                 AppointmentListStub.getAppointmentList().get(AppointmentListStub.getTotalAppointments() - 1);
         AppointmentStub newAppointment = new AppointmentStub("asd", "asdsds");
-        assertEquals(tempAppointment.getDate(),newAppointment.getDate());
-        assertEquals(tempAppointment.getTime(),newAppointment.getTime());
+        assertEquals(tempAppointment.getDate(), newAppointment.getDate());
+        assertEquals(tempAppointment.getTime(), newAppointment.getTime());
     }
 
     @Test
-    void testAddEmptyString()  {
+    void testAddEmptyString() {
         int ui = 1;
         int storage = 1;
-        Map<String,String> tempMap = AddAppointmentCommandStub.generateMap(2);
+        Map<String, String> tempMap = AddAppointmentCommandStub.generateMap(2);
         AddAppointmentCommandStub addCommand = new AddAppointmentCommandStub(tempMap);
-        addCommand.execute(ui,storage);
+        addCommand.execute(ui, storage);
         AppointmentStub tempAppointment =
                 AppointmentListStub.getAppointmentList().get(AppointmentListStub.getTotalAppointments() - 1);
         AppointmentStub newAppointment = new AppointmentStub("", "");
-        assertEquals(tempAppointment.getDate(),newAppointment.getDate());
-        assertEquals(tempAppointment.getTime(),newAppointment.getTime());
+        assertEquals(tempAppointment.getDate(), newAppointment.getDate());
+        assertEquals(tempAppointment.getTime(), newAppointment.getTime());
     }
 
 }
