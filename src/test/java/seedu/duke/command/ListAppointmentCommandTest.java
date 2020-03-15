@@ -1,12 +1,11 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.storage.AppointmentList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListAppointmentCommandTest {
 
@@ -28,9 +27,8 @@ class ListAppointmentCommandTest {
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        listAppointmentCommandStub.execute(ui,storage);
+        listAppointmentCommandStub.execute(ui, storage);
         assertEquals(EXPECTED_OUTPUT, outContent.toString());
-
 
 
     }
@@ -48,9 +46,8 @@ class ListAppointmentCommandTest {
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        listAppointmentCommandStub.execute(ui,storage);
+        listAppointmentCommandStub.execute(ui, storage);
         assertEquals(EMPTY, outContent.toString());
-
 
 
     }

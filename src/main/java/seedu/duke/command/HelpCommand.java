@@ -40,6 +40,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
         System.out.println(COMMANDS_MESSAGE_USAGE);
+
         //TODO Justin ui.showHelpUsage(): can use the printing I just implemented
     }
 }

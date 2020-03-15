@@ -15,6 +15,7 @@ public class PatientStub {
         this.address = address;
         this.contactNumber = contactNumber;
     }
+
     public String getName() {
         return name;
     }
@@ -33,8 +34,8 @@ public class PatientStub {
 
     @Override
     public String toString() {
-        String newToString = "{" + "[Name]:"+ " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
-                + " " + "[Address]:" + " " +  getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
+        String newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
+                + " " + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
                 + getContactNumber() + "}";
         return newToString;
     }

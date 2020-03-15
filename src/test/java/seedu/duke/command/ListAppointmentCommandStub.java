@@ -1,11 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.record.Patient;
-import seedu.duke.storage.PatientList;
-import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
-
-import java.io.IOException;
 import java.util.List;
 
 public class ListAppointmentCommandStub {
