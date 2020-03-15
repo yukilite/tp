@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 
 public class Duke {
@@ -35,7 +37,6 @@ public class Duke {
         parser = new Parser();
         storage = new Storage();
     }
-
 
     public void startup() {
         List<Patient> patientListToLoad = null;
@@ -64,16 +65,19 @@ public class Duke {
             try {
                 String fullCommand = in.nextLine();
 
-                Command c = parser.parseCommand(fullCommand); //return what type of command you should execute
+                Command c = parser.parseCommand(fullCommand);
                 assert c != null;
                 c.execute(ui, storage);
                 isExit = c.isExit();
 
-            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexError | IndexNotIntegerException e) {
+            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexError |
+                    IndexNotIntegerException e) {
                 ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
                 //todo justin ui print error message
+            } catch (NoSuchElementException e) {
+                break;
             }
         }
     }
