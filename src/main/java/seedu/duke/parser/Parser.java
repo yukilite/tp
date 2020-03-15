@@ -96,7 +96,7 @@ public class Parser {
      * @param fullCommand the user input that the user provided
      * @return fieldsToChange a HashMap that matches the patient's fieldKey to value.
      * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap
-     * @see #findValue(String fullCommand, String key) value returned by this method will be stored at key.
+     * @see #findValue (String fullCommand, String key) value returned by this method will be stored at key.
      */
     private Map<String, String> getPatientFields(String fullCommand) {
         Map<String, String> fieldsToChange = new HashMap<>();
@@ -150,8 +150,7 @@ public class Parser {
      *
      * @param command the command that was specified
      * @param fieldsToChange the HashMap of what to add or edit
-     * @return null a specific command object that is specified by @param command.
-     * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
+     * @throws UnknownCommandException throws custom duke exception to catch and print error message.
      */
     private Command getCommandObject(String command,
                                      Map<String, String> fieldsToChange) throws UnknownCommandException {
