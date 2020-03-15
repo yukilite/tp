@@ -1,13 +1,13 @@
 package seedu.duke.parser;
 
 import seedu.duke.Duke;
-import seedu.duke.command.AddCommand;
+import seedu.duke.command.AddPatientCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeletePatientCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.UpdatePatientCommand;
+import seedu.duke.command.EditPatientCommand;
+import seedu.duke.command.ListPatientCommand;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.NoKeyExistException;
