@@ -6,16 +6,13 @@ import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.UpdateCommand.*;
+import static seedu.duke.command.UpdatePatientCommand.*;
 
-class UpdateCommandTest {
+class UpdatePatientCommandTest {
 
     //Test case 1
     @Test
@@ -34,7 +31,7 @@ class UpdateCommandTest {
         fieldsToChange.put(AGE, "20");
         fieldsToChange.put(ADDRESS, "Jurong East");
         fieldsToChange.put(CONTACT_NUMBER, "8225 3819");
-        Command command = new UpdateCommand(fieldsToChange);
+        Command command = new UpdatePatientCommand(fieldsToChange);
         command.execute(ui,storage);
         assertEquals("{[Name]: Joe Harris | [Age]: 20 | [Address]: Jurong East | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());
@@ -57,7 +54,7 @@ class UpdateCommandTest {
         fieldsToChange.put(AGE, null);
         fieldsToChange.put(ADDRESS, null);
         fieldsToChange.put(CONTACT_NUMBER, "8225 3819");
-        Command command = new UpdateCommand(fieldsToChange);
+        Command command = new UpdatePatientCommand(fieldsToChange);
         command.execute(ui,storage);
         assertEquals("{[Name]: kurumi | [Age]: 15 | [Address]: hokkaido | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());

@@ -15,7 +15,7 @@ import java.util.Map;
  * @version 0.1
  * @since 2020-03-08
  */
-public class DeleteCommand extends Command{
+public class DeletePatientCommand extends Command{
 
     public static final String COMMAND_WORD = "deletep";
     public static final String EXAMPLE = "deletep \\index 12";
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command{
      * @param fieldsToChange a hash map with only 1 item which is a field called
      *                       "index" and the value of the index needed to delete
      */
-    public DeleteCommand(Map<String, String> fieldsToChange) {
+    public DeletePatientCommand(Map<String, String> fieldsToChange) {
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
     }
 
@@ -60,6 +60,6 @@ public class DeleteCommand extends Command{
         //Auto-save the changes
         storage.savePatientList();
 
-        //TODO Justin ui.showDeleteSuccess(); To be implemented later
+        //TODO Justin ui.showDeletePatientSuccess(); To be implemented later
     }
 }

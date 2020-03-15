@@ -1,5 +1,7 @@
 package seedu.duke.record;
 
+import java.io.IOException;
+
 /**
  * This class contains the patient information such as name, age, address and contact number.
  */
@@ -47,7 +49,7 @@ public class Patient {
     }
 
 /**
- * This part is implemented for the UpdateCommand class by Duc
+ * This part is implemented for the UpdatePatientCommand class by Duc
  */
 
     /**
@@ -56,7 +58,7 @@ public class Patient {
      * @param name name that needs to be updated
      */
     public void setName(String name) {
-        if(name != null) {
+        if (!name.isBlank()) {
             this.name = name;
         }
     }
@@ -78,7 +80,7 @@ public class Patient {
      * @param address address that needs to be updated
      */
     public void setAddress(String address) {
-        if(address != null) {
+        if(!address.isBlank()) {
             this.address = address;
         }
     }
@@ -89,7 +91,7 @@ public class Patient {
      * @param contactNumber contact number that needs to be updated
      */
     public void setContactNumber(String contactNumber) {
-        if(contactNumber != null) {
+        if(!contactNumber.isBlank()) {
             this.contactNumber = contactNumber;
         }
     }
