@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.Command;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @version 0.1
  * @since 2020-03-08
  */
-public class UpdatePatientCommand extends Command{
+public class UpdatePatientCommand extends Command {
 
     public static final String COMMAND_WORD = "editp";
     public static final String EXAMPLE = "editp \\index 5  \\address Clementi \\phone 83487846";

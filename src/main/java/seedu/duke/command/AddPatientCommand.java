@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 
+import seedu.duke.command.Command;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;

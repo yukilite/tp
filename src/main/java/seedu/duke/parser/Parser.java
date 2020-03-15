@@ -2,6 +2,10 @@ package seedu.duke.parser;
 
 import seedu.duke.Duke;
 import seedu.duke.command.*;
+import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.DeletePatientCommand;
+import seedu.duke.command.ListPatientCommand;
+import seedu.duke.command.UpdatePatientCommand;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.NoKeyExistException;
@@ -131,7 +135,7 @@ public class Parser {
         case HELP_COMMAND:
             return new HelpCommand();
         case EXIT_COMMAND:
-            return new ByeCommand();
+            return new ExitCommand();
         default:
             DukeExceptions.unknownCommand();
             return null;

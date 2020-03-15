@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.Command;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @version 1.0
  * @since 2020-03-14
  */
-public class UpdateAppointmentCommand extends Command{
+public class UpdateAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "edita";
     public static final String EXAMPLE = "edita \\index 5  \\date 01/03/2020 \\time 10am";
     public static final String APPOINTMENT_INDEX = "index";

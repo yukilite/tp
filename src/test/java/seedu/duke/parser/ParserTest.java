@@ -2,6 +2,10 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.*;
+import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.DeletePatientCommand;
+import seedu.duke.command.ListPatientCommand;
+import seedu.duke.command.UpdatePatientCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 

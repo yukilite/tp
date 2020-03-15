@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.Command;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @version 1.0
  * @since 2020-03-14
  */
-public class DeleteAppointmentCommand extends Command{
+public class DeleteAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "deletea";
     public static final String EXAMPLE = "deletea \\index 12";
