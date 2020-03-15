@@ -7,9 +7,11 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * This class deals with the command relating to adding of appointments into the appointment list
+ * This class deals with the command relating to adding of appointments into the appointment list.
  * <p></p>
  * <p>
  * It achieves this by acting as a bridge to connect the functions of {@link seedu.duke.parser.Parser},
@@ -31,29 +33,40 @@ public class AddAppointmentCommand extends Command {
             "Example: " + EXAMPLE;
     private static final String DATE = "date";
     private static final String TIME = "time";
+    private static Logger logger = Logger.getLogger("LoggerAddAppointmentCommandClass");
     private String date;
     private String time;
+
     /**
      * Constructor for the appointment class.
      * @param appointmentInfo the <code>Map</code> that contains the information relating to the appointment.
      */
     public AddAppointmentCommand(Map<String, String> appointmentInfo) {
+        logger.log(Level.INFO, "Creating AddAppointmentCommand object");
         this.date = appointmentInfo.get(DATE);
         this.time = appointmentInfo.get(TIME);
     }
 
+    /**
+     * Just for the junit test and assert to use.
+     * @return a <code>String</code> which shows the date stored in the {@link AddAppointmentCommand} object.
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Just for the junit test and assert to use.
+     * @return a <code>String</code> which shows the time stored in the {@link AddAppointmentCommand} object.
+     */
     public String getTime() {
         return time;
     }
 
     /**
-     * For this execution, the appointment information is added into the appointment list
-     * @param ui      the ui object which can be used to display text
-     * @param storage the storage object for auto saving function
+     * For this execution, the appointment information is added into the appointment list.
+     * @param ui      the ui object which can be used to display text.
+     * @param storage the storage object for auto saving function.
      * @throws IOException this exception is thrown by the {@link Storage} class if it fails to save the current
      *                     appointment list into offline data.
      */
@@ -62,9 +75,19 @@ public class AddAppointmentCommand extends Command {
         Appointment appointment = new Appointment(this.date, this.time);
 
         /** Hacky method to add appointments into the appointment list. Also make appointment list static thanks**/
+        logger.log(Level.INFO, "Adding the appointment object into the appointment list object from " +
+                "AppointmentListClass");
         AppointmentList.getAppointmentList().add(appointment);
 
+        /** Checking to see if appointment object is created and placed correctly in the appointment list **/
+        assert AppointmentList.getAppointmentList().get(AppointmentList.getTotalAppointments() - 1).
+                getDate().equals(this.date) : "Wrong date!";
+        assert AppointmentList.getAppointmentList().get(AppointmentList.getTotalAppointments() - 1).getTime()
+                .equals(this.time) : "Wrong time!";
+
+
         /** For Autosaving. Again use static for appointment list thanks**/
+        logger.log(Level.INFO, "Auto saving appointment list");
         storage.saveAppointmentsList();
 
         /** Assuming that there is a confimation message indicating the adding of appointment is a susccess **/
