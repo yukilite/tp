@@ -2,11 +2,9 @@ package seedu.duke.enums;
 
 /**
  * This enum reflects the changeable fields for the Patient Class.
- *</p>
- * The only exception is indexNumber, as the indexNumber for each patient is not dependant on the individual,
- * but rather the system (duke).
  *
- * @author Justin
+ * @author Justin.
+ * @see seedu.duke.record.Patient
  */
 public enum PatientFieldKeys {
 
@@ -20,6 +18,7 @@ public enum PatientFieldKeys {
      * This toString method overrides the default method with a specified field key
      * and returns a string when called.
      */
+    @Override
     public String toString() {
         switch (this) {
         case INDEX:

@@ -2,30 +2,30 @@ package seedu.duke.record;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PatientTest {
     @Test
     void getName() {
-        Patient patient = new Patient("peony", 33, "clementi road", "61234567" );
+        Patient patient = new Patient("peony", 33, "clementi road", "61234567");
         assertEquals("peony", patient.getName());
     }
 
     @Test
     void testGetAge() {
-        Patient patient = new Patient("peony", 33, "clementi road", "61234567" );
+        Patient patient = new Patient("peony", 33, "clementi road", "61234567");
         assertEquals(33, patient.getAge());
     }
 
     @Test
     void testGetAddress() {
-        Patient patient = new Patient("peony", 33, "clementi road", "61234567" );
+        Patient patient = new Patient("peony", 33, "clementi road", "61234567");
         assertEquals("clementi road", patient.getAddress());
     }
 
     @Test
     void testGetContactNumber() {
-        Patient patient = new Patient("peony", 33, "clementi road", "61234567" );
+        Patient patient = new Patient("peony", 33, "clementi road", "61234567");
         assertEquals("61234567", patient.getContactNumber());
     }
 

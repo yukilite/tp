@@ -8,7 +8,7 @@ public class AppointmentListStub {
 
     private static List<AppointmentStub> appointmentList = new ArrayList<>();
 
-    public static  List<AppointmentStub> getAppointmentList() {
+    public static List<AppointmentStub> getAppointmentList() {
         return appointmentList;
     }
 

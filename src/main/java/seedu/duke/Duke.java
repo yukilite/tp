@@ -1,7 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+
+import seedu.duke.exceptions.DescriptionIsEmptyException;
+import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -13,11 +17,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
 public class Duke {
-    public static int indexNumber;
+    public static int patientIndexNumber;
+    public static int appointmentIndexNumber;
 
     private Ui ui;
     private Parser parser;
@@ -32,11 +38,13 @@ public class Duke {
      * @see Storage
      */
     public Duke() {
-        indexNumber = 0;
+        patientIndexNumber = 0;
+        appointmentIndexNumber = 0;
         ui = new Ui();
         parser = new Parser();
         storage = new Storage();
     }
+
 
     /**
      * This method loads any previous patient particulars and its respective appointment details
@@ -50,14 +58,14 @@ public class Duke {
         try {
             patientListToLoad = storage.loadSavedPatients();
         } catch (FileNotFoundException e) {
-            patientListToLoad = new ArrayList<Patient>();
+            patientListToLoad = new ArrayList<>();
         } finally {
             patientList = new PatientList(patientListToLoad);
         }
         try {
             appointmentListToLoad = storage.loadSavedAppointments();
         } catch (FileNotFoundException e) {
-            appointmentListToLoad = new ArrayList<Appointment>();
+            appointmentListToLoad = new ArrayList<>();
         } finally {
             appointmentList = new AppointmentList(appointmentListToLoad);
         }
@@ -69,20 +77,25 @@ public class Duke {
     public void run() {
         startup();
         boolean isExit = false;
+        Scanner in = new Scanner(System.in);
         while (!isExit) {
             try {
-                String fullCommand = ui.readFromUser();
+                String fullCommand = in.nextLine();
 
-                Command c = parser.parseCommand(fullCommand); //return what type of command you should execute
+                Command c = parser.parseCommand(fullCommand);
                 assert c != null;
                 c.execute(ui, storage);
                 isExit = c.isExit();
-            } catch (UnknownCommandException e) {
-                ui.showUnknownCommandError();
+
+            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexException
+                    | IndexNotIntegerException e) {
+                ui.showExceptionError(e.getLocalizedMessage());
+
             } catch (IOException e) {
                 //todo justin ui print error message
+            } catch (NoSuchElementException e) {
+                break;
             }
-
         }
     }
 

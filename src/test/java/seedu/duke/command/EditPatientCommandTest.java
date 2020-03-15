@@ -9,14 +9,18 @@ import seedu.duke.ui.Ui;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.EditPatientCommand.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.duke.command.EditPatientCommand.PATIENT_INDEX;
+import static seedu.duke.command.EditPatientCommand.PATIENT_NAME;
+import static seedu.duke.command.EditPatientCommand.AGE;
+import static seedu.duke.command.EditPatientCommand.ADDRESS;
+import static seedu.duke.command.EditPatientCommand.CONTACT_NUMBER;
 
 class EditPatientCommandTest {
 
     //Test case 1
     @Test
-    void execute_1() throws Exception{
+    void execute_1() throws Exception {
         PatientList patientList = new PatientList();
         patientList.getPatientList().add(new Patient("peony", 33, "clementi road", "61234567"));
         patientList.getPatientList().add(new Patient("yoshino", 8, "shibuya", "13182371"));
@@ -32,14 +36,14 @@ class EditPatientCommandTest {
         fieldsToChange.put(ADDRESS, "Jurong East");
         fieldsToChange.put(CONTACT_NUMBER, "8225 3819");
         Command command = new EditPatientCommand(fieldsToChange);
-        command.execute(ui,storage);
+        command.execute(ui, storage);
         assertEquals("{[Name]: Joe Harris | [Age]: 20 | [Address]: Jurong East | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());
     }
 
     //Test case 2
     @Test
-    void execute_2() throws Exception{
+    void execute_2() throws Exception {
         PatientList patientList = new PatientList();
         patientList.getPatientList().add(new Patient("peony", 33, "clementi road", "61234567"));
         patientList.getPatientList().add(new Patient("yoshino", 8, "shibuya", "13182371"));
@@ -55,7 +59,7 @@ class EditPatientCommandTest {
         fieldsToChange.put(ADDRESS, "");
         fieldsToChange.put(CONTACT_NUMBER, "8225 3819");
         Command command = new EditPatientCommand(fieldsToChange);
-        command.execute(ui,storage);
+        command.execute(ui, storage);
         assertEquals("{[Name]: kurumi | [Age]: 15 | [Address]: hokkaido | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());
     }
