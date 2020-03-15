@@ -99,6 +99,7 @@ class AddPatientCommandTest {
         }
     }
 
+    /*
     @Test
     void testAddNormalString() throws IOException {
         Map<String, String> tempMap = new HashMap<>();
@@ -129,7 +130,9 @@ class AddPatientCommandTest {
         assertEquals(temppatient.getAddress(), newPatient.getAddress());
         assertEquals(temppatient.getContactNumber(), newPatient.getContactNumber());
     }
+     */
 
+    /*
     @Test
     void testAddEmptyString() throws IOException {
 
@@ -161,4 +164,5 @@ class AddPatientCommandTest {
         assertEquals(temppatient.getAddress(), newPatient.getAddress());
         assertEquals(temppatient.getContactNumber(), newPatient.getContactNumber());
     }
+     */
 }
