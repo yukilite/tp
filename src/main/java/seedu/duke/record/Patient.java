@@ -4,6 +4,7 @@ import java.io.IOException;
 
 /**
  * This class contains the patient information such as name, age, address and contact number.
+ * @author yukilite
  */
 
 public class Patient {
@@ -12,7 +13,13 @@ public class Patient {
     private String address;
     private String contactNumber;
 
-
+    /**
+     * This method stores the patient information when the user enters an input.
+     * @param name the name of the patient
+     * @param age the age of the patient
+     * @param address the address of the patient
+     * @param contactNumber the phone number of the patient
+     */
     public Patient(String name, int age, String address, String contactNumber) {
         this.name = name;
         this.age = age;

@@ -112,6 +112,11 @@ public class Storage {
         return patientListToReturn;
     }
 
+    /**
+     * This method saves the patient's appointment details from the AppointmentList into the local save file.
+     * @throws IOException this exception occurs if the patient's appointment details are unable to be written
+     * to the local save file.
+     */
     public void saveAppointmentsList() throws IOException {
         FileWriter fwAppointmentSave;
         try {
