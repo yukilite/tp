@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.DescriptionIsEmptyException;
+import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.exceptions.InvalidIndexError;
 import seedu.duke.parser.Parser;
@@ -42,14 +43,14 @@ public class Duke {
         try {
             patientListToLoad = storage.loadSavedPatients();
         } catch (FileNotFoundException e) {
-            patientListToLoad = new ArrayList<Patient>();
+            patientListToLoad = new ArrayList<>();
         } finally {
             patientList = new PatientList(patientListToLoad);
         }
         try {
             appointmentListToLoad = storage.loadSavedAppointments();
         } catch (FileNotFoundException e) {
-            appointmentListToLoad = new ArrayList<Appointment>();
+            appointmentListToLoad = new ArrayList<>();
         } finally {
             appointmentList = new AppointmentList(appointmentListToLoad);
         }
@@ -67,7 +68,7 @@ public class Duke {
                 c.execute(ui, storage);
                 isExit = c.isExit();
 
-            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexError e) {
+            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexError | IndexNotIntegerException e) {
                 ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
