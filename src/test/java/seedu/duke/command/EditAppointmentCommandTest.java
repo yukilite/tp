@@ -29,12 +29,12 @@ class EditAppointmentCommandTest {
         appointmentList.getAppointmentList().add(new Appointment("17/03/2020", "1pm"));
         appointmentList.getAppointmentList().add(new Appointment("18/03/2020", "2pm"));
         Map<String, String> fieldsToChange = new HashMap<>();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
         fieldsToChange.put(APPOINTMENT_INDEX, "3");
         fieldsToChange.put(APPOINTMENT_DATE, "31/12/2020");
         fieldsToChange.put(APPOINTMENT_TIME, "11pm");
         Command command = new EditAppointmentCommand(fieldsToChange);
+        Ui ui = new Ui();
+        Storage storage = new Storage();
         command.execute(ui, storage);
         assertEquals("{[Date]: 31/12/2020 |[Time]: 11pm}",
                 appointmentList.getAppointmentRecord(2).toString());
@@ -50,12 +50,12 @@ class EditAppointmentCommandTest {
         appointmentList.getAppointmentList().add(new Appointment("17/03/2020", "1pm"));
         appointmentList.getAppointmentList().add(new Appointment("18/03/2020", "2pm"));
         Map<String, String> fieldsToChange = new HashMap<>();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
         fieldsToChange.put(APPOINTMENT_INDEX, "5");
         fieldsToChange.put(APPOINTMENT_DATE, "");
         fieldsToChange.put(APPOINTMENT_TIME, "11pm");
         Command command = new EditAppointmentCommand(fieldsToChange);
+        Ui ui = new Ui();
+        Storage storage = new Storage();
         command.execute(ui, storage);
         assertEquals("{[Date]: 18/03/2020 |[Time]: 11pm}",
                 appointmentList.getAppointmentRecord(4).toString());

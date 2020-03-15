@@ -17,6 +17,10 @@ public class AppointmentListStub {
         return appointmentList.size();
     }
 
+    /**
+     * This method is a stub.
+     * @see seedu.duke.storage.AppointmentList
+     */
     public static void createList(int choice) {
         if (choice == 1) {
             AppointmentStub newAppointment1 = new AppointmentStub("s;dlskd;l", "Li");
