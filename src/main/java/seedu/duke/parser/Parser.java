@@ -53,7 +53,7 @@ public class Parser {
      * Supplied key is "\name"
      * Default delimiter is "\"
      * Returns String value "Justin" since it is the value behind the first key
-     *<p></p>
+     *
      * <p>Note: This method only searches of known keys (key values in the patient field enum). Therefore, any
      * unknown keys in the full command will be ignore.
      * For example: param fullCommand = "addp \name Justin \adress Pasir Ris \age 20"
@@ -95,9 +95,8 @@ public class Parser {
      *
      * @param fullCommand the user input that the user provided
      * @return a HashMap that matches the patient's fieldKey to value.
-     *
      * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap
-     * @see #findValue(String fullCommand ,String key) value returned by this method will be stored at key.
+     * @see #findValue(String fullCommand, String key) value returned by this method will be stored at key.
      */
     private Map<String, String> getPatientFields(String fullCommand) {
         Map<String, String> fieldsToChange = new HashMap<>();
@@ -122,7 +121,7 @@ public class Parser {
      * Throws an unknownCommandException for the caller to catch when user supplied an unknown command.
      *
      * @param fullCommand the user input that the user provided
-     * @return a command object to be executed
+     * @return command a command object to be executed
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
     public Command parseCommand(String fullCommand) throws UnknownCommandException {

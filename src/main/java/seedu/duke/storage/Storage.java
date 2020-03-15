@@ -76,8 +76,9 @@ public class Storage {
 
     /**
      * load save file for Patients list.
-     * @return patientListToReturn the patient list for the save file
-     * @throws FileNotFoundException this exception occurs if a file is not found
+     *
+     * @return patientListToReturn the patient list for the save file.
+     * @throws FileNotFoundException this exception occurs if a file is not found.
      */
     public List<Patient> loadSavedPatients() throws FileNotFoundException {
         File patientSave = new File(this.patientListSaveLocation);
@@ -122,8 +123,9 @@ public class Storage {
 
     /**
      * This method saves the patient's appointment details from the AppointmentList into the local save file.
+     *
      * @throws IOException this exception occurs if the patient's appointment details are unable to be written
-     * to the local save file.
+     *                     to the local save file.
      */
     public void saveAppointmentsList() throws IOException {
         FileWriter fwAppointmentSave;
