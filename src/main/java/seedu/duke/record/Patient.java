@@ -49,11 +49,11 @@ public class Patient {
         return newToString;
     }
 
-     /**
+    /**
      * This part is implemented for the UpdatePatientCommand class by Duc.
      */
 
-     /**
+    /**
      * Update the name if it is not null.
      *
      * @param name name that needs to be updated

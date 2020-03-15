@@ -131,6 +131,10 @@ public class Storage {
         fwAppointmentSave.close();
     }
 
+    /**
+     * This method saves the patient list into the local save file.
+     * @throws IOException this exception occurs if the patient data was unable to be written to the local save file.
+     */
     public void savePatientList() throws IOException {
 
         FileWriter fwPatientSave;
