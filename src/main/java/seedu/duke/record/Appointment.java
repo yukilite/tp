@@ -22,13 +22,13 @@ public class Appointment {
     }
 
     /**
-     * Overrides the default toString command so that the patient's appointment
+     * Overrides the default toString command so that the patient's appointment.
      * details can be printed in a specific string format.
      * @return newToString The formatted string
      */
     @Override
     public String toString() {
-        String newToString = "{" + "[Date]:" + " " + getDate() + " "+ "|" + "[Time]:" + " " + getTime() + "}";
+        String newToString = "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + "}";
         return newToString;
     }
 
@@ -37,7 +37,7 @@ public class Appointment {
      */
 
     /**
-     * Update the name if it is not null
+     * Update the name if it is not null.
      *
      * @param date date that needs to be updated
      */
@@ -48,7 +48,7 @@ public class Appointment {
     }
 
     /**
-     * Update the age if it is a positive integer
+     * Update the age if it is a positive integer.
      *
      * @param time time that needs to be updated
      */
@@ -59,7 +59,7 @@ public class Appointment {
     }
 
     /**
-     * Method to update all the patient's information
+     * Method to update all the patient's information.
      *
      * @param date date that needs to be updated
      * @param time time that needs to be updated

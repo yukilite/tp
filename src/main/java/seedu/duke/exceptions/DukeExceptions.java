@@ -16,11 +16,11 @@ public class DukeExceptions {
      *         Since \age cannot be found in user input, this method will throw noKeyExistException.
      *
      * @param keyValue the key value pair "Key => value" as a size = 2 String array.
-     * @throws noKeyExistException throws exception when there is no key associated with any value.
+     * @throws NoKeyExistException throws exception when there is no key associated with any value.
      */
-    public static void doesKeyExist(String[] keyValue) throws noKeyExistException {
+    public static void doesKeyExist(String[] keyValue) throws NoKeyExistException {
         if (keyValue.length != 2) {
-            throw new noKeyExistException();
+            throw new NoKeyExistException();
         }
     }
 
@@ -28,20 +28,20 @@ public class DukeExceptions {
      * THis method throws a unknownCommandException when the user supplied in an unknown command.
      * All commands available are listed as final Strings in Parser class.
      *
-     * @throws unknownCommandException when user supplied command are not amongst the final Strings.
+     * @throws UnknownCommandException when user supplied command are not amongst the final Strings.
      */
-    public static void unknownCommand() throws unknownCommandException {
-        throw new unknownCommandException();
+    public static void unknownCommand() throws UnknownCommandException {
+        throw new UnknownCommandException();
     }
 
     public static void noFieldCommand(Map<String, String> map) throws NoFieldCommandException {
         int count = 0;
-        for(Map.Entry mapElement: map.entrySet()) {
-            if(mapElement.getValue() == "") {
+        for (Map.Entry mapElement: map.entrySet()) {
+            if (mapElement.getValue() == "") {
                 count++;
             }
         }
-        if(count == map.size()) {
+        if (count == map.size()) {
             throw new NoFieldCommandException();
         }
     }

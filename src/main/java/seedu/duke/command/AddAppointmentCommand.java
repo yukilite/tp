@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * This class deals with the command relating to adding of appointments into the appointment list
+ * This class deals with the command relating to adding of appointments into the appointment list.
  * <p></p>
  * <p>
  * It achieves this by acting as a bridge to connect the functions of {@link seedu.duke.parser.Parser},
@@ -27,12 +27,13 @@ public class AddAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "adda";
     private static final String EXAMPLE = "adda \\date 20-12-2020 \\time 2300";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add an appointment to the appointment's list.\n" +
-            "Example: " + EXAMPLE;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add an appointment to the appointment's list.\n"
+            + "Example: " + EXAMPLE;
     private static final String DATE = "date";
     private static final String TIME = "time";
     private String date;
     private String time;
+
     /**
      * Constructor for the appointment class.
      * @param appointmentInfo the <code>Map</code> that contains the information relating to the appointment.
@@ -51,7 +52,7 @@ public class AddAppointmentCommand extends Command {
     }
 
     /**
-     * For this execution, the appointment information is added into the appointment list
+     * For this execution, the appointment information is added into the appointment list.
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException this exception is thrown by the {@link Storage} class if it fails to save the current

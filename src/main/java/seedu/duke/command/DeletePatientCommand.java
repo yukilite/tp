@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Delete a patient's record with certain index in the patient's list
+ * Delete a patient's record with certain index in the patient's list.
  *
  * @author Nguyen Thanh Duc
  * @version 0.1
  * @since 2020-03-08
  */
-public class DeletePatientCommand extends Command{
+public class DeletePatientCommand extends Command {
 
     public static final String COMMAND_WORD = "deletep";
     public static final String EXAMPLE = "deletep \\index 12";
@@ -30,7 +30,7 @@ public class DeletePatientCommand extends Command{
 
     /**
      * Constructor which pass a hash map with only 1 item containing the index of
-     * the patient that needs to be removed
+     * the patient that needs to be removed.
      *
      * @param fieldsToChange a hash map with only 1 item which is a field called
      *                       "index" and the value of the index needed to delete
@@ -57,7 +57,7 @@ public class DeletePatientCommand extends Command{
 
     /**
      * Method to delete the patient from the list by getting that patient's index then
-     * remove it and auto-save the changes
+     * remove it and auto-save the changes.
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function

@@ -1,11 +1,17 @@
 package seedu.duke.parser;
 
 import seedu.duke.Duke;
-import seedu.duke.command.*;
+import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeletePatientCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.HelpCommand;
+import seedu.duke.command.EditPatientCommand;
+import seedu.duke.command.ListPatientCommand;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.noKeyExistException;
-import seedu.duke.exceptions.unknownCommandException;
+import seedu.duke.exceptions.NoKeyExistException;
+import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,13 +53,14 @@ public class Parser {
      * Supplied key is "\name"
      * Default delimiter is "\"
      * Returns String value "Justin" since it is the value behind the first key
-     * <p>
-     * Note: This method only searches of known keys (key values in the patient field enum). Therefore, any
+     *
+     * <p>Note: This method only searches of known keys (key values in the patient field enum). Therefore, any
      * unknown keys in the full command will be ignore.
      * For example: param fullCommand = "addp \name Justin \adress Pasir Ris \age 20"
      * "\adress" will be ignored as it is a mis-spelling of the enum fieldKeys "address".
-     * <p>
-     * Note: The default delimiter in this method is exactly " \". Any sequence of characters that does not follow this
+     *
+     * <p>Note: The default delimiter in this method is exactly " \".
+     * Any sequence of characters that does not follow this
      * delimiter will be considered as the value to the key.
      * For example: param fullCommand = "\name Justin\age 24",
      * The value returned for key "\name" will be "Justin\age 24".
@@ -61,7 +68,7 @@ public class Parser {
      *
      * @param fullCommand the entire command that the user supplied
      * @param key         the patient field, prepended with REGEX_BACKSLASH. This key is an enum.
-     * @return the String that is between key and " \" delimiter
+     * @return value.trim() the String that is between key and " \" delimiter
      */
     private String findValue(String fullCommand, String key) {
         String[] keyValue = fullCommand.split(key, LIMIT);
@@ -76,7 +83,7 @@ public class Parser {
             String value = b[VALUE_INDEX];
             return value.trim();
 
-        } catch (noKeyExistException e) {
+        } catch (NoKeyExistException e) {
             return BLANK_STRING;
         }
     }
@@ -87,10 +94,9 @@ public class Parser {
      * The values however will be determined by the user.
      *
      * @param fullCommand the user input that the user provided
-     * @return a HashMap that matches the patient's fieldKey to value.
-     *
+     * @return fieldsToChange a HashMap that matches the patient's fieldKey to value.
      * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap
-     * @see #findValue(String fullCommand ,String key) value returned by this method will be stored at key.
+     * @see #findValue (String fullCommand, String key) value returned by this method will be stored at key.
      */
     private Map<String, String> getPatientFields(String fullCommand) {
         Map<String, String> fieldsToChange = new HashMap<>();
@@ -100,7 +106,7 @@ public class Parser {
             String key = WHITESPACE + REGEX_BACKSLASH + field; // String key = "\key";
             String value = findValue(fullCommand, key);
             fieldsToChange.put(field, value);
-            if(field.equals(ADD_PATIENT)) {
+            if (field.equals(ADD_PATIENT)) {
                 Duke.indexNumber++;
                 fieldsToChange.put(INDEX, Integer.toString(Duke.indexNumber));
             }
@@ -112,13 +118,13 @@ public class Parser {
 
     /**
      * This method returns the command object to be executed.
-     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command
+     * Throws an unknownCommandException for the caller to catch when user supplied an unknown command.
      *
      * @param fullCommand the user input that the user provided
-     * @return a command object to be executed
-     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
+     * @return command a command object to be executed
+     * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
-    public Command parseCommand(String fullCommand) throws unknownCommandException {
+    public Command parseCommand(String fullCommand) throws UnknownCommandException {
         String commandAsString = getCommand(fullCommand);
 
         Command command;
@@ -144,10 +150,11 @@ public class Parser {
      *
      * @param command the command that was specified
      * @param fieldsToChange the HashMap of what to add or edit
-     * @return a specific command object that is specified by @param command.
-     * @throws unknownCommandException Throws custom duke exception to catch and print error message.
+     * @throws UnknownCommandException throws custom duke exception to catch and print error message.
      */
-    private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws unknownCommandException {
+    private Command getCommandObject(String command,
+                                     Map<String, String> fieldsToChange) throws UnknownCommandException {
+
         switch (command) {
         case ADD_PATIENT:
             assert fieldsToChange != null;

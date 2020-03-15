@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.unknownCommandException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -25,6 +25,12 @@ public class Duke {
     private static PatientList patientList;
     private static AppointmentList appointmentList;
 
+    /**
+     * This constructor initializes the other ui, parser and storage classes to be used in the java.duke.Duke program.
+     * @see Ui
+     * @see Parser
+     * @see Storage
+     */
     public Duke() {
         indexNumber = 0;
         ui = new Ui();
@@ -32,7 +38,12 @@ public class Duke {
         storage = new Storage();
     }
 
-
+    /**
+     * This method loads any previous patient particulars and its respective appointment details
+     * from storage if any, or creates a new one if its a new entry.
+     * @see PatientList
+     * @see Storage
+     */
     public void startup() {
         List<Patient> patientListToLoad = null;
         List<Appointment> appointmentListToLoad = null;
@@ -52,6 +63,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         startup();
         boolean isExit = false;
@@ -63,7 +77,7 @@ public class Duke {
                 assert c != null;
                 c.execute(ui, storage);
                 isExit = c.isExit();
-            } catch (unknownCommandException e) {
+            } catch (UnknownCommandException e) {
                 ui.showUnknownCommandError();
             } catch (IOException e) {
                 //todo justin ui print error message
@@ -75,7 +89,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         new Duke().run();
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Represents the user interface that will interact with the user
+ * Represents the user interface that will interact with the user.
  *
  * @author Justin
  */
@@ -22,14 +22,17 @@ public class Ui {
      * name and greeting him.
      */
     public Ui() {
-//        this.logo = " ____        _        \n"
-////                + "|  _ \\ _   _| | _____ \n"
-////                + "| | | | | | | |/ / _ \\\n"
-////                + "| |_| | |_| |   <  __/\n"
-////                + "|____/ \\__,_|_|\\_\\___|\n";
-////        startUpGreetings();
+    //        this.logo = " ____        _        \n"
+    ////                + "|  _ \\ _   _| | _____ \n"
+    ////                + "| | | | | | | |/ / _ \\\n"
+    ////                + "| |_| | |_| |   <  __/\n"
+    ////                + "|____/ \\__,_|_|\\_\\___|\n";
+    ////       startUpGreetings();
     }
 
+    /**
+     * This method prints out the appointment list.
+     */
     public static void showEntireAppointmentList() {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
         for (Appointment a : appointmentList) {
@@ -55,7 +58,7 @@ public class Ui {
     /**
      * Final modifier to prevent method overriding.
      *
-     * @see #startUpGreetings().
+     * @see #startUpGreetings()
      */
     public final void getUserName() {
         System.out.println("What is your name?");
@@ -64,7 +67,7 @@ public class Ui {
     }
 
     /**
-     * Returns a string that captures the entire user input
+     * Returns a string that captures the entire user input.
      *
      * @return entire user input
      */
@@ -82,7 +85,7 @@ public class Ui {
     }
 
     /**
-     * This method prints the entire patientList
+     * This method prints the entire patientList.
      */
     public static void showEntireList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn

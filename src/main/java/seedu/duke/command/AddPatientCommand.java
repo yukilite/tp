@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * This class deals with the command relating to adding of patient into the patient list
+ * This class deals with the command relating to adding of patient into the patient list.
  * <p></p>
  * <p>
  * It achieves this by acting as a bridge to connect the functions of {@link seedu.duke.parser.Parser} class,
@@ -38,7 +38,7 @@ public class AddPatientCommand extends Command {
     private String contactNumber;
 
     /**
-     * Constructor for the AddPatientCommand
+     * Constructor for the AddPatientCommand.
      * @param patientInfo the map containing the patient information
      */
     public AddPatientCommand(Map<String, String> patientInfo) {

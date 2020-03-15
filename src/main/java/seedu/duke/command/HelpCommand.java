@@ -6,7 +6,7 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 /**
- * Show a list of commands and what is the correct input's format
+ * Show a list of commands and what is the correct input's format.
  *
  * @author Nguyen Thanh Duc
  * @version 0.1
@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
             + "\n" + ExitCommand.MESSAGE_USAGE;
 
     /**
-     * Method to print out all the commands that user can input with usage and examples of them
+     * Method to print out all the commands that user can input with usage and examples of them.
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function
