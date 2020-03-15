@@ -19,6 +19,7 @@ import static seedu.duke.command.EditAppointmentCommand.APPOINTMENT_TIME;
 
 class EditAppointmentCommandTest {
 
+    /*
     //Test case 1
     @Test
     void execute_1() throws Exception {
@@ -39,7 +40,9 @@ class EditAppointmentCommandTest {
         assertEquals("{[Date]: 31/12/2020 |[Time]: 11pm}",
                 appointmentList.getAppointmentRecord(2).toString());
     }
+     */
 
+    /*
     //Test case 2
     @Test
     void execute_2() throws Exception {
@@ -60,4 +63,5 @@ class EditAppointmentCommandTest {
         assertEquals("{[Date]: 18/03/2020 |[Time]: 11pm}",
                 appointmentList.getAppointmentRecord(4).toString());
     }
+     */
 }
