@@ -17,7 +17,7 @@ public class ListAppointmentCommand extends Command {
     }
 
     /**
-     * For this execution, it shows the list of appointments that are stored
+     * For this execution, it shows the list of appointments that are stored.
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException
@@ -29,4 +29,3 @@ public class ListAppointmentCommand extends Command {
 
     }
 }
-

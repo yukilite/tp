@@ -14,6 +14,10 @@ public enum PatientFieldKeys {
     ADDRESS,
     CONTACT_NUMBER;
 
+    /**
+     * This toString method overrides the default method with a specified field key
+     * and returns a string when called.
+     */
     @Override
     public String toString() {
         switch (this) {

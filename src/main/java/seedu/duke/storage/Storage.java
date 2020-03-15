@@ -31,7 +31,11 @@ public class Storage {
         this.patientListSaveLocation = PATIENT_LIST_SAVE_FILEPATH;
     }
 
-    //load save file for Appointments list
+    /**
+     * load save file for Appointments list.
+     * @return appointmentListToReturn returns the appointment list in the save file
+     * @throws FileNotFoundException this exception occurs when a file is not found
+     */
     public List<Appointment> loadSavedAppointments() throws FileNotFoundException {
         File appointmentSave = new File(this.appointmentListSaveLocation);
         if (!appointmentSave.exists()) {
@@ -70,7 +74,12 @@ public class Storage {
         return appointmentListToReturn;
     }
 
-    //load save file for Patients list
+    /**
+     * load save file for Patients list.
+     *
+     * @return patientListToReturn the patient list for the save file.
+     * @throws FileNotFoundException this exception occurs if a file is not found.
+     */
     public List<Patient> loadSavedPatients() throws FileNotFoundException {
         File patientSave = new File(this.patientListSaveLocation);
         if (!patientSave.exists()) {
@@ -112,6 +121,12 @@ public class Storage {
         return patientListToReturn;
     }
 
+    /**
+     * This method saves the patient's appointment details from the AppointmentList into the local save file.
+     *
+     * @throws IOException this exception occurs if the patient's appointment details are unable to be written
+     *                     to the local save file.
+     */
     public void saveAppointmentsList() throws IOException {
         FileWriter fwAppointmentSave;
         try {
@@ -121,7 +136,7 @@ public class Storage {
         }
         String newAppointmentString = null;
 
-        for (int i=0; i < appointmentList.getTotalAppointments(); i++) {
+        for (int i = 0; i < appointmentList.getTotalAppointments(); i++) {
             Appointment newAppointmentData = appointmentList.getAppointmentRecord(i);
             newAppointmentString = newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + LS;
             fwAppointmentSave.write(newAppointmentString);
@@ -131,6 +146,10 @@ public class Storage {
         fwAppointmentSave.close();
     }
 
+    /**
+     * This method saves the patient list into the local save file.
+     * @throws IOException this exception occurs if the patient data was unable to be written to the local save file.
+     */
     public void savePatientList() throws IOException {
 
         FileWriter fwPatientSave;
@@ -141,12 +160,12 @@ public class Storage {
         }
         String newPatientString = null;
 
-        for (int i=0; i < patientList.getTotalPatients(); i++) {
+        for (int i = 0; i < patientList.getTotalPatients(); i++) {
             Patient newPatientData = patientList.getPatientRecord(i);
-            newPatientString = newPatientData.getName() + PIPE_DELIMITER +
-                    newPatientData.getAge() + PIPE_DELIMITER +
-                    newPatientData.getAddress() + PIPE_DELIMITER +
-                    newPatientData.getContactNumber() + LS;
+            newPatientString = newPatientData.getName() + PIPE_DELIMITER
+                    + newPatientData.getAge() + PIPE_DELIMITER
+                    + newPatientData.getAddress() + PIPE_DELIMITER
+                    + newPatientData.getContactNumber() + LS;
             fwPatientSave.write(newPatientString);
 
         }

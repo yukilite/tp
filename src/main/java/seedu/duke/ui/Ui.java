@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Represents the user interface that will interact with the user
+ * Represents the user interface that will interact with the user.
  *
  * @author Justin
  */

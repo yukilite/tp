@@ -74,11 +74,13 @@ public class DukeExceptions {
      */
     public static void noFieldCommand(Map<String, String> map) throws NoFieldCommandException {
         int count = 0;
-        for (Map.Entry mapElement : map.entrySet()) {
+
+        for (Map.Entry mapElement: map.entrySet()) {
             if (mapElement.getValue() == "") {
                 count++;
             }
         }
+
         if (count == map.size()) {
             throw new NoFieldCommandException();
         }
