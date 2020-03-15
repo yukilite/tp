@@ -35,7 +35,7 @@ public class DeleteAppointmentCommand extends Command {
      * @param fieldsToChange a hash map with only 1 item which is a field called
      *                       "index" and the value of the index needed to delete
      */
-    public DeleteAppointmentCommand(Map<String, String> fieldsToChange) throws IndexOutOfBoundsException{
+    public DeleteAppointmentCommand(Map<String, String> fieldsToChange) throws IndexOutOfBoundsException {
         try {
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {

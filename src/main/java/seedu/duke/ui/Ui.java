@@ -30,6 +30,9 @@ public class Ui {
     ////       startUpGreetings();
     }
 
+    /**
+     * This method prints out the appointment list.
+     */
     public static void showEntireAppointmentList() {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
         for (Appointment a : appointmentList) {
