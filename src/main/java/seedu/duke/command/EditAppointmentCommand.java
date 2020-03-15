@@ -4,6 +4,7 @@ import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
+import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -11,36 +12,41 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Delete an appointment's record with certain index in the appointment's list.
+ * Edit the information of the appointment existed in the appointment's list
  *
  * @author Nguyen Thanh Duc
  * @version 1.0
  * @since 2020-03-14
  */
-public class DeleteAppointmentCommand extends Command {
+public class EditAppointmentCommand extends Command{
+    public static final String COMMAND_WORD = "edita";
+    public static final String EXAMPLE = "edita \\index 5  \\date 01/03/2020 \\time 10am";
+    public static final String APPOINTMENT_INDEX = "index";
+    public static final String APPOINTMENT_DATE = "date";
+    public static final String APPOINTMENT_TIME = "time";
 
-    public static final String COMMAND_WORD = "deletea";
-    public static final String EXAMPLE = "deletea \\index 12";
-    private static final String APPOINTMENT_INDEX = "index";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an appointment from the list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit the information of appointment in the list.\n"
             + "Example: " + EXAMPLE;
 
     private int index;
+    private String date;
+    private String time;
 
     /**
-     * Constructor which pass a hash map with only 1 item containing the index of
-     * the patient that needs to be removed.
+     * Constructor which pass a hash map with keys as fields to change and values
+     * as content in that fields that needs to be changed. If there is no need to
+     * change in a field in the appointment's record, it will be automatically set as
+     * null
      *
-     * @param fieldsToChange a hash map with only 1 item which is a field called
-     *                       "index" and the value of the index needed to delete
+     * @param fieldsToChange a hash map which pass all the fields needed to be changed
+     *                       as key and content as values
      */
-    public DeleteAppointmentCommand(Map<String, String> fieldsToChange) throws IndexOutOfBoundsException{
+    public EditAppointmentCommand(Map<String, String> fieldsToChange) {
         try {
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {
                 this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-                if (index > AppointmentList.getTotalAppointments() || index <= 0) {
+                if(index > PatientList.getTotalPatients() || index <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (NumberFormatException e) {
@@ -50,20 +56,24 @@ public class DeleteAppointmentCommand extends Command {
                 System.out.println("Index out of bound, please check the correct index from the list");
                 //TODO Justin include this ui.showIndexError();
             }
+            this.date = fieldsToChange.get(APPOINTMENT_DATE);
+            this.time = fieldsToChange.get(APPOINTMENT_TIME);
         } catch (NoFieldCommandException e) {
             System.out.println("Please do not let the information be empty");
+            //TODO Justin include this ui.showEmptyFieldError();
         }
     }
 
     /**
-     * Method to delete the appointment from the list by getting that appointment's index then
-     * remove it and auto-save the changes.
+     * Method to update the appointment by getting the appointment's record based on its index
+     * and update it based on the queries by users, and auto-save it to the data file
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException
      * @see AppointmentList#getAppointmentRecord
+     * @see Appointment#setAppointmentInfo
      * @see Storage#saveAppointmentsList
      */
     @Override
@@ -72,13 +82,16 @@ public class DeleteAppointmentCommand extends Command {
             // Get the appointment's record based on its index from the list
             Appointment appointment = AppointmentList.getAppointmentRecord(index - 1);
 
-            // Remove the appointment's information from the patient's list
-            AppointmentList.getAppointmentList().remove(appointment);
+            // Updating the information
+            appointment.setAppointmentInfo(date, time);
+
+            // Updating it back to its corresponding index in the appointment's list
+            AppointmentList.getAppointmentList().set(index - 1, appointment);
 
             //Auto-save the changes
             storage.saveAppointmentsList();
 
-            //TODO Justin ui.showDeleteAppointmentSuccess(); To be implemented later
+            //TODO Justin ui.showUpdateAppointmentSuccess(); To be implemented later
         } catch (IndexOutOfBoundsException e) {
             return;
         }

@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.DukeExceptions;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -34,7 +36,23 @@ public class DeletePatientCommand extends Command {
      *                       "index" and the value of the index needed to delete
      */
     public DeletePatientCommand(Map<String, String> fieldsToChange) {
-        this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+        try {
+            DukeExceptions.noFieldCommand(fieldsToChange);
+            try {
+                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                    throw new IndexOutOfBoundsException();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please input an integer for index");
+                //TODO Justin include this ui.showNumberError();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Index out of bound, please check the correct index from the list");
+                //TODO Justin include this ui.showIndexError();
+            }
+        } catch (NoFieldCommandException e) {
+            System.out.println("Please do not let the information be empty");
+        }
     }
 
     /**
@@ -50,16 +68,19 @@ public class DeletePatientCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
+        try {
+            // Get the patient's record based on its index from the list
+            Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
-        // Get the patient's record based on its index from the list
-        Patient patient = PatientList.getPatientRecord(patientIndex - 1);
+            // Remove the patient's information from the patient's list
+            PatientList.getPatientList().remove(patient);
 
-        // Remove the patient's information from the patient's list
-        PatientList.getPatientList().remove(patient);
+            //Auto-save the changes
+            storage.savePatientList();
 
-        //Auto-save the changes
-        storage.savePatientList();
-
-        //TODO Justin ui.showDeletePatientSuccess(); To be implemented later
+            //TODO Justin ui.showDeletePatientSuccess(); To be implemented later
+        } catch (IndexOutOfBoundsException e) {
+            return;
+        }
     }
 }

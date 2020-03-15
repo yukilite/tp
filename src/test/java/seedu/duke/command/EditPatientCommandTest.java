@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.command.UpdatePatientCommand.*;
+import static seedu.duke.command.EditPatientCommand.*;
 
-class UpdatePatientCommandTest {
+class EditPatientCommandTest {
 
     //Test case 1
     @Test
@@ -31,12 +31,12 @@ class UpdatePatientCommandTest {
         fieldsToChange.put(AGE, "20");
         fieldsToChange.put(ADDRESS, "Jurong East");
         fieldsToChange.put(CONTACT_NUMBER, "8225 3819");
-        Command command = new UpdatePatientCommand(fieldsToChange);
+        Command command = new EditPatientCommand(fieldsToChange);
         command.execute(ui,storage);
         assertEquals("{[Name]: Joe Harris | [Age]: 20 | [Address]: Jurong East | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());
     }
-/*
+
     //Test case 2
     @Test
     void execute_2() throws Exception{
@@ -50,15 +50,13 @@ class UpdatePatientCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         fieldsToChange.put(PATIENT_INDEX, "3");
-        fieldsToChange.put(PATIENT_NAME, null);
-        fieldsToChange.put(AGE, null);
-        fieldsToChange.put(ADDRESS, null);
+        fieldsToChange.put(PATIENT_NAME, "");
+        fieldsToChange.put(AGE, "");
+        fieldsToChange.put(ADDRESS, "");
         fieldsToChange.put(CONTACT_NUMBER, "8225 3819");
-        Command command = new UpdatePatientCommand(fieldsToChange);
+        Command command = new EditPatientCommand(fieldsToChange);
         command.execute(ui,storage);
         assertEquals("{[Name]: kurumi | [Age]: 15 | [Address]: hokkaido | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());
     }
-
- */
 }
