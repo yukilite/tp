@@ -14,7 +14,7 @@ public enum AppointmentFieldKeys {
 
     @Override
     public String toString() {
-        switch(this) {
+        switch (this) {
         case INDEX:
             return "index";
         case DATE:
