@@ -26,13 +26,31 @@ public class DukeExceptions {
      *
      * @throws UnknownCommandException when user supplied command are not amongst the final Strings.
      */
-    public static void unknownCommand() throws UnknownCommandException {
+    public static void throwUnknownCommand() throws UnknownCommandException {
         throw new UnknownCommandException();
     }
 
-    public static void isCommandFormatCorrect(String[] splits) throws WrongCommandFormat {
+    public static void isCommandFormatCorrect(String[] splits) throws WrongCommandFormatException {
         if (splits.length != 2) {
-            throw new WrongCommandFormat();
+            throw new WrongCommandFormatException();
+        }
+    }
+
+    public static void isCommandDescriptionEmpty(String[] commandParsed) throws DescriptionIsEmptyException {
+        if (commandParsed.length != 2) {
+            throw new DescriptionIsEmptyException(commandParsed[0]);
+        }
+    }
+
+    public static void checkIndexValidity(String indexAsString, String command) throws InvalidIndexError {
+        try {
+            int index = Integer.parseInt(indexAsString);
+            if (index <= 0) {
+                throw new InvalidIndexError(command);
+            }
+
+        } catch (Exception e) {
+            throw new InvalidIndexError(command);
         }
     }
 }
