@@ -3,13 +3,13 @@ package seedu.duke.command;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
-public class ListCommand extends Command{
+public class ListPatientCommand extends Command{
     public static final String MESSAGE_USAGE = "listp : List all the patients.\n"
             + "Example: listp";
     /**
-     * Empty constructor. Only used to create the ListCommand object
+     * Empty constructor. Only used to create the ListPatientCommand object
      */
-    public ListCommand() {
+    public ListPatientCommand() {
     }
 
     /**

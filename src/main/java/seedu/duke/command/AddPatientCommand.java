@@ -9,7 +9,7 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 import java.util.Map;
 
-public class AddCommand extends Command {
+public class AddPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "addp";
     private static final String PATIENT_NAME = "name";
@@ -30,7 +30,7 @@ public class AddCommand extends Command {
      * Constructor for the AddCommand
      * @param patientInfo the map containing the patient information
      */
-    public AddCommand(Map<String, String> patientInfo) {
+    public AddPatientCommand(Map<String, String> patientInfo) {
         this.patientName = patientInfo.get(PATIENT_NAME);
         if (patientInfo.get(AGE).isBlank()) {
             this.age = -1;
