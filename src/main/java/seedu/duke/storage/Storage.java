@@ -57,7 +57,7 @@ public class Storage {
             //TODO: parse savefile substring, update Appointment constructor
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
-            String[] patientFields = appointmentString.split(" \\| ");
+            String[] patientFields = appointmentString.split(" \\| ",2);
             for (String field: patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
@@ -97,7 +97,7 @@ public class Storage {
             //TODO: parse savefile substring, update Patient constructor
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
-            String[] patientFields = patientString.split(" \\| ");
+            String[] patientFields = patientString.split(" \\| ",4);
             for (String field: patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
