@@ -25,6 +25,10 @@ import java.util.Map;
  */
 public class AddAppointmentCommand extends Command {
 
+    public static final String COMMAND_WORD = "adda";
+    private static final String EXAMPLE = "adda \\date 20-12-2020 \\time 2300";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add an appointment to the appointment's list.\n" +
+            "Example: " + EXAMPLE;
     private static final String DATE = "date";
     private static final String TIME = "time";
     private String date;
