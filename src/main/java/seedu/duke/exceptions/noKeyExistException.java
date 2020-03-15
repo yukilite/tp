@@ -1,4 +1,4 @@
 package seedu.duke.exceptions;
 
-public class noKeyExistException extends Exception {
+public class NoKeyExistException extends Exception {
 }

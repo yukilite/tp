@@ -1,7 +1,7 @@
 package seedu.duke.exceptions;
 
-public class unknownCommandException extends Exception {
+public class UnknownCommandException extends Exception {
     public String getLocalizedMessage() {
-        return "unknownCommandException";
+        return "UnknownCommandException";
     }
 }

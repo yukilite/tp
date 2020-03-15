@@ -1,8 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.unknownCommandException;
-import seedu.duke.exceptions.wrongCommandFormat;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -14,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Duke {
@@ -64,7 +62,7 @@ public class Duke {
                 assert c != null;
                 c.execute(ui, storage);
 
-            } catch (unknownCommandException e) {
+            } catch (UnknownCommandException e) {
                 ui.showUnknownCommandError();
             } catch (IOException e) {
                 //todo justin ui print error message
