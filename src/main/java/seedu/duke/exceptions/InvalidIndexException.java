@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-public class InvalidIndexError extends Exception {
+public class InvalidIndexException extends Exception {
     private String command;
 
-    public InvalidIndexError(String commandType) {
+    public InvalidIndexException(String commandType) {
         this.command = commandType;
     }
 
