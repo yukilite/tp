@@ -18,9 +18,11 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
     public static final String COMMANDS_MESSAGE_USAGE = AddPatientCommand.MESSAGE_USAGE
+            + "\n" + AddAppointmentCommand.MESSAGE_USAGE
             + "\n" + UpdatePatientCommand.MESSAGE_USAGE
             + "\n" + DeletePatientCommand.MESSAGE_USAGE
             + "\n" + ListPatientCommand.MESSAGE_USAGE
+            + "\n" + ListAppointmentCommand.MESSAGE_USAGE
             + "\n" + HelpCommand.MESSAGE_USAGE;
 
     /**

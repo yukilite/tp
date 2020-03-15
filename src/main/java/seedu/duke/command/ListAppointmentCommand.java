@@ -9,6 +9,10 @@ import java.io.IOException;
  * Empty constructor. Only used to create the ListAppointmentCommand object
  */
 public class ListAppointmentCommand extends Command {
+    
+    public static final String MESSAGE_USAGE = "lista : List all the appointments.\n"
+            + "Example: lista";
+
     public ListAppointmentCommand() {
     }
 
