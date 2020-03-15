@@ -16,7 +16,8 @@ import java.util.List;
 
 
 public class Duke {
-    public static int indexNumber;
+    public static int patientIndexNumber;
+    public static int appointmentIndexNumber;
 
     private Ui ui;
     private Parser parser;
@@ -25,7 +26,8 @@ public class Duke {
     private static AppointmentList appointmentList;
 
     public Duke() {
-        indexNumber = 0;
+        patientIndexNumber = 0;
+        appointmentIndexNumber = 0;
         ui = new Ui();
         parser = new Parser();
         storage = new Storage();
