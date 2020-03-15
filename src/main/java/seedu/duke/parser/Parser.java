@@ -68,7 +68,7 @@ public class Parser {
      *
      * @param fullCommand the entire command that the user supplied
      * @param key         the patient field, prepended with REGEX_BACKSLASH. This key is an enum.
-     * @return the String that is between key and " \" delimiter
+     * @return value.trim() the String that is between key and " \" delimiter
      */
     private String findValue(String fullCommand, String key) {
         String[] keyValue = fullCommand.split(key, LIMIT);
@@ -94,7 +94,7 @@ public class Parser {
      * The values however will be determined by the user.
      *
      * @param fullCommand the user input that the user provided
-     * @return a HashMap that matches the patient's fieldKey to value.
+     * @return fieldsToChange a HashMap that matches the patient's fieldKey to value.
      * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap
      * @see #findValue(String fullCommand, String key) value returned by this method will be stored at key.
      */
@@ -150,7 +150,7 @@ public class Parser {
      *
      * @param command the command that was specified
      * @param fieldsToChange the HashMap of what to add or edit
-     * @return a specific command object that is specified by @param command.
+     * @return null a specific command object that is specified by @param command.
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
     private Command getCommandObject(String command,
