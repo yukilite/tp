@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Edit the information of the appointment existed in the appointment's list
+ * Edit the information of the appointment existed in the appointment's list.
  *
  * @author Nguyen Thanh Duc
  * @version 1.0
@@ -47,7 +47,7 @@ public class UpdateAppointmentCommand extends Command {
 
     /**
      * Method to update the appointment by getting the appointment's record based on its index
-     * and update it based on the queries by users, and auto-save it to the data file
+     * and update it based on the queries by users, and auto-save it to the data file.
      *
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function

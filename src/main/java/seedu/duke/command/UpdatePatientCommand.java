@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Edit the information of the patient existed in the patient's list
+ * Edit the information of the patient existed in the patient's list.
  *
  * @author Nguyen Thanh Duc
  * @version 0.1
@@ -48,10 +48,9 @@ public class UpdatePatientCommand extends Command {
         this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
         this.patientName = fieldsToChange.get(PATIENT_NAME);
         boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
-        if(isAgeEqualNull) {
+        if (isAgeEqualNull) {
             this.age = -1;
-        }
-        else {
+        } else {
             this.age = Integer.parseInt(fieldsToChange.get(AGE));
         }
         this.address = fieldsToChange.get(ADDRESS);
@@ -60,9 +59,9 @@ public class UpdatePatientCommand extends Command {
 
     /**
      * Method to update the patient by getting the patient's record based on its index
-     * and update it based on the queries by users, and auto-save it to the data file
+     * and update it based on the queries by users, and auto-save it to the data file.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException
@@ -76,10 +75,10 @@ public class UpdatePatientCommand extends Command {
         Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
         // Updating the information
-        patient.setPatientInfo(patientName,age,address,contactNumber);
+        patient.setPatientInfo(patientName, age, address, contactNumber);
 
         // Updating it back to its corresponding index in the patient's list
-        PatientList.getPatientList().set(patientIndex - 1,patient);
+        PatientList.getPatientList().set(patientIndex - 1, patient);
 
         //Auto-save the changes
         storage.savePatientList();

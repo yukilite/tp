@@ -69,21 +69,6 @@ public class Parser {
      * Returns strictly the String that is between the fieldKey and " \" delimiter.
      * It will only return the value that is behind the first key.
      * Returns an empty String if the key supplied cannot be found in the fullCommand
-     * For example: param fullCommand = "addp \name Justin \address Pasir Ris \name Ananda"
-     * Supplied key is "\name"
-     * Default delimiter is "\"
-     * Returns String value "Justin" since it is the value behind the first key
-     * <p>
-     * Note: This method only searches of known keys (key values in the patient field enum).
-     * Therefore, any unknown keys in the full command will be ignore.
-     * For example: param fullCommand = "addp \name Justin \adress Pasir Ris \age 20".
-     * "\adress" will be ignored as it is a mis-spelling of the enum fieldKeys "address".
-     * <p>
-     * Note: The default delimiter in this method is exactly " \".
-     * Any sequence of characters that does not follow this delimiter will be considered as the value to the key.
-     * For example: param fullCommand = "\name Justin\age 24".
-     * The value returned for key "\name" will be "Justin\age 24".
-     * The value return for key "\age" will be EMPTY_STRING.
      *
      * @param fullCommand the entire command that the user supplied
      * @param key         the patient field, prepended with REGEX_BACKSLASH. This key is an enum.

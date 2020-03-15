@@ -20,12 +20,10 @@ public class ListAppointmentCommand extends Command {
      * For this execution, it shows the list of appointments that are stored.
      * @param ui the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @throws IOException
      */
     @Override
-    public void execute(Ui ui, Storage storage) throws IOException {
+    public void execute(Ui ui, Storage storage) {
         /* TODO: Justin please implement this method to show all the list of appointments thanks*/
         Ui.showEntireAppointmentList();
-
     }
 }

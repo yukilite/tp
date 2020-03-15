@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * This method prints the entire patientList
+     * This method prints the entire patientList.
      */
     public static void showEntireList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn
