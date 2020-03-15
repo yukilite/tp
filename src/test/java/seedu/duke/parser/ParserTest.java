@@ -103,7 +103,7 @@ class ParserTest {
     void testParseCommand_deletePatientCommand_isDeleteCommand() {
         String deletePatientUserInput1 = "         deletep  \\index 4      \\\\\\\\\\";
         String deletePatientUserInput2 = "           deletep \\index 10";
-        String deletePatientUserInput3 = "deletep               \\index 0";
+        String deletePatientUserInput3 = "deletep               \\index 1";
 
         try {
             Command type1 = p.parseCommand(deletePatientUserInput1);
@@ -198,4 +198,5 @@ class ParserTest {
             assertEquals("Unknown Command", e.getLocalizedMessage());
         }
     }
+
 }
