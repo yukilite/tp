@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 
-import seedu.duke.command.Command;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -10,6 +9,17 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * This class deals with the command relating to adding of patient into the patient list
+ * <p></p>
+ * <p>
+ * It achieves this by acting as a bridge to connect the functions of {@link seedu.duke.parser.Parser} class,
+ * {@link Patient} class and {@link PatientList} class</p>
+ * <p></p>
+ * <p>To elaborate, it converts the output of {@link seedu.duke.parser.Parser} into a {@link Patient} object, after
+ * which the {@link Patient} object is then added into the {@link PatientList} list.
+ * </p>
+ */
 public class AddPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "addp";
@@ -28,7 +38,7 @@ public class AddPatientCommand extends Command {
     private String contactNumber;
 
     /**
-     * Constructor for the AddCommand
+     * Constructor for the AddPatientCommand
      * @param patientInfo the map containing the patient information
      */
     public AddPatientCommand(Map<String, String> patientInfo) {
@@ -74,6 +84,7 @@ public class AddPatientCommand extends Command {
         storage.savePatientList();
 
         /** Assuming that there is a confimation message indicating the adding of patient is a susccess **/
-        //TODO: justin ui.showSuccessAdd();
+        //TODO: justin ui.showPatientAddSuccess();
     }
 }
+

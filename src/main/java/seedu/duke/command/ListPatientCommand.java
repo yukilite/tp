@@ -1,10 +1,9 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
-public class ListPatientCommand extends Command {
+public class ListPatientCommand extends Command{
     public static final String MESSAGE_USAGE = "listp : List all the patients.\n"
             + "Example: listp";
     /**
@@ -22,6 +21,7 @@ public class ListPatientCommand extends Command {
     public void execute(Ui ui, Storage storage) {
 
         /** Show the enitre list. This is the onlu method in Ui that is static for some reason **/
-        ui.showEntireList();
+        Ui.showEntireList();
+
     }
 }

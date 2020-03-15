@@ -1,5 +1,9 @@
 package seedu.duke.exceptions;
 
+import seedu.duke.storage.PatientList;
+
+import java.util.Map;
+
 /**
  * This class throws custom exceptions.
  */
@@ -51,6 +55,18 @@ public class DukeExceptions {
 
         } catch (NumberFormatException e) {
             throw new IndexNotIntegerException(command);
+        }
+    }
+
+    public static void noFieldCommand(Map<String, String> map) throws NoFieldCommandException {
+        int count = 0;
+        for(Map.Entry mapElement: map.entrySet()) {
+            if(mapElement.getValue() == "") {
+                count++;
+            }
+        }
+        if(count == map.size()) {
+            throw new NoFieldCommandException();
         }
     }
 }

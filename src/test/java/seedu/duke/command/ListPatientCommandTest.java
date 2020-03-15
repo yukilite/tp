@@ -1,15 +1,9 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.record.Patient;
-import seedu.duke.storage.PatientList;
-import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,26 +20,16 @@ class ListPatientCommandTest {
 
     @Test
     void testListWithPatients() {
-        Ui ui = null;
-        Storage storage = new Storage();
-        Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121");
-        Patient newPatient2 = new Patient(" ", 15, " ", "15454455");
-        Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989");
-        Patient newPatient4 = new Patient("aeiwae", 13,  "to", " ");
-        Patient newPatient5 = new Patient("LSDs", -1, "Lis", "12");
-        List<Patient> savedPatientList = new ArrayList<>();
-        savedPatientList.add(newPatient1);
-        savedPatientList.add(newPatient2);
-        savedPatientList.add(newPatient3);
-        savedPatientList.add(newPatient4);
-        savedPatientList.add(newPatient5);
-        PatientList patientList = new PatientList(savedPatientList);
-        ListPatientCommand listPatientCommand = new ListPatientCommand();
+        int ui = 1;
+        int storage = 1;
+        int savedPatientList = 1;
+        PatientListStub.createList(savedPatientList);
+        ListPatientCommandStub listPatientCommandStub = new ListPatientCommandStub();
 
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        listPatientCommand.execute(ui,storage);
+        listPatientCommandStub.execute(ui,storage);
         assertEquals(EXPECTED_OUTPUT, outContent.toString());
 
 
@@ -54,18 +38,18 @@ class ListPatientCommandTest {
 
     @Test
     void testListWithoutPatients() {
-        Ui ui = null;
-        Storage storage = new Storage();
+        int ui = 1;
+        int storage = 1;
 
-        List<Patient> savedPatientList = new ArrayList<>();
+        int savedPatientList = 2;
 
-        PatientList patientList = new PatientList(savedPatientList);
-        ListPatientCommand listPatientCommand = new ListPatientCommand();
+        PatientListStub.createList(savedPatientList);
+        ListPatientCommandStub listPatientCommandStub = new ListPatientCommandStub();
 
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        listPatientCommand.execute(ui,storage);
+        listPatientCommandStub.execute(ui,storage);
         assertEquals(EMPTY, outContent.toString());
 
 
