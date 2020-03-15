@@ -3,10 +3,8 @@ package seedu.duke.enums;
 /**
  * This enum reflects the changeable fields for the Patient Class.
  *
- * @author Justin
- *
- * The only exception is indexNumber, as the indexNumber for each patient is not dependant on the individual,
- * but rather the system (duke).
+ * @author Justin.
+ * @see seedu.duke.record.Patient
  */
 public enum PatientFieldKeys {
 
@@ -17,18 +15,18 @@ public enum PatientFieldKeys {
     CONTACT_NUMBER;
 
     public String toString() {
-        switch(this) {
+        switch (this) {
         case INDEX:
             return "index";
-        case NAME :
+        case NAME:
             return "name";
-        case AGE :
+        case AGE:
             return "age";
-        case ADDRESS :
+        case ADDRESS:
             return "address";
-        case CONTACT_NUMBER :
+        case CONTACT_NUMBER:
             return "phone";
-        default :
+        default:
             return null;
         }
     }
