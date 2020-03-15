@@ -14,6 +14,7 @@ public enum PatientFieldKeys {
     ADDRESS,
     CONTACT_NUMBER;
 
+    @Override
     public String toString() {
         switch (this) {
         case INDEX:
