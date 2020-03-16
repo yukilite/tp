@@ -15,7 +15,7 @@ import java.util.List;
 public class Ui {
 
     /**
-     * This method prints the entire patientList.
+     * Prints the entire patientList.
      */
     public static void showEntirePatientList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn
@@ -24,6 +24,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the entire appointmentList.
+     */
     public static void showEntireAppointmentList() {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
         for (Appointment a : appointmentList) {
