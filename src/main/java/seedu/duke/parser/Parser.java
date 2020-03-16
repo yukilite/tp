@@ -24,6 +24,7 @@ import seedu.duke.exceptions.DescriptionIsEmptyException;
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.InvalidIndexException;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.NoKeyExistException;
 import seedu.duke.exceptions.UnknownCommandException;
 
@@ -210,7 +211,7 @@ public class Parser {
      */
     public Command parseCommand(String fullCommand) throws
             UnknownCommandException, DescriptionIsEmptyException,
-            InvalidIndexException, IndexNotIntegerException {
+            InvalidIndexException, IndexNotIntegerException, NoFieldCommandException {
         String[] commandParsed = getCommand(fullCommand);
         String commandAsString = commandParsed[COMMAND_INDEX].trim();
 
@@ -224,6 +225,7 @@ public class Parser {
         case DELETE_PATIENT:
             DukeExceptions.isCommandDescriptionEmpty(commandParsed);
             fieldsToChange = getPatientFields(fullCommand);
+            DukeExceptions.noFieldCommand(fieldsToChange, commandAsString);
             command = getCommandObject(commandAsString, fieldsToChange);
             break;
 
@@ -234,6 +236,7 @@ public class Parser {
         case DELETE_APPOINTMENT:
             DukeExceptions.isCommandDescriptionEmpty(commandParsed);
             fieldsToChange = getAppointmentFields(fullCommand);
+            DukeExceptions.noFieldCommand(fieldsToChange, commandAsString);
             command = getCommandObject(commandAsString, fieldsToChange);
             break;
 

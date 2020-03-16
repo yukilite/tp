@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -34,24 +32,18 @@ public class DeletePatientCommand extends Command {
      *                       "index" and the value of the index needed to delete
      */
     public DeletePatientCommand(Map<String, String> fieldsToChange) {
+
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-
-            try {
-                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-
-            } catch (NumberFormatException e) {
-                Ui.showNumberError();
-
-            } catch (IndexOutOfBoundsException e) {
-                Ui.showIndexError();
+            this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+            if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                throw new IndexOutOfBoundsException();
             }
 
-        } catch (NoFieldCommandException e) {
-            Ui.showNoFieldError();
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
     }
 

@@ -43,22 +43,20 @@ public class EditAppointmentCommand extends Command {
      */
     public EditAppointmentCommand(Map<String, String> fieldsToChange) {
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-            try {
-                this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-                if (index > PatientList.getTotalPatients() || index <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-            } catch (NumberFormatException e) {
-                Ui.showNumberError();
-            } catch (IndexOutOfBoundsException e) {
-                Ui.showIndexError();
+            this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
+            if (index > PatientList.getTotalPatients() || index <= 0) {
+                throw new IndexOutOfBoundsException();
             }
-            this.date = fieldsToChange.get(APPOINTMENT_DATE);
-            this.time = fieldsToChange.get(APPOINTMENT_TIME);
-        } catch (NoFieldCommandException e) {
-            Ui.showNoFieldError();
+
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
+
+        this.date = fieldsToChange.get(APPOINTMENT_DATE);
+        this.time = fieldsToChange.get(APPOINTMENT_TIME);
     }
 
     /**

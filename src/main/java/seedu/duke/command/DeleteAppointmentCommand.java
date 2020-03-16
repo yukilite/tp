@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -34,24 +32,18 @@ public class DeleteAppointmentCommand extends Command {
      *                       "index" and the value of the index needed to delete
      */
     public DeleteAppointmentCommand(Map<String, String> fieldsToChange) throws IndexOutOfBoundsException {
+
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-
-            try {
-                this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-                if (index > AppointmentList.getTotalAppointments() || index <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-
-            } catch (NumberFormatException e) {
-                Ui.showNumberError();
-
-            } catch (IndexOutOfBoundsException e) {
-                Ui.showIndexError();
+            this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
+            if (index > AppointmentList.getTotalAppointments() || index <= 0) {
+                throw new IndexOutOfBoundsException();
             }
 
-        } catch (NoFieldCommandException e) {
-            Ui.showNoFieldError();
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
     }
 

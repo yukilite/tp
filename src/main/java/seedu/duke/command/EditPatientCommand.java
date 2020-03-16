@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -47,41 +45,35 @@ public class EditPatientCommand extends Command {
      */
     public EditPatientCommand(Map<String, String> fieldsToChange) {
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
+            this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+            if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                throw new IndexOutOfBoundsException();
+            }
+
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
+        }
+
+        this.patientName = fieldsToChange.get(PATIENT_NAME);
+        boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
+
+        if (isAgeEqualNull) {
+            this.age = -1;
+        } else {
             try {
-                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
+                this.age = Integer.parseInt(fieldsToChange.get(AGE));
 
             } catch (NumberFormatException e) {
-                Ui.showNumberError();
-
-            } catch (IndexOutOfBoundsException e) {
-                Ui.showIndexError();
-            }
-
-            this.patientName = fieldsToChange.get(PATIENT_NAME);
-            boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
-
-            if (isAgeEqualNull) {
+                Ui.showSetAgeError();
                 this.age = -1;
-            } else {
-                try {
-                    this.age = Integer.parseInt(fieldsToChange.get(AGE));
-
-                } catch (NumberFormatException e) {
-                    Ui.showSetAgeError();
-                    this.age = -1;
-                }
             }
-
-            this.address = fieldsToChange.get(ADDRESS);
-            this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
-
-        } catch (NoFieldCommandException e) {
-            Ui.showNoFieldError();
         }
+
+        this.address = fieldsToChange.get(ADDRESS);
+        this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
     }
 
     /**
