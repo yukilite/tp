@@ -18,7 +18,6 @@ import static seedu.duke.command.EditPatientCommand.CONTACT_NUMBER;
 
 class EditPatientCommandTest {
 
-    /*
     //Test case 1
     @Test
     void execute_1() throws Exception {
@@ -41,9 +40,7 @@ class EditPatientCommandTest {
         assertEquals("{[Name]: Joe Harris | [Age]: 20 | [Address]: Jurong East | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());
     }
-     */
 
-    /*
     //Test case 2
     @Test
     void execute_2() throws Exception {
@@ -66,5 +63,4 @@ class EditPatientCommandTest {
         assertEquals("{[Name]: kurumi | [Age]: 15 | [Address]: hokkaido | [Contact Number]: 8225 3819}",
                 patientList.getPatientRecord(2).toString());
     }
-     */
 }

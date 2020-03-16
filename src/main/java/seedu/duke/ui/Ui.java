@@ -16,6 +16,13 @@ import java.util.Scanner;
 public class Ui {
 
     /**
+     * Empty Ui constructor.
+     */
+    public Ui() {
+
+    }
+
+    /**
      * This method prints the entire patientList.
      */
     public static void showEntireList() {
