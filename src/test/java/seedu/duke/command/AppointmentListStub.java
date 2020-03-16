@@ -22,6 +22,7 @@ public class AppointmentListStub {
      * @see seedu.duke.storage.AppointmentList
      */
     public static void createList(int choice) {
+        appointmentList.clear();
         if (choice == 1) {
             AppointmentStub newAppointment1 = new AppointmentStub("s;dlskd;l", "Li");
             AppointmentStub newAppointment2 = new AppointmentStub(" ", " ");

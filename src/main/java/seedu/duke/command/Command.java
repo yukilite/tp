@@ -22,9 +22,9 @@ public abstract class Command {
     }
 
     /**
-     * Execution method that will be overriden its child classes (the different command classes.
-     * @param ui the ui object which can be used to display text
-     * @param storage the storage object for auto saving function
+     * Execution method that will be overriden by its child classes (the different command classes).
+     * @param ui the ui object which can be used to display text.
+     * @param storage the storage object for auto saving function.
      */
     public abstract void execute(Ui ui, Storage storage) throws IOException;
 }
