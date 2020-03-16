@@ -1,10 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
-import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -36,7 +33,7 @@ public class EditAppointmentCommand extends Command {
      * Constructor which pass a hash map with keys as fields to change and values
      * as content in that fields that needs to be changed. If there is no need to
      * change in a field in the appointment's record, it will be automatically set as
-     * null
+     * null.
      *
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
@@ -44,7 +41,7 @@ public class EditAppointmentCommand extends Command {
     public EditAppointmentCommand(Map<String, String> fieldsToChange) {
         try {
             this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-            if (index > PatientList.getTotalPatients() || index <= 0) {
+            if (index > AppointmentList.getTotalAppointments() || index <= 0) {
                 throw new IndexOutOfBoundsException();
             }
 
@@ -57,6 +54,33 @@ public class EditAppointmentCommand extends Command {
 
         this.date = fieldsToChange.get(APPOINTMENT_DATE);
         this.time = fieldsToChange.get(APPOINTMENT_TIME);
+    }
+
+    /**
+     * Method to check if the right index is returned to the class.
+     *
+     * @return index index in the list that information needs to be updated
+     */
+    public int getIndex() {
+        return index;
+    }
+
+    /**
+     * Method to check if the right date is returned to the class.
+     *
+     * @return date that needs to be updated
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * Method to check if the right time is returned to the class.
+     *
+     * @return time needs to be updated
+     */
+    public String getTime() {
+        return time;
     }
 
     /**
@@ -83,9 +107,16 @@ public class EditAppointmentCommand extends Command {
             // Updating it back to its corresponding index in the appointment's list
             AppointmentList.getAppointmentList().set(index - 1, appointment);
 
-            //Auto-save the changes
+            // Check with assertions to make sure that the updated fields are correct
+            assert AppointmentList.getAppointmentRecord(index - 1).getDate().equals(this.date) :
+                    "Wrong date!";
+            assert AppointmentList.getAppointmentRecord(index - 1).getTime().equals(this.time) :
+                    "Wrong time!";
+
+            // Auto-save the changes
             storage.saveAppointmentsList();
 
+            // Show updated successfully message
             Ui.showUpdateAppointmentSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
