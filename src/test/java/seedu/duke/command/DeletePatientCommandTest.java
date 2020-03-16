@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.duke.command.EditPatientCommand.PATIENT_INDEX;
-
 
 class DeletePatientCommandTest {
 
@@ -27,10 +25,10 @@ class DeletePatientCommandTest {
         Map<String, String> fieldsToChange = new HashMap<>();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        fieldsToChange.put(PATIENT_INDEX, "3");
+        fieldsToChange.put("index", "3");
         Command command = new DeletePatientCommand(fieldsToChange);
         command.execute(ui, storage);
-        assertEquals(4, patientList.getTotalPatients());
+        assertEquals(4, PatientList.getTotalPatients());
         assertEquals("{[Name]: peony | [Age]: 33 | [Address]: clementi road | [Contact Number]: 61234567}",
                 patientList.getPatientRecord(0).toString());
         assertEquals("{[Name]: yoshino | [Age]: 8 | [Address]: shibuya | [Contact Number]: 13182371}",

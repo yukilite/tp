@@ -1,13 +1,12 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.duke.command.Command;
 import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.Command;
 import seedu.duke.command.DeletePatientCommand;
+import seedu.duke.command.EditPatientCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListPatientCommand;
-import seedu.duke.command.UpdatePatientCommand;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
@@ -84,9 +83,9 @@ class ParserTest {
             Command type2 = p.parseCommand(editPatientUserInput2);
             Command type3 = p.parseCommand(editPatientUserInput3);
 
-            assertTrue(type1 instanceof UpdatePatientCommand);
-            assertTrue(type2 instanceof UpdatePatientCommand);
-            assertTrue(type3 instanceof UpdatePatientCommand);
+            assertTrue(type1 instanceof EditPatientCommand);
+            assertTrue(type2 instanceof EditPatientCommand);
+            assertTrue(type3 instanceof EditPatientCommand);
 
         } catch (Exception | UnknownCommandException e) {
             fail("Should not have thrown any exception");
@@ -104,9 +103,9 @@ class ParserTest {
             Command type2 = p.parseCommand(editPatientUserInput2);
             Command type3 = p.parseCommand(editPatientUserInput3);
 
-            assertFalse(type1 instanceof UpdatePatientCommand);
-            assertFalse(type2 instanceof UpdatePatientCommand);
-            assertFalse(type3 instanceof UpdatePatientCommand);
+            assertFalse(type1 instanceof EditPatientCommand);
+            assertFalse(type2 instanceof EditPatientCommand);
+            assertFalse(type3 instanceof EditPatientCommand);
 
         } catch (Exception | UnknownCommandException e) {
             assertEquals("Unknown command", e.getLocalizedMessage());

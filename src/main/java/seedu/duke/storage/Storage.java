@@ -3,7 +3,7 @@ package seedu.duke.storage;
 
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
-import seedu.duke.storage.PatientList;
+import seedu.duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,16 +15,15 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private String appointmentListSaveLocation;
-    private String patientListSaveLocation;
-    private static PatientList patientList;
-    private static AppointmentList appointmentList;
-
     private static final String SAVE_DIRECTORY = "saves";
     private static final String APPOINTMENT_LIST_SAVE_FILEPATH = "saves/appointments.txt";
     private static final String PATIENT_LIST_SAVE_FILEPATH = "saves/patients.txt";
     private static final String PIPE_DELIMITER = " | ";
     private static final String LS = System.lineSeparator();
+    private static PatientList patientList;
+    private static AppointmentList appointmentList;
+    private String appointmentListSaveLocation;
+    private String patientListSaveLocation;
 
     public Storage() {
         this.appointmentListSaveLocation = APPOINTMENT_LIST_SAVE_FILEPATH;
@@ -33,6 +32,7 @@ public class Storage {
 
     /**
      * load save file for Appointments list.
+     *
      * @return appointmentListToReturn returns the appointment list in the save file
      * @throws FileNotFoundException this exception occurs when a file is not found
      */
@@ -46,11 +46,10 @@ public class Storage {
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
-                    System.out.println("Failed to create file in new directory");
+                    Ui.showFailedToCreateFile();
                 }
-
             } else {
-                System.out.println("Failed to create directory");
+                Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
         }
@@ -61,8 +60,8 @@ public class Storage {
             //TODO: parse savefile substring, update Appointment constructor
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
-            String[] patientFields = appointmentString.split(" \\| ",2);
-            for (String field: patientFields) {
+            String[] patientFields = appointmentString.split(" \\| ", 2);
+            for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
                 }
@@ -90,11 +89,11 @@ public class Storage {
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
-                    System.out.println("Failed to create file in new directory");
+                    Ui.showFailedToCreateFile();
                 }
 
             } else {
-                System.out.println("Failed to create directory");
+                Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
 
@@ -106,8 +105,8 @@ public class Storage {
             //TODO: parse savefile substring, update Patient constructor
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
-            String[] patientFields = patientString.split(" \\| ",4);
-            for (String field: patientFields) {
+            String[] patientFields = patientString.split(" \\| ", 4);
+            for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
                 }
@@ -136,8 +135,8 @@ public class Storage {
         }
         String newAppointmentString = null;
 
-        for (int i = 0; i < appointmentList.getTotalAppointments(); i++) {
-            Appointment newAppointmentData = appointmentList.getAppointmentRecord(i);
+        for (int i = 0; i < AppointmentList.getTotalAppointments(); i++) {
+            Appointment newAppointmentData = AppointmentList.getAppointmentRecord(i);
             newAppointmentString = newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + LS;
             fwAppointmentSave.write(newAppointmentString);
 
@@ -148,6 +147,7 @@ public class Storage {
 
     /**
      * This method saves the patient list into the local save file.
+     *
      * @throws IOException this exception occurs if the patient data was unable to be written to the local save file.
      */
     public void savePatientList() throws IOException {
@@ -160,8 +160,8 @@ public class Storage {
         }
         String newPatientString = null;
 
-        for (int i = 0; i < patientList.getTotalPatients(); i++) {
-            Patient newPatientData = patientList.getPatientRecord(i);
+        for (int i = 0; i < PatientList.getTotalPatients(); i++) {
+            Patient newPatientData = PatientList.getPatientRecord(i);
             newPatientString = newPatientData.getName() + PIPE_DELIMITER
                     + newPatientData.getAge() + PIPE_DELIMITER
                     + newPatientData.getAddress() + PIPE_DELIMITER

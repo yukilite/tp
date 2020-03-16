@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AppointmentListStub {
 
@@ -19,9 +18,11 @@ public class AppointmentListStub {
 
     /**
      * This method is a stub.
+     *
      * @see seedu.duke.storage.AppointmentList
      */
     public static void createList(int choice) {
+        appointmentList.clear();
         if (choice == 1) {
             AppointmentStub newAppointment1 = new AppointmentStub("s;dlskd;l", "Li");
             AppointmentStub newAppointment2 = new AppointmentStub(" ", " ");

@@ -17,11 +17,11 @@ public class AppointmentList {
     private static List<Appointment> appointmentList;
 
     public AppointmentList() {
-        this.appointmentList = new ArrayList<>();
+        appointmentList = new ArrayList<>();
     }
 
     public AppointmentList(List<Appointment> savedPatientList) {
-        this.appointmentList = savedPatientList;
+        appointmentList = savedPatientList;
     }
 
     //getter and setter
@@ -30,7 +30,7 @@ public class AppointmentList {
     }
 
     public void setAppointmentList(List appointmentListInput) {
-        this.appointmentList = appointmentListInput;
+        appointmentList = appointmentListInput;
     }
 
     public static Appointment getAppointmentRecord(int appointmentIndex) {
@@ -42,6 +42,6 @@ public class AppointmentList {
     }
 
     public void removeAppointmentRecord(int appointmentIndex) {
-        this.getAppointmentList().remove(appointmentIndex);
+        getAppointmentList().remove(appointmentIndex);
     }
 }

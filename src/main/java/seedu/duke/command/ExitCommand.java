@@ -31,13 +31,13 @@ public class ExitCommand extends Command {
     /**
      * Method to print the bye message for users.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
-        //TODO Justin ui.showByeMessage();
+        Ui.showByeMessage();
     }
 }

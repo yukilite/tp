@@ -30,7 +30,6 @@ public class AddPatientCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a patient to the patient's list.\n"
             + "Example: " + EXAMPLE;
-
     private String patientName;
     private int age;
     private String address;
@@ -38,6 +37,7 @@ public class AddPatientCommand extends Command {
 
     /**
      * Constructor for the AddPatientCommand.
+     *
      * @param patientInfo the map containing the patient information
      */
     public AddPatientCommand(Map<String, String> patientInfo) {
@@ -47,13 +47,12 @@ public class AddPatientCommand extends Command {
         } else {
             try {
                 this.age = Integer.parseInt(patientInfo.get(AGE));
+
             } catch (NumberFormatException e) {
                 /** If string is given, a message will be shown and the age will be set to -1 **/
-                /** TODO: Justin please add this error message too **/
-                System.out.println(e + ": Received string for age. Setting age to be -1");
+                Ui.showSetAgeError();
                 this.age = -1;
             }
-
         }
         this.address = patientInfo.get(ADDRESS);
         this.contactNumber = patientInfo.get(CONTACT_NUMBER);
@@ -66,6 +65,7 @@ public class AddPatientCommand extends Command {
 
     /**
      * For this execution, the patient will be added into the patient list.
+     *
      * @param ui      ui object for displaying information
      * @param storage storage object to do auto saving
      * @see PatientList#getPatientList
@@ -79,10 +79,21 @@ public class AddPatientCommand extends Command {
         /** Hacky method to add patient into patient list **/
         PatientList.getPatientList().add(newPatient);
 
+        /** Checking to see if patient object is created and placed correctly in the patient list **/
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getName().equals(this.patientName) :
+                "Wrong name!";
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getAge() == this.age : "Wrong "
+                + "age!";
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getAddress().equals(this.address) :
+                "Wrong address!";
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getContactNumber()
+                .equals(this.contactNumber) : "Wrong number!";
+
+
         /** Autosaving upon each add **/
         storage.savePatientList();
 
-        /** Assuming that there is a confimation message indicating the adding of patient is a susccess **/
-        //TODO: justin ui.showPatientAddSuccess();
+        /** Assuming that there is a confimation message indicating the adding of patient is a success**/
+        ui.showPatientAddSuccess();
     }
 }

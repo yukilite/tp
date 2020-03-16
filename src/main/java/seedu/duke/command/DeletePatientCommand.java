@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -21,11 +19,9 @@ public class DeletePatientCommand extends Command {
 
     public static final String COMMAND_WORD = "deletep";
     public static final String EXAMPLE = "deletep \\index 12";
-    private static final String PATIENT_INDEX = "index";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a patient from the list.\n"
             + "Example: " + EXAMPLE;
-
+    private static final String PATIENT_INDEX = "index";
     private int patientIndex;
 
     /**
@@ -36,22 +32,18 @@ public class DeletePatientCommand extends Command {
      *                       "index" and the value of the index needed to delete
      */
     public DeletePatientCommand(Map<String, String> fieldsToChange) {
+
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-            try {
-                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please input an integer for index");
-                //TODO Justin include this ui.showNumberError();
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Index out of bound, please check the correct index from the list");
-                //TODO Justin include this ui.showIndexError();
+            this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+            if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                throw new IndexOutOfBoundsException();
             }
-        } catch (NoFieldCommandException e) {
-            System.out.println("Please do not let the information be empty");
+
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
     }
 
@@ -59,7 +51,7 @@ public class DeletePatientCommand extends Command {
      * Method to delete the patient from the list by getting that patient's index then
      * remove it and auto-save the changes.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException
@@ -72,13 +64,20 @@ public class DeletePatientCommand extends Command {
             // Get the patient's record based on its index from the list
             Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
+            // Get the original appointment's list size
+            int originalSize = PatientList.getTotalPatients();
+
             // Remove the patient's information from the patient's list
             PatientList.getPatientList().remove(patient);
 
-            //Auto-save the changes
+            // Check with assertions that the size has been decremented
+            assert PatientList.getTotalPatients() == originalSize - 1;
+
+            // Auto-save the changes
             storage.savePatientList();
 
-            //TODO Justin ui.showDeletePatientSuccess(); To be implemented later
+            // Show deleted patient successfully message
+            Ui.showDeletePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
         }

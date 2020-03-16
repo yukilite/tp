@@ -36,6 +36,7 @@ public class AddAppointmentCommand extends Command {
 
     /**
      * Constructor for the appointment class.
+     *
      * @param appointmentInfo the <code>Map</code> that contains the information relating to the appointment.
      */
     public AddAppointmentCommand(Map<String, String> appointmentInfo) {
@@ -53,6 +54,7 @@ public class AddAppointmentCommand extends Command {
 
     /**
      * For this execution, the appointment information is added into the appointment list.
+     *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException this exception is thrown by the {@link Storage} class if it fails to save the current
@@ -62,15 +64,13 @@ public class AddAppointmentCommand extends Command {
     public void execute(Ui ui, Storage storage) throws IOException {
         Appointment appointment = new Appointment(this.date, this.time);
 
-        /** Hacky method to add appointments into the appointment list. Also make appointment list static thanks**/
+        /* Hacky method to add appointments into the appointment list.*/
         AppointmentList.getAppointmentList().add(appointment);
 
-        /** For Autosaving. Again use static for appointment list thanks**/
+        /* For Auto-saving */
         storage.saveAppointmentsList();
 
-        /** Assuming that there is a confimation message indicating the adding of appointment is a susccess **/
-        //TODO: justin ui.showAppointmentAddSuccess();
-
+        ui.showAppointmentAddSuccess();
     }
 
 }

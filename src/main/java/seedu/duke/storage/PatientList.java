@@ -17,20 +17,20 @@ public class PatientList {
     private static List<Patient> patientList;
 
     public PatientList() {
-        this.patientList = new ArrayList<>();
+        patientList = new ArrayList<>();
     }
 
     public PatientList(List<Patient> savedPatientList) {
-        this.patientList = savedPatientList;
+        patientList = savedPatientList;
     }
-  
+
     public static List<Patient> getPatientList() {
         return patientList;
     }
 
 
     public void setPatientList(List patientListInput) {
-        this.patientList = patientListInput;
+        patientList = patientListInput;
     }
 
     public static Patient getPatientRecord(int patientIndex) {
@@ -42,6 +42,6 @@ public class PatientList {
     }
 
     public void removePatientRecord(int patientIndex) {
-        this.getPatientList().remove(patientIndex);
+        getPatientList().remove(patientIndex);
     }
 }

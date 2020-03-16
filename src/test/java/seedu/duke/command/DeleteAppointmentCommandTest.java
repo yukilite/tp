@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.duke.command.EditAppointmentCommand.APPOINTMENT_INDEX;
 
 class DeleteAppointmentCommandTest {
 
@@ -25,7 +24,7 @@ class DeleteAppointmentCommandTest {
         Map<String, String> fieldsToChange = new HashMap<>();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        fieldsToChange.put(APPOINTMENT_INDEX, "3");
+        fieldsToChange.put("index", "3");
         Command command = new DeleteAppointmentCommand(fieldsToChange);
         command.execute(ui, storage);
         assertEquals("{[Date]: 14/03/2020 |[Time]: 10am}",

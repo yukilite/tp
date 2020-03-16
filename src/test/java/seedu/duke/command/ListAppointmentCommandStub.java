@@ -12,7 +12,7 @@ public class ListAppointmentCommandStub {
     /**
      * Stub to simulate adding appointments into list.
      *
-     * @param ui stub ui
+     * @param ui      stub ui
      * @param storage stub storage
      */
     public void execute(int ui, int storage) {
