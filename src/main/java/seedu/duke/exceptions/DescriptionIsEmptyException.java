@@ -9,6 +9,6 @@ public class DescriptionIsEmptyException extends Exception {
 
     @Override
     public String getLocalizedMessage() {
-        return "Please ensure that the description for " + this.command + " is not empty";
+        return "Please ensure that the fields for " + this.command + " is provided";
     }
 }

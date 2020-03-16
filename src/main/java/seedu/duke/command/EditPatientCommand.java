@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -47,38 +45,35 @@ public class EditPatientCommand extends Command {
      */
     public EditPatientCommand(Map<String, String> fieldsToChange) {
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-            try {
-                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please input an integer for index");
-                //TODO Justin include this ui.showNumberError();
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Index out of bound, please check the correct index from the list");
-                //TODO Justin include this ui.showIndexError();
+            this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+            if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                throw new IndexOutOfBoundsException();
             }
-            this.patientName = fieldsToChange.get(PATIENT_NAME);
-            boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
-            if (isAgeEqualNull) {
-                this.age = -1;
-            } else {
-                try {
-                    this.age = Integer.parseInt(fieldsToChange.get(AGE));
-                } catch (NumberFormatException e) {
-                    /** TODO: Justin please add this error message too **/
-                    System.out.println("Received string for age. Setting age to be -1");
-                    this.age = -1;
-                }
-            }
-            this.address = fieldsToChange.get(ADDRESS);
-            this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
-        } catch (NoFieldCommandException e) {
-            System.out.println("Please do not let the information be empty");
-            //TODO Justin include this ui.showEmptyFieldError();
+
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
+
+        this.patientName = fieldsToChange.get(PATIENT_NAME);
+        boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
+
+        if (isAgeEqualNull) {
+            this.age = -1;
+        } else {
+            try {
+                this.age = Integer.parseInt(fieldsToChange.get(AGE));
+
+            } catch (NumberFormatException e) {
+                Ui.showSetAgeError();
+                this.age = -1;
+            }
+        }
+
+        this.address = fieldsToChange.get(ADDRESS);
+        this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
     }
 
     /**
@@ -108,7 +103,7 @@ public class EditPatientCommand extends Command {
             //Auto-save the changes
             storage.savePatientList();
 
-            //TODO Justin ui.showUpdatePatientSuccess(); To be implemented later
+            Ui.showUpdatePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
         }
