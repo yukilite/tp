@@ -95,9 +95,9 @@ Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
-:heavy_check_mark: | `addp \name Justin \address Pasir Ris \age 20 \phone 98889888` | ![](images/addp%20success.PNG)
-:heavy_check_mark: | `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris` | ![](images/addp%20success2.PNG)
-:x: | `addp` | ![](images/addp%20fail.PNG)
+OK | `addp \name Justin \address Pasir Ris \age 20 \phone 98889888` | ![](images/addp%20success.PNG)
+OK | `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris` | ![](images/addp%20success2.PNG)
+NOT OK | `addp` | ![](images/addp%20fail.PNG)
 
 >
 >**Notice:**
