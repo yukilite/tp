@@ -297,10 +297,18 @@ Format: `exit`
 * `exit` Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
 ## 6. FAQ
+**Q**: Would my details be captured if I randomnize the input order of the keywords?
 
-**Q**: Why do I have to learn CS2106? 
+* `addp \phone 12345678 \address NUS \age 22 \name John Doe`
+* `addp \name John Doe \address NUS \ age 22 \ phone 12345678`
 
-**A**: Because you will learn a lot of "C" programming.
+**A**: Yes. The system is keyword-sensitive. Regardless of the order given, it stores the information within each command used respectively. Both examples provided above would result in the same information stored. 
+
+**Q**: Why does my patient list display a "-1" in the age field?
+
+* `{[Name]: Tommy | [Age]: -1 | [Address]:  | [Contact Number]: 92331234}`
+
+**A**: The age field provided by the user is empty. 
 
 
 
