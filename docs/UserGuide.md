@@ -125,8 +125,8 @@ Format: `deletep \index [patient number in list]`
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
-:heavy_check_mark: | `deletep \index 2` | ![](images/delete_success.PNG)
-:x: | `deletep \index a` | ![](images/delete_fail.PNG)
+OK | `deletep \index 2` | ![](images/delete_success.PNG)
+NOT OK | `deletep \index a` | ![](images/delete_fail.PNG)
 
 
 #### 4.1.4 Edit an existing Patient
@@ -223,8 +223,8 @@ Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
-:heavy_check_mark: | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
-:x: | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
+OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
+NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
 
 >
 >**Notice:**
