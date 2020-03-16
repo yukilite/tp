@@ -76,15 +76,22 @@ A valid input would be `adda \date Mar 17 \time 2pm`.
 
 #### 4.1.1 Add a new Patient record
 
-The program allows you to add a new Patient record to the current list of Patient records. The command contains:
+The program allows you to add a new Patient record to the current list of Patient records. 
+
+Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
+
 * `addp` keyword
 * `\name` followed by the name of the patient 
 * `\age` followed by the age of the patient
 * `\address` followed by the address of the patient
 * `\phone` followed by the contact number of the patient
-(All these fields will be developed so that later on they have certain limit and validation of the text or number inputted)
 
-Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
+>
+>**Notice:**
+> For versions beyond 1.0, the above fields will have certain limits and validation of text and numbers imposed
+>upon.
+
+Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
@@ -111,8 +118,8 @@ Format: `listp`
 #### 4.1.3 Delete an existing Patient
 
 The program allows you to delete an existing Patient record by its index in the list. The command contains:
-1. the `deletep` keyword
-2. `\index` followed by the index number of the patient to be deleted 
+* `deletep` keyword
+* `\index` followed by the index number of the patient to be deleted 
 
 Format: `deletep \index [patient number in list]`
 
@@ -124,17 +131,22 @@ OK? |   Usage    |   Outcome
 
 #### 4.1.4 Edit an existing Patient
 
-The program allows you to make changes to an existing Patient record by its index in the list. The command contains:
-1. the `editp` keyword
-2. `\index` followed by the index number of the Patient record in the list
-3. `\name` followed by the name of the patient
-4. `\age` followed by the age of the patient
-4. `\address` followed by the address of the patient
-4. `\phone` the contact number of the patient
-Note that users do not need to include any single field that needs to be modified in the command.
-Illustration will be later shown in the command's format and usage.
+The program allows you to make changes to an existing Patient record by its index in the list. 
 
 Format: `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]`
+
+* `editp` keyword
+* `\index` followed by the index number of the Patient record in the list
+* `\name` followed by the name of the patient
+* `\age` followed by the age of the patient
+* `\address` followed by the address of the patient
+* `\phone` the contact number of the patient
+>
+>**Notice:**
+>Note that users do not need to include any single field that needs to be modified in the command.
+>Illustration will be later shown in the command's format and usage.
+>
+>
 
 #### Example of usage: 
 `editp \index 1  \name Justin \age 23 \address Clementi \phone 83487846`
@@ -167,13 +179,17 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 
 #### 4.2.1 Add a new Appointment record
 
-The program allows you to add a new Appointment record to the current list of Appointment records. The command contains:
-1. the `adda` keyword
-2. `\date` followed by the date of the appointment
-3. `\time` followed by the time of the appointment
-(Both date and time are currently in string so they will be further developed later)
+The program allows you to add a new Appointment record to the current list of Appointment records. 
 
 Format: `adda \date [date] \time [time]`
+
+* `adda` keyword
+* `\date` followed by the date of the appointment
+* `\time` followed by the time of the appointment
+>
+>**Notice:**
+> For version 1.0, both date and time are stored in string.
+>
 
 #### Example of usage: 
 - `adda \date 14-03-2020 \time 10am`
@@ -196,11 +212,14 @@ Format: `lista`
 
 #### 4.2.3 Delete an existing Appointment
 
-The program allows you to delete an existing Appointment record by its index in the list. The command contains:
+The program allows you to delete an existing Appointment record by its index in the list. 
+
+Format: `deletea \index [appointment number in list]`
+
 * `deletea` keyword
 * `\index` followed by the index number of the Appointment to be deleted 
 
-Format: `deletea \index [appointment number in list]`
+Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
@@ -214,15 +233,21 @@ OK? |   Usage    |   Outcome
 
 #### 4.2.4 Edit an existing Appointment
 
-The program allows you to make changes to an existing Appointment record by its index in the list. The command contains:
-1. the `edita` keyword
-2. `\index` followed by the index number of the Appointment in the list.
-3. `\date` followed by the date of the appointment 
-4. `\time` followed by the time of the appointment
-Note that users do not need to include any single field that needs to be modified in the command.
-Illustration will be later shown in the command's format and usage
+The program allows you to make changes to an existing Appointment record by its index in the list.
 
 Format: `edita \index [appointmentNumber] \date [date] \time [time]`
+ 
+* `edita` keyword
+* `\index` followed by the index number of the Appointment in the list.
+* `\date` followed by the date of the appointment 
+* `\time` followed by the time of the appointment
+
+>
+>**Notice:**
+> Note that users do not need to include any single field that needs to be modified in the command.
+Illustration will be displayed in the command's format and usage.
+
+
 
 #### Example List
 <img src ="images/edita_before.PNG" width = "400">
@@ -270,16 +295,18 @@ Format: `exit`
 
 ## 5. Command Summary
 
-* `adda \date [date] \time [time]` Adds date and time of an appointment
-* `addp \name [name] \age [age] \address [address] \phone [phone]` Adds name, age, address, and contact number of patient
-* `lista` List all the appointments from the appointment's list
-* `listp` List all the patients from the patient's list
-* `deletea \index [appointment number in list]` Delete an appointment by the list's appointment number
-* `deletep \index [patient number in list]` Delete a patient by the list's patient number
-* `edita \index [appointmentNumber] \date [date] \time [time]` Edit date or time of an appointment by the list's appointment number
-* `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` Edit date or time of an appointment by the list's appointment number
-* `help` Give you a manual on a list of valid commands and their usage
-* `exit` Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
+   Command    |   Description 
+   ------------- | ---------------
+`adda \date [date] \time [time]` |  Adds date and time of an appointment
+`addp \name [name] \age [age] \address [address] \phone [phone]` | Adds name, age, address, and contact number of patient
+`lista` | List all the appointments from the appointment's list
+`listp` | List all the patients from the patient's list
+`deletea \index [appointment number in list]` | Delete an appointment by the list's appointment number
+`deletep \index [patient number in list]` | Delete a patient by the list's patient number
+`edita \index [appointmentNumber] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
+`editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
+`help` | Give you a manual on a list of valid commands and their usage
+`exit` | Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
 ## 6. FAQ
 **Q**: Would my details be captured if I randomize the input order of the keywords?
