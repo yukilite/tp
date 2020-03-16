@@ -82,7 +82,7 @@ public class Ui {
     }
 
     public static void showFailedToCreateDirectory() {
-        System.out.println("Failed to create directory");
+        System.out.println("No existing 'save' directory found. Directory has been created.");
     }
 
 
