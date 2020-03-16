@@ -90,14 +90,19 @@ Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 - `addp \name Justin \address Pasir Ris \age 20 \phone 98889888`
 
 ##### Expected outcome:
+![](images/addp%20success.PNG)
 
 #### Example of usage: 
+- `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris`
 
 ##### Expected outcome:
+![](images/addp%20success2.PNG)
 
-#### Example of wrong usage  
+#### Example of wrong usage 
+- `addp` 
 
 ##### Expected error outcome:
+![](images/addp%20fail.PNG)
 
 #### 4.1.2 List all existing Patients
 
@@ -108,6 +113,7 @@ Format: `listp`
 `listp`
 
 ##### Expected outcome 
+![](images/listp.PNG)
 
 #### 4.1.3 Delete an existing Patient
 
@@ -118,13 +124,16 @@ The program allows you to delete an existing Patient record by its index in the 
 Format: `deletep \index [patient number in list]`
 
 #### Example of usage: 
-`deletep \index 5`
+`deletep \index 2`
 
 ##### Expected outcome:
+![](images/delete_success.PNG)
 
 #### Example of wrong usage:
+- `deletep \index a`
 
 ##### Expected error outcome:
+![](images/delete_fail.PNG)
 
 #### 4.1.4 Edit an existing Patient
 
@@ -141,19 +150,30 @@ Illustration will be later shown in the command's format and usage.
 Format: `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]`
 
 #### Example of usage: 
-`editp \index 5  \name Justin \age 23 \address Clementi \phone 83487846`
+`editp \index 1  \name Justin \age 23 \address Clementi \phone 83487846`
 
 ##### Expected outcome:
+![](images/editp_success.PNG)
+###### Before:
+![](images/editp_before.PNG)
+###### After:
+![](images/editp_after.PNG)
 
 #### Example of usage: 
-`editp \age 23 \address Clementi \phone 83487846 \name Justin \index 5`
+`editp \age 99 \address Bedok \phone 89993999 \name Justin \index 1`
 
 ##### Expected outcome:
+![](images/editp_success2.PNG)
+###### Before:
+![](images/editp_before2.PNG)
+###### After:
+![](images/editp_after2.PNG)
 
-#### Example of usage: 
-`editp \index 10 \address Paris Ris \phone 93489678`
+#### Example of wrong usage: 
+`editp \index a \address Paris Ris \phone 93489678`
 
 ##### Expected outcome:
+![](images/editp_fail.PNG)
 
 
 ### 4.2 `Appointment` Commands
