@@ -308,7 +308,6 @@ Format: `exit`
 
 * `{[Name]: Tommy | [Age]: -1 | [Address]:  | [Contact Number]: 92331234}`
 
-**A**: The age field provided by the user is empty. 
-
+**A**: The age field provided by the user is empty.
 
 

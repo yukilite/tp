@@ -48,6 +48,15 @@ public class DeletePatientCommand extends Command {
     }
 
     /**
+     * Method to check if the right index is returned to the class.
+     *
+     * @return patientIndex index of patient that needs to be updated
+     */
+    public int getPatientIndex() {
+        return patientIndex;
+    }
+
+    /**
      * Method to delete the patient from the list by getting that patient's index then
      * remove it and auto-save the changes.
      *
@@ -64,12 +73,19 @@ public class DeletePatientCommand extends Command {
             // Get the patient's record based on its index from the list
             Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
+            // Get the original appointment's list size
+            int originalSize = PatientList.getTotalPatients();
+
             // Remove the patient's information from the patient's list
             PatientList.getPatientList().remove(patient);
 
-            //Auto-save the changes
+            // Check with assertions that the size has been decremented
+            assert PatientList.getTotalPatients() == originalSize - 1;
+
+            // Auto-save the changes
             storage.savePatientList();
 
+            // Show deleted patient successfully message
             Ui.showDeletePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
