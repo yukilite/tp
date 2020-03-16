@@ -77,22 +77,26 @@ A valid input would be `adda \date Mar 17 \time 2pm`.
 #### 4.1.1 Add a new Patient record
 
 The program allows you to add a new Patient record to the current list of Patient records. The command contains:
-1. the `addp` keyword
-2. `\name` followed by the name of the patient 
-3. `\age` followed by the age of the patient
-4. `\address` followed by the address of the patient
-5. `\phone` followed by the contact number of the patient
+* `addp` keyword
+* `\name` followed by the name of the patient 
+* `\age` followed by the age of the patient
+* `\address` followed by the address of the patient
+* `\phone` followed by the contact number of the patient
 (All these fields will be developed so that later on they have certain limit and validation of the text or number inputted)
 
 Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
-Status |   Usage    |   Outcome 
+OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
 :heavy_check_mark: | `addp \name Justin \address Pasir Ris \age 20 \phone 98889888` | ![](images/addp%20success.PNG)
 :heavy_check_mark: | `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris` | ![](images/addp%20success2.PNG)
 :x: | `addp` | ![](images/addp%20fail.PNG)
 
-
+>
+>**Notice:**
+> In the correct usage examples, the input order of the keywords can be randomized.  
+>
+>
 #### 4.1.2 List all existing Patients
 
 The command simply contains the 'listp' keyword.
@@ -112,17 +116,11 @@ The program allows you to delete an existing Patient record by its index in the 
 
 Format: `deletep \index [patient number in list]`
 
-#### Example of usage: 
-`deletep \index 2`
+OK? |   Usage    |   Outcome 
+------------- | ------------- | ---------------
+:heavy_check_mark: | `deletep \index 2` | ![](images/delete_success.PNG)
+:x: | `deletep \index a` | ![](images/delete_fail.PNG)
 
-##### Expected outcome:
-![](images/delete_success.PNG)
-
-#### Example of wrong usage:
-- `deletep \index a`
-
-##### Expected error outcome:
-![](images/delete_fail.PNG)
 
 #### 4.1.4 Edit an existing Patient
 
@@ -199,22 +197,20 @@ Format: `lista`
 #### 4.2.3 Delete an existing Appointment
 
 The program allows you to delete an existing Appointment record by its index in the list. The command contains:
-1. the `deletea` keyword
-2. `\index` followed by the index number of the Appointment to be deleted 
+* `deletea` keyword
+* `\index` followed by the index number of the Appointment to be deleted 
 
 Format: `deletea \index [appointment number in list]`
 
-#### Example of usage: 
-- `deletea \index 3`
+OK? |   Usage    |   Outcome 
+------------- | ------------- | ---------------
+:heavy_check_mark: | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
+:x: | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
 
-##### Expected outcome:
-<img src ="images/delete_eg1.PNG" width = "400">
-
-#### Example of wrong usage : 
-- `deletea \index 999` (index is not in valid range)
-
-##### Expected error outcome:
-<img src ="images/delete_wrongeg1.PNG" width = "400">
+>
+>**Notice:**
+>In the wrong usage example, the index is not in valid range.
+>
 
 #### 4.2.4 Edit an existing Appointment
 
@@ -286,7 +282,7 @@ Format: `exit`
 * `exit` Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
 ## 6. FAQ
-**Q**: Would my details be captured if I randomnize the input order of the keywords?
+**Q**: Would my details be captured if I randomize the input order of the keywords?
 
 * `addp \phone 12345678 \address NUS \age 22 \name John Doe`
 * `addp \name John Doe \address NUS \ age 22 \ phone 12345678`
