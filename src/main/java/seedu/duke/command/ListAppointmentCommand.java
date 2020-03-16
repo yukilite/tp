@@ -6,6 +6,7 @@ import seedu.duke.ui.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  * Empty constructor. Only used to create the ListAppointmentCommand object.
  */
