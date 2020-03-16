@@ -281,6 +281,7 @@ Format: `help`
 `help`
 
 ##### Expected outcome 
+![](images/help.PNG)
 
 ### 4.4 Exit HAMS program
 
