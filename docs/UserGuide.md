@@ -86,23 +86,12 @@ The program allows you to add a new Patient record to the current list of Patien
 
 Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
-#### Example of usage: 
-- `addp \name Justin \address Pasir Ris \age 20 \phone 98889888`
+Status |   Usage    |   Outcome 
+------------- | ------------- | ---------------
+:heavy_check_mark: | `addp \name Justin \address Pasir Ris \age 20 \phone 98889888` | ![](images/addp%20success.PNG)
+:heavy_check_mark: | `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris` | ![](images/addp%20success2.PNG)
+:x: | `addp` | ![](images/addp%20fail.PNG)
 
-##### Expected outcome:
-![](images/addp%20success.PNG)
-
-#### Example of usage: 
-- `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris`
-
-##### Expected outcome:
-![](images/addp%20success2.PNG)
-
-#### Example of wrong usage 
-- `addp` 
-
-##### Expected error outcome:
-![](images/addp%20fail.PNG)
 
 #### 4.1.2 List all existing Patients
 
