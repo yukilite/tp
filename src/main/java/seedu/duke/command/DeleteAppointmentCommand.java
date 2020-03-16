@@ -48,6 +48,16 @@ public class DeleteAppointmentCommand extends Command {
     }
 
     /**
+     * Method to check if the right index is returned to the class.
+     *
+     * @return index index in the list that information needs to be updated
+     */
+    public int getIndex() {
+        return index;
+    }
+
+
+    /**
      * Method to delete the appointment from the list by getting that appointment's index then
      * remove it and auto-save the changes.
      *

@@ -34,12 +34,6 @@ class EditAppointmentCommandTest {
     //Test case 2
     @Test
     void execute_2() throws Exception {
-        AppointmentList appointmentList = new AppointmentList();
-        appointmentList.getAppointmentList().add(new Appointment("14/03/2020", "10am"));
-        appointmentList.getAppointmentList().add(new Appointment("15/03/2020", "11am"));
-        appointmentList.getAppointmentList().add(new Appointment("16/03/2020", "12am"));
-        appointmentList.getAppointmentList().add(new Appointment("17/03/2020", "1pm"));
-        appointmentList.getAppointmentList().add(new Appointment("18/03/2020", "2pm"));
         Map<String, String> fieldsToChange = new HashMap<>();
         fieldsToChange.put("index", "5");
         fieldsToChange.put("date", "");

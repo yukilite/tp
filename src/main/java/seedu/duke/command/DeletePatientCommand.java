@@ -48,6 +48,15 @@ public class DeletePatientCommand extends Command {
     }
 
     /**
+     * Method to check if the right index is returned to the class.
+     *
+     * @return patientIndex index of patient that needs to be updated
+     */
+    public int getPatientIndex() {
+        return patientIndex;
+    }
+
+    /**
      * Method to delete the patient from the list by getting that patient's index then
      * remove it and auto-save the changes.
      *
