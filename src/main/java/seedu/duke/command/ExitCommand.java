@@ -38,6 +38,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
-        //TODO Justin ui.showByeMessage();
+        Ui.showByeMessage();
     }
 }

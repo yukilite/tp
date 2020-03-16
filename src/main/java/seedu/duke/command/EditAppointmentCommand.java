@@ -43,25 +43,20 @@ public class EditAppointmentCommand extends Command {
      */
     public EditAppointmentCommand(Map<String, String> fieldsToChange) {
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-            try {
-                this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-                if (index > PatientList.getTotalPatients() || index <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please input an integer for index");
-                //TODO Justin include this ui.showNumberError();
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Index out of bound, please check the correct index from the list");
-                //TODO Justin include this ui.showIndexError();
+            this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
+            if (index > PatientList.getTotalPatients() || index <= 0) {
+                throw new IndexOutOfBoundsException();
             }
-            this.date = fieldsToChange.get(APPOINTMENT_DATE);
-            this.time = fieldsToChange.get(APPOINTMENT_TIME);
-        } catch (NoFieldCommandException e) {
-            System.out.println("Please do not let the information be empty");
-            //TODO Justin include this ui.showEmptyFieldError();
+
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
+
+        this.date = fieldsToChange.get(APPOINTMENT_DATE);
+        this.time = fieldsToChange.get(APPOINTMENT_TIME);
     }
 
     /**
@@ -91,7 +86,7 @@ public class EditAppointmentCommand extends Command {
             //Auto-save the changes
             storage.saveAppointmentsList();
 
-            //TODO Justin ui.showUpdateAppointmentSuccess(); To be implemented later
+            Ui.showUpdateAppointmentSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
         }

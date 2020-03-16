@@ -72,7 +72,7 @@ public class DukeExceptions {
      * @param map a HashMap that contains all the fields to be included.
      * @throws NoFieldCommandException Throws a NoFieldCommandException when none of the fields are included
      */
-    public static void noFieldCommand(Map<String, String> map) throws NoFieldCommandException {
+    public static void noFieldCommand(Map<String, String> map, String command) throws NoFieldCommandException {
         int count = 0;
 
         for (Map.Entry mapElement : map.entrySet()) {
@@ -82,7 +82,7 @@ public class DukeExceptions {
         }
 
         if (count == map.size()) {
-            throw new NoFieldCommandException();
+            throw new NoFieldCommandException(command);
         }
     }
 }

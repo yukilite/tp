@@ -9,6 +9,6 @@ public class InvalidIndexException extends Exception {
 
     @Override
     public String getLocalizedMessage() {
-        return "Please sure that the index for " + this.command + " is valid";
+        return "Please ensure that the index for " + this.command + " is valid";
     }
 }
