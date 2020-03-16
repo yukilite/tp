@@ -8,6 +8,7 @@ public class AppointmentStub {
         this.date = date;
         this.time = time;
     }
+
     public String getDate() {
         return date;
     }
@@ -18,6 +19,6 @@ public class AppointmentStub {
 
 
     public String toString() {
-        return "{" + "[Date]:" + " " + getDate() + " "+ "|" + "[Time]:" + " " + getTime() + "}";
+        return "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + "}";
     }
 }

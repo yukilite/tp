@@ -2,13 +2,12 @@ package seedu.duke.command;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AppointmentListStub {
 
     private static List<AppointmentStub> appointmentList = new ArrayList<>();
 
-    public static  List<AppointmentStub> getAppointmentList() {
+    public static List<AppointmentStub> getAppointmentList() {
         return appointmentList;
     }
 
@@ -17,6 +16,11 @@ public class AppointmentListStub {
         return appointmentList.size();
     }
 
+    /**
+     * This method is a stub.
+     *
+     * @see seedu.duke.storage.AppointmentList
+     */
     public static void createList(int choice) {
         if (choice == 1) {
             AppointmentStub newAppointment1 = new AppointmentStub("s;dlskd;l", "Li");

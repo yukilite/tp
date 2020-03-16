@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Edit the information of the patient existed in the patient's list
+ * Edit the information of the patient existed in the patient's list.
  *
  * @author Nguyen Thanh Duc
  * @version 0.1
  * @since 2020-03-08
  */
-public class EditPatientCommand extends Command{
+public class EditPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "editp";
     public static final String EXAMPLE = "editp \\index 5  \\address Clementi \\phone 83487846";
@@ -40,7 +40,7 @@ public class EditPatientCommand extends Command{
      * Constructor which pass a hash map with keys as fields to change and values
      * as content in that fields that needs to be changed. If there is no need to
      * change in a field in the patient's record, it will be automatically set as
-     * null
+     * null.
      *
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
@@ -50,7 +50,7 @@ public class EditPatientCommand extends Command{
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {
                 this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if(patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (NumberFormatException e) {
@@ -83,9 +83,9 @@ public class EditPatientCommand extends Command{
 
     /**
      * Method to update the patient by getting the patient's record based on its index
-     * and update it based on the queries by users, and auto-save it to the data file
+     * and update it based on the queries by users, and auto-save it to the data file.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException

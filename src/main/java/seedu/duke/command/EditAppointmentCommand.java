@@ -12,13 +12,13 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Edit the information of the appointment existed in the appointment's list
+ * Edit the information of the appointment existed in the appointment's list.
  *
  * @author Nguyen Thanh Duc
  * @version 1.0
  * @since 2020-03-14
  */
-public class EditAppointmentCommand extends Command{
+public class EditAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "edita";
     public static final String EXAMPLE = "edita \\index 5  \\date 01/03/2020 \\time 10am";
     public static final String APPOINTMENT_INDEX = "index";
@@ -46,7 +46,7 @@ public class EditAppointmentCommand extends Command{
             DukeExceptions.noFieldCommand(fieldsToChange);
             try {
                 this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
-                if(index > PatientList.getTotalPatients() || index <= 0) {
+                if (index > PatientList.getTotalPatients() || index <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (NumberFormatException e) {
@@ -66,9 +66,9 @@ public class EditAppointmentCommand extends Command{
 
     /**
      * Method to update the appointment by getting the appointment's record based on its index
-     * and update it based on the queries by users, and auto-save it to the data file
+     * and update it based on the queries by users, and auto-save it to the data file.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException

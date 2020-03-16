@@ -17,27 +17,8 @@ public class Appointment {
         return date;
     }
 
-    public String getTime() {
-        return time;
-    }
-
     /**
-     * Overrides the default toString command so that the patient's appointment
-     * details can be printed in a specific string format.
-     * @return newToString The formatted string
-     */
-    @Override
-    public String toString() {
-        String newToString = "{" + "[Date]:" + " " + getDate() + " "+ "|" + "[Time]:" + " " + getTime() + "}";
-        return newToString;
-    }
-
-    /**
-     * This part is implemented for the EditPatientCommand class by Duc
-     */
-
-    /**
-     * Update the name if it is not null
+     * Update the name if it is not null.
      *
      * @param date date that needs to be updated
      */
@@ -47,8 +28,16 @@ public class Appointment {
         }
     }
 
+    public String getTime() {
+        return time;
+    }
+
     /**
-     * Update the age if it is a positive integer
+     * This part is implemented for the EditPatientCommand class by Duc
+     */
+
+    /**
+     * Update the age if it is a positive integer.
      *
      * @param time time that needs to be updated
      */
@@ -59,7 +48,19 @@ public class Appointment {
     }
 
     /**
-     * Method to update all the patient's information
+     * Overrides the default toString command so that the patient's appointment.
+     * details can be printed in a specific string format.
+     *
+     * @return newToString The formatted string
+     */
+    @Override
+    public String toString() {
+        String newToString = "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + "}";
+        return newToString;
+    }
+
+    /**
+     * Method to update all the patient's information.
      *
      * @param date date that needs to be updated
      * @param time time that needs to be updated

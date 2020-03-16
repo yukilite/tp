@@ -3,13 +3,13 @@ package seedu.duke.storage;
 import org.junit.jupiter.api.Test;
 import seedu.duke.record.Patient;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PatientListTest {
     private PatientList testPatientList = new PatientList();
-    private Patient testPatient1 = new Patient("alice", 11, "bukit timah", "61111111" );
-    private Patient testPatient2 = new Patient("bob", 22, "novena", "822222222" );
-    private Patient testPatient3 = new Patient("chong", 33, "pasir ris", "93333333" );
+    private Patient testPatient1 = new Patient("alice", 11, "bukit timah", "61111111");
+    private Patient testPatient2 = new Patient("bob", 22, "novena", "822222222");
+    private Patient testPatient3 = new Patient("chong", 33, "pasir ris", "93333333");
 
     @Test
     void patientListTest_Add() {

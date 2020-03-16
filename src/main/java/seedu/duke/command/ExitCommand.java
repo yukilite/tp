@@ -6,7 +6,7 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 /**
- * Terminate the program when the user's input is "exit
+ * Terminate the program when the user's input is "exit".
  *
  * @author Nguyen Thanh Duc
  * @version 1.0
@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     /**
-     * Set the termination of the program to be true
+     * Set the termination of the program to be true.
      *
      * @return true
      */
@@ -29,9 +29,9 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Method to print the bye message for users
+     * Method to print the bye message for users.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException

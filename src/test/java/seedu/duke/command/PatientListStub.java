@@ -1,29 +1,45 @@
 package seedu.duke.command;
 
-import seedu.duke.record.Patient;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Stub class for patientlist class
+ * Stub class for PatientList class.
  */
 public class PatientListStub {
     private static List<PatientStub> patientList = new ArrayList<>();
 
+    /**
+     * Stub constructor.
+     *
+     * @param choice Stub choice
+     */
     public PatientListStub(int choice) {
-
     }
 
+    /**
+     * Stub method to return patient list.
+     *
+     * @return a patient list
+     */
     public static List<PatientStub> getPatientList() {
         return patientList;
     }
 
+    /**
+     * Stub method to get patient list size.
+     *
+     * @return size of patient list
+     */
     public static int getTotalPatients() {
         return patientList.size();
     }
 
+    /**
+     * Stub method to create and initialize list.
+     *
+     * @param choice Stub choice
+     */
     public static void createList(int choice) {
         if (choice == 1) {
             PatientStub newPatient1 = new PatientStub("s;dlskd;l", 23, "Li", "121");
