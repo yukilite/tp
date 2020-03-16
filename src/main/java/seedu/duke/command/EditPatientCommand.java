@@ -53,31 +53,34 @@ public class EditPatientCommand extends Command {
                 if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
                     throw new IndexOutOfBoundsException();
                 }
+
             } catch (NumberFormatException e) {
-                System.out.println("Please input an integer for index");
-                //TODO Justin include this ui.showNumberError();
+                Ui.showNumberError();
+
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Index out of bound, please check the correct index from the list");
-                //TODO Justin include this ui.showIndexError();
+                Ui.showIndexError();
             }
+
             this.patientName = fieldsToChange.get(PATIENT_NAME);
             boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
+
             if (isAgeEqualNull) {
                 this.age = -1;
             } else {
                 try {
                     this.age = Integer.parseInt(fieldsToChange.get(AGE));
+
                 } catch (NumberFormatException e) {
-                    /** TODO: Justin please add this error message too **/
-                    System.out.println("Received string for age. Setting age to be -1");
+                    Ui.showSetAgeError();
                     this.age = -1;
                 }
             }
+
             this.address = fieldsToChange.get(ADDRESS);
             this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
+
         } catch (NoFieldCommandException e) {
-            System.out.println("Please do not let the information be empty");
-            //TODO Justin include this ui.showEmptyFieldError();
+            Ui.showNoFieldError();
         }
     }
 
@@ -108,7 +111,7 @@ public class EditPatientCommand extends Command {
             //Auto-save the changes
             storage.savePatientList();
 
-            //TODO Justin ui.showUpdatePatientSuccess(); To be implemented later
+            Ui.showUpdatePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
         }
