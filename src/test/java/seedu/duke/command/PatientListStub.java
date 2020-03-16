@@ -1,10 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.record.Patient;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Stub class for PatientList class.
@@ -14,6 +11,7 @@ public class PatientListStub {
 
     /**
      * Stub constructor.
+     *
      * @param choice Stub choice
      */
     public PatientListStub(int choice) {

@@ -49,8 +49,8 @@ public class DukeExceptions {
      * Checks the validity of the index. If it is not valid, throws one of the two exceptions.
      *
      * @param indexAsString The index as a string
-     * @param command The command that called this method
-     * @throws InvalidIndexException Throws an InvalidIndexException when the index supplied is <= 0
+     * @param command       The command that called this method
+     * @throws InvalidIndexException    Throws an InvalidIndexException when the index supplied is <= 0
      * @throws IndexNotIntegerException Throws an IndexNotIntegerException when the index supplied is not an integer
      */
     public static void checkIndexValidity(String indexAsString, String command) throws InvalidIndexException,
@@ -75,7 +75,7 @@ public class DukeExceptions {
     public static void noFieldCommand(Map<String, String> map) throws NoFieldCommandException {
         int count = 0;
 
-        for (Map.Entry mapElement: map.entrySet()) {
+        for (Map.Entry mapElement : map.entrySet()) {
             if (mapElement.getValue() == "") {
                 count++;
             }

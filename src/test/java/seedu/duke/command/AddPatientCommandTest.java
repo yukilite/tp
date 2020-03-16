@@ -2,14 +2,8 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.record.Patient;
-import seedu.duke.storage.PatientList;
-import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

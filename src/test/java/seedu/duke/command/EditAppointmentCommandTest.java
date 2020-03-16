@@ -1,22 +1,5 @@
 package seedu.duke.command;
 
-import org.junit.jupiter.api.Test;
-import seedu.duke.record.Appointment;
-import seedu.duke.storage.AppointmentList;
-import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-import static seedu.duke.command.EditAppointmentCommand.APPOINTMENT_DATE;
-import static seedu.duke.command.EditAppointmentCommand.APPOINTMENT_INDEX;
-import static seedu.duke.command.EditAppointmentCommand.APPOINTMENT_TIME;
-
-
 class EditAppointmentCommandTest {
 
     /*

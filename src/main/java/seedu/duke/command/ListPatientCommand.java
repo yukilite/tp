@@ -23,16 +23,16 @@ public class ListPatientCommand extends Command {
 
     /**
      * For this execution, the patient list will be displayed.
-     * @param ui the ui object which can be used to display text.
-     * @param storage the storage object for auto saving function.
+     *
+     * @param ui      the ui object which can be used to display text
+     * @param storage the storage object for auto saving function
      */
     @Override
     public void execute(Ui ui, Storage storage) {
 
-
         /** Show the enitre list. This is the only method in Ui that is static for some reason **/
         logger.log(Level.INFO, "Getting Ui class to display the list of appointments");
-        Ui.showEntireList();
+        Ui.showEntirePatientList();
 
     }
 }
