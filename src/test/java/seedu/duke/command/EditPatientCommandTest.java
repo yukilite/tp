@@ -1,21 +1,5 @@
 package seedu.duke.command;
 
-import org.junit.jupiter.api.Test;
-import seedu.duke.record.Patient;
-import seedu.duke.storage.PatientList;
-import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.duke.command.EditPatientCommand.PATIENT_INDEX;
-import static seedu.duke.command.EditPatientCommand.PATIENT_NAME;
-import static seedu.duke.command.EditPatientCommand.AGE;
-import static seedu.duke.command.EditPatientCommand.ADDRESS;
-import static seedu.duke.command.EditPatientCommand.CONTACT_NUMBER;
-
 class EditPatientCommandTest {
 
     /*

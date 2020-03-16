@@ -38,6 +38,7 @@ public class AddPatientCommand extends Command {
 
     /**
      * Constructor for the AddPatientCommand.
+     *
      * @param patientInfo the map containing the patient information
      */
     public AddPatientCommand(Map<String, String> patientInfo) {
@@ -66,6 +67,7 @@ public class AddPatientCommand extends Command {
 
     /**
      * For this execution, the patient will be added into the patient list.
+     *
      * @param ui      ui object for displaying information
      * @param storage storage object to do auto saving
      * @see PatientList#getPatientList
@@ -83,6 +85,6 @@ public class AddPatientCommand extends Command {
         storage.savePatientList();
 
         /** Assuming that there is a confimation message indicating the adding of patient is a susccess **/
-        //TODO: justin ui.showPatientAddSuccess();
+        ui.showPatientAddSuccess();
     }
 }

@@ -12,9 +12,9 @@ public class PatientStub {
     /**
      * Default constructor for stub class.
      *
-     * @param name name of patient
-     * @param age age of patient
-     * @param address address of patient
+     * @param name          name of patient
+     * @param age           age of patient
+     * @param address       address of patient
      * @param contactNumber contact number of patient
      */
     public PatientStub(String name, int age, String address, String contactNumber) {

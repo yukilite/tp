@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -49,7 +48,7 @@ public class UpdateAppointmentCommand extends Command {
      * Method to update the appointment by getting the appointment's record based on its index
      * and update it based on the queries by users, and auto-save it to the data file.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException
@@ -63,10 +62,10 @@ public class UpdateAppointmentCommand extends Command {
         Appointment appointment = AppointmentList.getAppointmentRecord(index - 1);
 
         // Updating the information
-        appointment.setAppointmentInfo(date,time);
+        appointment.setAppointmentInfo(date, time);
 
         // Updating it back to its corresponding index in the appointment's list
-        AppointmentList.getAppointmentList().set(index - 1,appointment);
+        AppointmentList.getAppointmentList().set(index - 1, appointment);
 
         //Auto-save the changes
         storage.saveAppointmentsList();

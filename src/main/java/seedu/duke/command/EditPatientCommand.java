@@ -85,7 +85,7 @@ public class EditPatientCommand extends Command {
      * Method to update the patient by getting the patient's record based on its index
      * and update it based on the queries by users, and auto-save it to the data file.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException when there is error in the index's input
      * @see IOException

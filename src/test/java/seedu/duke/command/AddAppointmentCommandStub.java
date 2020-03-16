@@ -17,6 +17,7 @@ public class AddAppointmentCommandStub {
 
     /**
      * This method is a stub.
+     *
      * @see AddAppointmentCommand
      */
     public static Map<String, String> generateMap(int choice) {
@@ -33,6 +34,7 @@ public class AddAppointmentCommandStub {
 
     /**
      * This method is a stub.
+     *
      * @see AddAppointmentCommand
      */
     public void execute(int ui, int storage) {
