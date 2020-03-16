@@ -93,70 +93,33 @@ class AddPatientCommandTest {
         }
     }
 
-    /*
     @Test
-    void testAddNormalString() throws IOException {
-        Map<String, String> tempMap = new HashMap<>();
-        tempMap.put("name", "asd");
-        tempMap.put("age", "23");
-        tempMap.put("address", "asdsds");
-        tempMap.put("phone", "asdsadsad");
-        Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121");
-        Patient newPatient2 = new Patient(" ", 15, " ", "15454455");
-        Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989");
-        Patient newPatient4 = new Patient("aeiwae", 13, "to", " ");
-        Patient newPatient5 = new Patient("LSDs", -1, "Lis", "12");
-        List<Patient> savedPatientList = new ArrayList<>();
-        savedPatientList.add(newPatient1);
-        savedPatientList.add(newPatient2);
-        savedPatientList.add(newPatient3);
-        savedPatientList.add(newPatient4);
-        savedPatientList.add(newPatient5);
-        PatientList patientList = new PatientList(savedPatientList);
-        Ui ui = null;
-        Storage storage = new Storage();
-        AddPatientCommand addPatientCommand = new AddPatientCommand(tempMap);
-        addPatientCommand.execute(ui, storage);
-        Patient temppatient = patientList.getPatientList().get(patientList.getPatientList().size() - 1);
-        Patient newPatient = new Patient("asd", 23, "asdsds", "asdsadsad");
-        assertEquals(temppatient.getName(), newPatient.getName());
-        assertEquals(temppatient.getAge(), newPatient.getAge());
-        assertEquals(temppatient.getAddress(), newPatient.getAddress());
-        assertEquals(temppatient.getContactNumber(), newPatient.getContactNumber());
+    void testAddNormalString() {
+        int ui = 1;
+        int storage = 1;
+        Map<String,String> tempMap = AddPatientCommandStub.generateMap(1);
+        AddPatientCommandStub addCommand = new AddPatientCommandStub(tempMap);
+        addCommand.execute(ui,storage);
+        PatientStub temppatient = PatientListStub.getPatientList().get(PatientListStub.getTotalPatients() - 1);
+        PatientStub newPatient = new PatientStub("asd", 23,"asdsds","asdsadsad");
+        assertEquals(temppatient.getName(),newPatient.getName());
+        assertEquals(temppatient.getAge(),newPatient.getAge());
+        assertEquals(temppatient.getAddress(),newPatient.getAddress());
+        assertEquals(temppatient.getContactNumber(),newPatient.getContactNumber());
     }
-     */
 
-    /*
     @Test
-    void testAddEmptyString() throws IOException {
-
-        Map<String, String> tempMap = new HashMap<>();
-        tempMap.put("name", "");
-        tempMap.put("age", "");
-        tempMap.put("address", "");
-        tempMap.put("phone", "");
-        Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121");
-        Patient newPatient2 = new Patient(" ", 15, " ", "15454455");
-        Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989");
-        Patient newPatient4 = new Patient("aeiwae", 13, "to", " ");
-        Patient newPatient5 = new Patient("LSDs", -1, "Lis", "12");
-        List<Patient> savedPatientList = new ArrayList<>();
-        savedPatientList.add(newPatient1);
-        savedPatientList.add(newPatient2);
-        savedPatientList.add(newPatient3);
-        savedPatientList.add(newPatient4);
-        savedPatientList.add(newPatient5);
-        PatientList patientList = new PatientList(savedPatientList);
-        Ui ui = null;
-        Storage storage = new Storage();
-        AddPatientCommand addPatientCommand = new AddPatientCommand(tempMap);
-        addPatientCommand.execute(ui, storage);
-        Patient temppatient = patientList.getPatientList().get(patientList.getPatientList().size() - 1);
-        Patient newPatient = new Patient("", -1, "", "");
-        assertEquals(temppatient.getName(), newPatient.getName());
-        assertEquals(temppatient.getAge(), newPatient.getAge());
-        assertEquals(temppatient.getAddress(), newPatient.getAddress());
-        assertEquals(temppatient.getContactNumber(), newPatient.getContactNumber());
+    void testAddEmptyString()  {
+        int ui = 1;
+        int storage = 1;
+        Map<String,String> tempMap = AddPatientCommandStub.generateMap(2);
+        AddPatientCommandStub addCommand = new AddPatientCommandStub(tempMap);
+        addCommand.execute(ui,storage);
+        PatientStub temppatient = PatientListStub.getPatientList().get(PatientListStub.getTotalPatients() - 1);
+        PatientStub newPatient = new PatientStub("", -1,"","");
+        assertEquals(temppatient.getName(),newPatient.getName());
+        assertEquals(temppatient.getAge(),newPatient.getAge());
+        assertEquals(temppatient.getAddress(),newPatient.getAddress());
+        assertEquals(temppatient.getContactNumber(),newPatient.getContactNumber());
     }
-     */
 }

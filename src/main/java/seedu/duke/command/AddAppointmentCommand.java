@@ -7,6 +7,8 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class deals with the command relating to adding of appointments into the appointment list.
@@ -29,6 +31,7 @@ public class AddAppointmentCommand extends Command {
     private static final String EXAMPLE = "adda \\date 20-12-2020 \\time 2300";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add an appointment to the appointment's list.\n"
             + "Example: " + EXAMPLE;
+    private static Logger logger = Logger.getLogger("LoggerAddAppointmentCommandClass");
     private static final String DATE = "date";
     private static final String TIME = "time";
     private String date;
@@ -40,6 +43,7 @@ public class AddAppointmentCommand extends Command {
      * @param appointmentInfo the <code>Map</code> that contains the information relating to the appointment.
      */
     public AddAppointmentCommand(Map<String, String> appointmentInfo) {
+        logger.log(Level.INFO, "Creating AddAppointmentCommand object");
         this.date = appointmentInfo.get(DATE);
         this.time = appointmentInfo.get(TIME);
     }
@@ -65,9 +69,12 @@ public class AddAppointmentCommand extends Command {
         Appointment appointment = new Appointment(this.date, this.time);
 
         /** Hacky method to add appointments into the appointment list. Also make appointment list static thanks**/
+        logger.log(Level.INFO, "Adding the appointment object into the appointment list object from "
+                + "AppointmentListClass");
         AppointmentList.getAppointmentList().add(appointment);
 
         /** For Autosaving. Again use static for appointment list thanks**/
+        logger.log(Level.INFO, "Auto saving appointment list");
         storage.saveAppointmentsList();
 
         /** Assuming that there is a confimation message indicating the adding of appointment is a susccess **/
