@@ -7,6 +7,8 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class deals with the command relating to adding of patient into the patient list.
@@ -30,7 +32,7 @@ public class AddPatientCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a patient to the patient's list.\n"
             + "Example: " + EXAMPLE;
-
+    private static Logger logger = Logger.getLogger("LoggerAddPatientCommandClass");
     private String patientName;
     private int age;
     private String address;
@@ -42,6 +44,7 @@ public class AddPatientCommand extends Command {
      * @param patientInfo the map containing the patient information
      */
     public AddPatientCommand(Map<String, String> patientInfo) {
+        logger.log(Level.INFO, "Creating AddPatientCommand object");
         this.patientName = patientInfo.get(PATIENT_NAME);
         if (patientInfo.get(AGE).isBlank()) {
             this.age = -1;
@@ -51,6 +54,7 @@ public class AddPatientCommand extends Command {
             } catch (NumberFormatException e) {
                 /** If string is given, a message will be shown and the age will be set to -1 **/
                 /** TODO: Justin please add this error message too **/
+                logger.log(Level.INFO, "String received for age. Exception: " + e);
                 System.out.println(e + ": Received string for age. Setting age to be -1");
                 this.age = -1;
             }
@@ -81,7 +85,19 @@ public class AddPatientCommand extends Command {
         /** Hacky method to add patient into patient list **/
         PatientList.getPatientList().add(newPatient);
 
+        /** Checking to see if patient object is created and placed correctly in the patient list **/
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getName().equals(this.patientName) :
+                "Wrong name!";
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getAge() == this.age : "Wrong "
+                + "age!";
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getAddress().equals(this.address) :
+                "Wrong address!";
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getContactNumber()
+                .equals(this.contactNumber) : "Wrong number!";
+
+
         /** Autosaving upon each add **/
+        logger.log(Level.INFO, "Auto saving appointment list");
         storage.savePatientList();
 
         /** Assuming that there is a confimation message indicating the adding of patient is a susccess **/
