@@ -77,6 +77,51 @@ public class EditPatientCommand extends Command {
     }
 
     /**
+     * Method to check if the right index is returned to the class.
+     *
+     * @return patientIndex index of patient that needs to be updated
+     */
+    public int getPatientIndex() {
+        return patientIndex;
+    }
+
+    /**
+     * Method to check if the right patient's name is returned to the class.
+     *
+     * @return patientName name of patient that needs to be updated
+     */
+    public String getPatientName() {
+        return patientName;
+    }
+
+    /**
+     * Method to check if the right age is returned to the class.
+     *
+     * @return age age that needs to be updated
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * Method to check if the right address is returned to the class.
+     *
+     * @return address that needs to be updated
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * Method to check if the right phone number is returned to the class.
+     *
+     * @return contactNumber that needs to be updated
+     */
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    /**
      * Method to update the patient by getting the patient's record based on its index
      * and update it based on the queries by users, and auto-save it to the data file.
      *
@@ -90,8 +135,8 @@ public class EditPatientCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
-        // Get the patient's record based on its index from the list
         try {
+            // Get the patient's record based on its index from the list
             Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
             // Updating the information
@@ -100,9 +145,16 @@ public class EditPatientCommand extends Command {
             // Updating it back to its corresponding index in the patient's list
             PatientList.getPatientList().set(patientIndex - 1, patient);
 
-            //Auto-save the changes
+            // Check with assertions to make sure that the updated fields are correct
+            assert PatientList.getPatientRecord(patientIndex - 1).getName().equals(patientName);
+            assert PatientList.getPatientRecord(patientIndex - 1).getAge() == age;
+            assert PatientList.getPatientRecord(patientIndex - 1).getAddress().equals(patientName);
+            assert PatientList.getPatientRecord(patientIndex - 1).getContactNumber().equals(patientName);
+
+            // Auto-save the changes
             storage.savePatientList();
 
+            // Show updated successfully patient's list message
             Ui.showUpdatePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;

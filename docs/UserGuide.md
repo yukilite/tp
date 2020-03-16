@@ -192,14 +192,7 @@ Format: `adda \date [date] \time [time]`
 - `adda \date 14-03-2020 \time 10am`
 
 ##### Expected outcome:
-`//Insert UI here`
-
-#### Example of wrong usage (missing description): 
-`//Insert UI here`
-
-##### Expected error outcome:
-`//Insert UI here`
-
+<img src ="images/adda_eg1.PNG" width = "400">
 
 #### 4.2.2 List all existing Appointments
 
@@ -211,10 +204,8 @@ Format: `lista`
 `lista`
 
 ##### Expected outcome:
+<img src ="images/lista_eg1.PNG" width = "400">
 
-#### Example of wrong usage : 
-
-##### Expected error outcome:
 
 #### 4.2.3 Delete an existing Appointment
 
@@ -228,10 +219,13 @@ Format: `deletea \index [appointment number in list]`
 - `deletea \index 3`
 
 ##### Expected outcome:
+<img src ="images/delete_eg1.PNG" width = "400">
 
 #### Example of wrong usage : 
+- `deletea \index 999` (index is not in valid range)
 
 ##### Expected error outcome:
+<img src ="images/delete_wrongeg1.PNG" width = "400">
 
 #### 4.2.4 Edit an existing Appointment
 
@@ -245,20 +239,27 @@ Illustration will be later shown in the command's format and usage
 
 Format: `edita \index [appointmentNumber] \date [date] \time [time]`
 
+#### Example List
+<img src ="images/edita_before.PNG" width = "400">
+
 #### Example of usage: 
 `edita \index 3 \date 20-05-2021 \time 11pm`
 
 ##### Expected outcome:
+<img src ="images/edita_eg1.PNG" width = "400">
+
+##### Result:
+<img src ="images/edita_eg1after.PNG" width = "400">
 
 #### Example of usage: 
-`edita \index 3 \time 11pm \date 20-05-2021`
+`edita \index 3 \time 10pm \date 16-03-2020`
 
 ##### Expected outcome:
+<img src ="images/edita_eg2.PNG" width = "400">
 
-#### Example of usage: 
-`edita \index 5 \time 11:30am`
+##### Result:
+<img src ="images/edita_eg2after.PNG" width = "400">
 
-##### Expected outcome:
 
 ### 4.3 View help
 
@@ -280,7 +281,7 @@ Format: `exit`
 `exit`
 
 ##### Expected outcome: 
-
+<img src ="images/exit_eg1.PNG" width = "400">
 
 ## 5. Command Summary
 
@@ -296,10 +297,17 @@ Format: `exit`
 * `exit` Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
 ## 6. FAQ
+**Q**: Would my details be captured if I randomnize the input order of the keywords?
 
-**Q**: Why do I have to learn CS2106? 
+* `addp \phone 12345678 \address NUS \age 22 \name John Doe`
+* `addp \name John Doe \address NUS \ age 22 \ phone 12345678`
 
-**A**: Because you will learn a lot of "C" programming.
+**A**: Yes. The system is keyword-sensitive. Regardless of the order given, it stores the information within each command used respectively. Both examples provided above would result in the same information stored. 
 
+**Q**: Why does my patient list display a "-1" in the age field?
+
+* `{[Name]: Tommy | [Age]: -1 | [Address]:  | [Contact Number]: 92331234}`
+
+**A**: The age field provided by the user is empty.
 
 

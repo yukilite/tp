@@ -15,6 +15,13 @@ import java.util.List;
 public class Ui {
 
     /**
+     * Empty Ui constructor.
+     */
+    public Ui() {
+
+    }
+
+    /**
      * Prints the entire patientList.
      */
     public static void showEntirePatientList() {
