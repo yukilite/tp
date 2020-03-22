@@ -73,28 +73,36 @@ appointment details, allows the admin to delete patients and appointment informa
 different patients and the appointments in HAMS. In addition, the classes also deals with displaying the list of 
 commands and as well as to allowing HAMS to exit.
 
+![](images/Command%20class%20diagram.png)
+
 All of these command classes inherits from the abstract Command class. Likewise, the execute function of each command 
 class is also inherited from the abstract Command class's execute function too. Every command class (other than the 
 ExitCommand and HelpCommand) are actually façade classes that creates the connection from the Main class to the other 
 classes required such as Storage class, PatientList class and the Appointment class to name a few. 
 
+##### 2.2.3.1 AddPatientClass
+
 To add a patient, the AddPatientCommand class is used. For this AddPatientCommand class, it serves as the façade class 
-for the Main, Patient , PatientList and the  Storage class to interact with one another. The AddPatientCommand class 
-object will first be created by the Parser object, where the information regarding the patient to be added will be 
-stored in the AddPatientCommand class object. When the execute command is called, the AddPatientCommand would first 
-make use of the Patient class constructor to create a new Patient object. After which, it would then call the 
-PatientList’s getPatientList() command to get the List patient list object such that the patient object created 
-beforehand can directly be inserted into the patient list. After adding the patient into the patient list object, the 
-Storage’s savePatientList() function will be called next so that the newly update list of patient is saved as offline 
-data.  When this operation is successful, it will call upon the Ui class’ showPatientAddSuccess() function to display 
-the success of adding the Patient object into the patient list.
+for the Main, Patient , PatientList and the  Storage class to interact with one another. 
+
+The AddPatientCommand class object will first be created by the Parser object, where the information regarding the 
+patient to be added will be stored in the AddPatientCommand class object. When the execute command is called, the 
+AddPatientCommand would first make use of the Patient class constructor to create a new Patient object. After which, it
+would then call the PatientList’s getPatientList() command to get the List patient list object such that the patient 
+object created beforehand can directly be inserted into the patient list. After adding the patient into the patient list 
+object, the Storage’s savePatientList() function will be called next so that the newly update list of patient is saved 
+as offline data.  When this operation is successful, it will call upon the Ui class’ showPatientAddSuccess() function 
+to display the success of adding the Patient object into the patient list.
 
 If the supplied patient age is a word or is missing, the age will be set to -1. This value is chosen to indicate that 
 there isn’t a valid age set. Thus, when displaying the age, if -1 is encountered, show age as an empty string instead.
 
+##### 2.2.3.1 AddAppointmentClass
+
 To add an appointment, the AddAppointmentCommand class is used. For this AddAppointmentCommand class, it serves as a 
-façade class for the Main, Appoinment, AppointmentList and the Storage class to interact with one another. Like 
-the AddPatientCommand class, the AddAppointmentCommand object is first created by the Parser object, where the 
+façade class for the Main, Appoinment, AppointmentList and the Storage class to interact with one another. 
+
+Like the AddPatientCommand class, the AddAppointmentCommand object is first created by the Parser object, where the 
 information of the appointment is again stored in the AddAppoinmentCommand object. When the Main calls execute, the 
 AddAppoinmentCommand class would call upon the Appoinment class to make an Appointment Object. After which, the 
 AddAppoinmentCommand object will call upon the AppointmentList object to obtain the list of Appointments (get the List 
@@ -104,13 +112,21 @@ saveAppoinmentList() function to save the updated appointment list. Upon success
 into the appointment list, it will call upon the Ui class’ showAppointmentAddSuccess() function to display the success 
 of adding the appointmet into the appointment list.
 
-To display the list of patient, the ListPatientCommand class is called. This class serves as a façade class of Main and 
-Ui. This class is first created by the Parser class, where it is then returned to the Main class to have its execute 
+##### 2.2.3.1 ListPatientClass
+
+To display the list of patients, the ListPatientCommand class is called. This class serves as a façade class of Main
+and Ui. 
+
+This class is first created by the Parser class, where it is then returned to the Main class to have its execute 
 function be called. When the Main class calls the execute function, ListPatientCommand will call upon the Ui’s 
 showEntirePatientList() function to display the list of patients.
 
-To display the list of appointment, the ListAppointmentCommand class is called. This class serves as a façade 
-class of Main and Ui. This class is first created by the Parser class, where it is then returned to the Main class to 
+##### 2.2.3.1 ListAppointmentClass
+
+To display the list of appointments, the ListAppointmentCommand class is called. This class serves as a façade 
+class of Main and Ui. 
+
+This class is first created by the Parser class, where it is then returned to the Main class to 
 have its execute function be called. When the Main class calls the execute function, ListAppointmentCommand will call 
 upon the Ui’s showEntireAppointmentList() function to display the list of appointments.
 
