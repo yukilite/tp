@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 
 import seedu.duke.exceptions.DescriptionIsEmptyException;
 import seedu.duke.exceptions.IndexNotIntegerException;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.parser.Parser;
@@ -13,6 +14,7 @@ import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class Duke {
 
     /**
      * This constructor initializes the other ui, parser and storage classes to be used in the java.duke.Duke program.
+     *
      * @see Ui
      * @see Parser
      * @see Storage
@@ -43,12 +46,14 @@ public class Duke {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage();
+        ui.printHello();
     }
 
 
     /**
      * This method loads any previous patient particulars and its respective appointment details
      * from storage if any, or creates a new one if its a new entry.
+     *
      * @see PatientList
      * @see Storage
      */
@@ -88,11 +93,12 @@ public class Duke {
                 isExit = c.isExit();
 
             } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexException
-                    | IndexNotIntegerException e) {
+                    | IndexNotIntegerException | NoFieldCommandException e) {
                 ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
                 //todo justin ui print error message
+
             } catch (NoSuchElementException e) {
                 break;
             }

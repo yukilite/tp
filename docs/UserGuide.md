@@ -2,141 +2,204 @@
 
 # Table of content
 <!-- TOC -->
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [Features](#features)
-    - [Add appointment](#add-appointment)
-    - [Add patient](#add-patient)
-    - [List appointment](#list-appointment)
-    - [List patient](#list-patient)
-    - [Delete appointment](#delete-appointment)
-    - [Delete patient](#delete-patient)
-    - [Edit appointment](#edit-appointment)
-    - [Edit patient](#edit-patient)
-    - [Help manual](#help-manual)
-    - [Exit the program](#exit-the-program)
-- [Usage](#usage)
-    - [`adda \date [date] \time [time]` - Adds date and time of an appointment](#adda-date-date-time-time---adds-date-and-time-of-an-appointment)
-    - [`addp \name [name] \age [age] \address [address] \phone [phone]` - Adds name, age, address, and contact number of patient](#addp-name-name-age-age-address-address-phone-phone---adds-name-age-address-and-contact-number-of-patient)
-    - [`lista` - List all the appointments from the appointment's liste](#lista---list-all-the-appointments-from-the-appointments-list)
-    - [`listp` - List all the patients from the patient's list](#listp---list-all-the-patients-from-the-patients-list)
-    - [`deletea \index [appointment number in list]` - Delete an appointment by the list's appointment number](#deletea-index-appointment-number-in-list---delete-an-appointment-by-the-lists-appointment-number)
-    - [`deletep \index [patient number in list]` - Delete a patient by the list's patient number](#deletep-index-patient-number-in-list---delete-a-patient-by-the-lists-patient-number)
-    - [`edita \index [appointmentNumber] \date [date] \time [time]` - Edit date or time of an appointment by the list's appointment number](#edita-index-appointmentnumber-date-date-time-time---edit-date-or-time-of-an-appointment-by-the-lists-appointment-number)
-    - [`editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` - Edit name / age / address / contact number of an appointment by the list's patient number](#editp-index-patientnumber-name-name-age-age-address-address-phone-phone---edit-name--age--address--contact-number-of-an-appointment-by-the-lists-patient-number)
-    - [`help` - Give you a manual on a list of valid commands and their usage](#help---give-you-a-manual-on-a-list-of-valid-commands-and-their-usage)
-    - [`exit` - Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)](#exit---exit-the-program-and-save-the-task-into-an-offline-data-file-in-savesappointmentstxt-or-savespatientstxt)
+
+* [1. Introduction](#1-introduction)
+    + [1.1. Starting HAMS](#11-starting-hams)
+* [2. Features](#2-features)
+* [3. Command Format](#3-command-format)
+* [4. Command Usage](#4-command-usage)
+    + [4.1. Patient Commands](#41-patient-commands)
+        + [4.1.1 Add new patient record](#411-add-a-new-patient-record)
+        + [4.1.2 List all existing patient records](#412-list-all-existing-patients)
+        + [4.1.3 Delete existing patient record](#413-delete-an-existing-patient)
+        + [4.1.4 Edit existing patient record](#414-edit-an-existing-patient)
+    + [4.2. Appointment Commands](#42-appointment-commands)
+        + [4.2.1 Add new appointment record](#421-add-a-new-appointment-record)
+        + [4.2.2 List all existing appointment records](#422-list-all-existing-appointments)
+        + [4.2.3 Delete existing appointment record](#423-delete-an-existing-appointment)
+        + [4.2.4 Edit existing appointment record](#424-edit-an-existing-appointment)
+    + [4.3. Viewing help](#43-view-help)
+    + [4.4. Exiting the program](#44-exit-hams-program)
+* [5. Command Summary](#5-command-summary)  
+* [6. FAQ](#6-faq)  
+
 <!-- /TOC -->
 
-## Introduction
+## 1. Introduction
 
-`//Insert welcome message of program here`
+HAMS is a CLI-based medical facility administration system that assists in the maintenance of various medical records.  
+Its functionality has some resemblance to the Duke ChatBot, a CS2113 individual project.
 
-Our hospital administration system is to aid the management of the administrator of the whole hospital. Regularly,
-records and appointments of patients have to be keep track by the doctors, and our system is to save, load, and write 
-the data that you want to save. Its functionality has some resemblance to the Duke ChatBot, a CS2113 individual project.
-
-When Duke starts, it loads the 2 list of record, an appointment list from `saves\appointments.txt` and a patient list 
-from `saves\patients.txt` if one of them exists. After each of the user's input, the data given is auto saved to the data
-files mentioned above.
- 
-Duke uses UTF-8 unicode characters, which some command prompt might not support. If your command prompt supports 
-UTF-8 natively, to run duke, type this into command prompt
-
-`$ java -jar hms-1.0.jar`
-
-`//Insert image here`
+HAMS is designed for administrative assistants in medical facilities, like hospitals or polyclinics, that *prefer using
+CLI to keep track of various medical records* and *can type fast*.
     
-## Prerequisites
-Duke's system requirements
-1. JDK 11
-2. Able to output unicode characters in command prompt
+### 1.1 Starting HAMS
+1. Ensure you have JDK 11 installed on your computer. You can download the installer for your OS from [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+2. Download the latest .jar file release for HAMS from [GitHub](https://github.com/AY1920S2-CS2113T-T13-3/tp/releases).
+3. Move the .jar to an empty folder.
+4. Open Command Prompt.
+5. In Command Prompt, change your current working directory to the folder containing the .jar using `cd <Path of folder containing .jar>`
+6. Run the .jar using `$ java -jar hams-1.0.jar`
+ 
+&nbsp;
+
+## 2. Features
+
+#### Keep track of different record types
+HAMS provides you with an easy-to-use system that helps manage and keep track of two types of medical records: *Patients* and *Appointments*.
+
+#### View all your tasks
+The `lista` or `listp` command that HAMS provides can display all the Appointment or Patient records within the system in a readable format.
+
+#### Auto-save and store these records
+HAMS has an auto-save feature which stores Patient and Appointments every time you add or modify them. 
+With this feature, your tasks will be saved every time you leave the application and can be easily retrieved when you reopen the application subsequently.
+
+&nbsp;
+
+## 3. Command Format
+
+Words enclosed within angle brackets `[]` are the parameters to be supplied by the user. Other keywords stated are compulsory and they should be included.
+
+For example, in `adda \date [date] \time [time]`, `adda` is the command keyword that adds an Appointment record. 
+
+`\date` and `\time` are compulsory labels to denoting what field the subsequent information belongs to.
+`[date]` is the date of the appointment to be supplied by you. `[time]` represents the time of the appointment to be supplied by you.
+
+A valid input would be `adda \date Mar 17 \time 2pm`.
+
+&nbsp;
+
+## 4. Command Usage
+
+### 4.1 `Patient` Commands
+
+#### 4.1.1 Add a new Patient record
+
+The program allows you to add a new Patient record to the current list of Patient records. 
+
+Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
+
+* `addp` keyword
+* `\name` followed by the name of the patient 
+* `\age` followed by the age of the patient
+* `\address` followed by the address of the patient
+* `\phone` followed by the contact number of the patient
+
+>
+>**Notice:**
+> For versions beyond 1.0, the above fields will have certain limits and validation of text and numbers imposed
+>upon.
+
+Examples of Usage
+
+OK? |   Usage    |   Outcome 
+------------- | ------------- | ---------------
+:heavy_check_mark: | `addp \name Justin \address Pasir Ris \age 20 \phone 98889888` | ![](images/addp%20success.PNG)
+:heavy_check_mark: | `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris` | ![](images/addp%20success2.PNG)
+:x: | `addp` | ![](images/addp%20fail.PNG)
+
+>
+>**Notice:**
+> In the correct usage examples, the input order of the keywords can be randomized.  
+>
+>
+#### 4.1.2 List all existing Patients
+
+The command simply contains the 'listp' keyword.
+
+Format: `listp`
+#### Example of usage: 
+`listp`
+
+##### Expected outcome 
+![](images/listp.PNG)
+
+#### 4.1.3 Delete an existing Patient
+
+The program allows you to delete an existing Patient record by its index in the list. The command contains:
+* `deletep` keyword
+* `\index` followed by the index number of the patient to be deleted 
+
+Format: `deletep \index [patient number in list]`
+
+OK? |   Usage    |   Outcome 
+------------- | ------------- | ---------------
+:heavy_check_mark: | `deletep \index 2` | ![](images/delete_success.PNG)
+:x: | `deletep \index a` | ![](images/delete_fail.PNG)
 
 
-## Features
+#### 4.1.4 Edit an existing Patient
 
-### Add appointment 
-Adds date and time of an appointment
+The program allows you to make changes to an existing Patient record by its index in the list. 
 
-### Add patient
-Adds name, age, address, and contact number of patient
+Format: `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]`
 
-### List appointment
-List all the appointments from the appointment's list
+* `editp` keyword
+* `\index` followed by the index number of the Patient record in the list
+* `\name` followed by the name of the patient
+* `\age` followed by the age of the patient
+* `\address` followed by the address of the patient
+* `\phone` the contact number of the patient
+>
+>**Notice:**
+>Note that users do not need to include any single field that needs to be modified in the command.
+>Illustration will be later shown in the command's format and usage.
+>
+>
 
-### List patient
-List all the patients from the patient's list
+#### Example of usage: 
+`editp \index 1  \name Justin \age 23 \address Clementi \phone 83487846`
 
-### Delete appointment
-Delete an appointment based on its index 
+##### Expected outcome:
+![](images/editp_success.PNG)
+###### Before:
+![](images/editp_before.PNG)
+###### After:
+![](images/editp_after.PNG)
 
-### Delete patient
-Delete a patient based on its index
+#### Example of usage: 
+`editp \age 99 \address Bedok \phone 89993999 \name Justin \index 1`
 
-### Edit appointment
-Edit appointment's information in some fields
+##### Expected outcome:
+![](images/editp_success2.PNG)
+###### Before:
+![](images/editp_before2.PNG)
+###### After:
+![](images/editp_after2.PNG)
 
-### Edit patient
-Edit patient's information in some field
+#### Example of wrong usage: 
+`editp \index a \address Paris Ris \phone 93489678`
 
-### Help manual
-Give you a manual on a list of valid commands and their usage
+##### Expected outcome:
+![](images/editp_fail.PNG)
 
-### Exit the program
-Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
-## Usage
+### 4.2 `Appointment` Commands
 
-### `adda \date [date] \time [time]` - Adds date and time of an appointment
+#### 4.2.1 Add a new Appointment record
 
-The program supports adding an appointment to an appointment's list. The command contains:
-1. the `adda` keyword
-2. the date of the appointment is inputted after `\date`
-3. the time of the appointment is inputted after `\time`
-(Both date and time are currently in string so they will be further developed later)
+The program allows you to add a new Appointment record to the current list of Appointment records. 
 
 Format: `adda \date [date] \time [time]`
+
+* `adda` keyword
+* `\date` followed by the date of the appointment
+* `\time` followed by the time of the appointment
+>
+>**Notice:**
+> For version 1.0, both date and time are stored in string.
+>
 
 #### Example of usage: 
 - `adda \date 14-03-2020 \time 10am`
 
 ##### Expected outcome:
-`//Insert UI here`
+<img src ="images/adda_eg1.PNG" width = "400">
 
-#### Example of wrong usage (missing description): 
-`//Insert UI here`
+#### 4.2.2 List all existing Appointments
 
-##### Expected error outcome:
-`//Insert UI here`
-
-### `addp \name [name] \age [age] \address [address] \phone [phone]` - Adds name, age, address, and contact number of patient
-
-The program supports adding a patient to the patient's list. The command contains:
-1. the `addp` keyword
-2. the name of the patient is inputted after `\name`
-3. the age of the patient is inputted after `\age`
-4. the address of the patient is inputted after `\address`
-5. the contact number of the patient is inputted after `\phone`
-(All these fields will be developed so that later on they have certain limit and validation of the text or number inputted)
-
-Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
-
-#### Example of usage: 
-- `addp \name Justin \address Pasir Ris \age 20 \phone 98889888`
-
-##### Expected outcome:
-
-#### Example of usage: 
-
-##### Expected outcome:
-
-#### Example of wrong usage  
-
-##### Expected error outcome:
-
-### `lista` - List all the appointments from the appointment's list
-
-The command simply contains the 'lista' keyword
+The command simply contains the 'lista' keyword.
 
 Format: `lista`
 
@@ -144,148 +207,120 @@ Format: `lista`
 `lista`
 
 ##### Expected outcome:
+<img src ="images/lista_eg1.PNG" width = "400">
 
-#### Example of wrong usage : 
 
-##### Expected error outcome:
+#### 4.2.3 Delete an existing Appointment
 
-### `listp` - List all the patients from the patient's list
-
-The command simply contains the 'listp' keyword
-
-Format: `listp`
-#### Example of usage: 
-`listp`
-
-##### Expected outcome 
-
-### `deletea \index [appointment number in list]` - Delete an appointment by the list's appointment number
-
-The program supports the deletion of appointments by the appointment's number in the list. The command contains:
-1. the `deletea` keyword
-2. the appointment number of the appointment to be deleted 
+The program allows you to delete an existing Appointment record by its index in the list. 
 
 Format: `deletea \index [appointment number in list]`
 
-#### Example of usage: 
-- `deletea \index 3`
+* `deletea` keyword
+* `\index` followed by the index number of the Appointment to be deleted 
 
-##### Expected outcome:
+Examples of Usage
 
-#### Example of wrong usage : 
+OK? |   Usage    |   Outcome 
+------------- | ------------- | ---------------
+:heavy_check_mark: | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
+:x: | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
 
-##### Expected error outcome:
+>
+>**Notice:**
+>In the wrong usage example, the index is not in valid range.
+>
 
-### `deletep \index [patient number in list]` - Delete a patient by the list's patient number
+#### 4.2.4 Edit an existing Appointment
 
-The program supports the deletion of patients by the patient's number in the list. The command contains:
-1. the `deletep` keyword
-2. the patient number of the patient to be deleted 
-
-Format: `deletep \index [patient number in list]`
-
-#### Example of usage: 
-`deletep \index 5`
-
-##### Expected outcome:
-
-#### Example of wrong usage:
-
-##### Expected error outcome:
-
-### `edita \index [appointmentNumber] \date [date] \time [time]` - Edit date or time of an appointment by the list's appointment number
-
-The program supports the editing of appointments by the appointment's number in the list. The command contains:
-1. the `edita` keyword
-2. appointment's number in the list followed by `\index`
-3. the date of the appointment followed by `\date` 
-4. the time of the appointment followed by `\time`
-Note that users do not need to include any single field that needs to be modified in the command.
-Illustration will be later shown in the command's format and usage
+The program allows you to make changes to an existing Appointment record by its index in the list.
 
 Format: `edita \index [appointmentNumber] \date [date] \time [time]`
+ 
+* `edita` keyword
+* `\index` followed by the index number of the Appointment in the list.
+* `\date` followed by the date of the appointment 
+* `\time` followed by the time of the appointment
+
+>
+>**Notice:**
+> Note that users do not need to include any single field that needs to be modified in the command.
+Illustration will be displayed in the command's format and usage.
+
+
+
+#### Example List
+<img src ="images/edita_before.PNG" width = "400">
 
 #### Example of usage: 
 `edita \index 3 \date 20-05-2021 \time 11pm`
 
 ##### Expected outcome:
+<img src ="images/edita_eg1.PNG" width = "400">
+
+##### Result:
+<img src ="images/edita_eg1after.PNG" width = "400">
 
 #### Example of usage: 
-`edita \index 3 \time 11pm \date 20-05-2021`
+`edita \index 3 \time 10pm \date 16-03-2020`
 
 ##### Expected outcome:
+<img src ="images/edita_eg2.PNG" width = "400">
 
-#### Example of usage: 
-`edita \index 5 \time 11:30am`
+##### Result:
+<img src ="images/edita_eg2after.PNG" width = "400">
 
-##### Expected outcome:
 
-### `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` - Edit name / age / address / contact number of an appointment by the list's patient number
+### 4.3 View help
 
-The program supports the editing of patients by the patient's number in the list. The command contains:
-1. the `editp` keyword
-2. patient's number in the list followed by `\index`
-3. the name of the patient followed by `\name` 
-4. the age of the patient followed by `\age`
-4. the address of the patient followed by `\address`
-4. the contact number of the patient followed by `\phone`
-Note that users do not need to include any single field that needs to be modified in the command.
-Illustration will be later shown in the command's format and usage
-
-Format: `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]`
-
-#### Example of usage: 
-`editp \index 5  \name Justin \age 23 \address Clementi \phone 83487846`
-
-##### Expected outcome:
-
-#### Example of usage: 
-`editp \age 23 \address Clementi \phone 83487846 \name Justin \index 5`
-
-##### Expected outcome:
-
-#### Example of usage: 
-`editp \index 10 \address Paris Ris \phone 93489678`
-
-##### Expected outcome:
-
-### `help` - Give you a manual on a list of valid commands and their usage
-
-The command simply contains the 'help' keyword
+The 'help' keyword provides you with a list of valid commands, their functions and their proper usages.
 
 Format: `help`
+
 #### Example of usage: 
 `help`
 
 ##### Expected outcome 
+![](images/help.PNG)
 
-### `exit` - Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
+### 4.4 Exit HAMS program
 
-The command simply contains the 'exit' keyword
+This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in `/saves/appointments.txt` or `/saves/patients.txt`). These files will be loaded to the program when it is run again subsequently.
 
 Format: `exit`
 #### Example of usage: 
 `exit`
 
 ##### Expected outcome: 
+<img src ="images/exit_eg1.PNG" width = "400">
 
-## FAQ
+## 5. Command Summary
 
-**Q**: Why do I have to learn CS2106? 
+   Command    |   Description 
+   ------------- | ---------------
+`adda \date [date] \time [time]` |  Adds date and time of an appointment
+`addp \name [name] \age [age] \address [address] \phone [phone]` | Adds name, age, address, and contact number of patient
+`lista` | List all the appointments from the appointment's list
+`listp` | List all the patients from the patient's list
+`deletea \index [appointment number in list]` | Delete an appointment by the list's appointment number
+`deletep \index [patient number in list]` | Delete a patient by the list's patient number
+`edita \index [appointmentNumber] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
+`editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
+`help` | Give you a manual on a list of valid commands and their usage
+`exit` | Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
-**A**: Because you will learn a lot of "C" programming.
+## 6. FAQ
+**Q**: Would my details be captured if I randomize the input order of the keywords?
 
-## Command Summary
-* `adda \date [date] \time [time]` Adds date and time of an appointment
-* `addp \name [name] \age [age] \address [address] \phone [phone]` Adds name, age, address, and contact number of patient
-* `lista` List all the appointments from the appointment's list
-* `listp` List all the patients from the patient's list
-* `deletea \index [appointment number in list]` Delete an appointment by the list's appointment number
-* `deletep \index [patient number in list]` Delete a patient by the list's patient number
-* `edita \index [appointmentNumber] \date [date] \time [time]` Edit date or time of an appointment by the list's appointment number
-* `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` Edit date or time of an appointment by the list's appointment number
-* `help` Give you a manual on a list of valid commands and their usage
-* `exit` Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
+* `addp \phone 12345678 \address NUS \age 22 \name John Doe`
+* `addp \name John Doe \address NUS \ age 22 \ phone 12345678`
 
+**A**: Yes. The system is keyword-sensitive. Regardless of the order given, it stores the information within each command used respectively. Both examples provided above would result in the same information stored. 
+
+**Q**: Why does my patient list display a "-1" in the age field?
+
+* `{[Name]: Tommy | [Age]: -1 | [Address]:  | [Contact Number]: 92331234}`
+
+**A**: The age field provided by the user is empty.
 
 

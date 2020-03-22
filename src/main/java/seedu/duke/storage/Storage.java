@@ -3,6 +3,7 @@ package seedu.duke.storage;
 
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
+import seedu.duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,11 +46,10 @@ public class Storage {
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
-                    System.out.println("Failed to create file in new directory");
+                    Ui.showFailedToCreateFile();
                 }
-
             } else {
-                System.out.println("Failed to create directory");
+                Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
         }
@@ -89,11 +89,11 @@ public class Storage {
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
-                    System.out.println("Failed to create file in new directory");
+                    Ui.showFailedToCreateFile();
                 }
 
             } else {
-                System.out.println("Failed to create directory");
+                Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
 

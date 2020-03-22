@@ -64,13 +64,12 @@ public class AddAppointmentCommand extends Command {
     public void execute(Ui ui, Storage storage) throws IOException {
         Appointment appointment = new Appointment(this.date, this.time);
 
-        /** Hacky method to add appointments into the appointment list. Also make appointment list static thanks**/
+        /* Hacky method to add appointments into the appointment list.*/
         AppointmentList.getAppointmentList().add(appointment);
 
-        /** For Autosaving. Again use static for appointment list thanks**/
+        /* For Auto-saving */
         storage.saveAppointmentsList();
 
-        /** Assuming that there is a confimation message indicating the adding of appointment is a susccess **/
         ui.showAppointmentAddSuccess();
     }
 

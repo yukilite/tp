@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -47,38 +45,80 @@ public class EditPatientCommand extends Command {
      */
     public EditPatientCommand(Map<String, String> fieldsToChange) {
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-            try {
-                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please input an integer for index");
-                //TODO Justin include this ui.showNumberError();
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Index out of bound, please check the correct index from the list");
-                //TODO Justin include this ui.showIndexError();
+            this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+            if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                throw new IndexOutOfBoundsException();
             }
-            this.patientName = fieldsToChange.get(PATIENT_NAME);
-            boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
-            if (isAgeEqualNull) {
-                this.age = -1;
-            } else {
-                try {
-                    this.age = Integer.parseInt(fieldsToChange.get(AGE));
-                } catch (NumberFormatException e) {
-                    /** TODO: Justin please add this error message too **/
-                    System.out.println("Received string for age. Setting age to be -1");
-                    this.age = -1;
-                }
-            }
-            this.address = fieldsToChange.get(ADDRESS);
-            this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
-        } catch (NoFieldCommandException e) {
-            System.out.println("Please do not let the information be empty");
-            //TODO Justin include this ui.showEmptyFieldError();
+
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
+
+        this.patientName = fieldsToChange.get(PATIENT_NAME);
+        boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
+
+        if (isAgeEqualNull) {
+            this.age = -1;
+        } else {
+            try {
+                this.age = Integer.parseInt(fieldsToChange.get(AGE));
+
+            } catch (NumberFormatException e) {
+                Ui.showSetAgeError();
+                this.age = -1;
+            }
+        }
+
+        this.address = fieldsToChange.get(ADDRESS);
+        this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
+    }
+
+    /**
+     * Method to check if the right index is returned to the class.
+     *
+     * @return patientIndex index of patient that needs to be updated
+     */
+    public int getPatientIndex() {
+        return patientIndex;
+    }
+
+    /**
+     * Method to check if the right patient's name is returned to the class.
+     *
+     * @return patientName name of patient that needs to be updated
+     */
+    public String getPatientName() {
+        return patientName;
+    }
+
+    /**
+     * Method to check if the right age is returned to the class.
+     *
+     * @return age age that needs to be updated
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * Method to check if the right address is returned to the class.
+     *
+     * @return address that needs to be updated
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * Method to check if the right phone number is returned to the class.
+     *
+     * @return contactNumber that needs to be updated
+     */
+    public String getContactNumber() {
+        return contactNumber;
     }
 
     /**
@@ -95,8 +135,8 @@ public class EditPatientCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
-        // Get the patient's record based on its index from the list
         try {
+            // Get the patient's record based on its index from the list
             Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
             // Updating the information
@@ -105,10 +145,17 @@ public class EditPatientCommand extends Command {
             // Updating it back to its corresponding index in the patient's list
             PatientList.getPatientList().set(patientIndex - 1, patient);
 
-            //Auto-save the changes
+            // Check with assertions to make sure that the updated fields are correct
+            assert PatientList.getPatientRecord(patientIndex - 1).getName().equals(patientName);
+            assert PatientList.getPatientRecord(patientIndex - 1).getAge() == age;
+            assert PatientList.getPatientRecord(patientIndex - 1).getAddress().equals(patientName);
+            assert PatientList.getPatientRecord(patientIndex - 1).getContactNumber().equals(patientName);
+
+            // Auto-save the changes
             storage.savePatientList();
 
-            //TODO Justin ui.showUpdatePatientSuccess(); To be implemented later
+            // Show updated successfully patient's list message
+            Ui.showUpdatePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
         }

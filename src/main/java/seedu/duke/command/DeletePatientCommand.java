@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeExceptions;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -34,25 +32,28 @@ public class DeletePatientCommand extends Command {
      *                       "index" and the value of the index needed to delete
      */
     public DeletePatientCommand(Map<String, String> fieldsToChange) {
+
         try {
-            DukeExceptions.noFieldCommand(fieldsToChange);
-
-            try {
-                this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
-                if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
-                    throw new IndexOutOfBoundsException();
-                }
-
-            } catch (NumberFormatException e) {
-                Ui.showNumberError();
-
-            } catch (IndexOutOfBoundsException e) {
-                Ui.showIndexError();
+            this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
+            if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
+                throw new IndexOutOfBoundsException();
             }
 
-        } catch (NoFieldCommandException e) {
-            Ui.showNoFieldError();
+        } catch (NumberFormatException e) {
+            Ui.showNumberError();
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.showIndexError();
         }
+    }
+
+    /**
+     * Method to check if the right index is returned to the class.
+     *
+     * @return patientIndex index of patient that needs to be updated
+     */
+    public int getPatientIndex() {
+        return patientIndex;
     }
 
     /**
@@ -72,12 +73,19 @@ public class DeletePatientCommand extends Command {
             // Get the patient's record based on its index from the list
             Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
+            // Get the original appointment's list size
+            int originalSize = PatientList.getTotalPatients();
+
             // Remove the patient's information from the patient's list
             PatientList.getPatientList().remove(patient);
 
-            //Auto-save the changes
+            // Check with assertions that the size has been decremented
+            assert PatientList.getTotalPatients() == originalSize - 1;
+
+            // Auto-save the changes
             storage.savePatientList();
 
+            // Show deleted patient successfully message
             Ui.showDeletePatientSuccess();
         } catch (IndexOutOfBoundsException e) {
             return;
