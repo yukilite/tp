@@ -92,7 +92,7 @@ public class Duke {
                 c.execute(ui, storage);
                 isExit = c.isExit();
 
-            } catch (UnknownCommandException | DescriptionIsEmptyException | InvalidIndexException
+            } catch (UnknownCommandException | InvalidIndexException
                     | IndexNotIntegerException | NoFieldCommandException e) {
                 ui.showExceptionError(e.getLocalizedMessage());
 

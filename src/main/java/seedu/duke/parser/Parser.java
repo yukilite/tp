@@ -1,33 +1,25 @@
 package seedu.duke.parser;
 
 import seedu.duke.Duke;
-
-import seedu.duke.command.Command;
-
 import seedu.duke.command.AddAppointmentCommand;
-import seedu.duke.command.DeleteAppointmentCommand;
-import seedu.duke.command.EditAppointmentCommand;
-import seedu.duke.command.ListAppointmentCommand;
-
 import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteAppointmentCommand;
 import seedu.duke.command.DeletePatientCommand;
+import seedu.duke.command.EditAppointmentCommand;
 import seedu.duke.command.EditPatientCommand;
-import seedu.duke.command.ListPatientCommand;
-
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
-
+import seedu.duke.command.ListAppointmentCommand;
+import seedu.duke.command.ListPatientCommand;
 import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
-
-import seedu.duke.exceptions.DescriptionIsEmptyException;
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.NoKeyExistException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.record.Patient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +29,6 @@ public class Parser {
     private static final int LIMIT = 2;
     private static final int VALUE_INDEX = 0;
     private static final int VALUE_STRING_INDEX = 1;
-
 
     private static final String REGEX_BACKSLASH = "\\\\";
     private static final String BLANK_STRING = "";
@@ -96,37 +87,15 @@ public class Parser {
     }
 
     /**
-     * Returns a HashMap that matches the Patient fields to edit to the values to edit in.
-     * The HashMap is guaranteed to contain the keys found in the enum PatientFieldKeys.
-     * The values however will be determined by the user.
+     * This is a helper method to fill the HashMap with the values read from user input.
      *
-     * @param fullCommand the user input that the user provided.
-     * @param fullCommand the user input that the user provided
-     * @return fieldsToChange a HashMap that matches the patient's fieldKey to value.
-     * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap.
-     * @see #findValue(String fullCommand, String key) value returned by this method will be stored at key.
+     * @param fullCommand        the full command read from the user
+     * @param patientFieldsToAdd the HashMap to store the values read from the fullCommand
      */
-    private Map<String, String> getPatientFields(String fullCommand) {
-        Map<String, String> patientFieldsToChange = new HashMap<>();
-
-        for (PatientFieldKeys pf : PatientFieldKeys.values()) {
-            String field = pf.toString();
-            String key = WHITESPACE + REGEX_BACKSLASH + field;
-            String value = findValue(fullCommand, key);
-
-            patientFieldsToChange.put(field, value);
-
-        }
-        return patientFieldsToChange;
-    }
-
-    private Map<String,String> getPatientFieldsAdd(String fullCommand) {
-        Map<String, String> patientFieldsToAdd = new HashMap<>();
-
+    private void fillPatientFields(String fullCommand, Map<String, String> patientFieldsToAdd) {
         for (PatientFieldKeys pf : PatientFieldKeys.values()) {
             String field = pf.toString();
 
-            /* the line below ignores the field "index", since there's no need to access index when adding */
             assert field != null;
             if (field.equals(PatientFieldKeys.INDEX.toString())) {
                 continue;
@@ -134,36 +103,196 @@ public class Parser {
 
             String key = WHITESPACE + REGEX_BACKSLASH + field;
             String value = findValue(fullCommand, key);
+            patientFieldsToAdd.put(field, value);
         }
-        //check if there is at least 1 field inside.
-        return patientFieldsToAdd;
     }
 
-    private Map<String,String> getPatientFieldsEdit(String fullCommand) {
+    /**
+     * Returns a HashMap that take keys from PatientFieldKeys and values from user input.
+     * The HashMap is guaranteed to contain the keys found in the enum PatientFieldKeys.
+     * The values however will be determined by the user.
+     * This method is only used for "addp".
+     * Throws a noFieldCommandException when all fields are blank.
+     *
+     * @param fullCommand the user input that the user provided.
+     * @return fieldsToChange a HashMap that matches the patient's fieldKey to value.
+     * @throws NoFieldCommandException Throws a noFieldCommandException when all fields are blank.
+     * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap.
+     * @see #findValue(String fullCommand, String key) value returned by this method will be stored at key.
+     */
+    private Map<String, String> getPatientFieldsAdd(String fullCommand) throws NoFieldCommandException {
+
         Map<String, String> patientFieldsToAdd = new HashMap<>();
+
+        fillPatientFields(fullCommand, patientFieldsToAdd);
+
+        //check if there is at least 1 field inside.
+        DukeExceptions.checkFieldEmptyAddPatient(patientFieldsToAdd);
+
         return patientFieldsToAdd;
     }
 
     /**
-     * Returns a HashMap that matches the Appointment fields to edit to the values to edit in.
+     * Returns a HashMap that take keys from PatientFieldKeys and values from user input.
+     * The HashMap is guaranteed to contain the keys found in the enum PatientFieldKeys.
+     * The values however will be determined by the user.
+     * This method is only used for "editp".
+     * Throws a InvalidIndexException when the index is <= 0.
+     * Throws a IndexNotIntegerException when index is not an integer.
+     * Throws a NoFieldCommandException when all fields are blank.
+     *
+     * @param fullCommand the user input that the user provided.
+     * @return fieldsToChange a HashMap that matches the patient's fieldKey to value.
+     * @throws InvalidIndexException    when the index is <= 0.
+     * @throws IndexNotIntegerException when index is not an integer.
+     * @throws NoFieldCommandException  when all fields are blank.
+     */
+    private Map<String, String> getPatientFieldsEdit(String fullCommand) throws InvalidIndexException,
+            IndexNotIntegerException, NoFieldCommandException {
+
+        Map<String, String> patientFieldsToEdit = new HashMap<>();
+
+        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString();
+        String indexValue = findValue(fullCommand, index);
+        DukeExceptions.checkIndexValidity(indexValue, "editp"); //TODO remove magic string
+        patientFieldsToEdit.put(PatientFieldKeys.INDEX.toString(), indexValue);
+
+        fillPatientFields(fullCommand, patientFieldsToEdit);
+
+        //check if there is at least 1 field inside.
+        DukeExceptions.checkFieldEmptyEditPatient(patientFieldsToEdit);
+
+        return patientFieldsToEdit;
+    }
+
+    /**
+     * Returns a HashMap that take keys from PatientFieldKeys and values from user input.
+     * The HashMap is guaranteed to contain the keys found in the enum PatientFieldKeys.
+     * The values however will be determined by the user.
+     * This method is only used for "editp".
+     * Throws a InvalidIndexException when the index is <= 0.
+     * Throws a IndexNotIntegerException when index is not an integer.
+     *
+     * @param fullCommand the user input that the user provided.
+     * @return fieldsToChange a HashMap that only contains index as key
+     * @throws InvalidIndexException    when the index is <= 0.
+     * @throws IndexNotIntegerException when index is not an integer.
+     */
+    private Map<String, String> getPatientFieldsDelete(String fullCommand) throws InvalidIndexException,
+            IndexNotIntegerException {
+
+        Map<String, String> patientFieldsToDelete = new HashMap<>();
+
+        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString();
+        String indexValue = findValue(fullCommand, index);
+        DukeExceptions.checkIndexValidity(indexValue, "deletep"); //TODO remove magic string
+
+        patientFieldsToDelete.put(PatientFieldKeys.INDEX.toString(), indexValue);
+        return patientFieldsToDelete;
+    }
+
+    /**
+     * This is a helper method to fill the HashMap with the values read from user input.
+     *
+     * @param fullCommand               the full command read from the user
+     * @param appointmentFieldsToChange the HashMap to store the values read from the fullCommand
+     */
+    private void fillAppointmentFields(String fullCommand, Map<String, String> appointmentFieldsToChange) {
+        for (AppointmentFieldKeys af : AppointmentFieldKeys.values()) {
+            String field = af.toString();
+
+            assert field != null;
+            if (field.equals(AppointmentFieldKeys.INDEX.toString())) {
+                continue;
+            }
+
+            String key = WHITESPACE + REGEX_BACKSLASH + field;
+            String value = findValue(fullCommand, key);
+            appointmentFieldsToChange.put(field, value);
+        }
+    }
+
+    /**
+     * Returns a HashMap that takes the key from AppointmentFieldKeys and values from user input.
      * The HashMap is guaranteed to contain the keys found in the enum AppointmentFieldKeys.
-     * The values however will be determined by the user. If not provided, EMPTY_STRING will be stored
+     * The values however will be determined by the user. If not provided, EMPTY_STRING will be stored.
+     * This method is only for "adda".
+     * Throw NoFieldCommandException when all fields are blank.
      *
      * @param fullCommand the user input that the user provided
      * @return a HashMap that matches the appointment's fieldKey to value.
      * @see AppointmentFieldKeys
      * @see #findValue(String fullcommand, String key) value returned by this method will be stored at key.
      */
-    private Map<String, String> getAppointmentFields(String fullCommand) {
-        Map<String, String> appointmentFieldsToChange = new HashMap<>();
+    private Map<String, String> getAppointmentFieldsAdd(String fullCommand) throws NoFieldCommandException {
 
-        for (AppointmentFieldKeys af : AppointmentFieldKeys.values()) {
-            String field = af.toString();
-            String key = WHITESPACE + REGEX_BACKSLASH + field;
-            String value = findValue(fullCommand, key);
-            appointmentFieldsToChange.put(field, value);
-        }
-        return appointmentFieldsToChange;
+        Map<String, String> appointmentFieldsToAdd = new HashMap<>();
+        fillAppointmentFields(fullCommand, appointmentFieldsToAdd);
+
+        /* check if there is at least 1 field inside. */
+        DukeExceptions.checkFieldEmptyAddAppointment(appointmentFieldsToAdd);
+
+        return appointmentFieldsToAdd;
+    }
+
+    /**
+     * Returns a HashMap that takes the key from AppointmentFieldKeys and values from user input.
+     * The HashMap is guaranteed to contain the keys found in the enum AppointmentFieldKeys.
+     * The values however will be determined by the user. If not provided, EMPTY_STRING will be stored.
+     * This method is only for "edita".
+     * Throw InvalidIndexException when index <= 0.
+     * Throw IndexNotIntegerException when index is not an integer.
+     * Throw NoFieldCommandException when all fields are blank.
+     *
+     * @param fullCommand the user input that the user provided
+     * @return a HashMap that matches the appointment's fieldKey to value.
+     * @throws InvalidIndexException    when index <= 0.
+     * @throws IndexNotIntegerException when index is not an integer,
+     * @throws NoFieldCommandException  when all fields are blank.
+     */
+    private Map<String, String> getAppointmentFieldsEdit(String fullCommand) throws InvalidIndexException,
+            IndexNotIntegerException, NoFieldCommandException {
+
+        Map<String, String> appointmentFieldsToEdit = new HashMap<>();
+
+        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString();
+        String indexValue = findValue(fullCommand, index);
+        DukeExceptions.checkIndexValidity(indexValue, "edita"); //TODO remove magic string
+
+        appointmentFieldsToEdit.put(AppointmentFieldKeys.INDEX.toString(), indexValue);
+
+        fillAppointmentFields(fullCommand, appointmentFieldsToEdit);
+
+        /* check if there is at least 1 field inside. */
+        DukeExceptions.checkFieldEmptyEditAppointment(appointmentFieldsToEdit);
+
+        return appointmentFieldsToEdit;
+    }
+
+    /**
+     * Returns a HashMap that takes the key from AppointmentFieldKeys and values from user input.
+     * The HashMap is guaranteed to contain the keys found in the enum AppointmentFieldKeys.
+     * The values however will be determined by the user. If not provided, EMPTY_STRING will be stored.
+     * This method is only for "deletea".
+     * Throw InvalidIndexException when index <= 0.
+     * Throw IndexNotIntegerException when index is not an integer.
+     *
+     * @param fullCommand the user input that the user provided.
+     * @return a HashMap that matches the appointment's fieldKey to value.
+     * @throws InvalidIndexException    when index <= 0.
+     * @throws IndexNotIntegerException when index is not an integer.
+     */
+    private Map<String, String> getAppointmentFieldsDelete(String fullCommand) throws InvalidIndexException,
+            IndexNotIntegerException {
+
+        Map<String, String> appointmentFieldsToDelete = new HashMap<>();
+
+        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString();
+        String indexValue = findValue(fullCommand, index);
+        DukeExceptions.checkIndexValidity(indexValue, "deletea"); //TODO remove magic string
+
+        appointmentFieldsToDelete.put(AppointmentFieldKeys.INDEX.toString(), indexValue);
+        return appointmentFieldsToDelete;
     }
 
     /**
@@ -175,11 +304,9 @@ public class Parser {
      * @param fieldsToChange the HashMap of what to add or edit.
      * @return a specific command object that is specified by @param command.
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
-     * @throws InvalidIndexException   Throws a custom duke exception to catch and print error message.
      */
     private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws
-            UnknownCommandException,
-            InvalidIndexException, IndexNotIntegerException {
+            UnknownCommandException {
 
         switch (command) {
         case ADD_PATIENT:
@@ -188,11 +315,9 @@ public class Parser {
             return new AddPatientCommand(fieldsToChange);
 
         case EDIT_PATIENT:
-            DukeExceptions.checkIndexValidity(fieldsToChange.get(INDEX), command);
             return new EditPatientCommand(fieldsToChange);
 
         case DELETE_PATIENT:
-            DukeExceptions.checkIndexValidity(fieldsToChange.get(INDEX), command);
             return new DeletePatientCommand(fieldsToChange);
 
         case LIST_PATIENT:
@@ -204,11 +329,9 @@ public class Parser {
             return new AddAppointmentCommand(fieldsToChange);
 
         case EDIT_APPOINTMENT:
-            DukeExceptions.checkIndexValidity(fieldsToChange.get(INDEX), command);
             return new EditAppointmentCommand(fieldsToChange);
 
         case DELETE_APPOINTMENT:
-            DukeExceptions.checkIndexValidity(fieldsToChange.get(INDEX), command);
             return new DeleteAppointmentCommand(fieldsToChange);
 
         case LIST_APPOINTMENT:
@@ -235,34 +358,43 @@ public class Parser {
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
     public Command parseCommand(String fullCommand) throws
-            UnknownCommandException, DescriptionIsEmptyException,
-            InvalidIndexException, IndexNotIntegerException, NoFieldCommandException {
+            UnknownCommandException, InvalidIndexException, IndexNotIntegerException, NoFieldCommandException {
 
         String[] commandParsed = getCommand(fullCommand);
         String commandAsString = commandParsed[COMMAND_INDEX].trim();
 
         Command command;
         Map<String, String> fieldsToChange;
+
         switch (commandAsString) {
+
         case ADD_PATIENT:
-            //fallthrough
+            fieldsToChange = getPatientFieldsAdd(fullCommand);
+            command = getCommandObject(commandAsString, fieldsToChange);
+            break;
+
         case EDIT_PATIENT:
-            //fallthrough
+            fieldsToChange = getPatientFieldsEdit((fullCommand));
+            command = getCommandObject(commandAsString, fieldsToChange);
+            break;
+
         case DELETE_PATIENT:
-            DukeExceptions.isCommandDescriptionEmpty(commandParsed);
-            fieldsToChange = getPatientFields(fullCommand);
-            DukeExceptions.noFieldCommand(fieldsToChange, commandAsString);
+            fieldsToChange = getPatientFieldsDelete(fullCommand);
             command = getCommandObject(commandAsString, fieldsToChange);
             break;
 
         case ADD_APPOINTMENT:
-            //fallthrough
+            fieldsToChange = getAppointmentFieldsAdd(fullCommand);
+            command = getCommandObject(commandAsString, fieldsToChange);
+            break;
+
         case EDIT_APPOINTMENT:
-            //fallthrough
+            fieldsToChange = getAppointmentFieldsEdit(fullCommand);
+            command = getCommandObject(commandAsString, fieldsToChange);
+            break;
+
         case DELETE_APPOINTMENT:
-            DukeExceptions.isCommandDescriptionEmpty(commandParsed);
-            fieldsToChange = getAppointmentFields(fullCommand);
-            DukeExceptions.noFieldCommand(fieldsToChange, commandAsString);
+            fieldsToChange = getAppointmentFieldsDelete(fullCommand);
             command = getCommandObject(commandAsString, fieldsToChange);
             break;
 
