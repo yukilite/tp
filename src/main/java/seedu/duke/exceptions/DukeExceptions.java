@@ -76,12 +76,15 @@ public class DukeExceptions {
         int count = 0;
 
         for (Map.Entry mapElement : map.entrySet()) {
+            if (mapElement.getKey().equals("index")) {
+                continue;
+            }
             if (mapElement.getValue() == "") {
                 count++;
             }
         }
 
-        if (count == map.size()) {
+        if (count == map.size() - 1) {
             throw new NoFieldCommandException(command);
         }
     }

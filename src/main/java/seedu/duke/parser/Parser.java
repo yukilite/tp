@@ -27,6 +27,7 @@ import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.NoKeyExistException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.record.Patient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -117,6 +118,30 @@ public class Parser {
 
         }
         return patientFieldsToChange;
+    }
+
+    private Map<String,String> getPatientFieldsAdd(String fullCommand) {
+        Map<String, String> patientFieldsToAdd = new HashMap<>();
+
+        for (PatientFieldKeys pf : PatientFieldKeys.values()) {
+            String field = pf.toString();
+
+            /* the line below ignores the field "index", since there's no need to access index when adding */
+            assert field != null;
+            if (field.equals(PatientFieldKeys.INDEX.toString())) {
+                continue;
+            }
+
+            String key = WHITESPACE + REGEX_BACKSLASH + field;
+            String value = findValue(fullCommand, key);
+        }
+        //check if there is at least 1 field inside.
+        return patientFieldsToAdd;
+    }
+
+    private Map<String,String> getPatientFieldsEdit(String fullCommand) {
+        Map<String, String> patientFieldsToAdd = new HashMap<>();
+        return patientFieldsToAdd;
     }
 
     /**
@@ -212,6 +237,7 @@ public class Parser {
     public Command parseCommand(String fullCommand) throws
             UnknownCommandException, DescriptionIsEmptyException,
             InvalidIndexException, IndexNotIntegerException, NoFieldCommandException {
+
         String[] commandParsed = getCommand(fullCommand);
         String commandAsString = commandParsed[COMMAND_INDEX].trim();
 
