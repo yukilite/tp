@@ -5,7 +5,7 @@ import seedu.duke.ui.Ui;
 
 
 /**
- * Command class to list the list of appointment
+ * Command class to list the list of appointment.
  * @author Andy
  */
 public class ListAppointmentCommand extends Command {

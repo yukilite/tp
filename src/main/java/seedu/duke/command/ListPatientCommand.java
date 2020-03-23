@@ -4,7 +4,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 /**
- * Command class to list the patients
+ * Command class to list the patients.
  * @author Andy
  */
 public class ListPatientCommand extends Command {
