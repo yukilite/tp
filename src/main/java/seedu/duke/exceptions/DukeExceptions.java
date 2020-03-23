@@ -1,11 +1,16 @@
 package seedu.duke.exceptions;
 
+import seedu.duke.enums.AppointmentFieldKeys;
+import seedu.duke.enums.PatientFieldKeys;
+
 import java.util.Map;
 
 /**
  * This class throws custom exceptions.
  */
 public class DukeExceptions {
+    private static final String BLANK_STRING = "";
+    public static final String ADD_PATIENT_COMMAND = "addp";
 
     /**
      * This method throws a NoKeyExistException if the key is not found in the input that the user supplied
@@ -33,19 +38,6 @@ public class DukeExceptions {
     }
 
     /**
-     * Throws a DescriptionIsEmptyException when the commandParsed length is not 2.
-     * Since commandParsed is split by a delimiter with a limit of 2, if there is a description the length will be 2.
-     *
-     * @param commandParsed the full command that was parsed by a delimiter
-     * @throws DescriptionIsEmptyException throws exception when length is not 2
-     */
-    public static void isCommandDescriptionEmpty(String[] commandParsed) throws DescriptionIsEmptyException {
-        if (commandParsed.length != 2) {
-            throw new DescriptionIsEmptyException(commandParsed[0]);
-        }
-    }
-
-    /**
      * Checks the validity of the index. If it is not valid, throws one of the two exceptions.
      *
      * @param indexAsString The index as a string
@@ -67,22 +59,121 @@ public class DukeExceptions {
     }
 
     /**
-     * Throws a noFieldCommandException when the user did not include any fields in the full command.
+     * Checks that at least 1 field is included in the user input for the command addp.
+     * If all fields is blank, then NoFieldCommandException is thrown.
      *
-     * @param map a HashMap that contains all the fields to be included.
-     * @throws NoFieldCommandException Throws a NoFieldCommandException when none of the fields are included
+     * @param patientFieldsToAdd the HashMap of the Patient Field to add.
+     * @throws NoFieldCommandException throws a NoFieldCommandException when all values that match to keys are empty.
      */
-    public static void noFieldCommand(Map<String, String> map, String command) throws NoFieldCommandException {
-        int count = 0;
+    public static void checkFieldEmptyAddPatient(Map<String, String> patientFieldsToAdd)
+            throws NoFieldCommandException {
 
-        for (Map.Entry mapElement : map.entrySet()) {
-            if (mapElement.getValue() == "") {
-                count++;
+        boolean isEmpty = isPatientFieldEmpty(patientFieldsToAdd);
+
+        if (isEmpty) {
+            throw new NoFieldCommandException(ADD_PATIENT_COMMAND);
+        }
+    }
+
+    /**
+     * Checks if the field-values are empty for the command "editp".
+     * Throw a NoFieldCommandException if all fields are empty.
+     *
+     * @param patientFieldsToEdit the HashMap of key values.
+     * @throws NoFieldCommandException if all fields are empty.
+     */
+    public static void checkFieldEmptyEditPatient(Map<String, String> patientFieldsToEdit)
+            throws NoFieldCommandException {
+
+        boolean isEmpty = isPatientFieldEmpty(patientFieldsToEdit);
+
+        if (isEmpty) {
+            throw new NoFieldCommandException("editp");
+        }
+    }
+
+    /**
+     * A helper method to check if the HashMap's values are all empty.
+     * Returns false immediately if at least 1 is not empty.
+     *
+     * @param patientFieldsToEdit the HashMap of key values.
+     * @return true if all empty, false if at least 1 is not empty.
+     */
+    private static boolean isPatientFieldEmpty(Map<String, String> patientFieldsToEdit) {
+
+        for (PatientFieldKeys pf : PatientFieldKeys.values()) {
+            String field = pf.toString();
+
+            /* ignores the index field */
+            assert field != null;
+            if (field.equals(PatientFieldKeys.INDEX.toString())) {
+                continue;
+            }
+
+            String value = patientFieldsToEdit.get(field);
+            if (!value.equals(BLANK_STRING)) {
+                return false;
             }
         }
+        return true;
+    }
 
-        if (count == map.size()) {
-            throw new NoFieldCommandException(command);
+    /**
+     * Checks if the field-values are empty for the command "adda".
+     * Throw a NoFieldCommandException if all fields are empty.
+     *
+     * @param appointmentFieldsToChange the HashMap of key values.
+     * @throws NoFieldCommandException if all fields are empty.
+     */
+    public static void checkFieldEmptyAddAppointment(Map<String, String> appointmentFieldsToChange)
+            throws NoFieldCommandException {
+
+        boolean isEmpty = isAppointmentFieldEmpty(appointmentFieldsToChange);
+
+        if (isEmpty) {
+            throw new NoFieldCommandException("adda");
+        }
+    }
+
+    /**
+     * A helper method to check if the HashMap's values are all empty.
+     * Returns false immediately if at least 1 is not empty.
+     *
+     * @param appointmentFieldsToChange the HashMap of key values.
+     * @return true if all empty, false if at least 1 is not empty.
+     */
+    private static boolean isAppointmentFieldEmpty(Map<String, String> appointmentFieldsToChange) {
+
+        for (AppointmentFieldKeys af : AppointmentFieldKeys.values()) {
+            String field = af.toString();
+
+            assert field != null;
+            if (field.equals(AppointmentFieldKeys.INDEX.toString())) {
+                continue;
+            }
+
+            String value = appointmentFieldsToChange.get(field);
+            if (!value.equals(BLANK_STRING)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the field-values are empty for the command "edita".
+     * Throw a NoFieldCommandException if all fields are empty.
+     *
+     * @param appointmentFieldsToEdit the HashMap of key values.
+     * @throws NoFieldCommandException if all fields are empty.
+     */
+    public static void checkFieldEmptyEditAppointment(Map<String, String> appointmentFieldsToEdit)
+            throws NoFieldCommandException {
+
+        boolean isEmpty = isAppointmentFieldEmpty(appointmentFieldsToEdit);
+
+        if (isEmpty) {
+            throw new NoFieldCommandException("edita");
         }
     }
 }
