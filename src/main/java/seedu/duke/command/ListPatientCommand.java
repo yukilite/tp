@@ -3,6 +3,10 @@ package seedu.duke.command;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+/**
+ * Command class to list the patients
+ * @author Andy
+ */
 public class ListPatientCommand extends Command {
     public static final String MESSAGE_USAGE = "listp : List all the patients.\n"
             + "Example: listp";
