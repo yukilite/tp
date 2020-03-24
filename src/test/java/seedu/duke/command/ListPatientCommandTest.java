@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -20,8 +22,8 @@ class ListPatientCommandTest {
 
     @Test
     void testListWithPatients() {
-        int ui = 1;
-        int storage = 1;
+        Ui ui = null;
+        Storage storage = null;
         int savedPatientList = 1;
         PatientListStub.createList(savedPatientList);
         ListPatientCommandStub listPatientCommandStub = new ListPatientCommandStub();
@@ -37,8 +39,8 @@ class ListPatientCommandTest {
 
     @Test
     void testListWithoutPatients() {
-        int ui = 1;
-        int storage = 1;
+        Ui ui = null;
+        Storage storage = null;
 
         int savedPatientList = 2;
 

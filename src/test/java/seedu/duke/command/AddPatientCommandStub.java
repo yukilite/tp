@@ -1,13 +1,16 @@
 package seedu.duke.command;
 
 
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Stub class for fake addCommand class.
  */
-class AddPatientCommandStub {
+class AddPatientCommandStub extends AddPatientCommand {
 
     private static final String PATIENT_NAME = "name";
     private static final String AGE = "age";
@@ -19,6 +22,7 @@ class AddPatientCommandStub {
     private int age;
 
     public AddPatientCommandStub(Map<String, String> patientInfo) {
+        super(patientInfo);
         this.patientName = patientInfo.get(PATIENT_NAME);
         if (patientInfo.get(AGE).isBlank()) {
             this.age = -1;
@@ -52,7 +56,7 @@ class AddPatientCommandStub {
     }
 
 
-    public void execute(int ui, int storage) {
+    public void execute(Ui ui, Storage storage) {
         PatientStub newPatient = new PatientStub(this.patientName, this.age, this.address, this.contactNumber);
 
         PatientListStub.createList(1);

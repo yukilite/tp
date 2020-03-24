@@ -1,9 +1,12 @@
 package seedu.duke.command;
 
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddAppointmentCommandStub {
+public class AddAppointmentCommandStub extends AddAppointmentCommand{
 
     private static final String DATE = "date";
     private static final String TIME = "time";
@@ -11,6 +14,7 @@ public class AddAppointmentCommandStub {
     private String time;
 
     public AddAppointmentCommandStub(Map<String, String> appointmentInfo) {
+        super(appointmentInfo);
         this.date = appointmentInfo.get(DATE);
         this.time = appointmentInfo.get(TIME);
     }
@@ -37,7 +41,7 @@ public class AddAppointmentCommandStub {
      *
      * @see AddAppointmentCommand
      */
-    public void execute(int ui, int storage) {
+    public void execute(Ui ui, Storage storage) {
         AppointmentStub newAppointment = new AppointmentStub(this.date, this.time);
 
         AppointmentListStub.createList(1);
