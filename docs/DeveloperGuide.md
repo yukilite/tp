@@ -26,6 +26,7 @@ The intended audience of this documentation are the developers, designers, softw
 operators and maintenance engineers. The below table summarizes the purposes of reading for each 
 audience.
 
+
 |Role|Purpose|
 |---------|-------|
 |Developers & Designers| To understand the architecture and follow the design to build the system|
@@ -66,6 +67,104 @@ name and a summarized purpose.
 #### 2.2.1 SAM record module
 #### 2.2.2 BRANDON storage module
 #### 2.2.3 A&D command module 
+
+The command module consist of 11 different classes, where each class does a different command by itself. 
+These classes allows the patients and appointments to be added into HAMS, allows the updating of patient and 
+appointment details, allows the admin to delete patients and appointment information and allows of listing of the 
+different patients and the appointments in HAMS. In addition, the classes also deals with displaying the list of 
+commands and as well as to allowing HAMS to exit.
+
+![](images/Command%20class%20diagram.png)
+
+All of these command classes inherits from the abstract ```Command``` class. Likewise, the execute function of each 
+command  class is also inherited from the abstract ```Command``` class's ```execute(Ui ui, Storage storage)``` function 
+too. Every command class (other than the  ```ExitCommand``` and ```HelpCommand```) are actually façade classes that 
+creates the connection from the ```Main``` class to the other classes required such as ```Storage``` class,
+```PatientList``` class and the ```Appointment``` class to name a few. 
+
+##### 2.2.3.1 AddPatientClass
+
+To add a patient, the ```AddPatientCommand``` class is used. For this ```AddPatientCommand``` class, it serves as the 
+façade class for the ```Main```, ```Patient``` , ```PatientList``` and the ```Storage``` class to interact with one 
+another. 
+
+![](images/AddPatientDiagram.png)
+
+The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
+regarding the patient to be added will be stored in the ```AddPatientCommand``` class object. When the 
+```execute(Ui ui, Storage storage)``` command is called, the  ```AddPatientCommand``` would first make use of the 
+```Patient``` class constructor to create a new ```Patient``` object. After which, it would then call the 
+```PatientList```’s ```getPatientList()``` command to get the ```List``` patient list object such that the ```Patient``` 
+object created beforehand can directly be inserted into the patient list. After adding the patient into the patient list 
+object, the ```Storage```’s ```savePatientList()``` function will be called next so that the newly update list of 
+```patient``` is saved as offline data.  When this operation is successful, it will call upon the ```Ui``` class’ 
+```showPatientAddSuccess()``` function to display the success of adding the ```Patient``` object into the patient list.
+
+If the supplied patient age is a word or is missing, the age will be set to ```-1```. This value is chosen to indicate 
+that there isn’t a valid age set. Thus, when displaying the age, if ```-1``` is encountered, show age as an empty string 
+instead.
+
+Below shows the sequence diagram for ```AddPatientCommand``` class
+
+![](images/AddPatientCommandSequence.png)
+
+##### 2.2.3.1 AddAppointmentClass
+
+To add an appointment, the ```AddAppointmentCommand``` class is used. For this ```AddAppointmentCommand``` class, it 
+serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
+interact with one another. 
+
+![](images/AddAppointmentDiagram.png)
+
+Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
+object, where the information of the appointment is again stored in the ```AddAppoinmentCommand``` object. When 
+the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
+```Appointment``` class to make an ```Appointment``` Object. After which, the ```AddAppoinmentCommand``` object will 
+call upon the ```AppointmentList``` object to obtain the list of ```Appointments``` (get the ```List``` object that 
+represents the list of appointments by ```AppointmentList```’s ```getAppointmentList()``` command) so that it can 
+directly add the new ```Appointment``` object into the appointment list. Finally, it will call upon the ```Storage``` 
+class’s ```saveAppoinmentList()``` function to save the updated appointment list. Upon successfully adding the 
+```Appointment``` object into the appointment list, it will call upon the ```Ui``` class’ 
+```showAppointmentAddSuccess()``` function to display the success of adding the ```appointment``` into the appointment 
+list.
+
+Below shows the sequence diagram for ```AddAppointmentCommand``` class
+
+![](images/AddAppointCommandSequence.png)
+
+##### 2.2.3.1 ListPatientClass
+
+To display the list of patients, the ```ListPatientCommand``` class is called. This class serves as a façade class of 
+```Main``` and ```Ui``` to interact with each other. 
+
+![](images/ListPatientDiagram.png)
+
+This class is first created by the ```Parser``` class, where it is then returned to the ```Main``` class to have its
+```execute(Ui ui, Storage storage)``` function be called. When the ```Main``` class calls the 
+```execute(Ui ui, Storage storage)``` function, ```ListPatientCommand``` will call upon the ```Ui```’s 
+```showEntirePatientList()``` function to display the list of patients.
+
+Below shows the sequence diagram for ```ListPatientCommand``` class
+
+![](images/ListPatientCommandSequence.png)
+
+##### 2.2.3.1 ListAppointmentClass
+
+To display the list of appointments, the ```ListAppointmentCommand``` class is called. This class serves as a façade 
+class of ```Main``` and ```Ui``` to interact with each other. 
+
+![](images/ListAppointmentDiagram.png)
+
+This class is first created by the ```Parser``` class, where it is then returned to the ```Main``` class to 
+have its ```execute(Ui ui, Storage storage)``` function be called. When the ```Main``` class calls the 
+```execute(Ui ui, Storage storage)``` function, ```ListAppointmentCommand``` will call upon the ```Ui```’s 
+```showEntireAppointmentList()``` function to display the list of appointments.
+
+Below shows the sequence diagram for ```ListAppointmentCommand``` class
+
+![](images/ListAppointmentCommandSequence.png)
+
+
 #### 2.2.4 Parser module
 **TODO**
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -76,6 +175,7 @@ name and a summarized purpose.
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new admin assistant|see usage instructions|refer to them when I forget how to use the application|
+|v1.0|admin assistant|add upcoming appointments|set the patient's future appointments|
 |v1.0|admin assistant|obtain upcoming appointments|remind patients of their appointment|
 |v1.0|admin assistant|reschedule appointments|help the patient change his appointment dates|
 |v1.0|admin assistant|add and delete patient's address|update the information in the system|
@@ -91,6 +191,12 @@ help menu should be sufficient for basic usage.
 
 * HAMS should be resistant to software crashes and if a crash does happens, the latest patient and 
 appointment list should be saved. In addition, user should be able to manually save their work. 
+
+
+* Each function of HAMS can be executed in a single line.
+
+* 
+
 
 **TODO**
 {Give non-functional requirements}
