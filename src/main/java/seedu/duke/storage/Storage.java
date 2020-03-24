@@ -102,8 +102,14 @@ public class Storage {
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
+            int delimiterCount = 0;
+            for (int i = 0; i < patientString.length(); i++) {
+                if (Character.toString(patientString.charAt(i)).equals("|")) {
+                    delimiterCount++;
+                }
+            }
+            assert delimiterCount == 3 : "not enough fields in this line:";
             String[] patientFields = patientString.split(" \\| ", 4);
-            assert patientFields.length == 4 : "not enough fields in this line:" + patientString;
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
