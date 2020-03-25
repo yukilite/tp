@@ -27,6 +27,8 @@ public class EditPatientCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update the information of patient in the list.\n"
             + "Example: " + EXAMPLE;
+    public static final String BLANK_STRING = "";
+    public static final int INVALID_AGE = -1;
 
     private int patientIndex;
     private String patientName;
@@ -146,10 +148,15 @@ public class EditPatientCommand extends Command {
             PatientList.getPatientList().set(patientIndex - 1, patient);
 
             // Check with assertions to make sure that the updated fields are correct
-            assert PatientList.getPatientRecord(patientIndex - 1).getName().equals(patientName);
-            assert PatientList.getPatientRecord(patientIndex - 1).getAge() == age;
-            assert PatientList.getPatientRecord(patientIndex - 1).getAddress().equals(patientName);
-            assert PatientList.getPatientRecord(patientIndex - 1).getContactNumber().equals(patientName);
+            assert patientName.equals(BLANK_STRING)
+                    || PatientList.getPatientRecord(patientIndex - 1).getName().equals(patientName);
+            assert age == INVALID_AGE
+                    || PatientList.getPatientRecord(patientIndex - 1).getAge() == age;
+            assert address.equals(BLANK_STRING)
+                    || PatientList.getPatientRecord(patientIndex - 1).getAddress().equals(address);
+            assert contactNumber.equals(BLANK_STRING)
+                    || PatientList.getPatientRecord(patientIndex - 1).getContactNumber()
+                    .equals(contactNumber);
 
             // Auto-save the changes
             storage.savePatientList();

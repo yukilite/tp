@@ -24,6 +24,7 @@ public class EditAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit the information of appointment in the list.\n"
             + "Example: " + EXAMPLE;
+    public static final String BLANK_STRING = "";
 
     private int index;
     private String date;
@@ -108,9 +109,11 @@ public class EditAppointmentCommand extends Command {
             AppointmentList.getAppointmentList().set(index - 1, appointment);
 
             // Check with assertions to make sure that the updated fields are correct
-            assert AppointmentList.getAppointmentRecord(index - 1).getDate().equals(this.date) :
+            assert date.equals(BLANK_STRING)
+                    || AppointmentList.getAppointmentRecord(index - 1).getDate().equals(this.date) :
                     "Wrong date!";
-            assert AppointmentList.getAppointmentRecord(index - 1).getTime().equals(this.time) :
+            assert time.equals(BLANK_STRING)
+                    || AppointmentList.getAppointmentRecord(index - 1).getTime().equals(this.time) :
                     "Wrong time!";
 
             // Auto-save the changes
