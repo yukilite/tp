@@ -7,6 +7,10 @@ import seedu.duke.command.DeletePatientCommand;
 import seedu.duke.command.EditPatientCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListPatientCommand;
+import seedu.duke.exceptions.DescriptionIsEmptyException;
+import seedu.duke.exceptions.IndexNotIntegerException;
+import seedu.duke.exceptions.InvalidIndexException;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
@@ -32,8 +36,8 @@ class ParserTest {
 
     @Test
     void testParseCommand_addPatientCommand_isAddCommand() {
-        String addPatientUserInput1 = "addp \\name \\age \\address";
-        String addPatientUserInput2 = "addp                        \\unknown \\age \\name \\12333";
+        String addPatientUserInput1 = "addp \\name Justin \\age \\address";
+        String addPatientUserInput2 = "addp                        \\unknown \\age 23 \\name \\12333";
 
         try {
             Command type1 = p.parseCommand(addPatientUserInput1);
@@ -68,9 +72,9 @@ class ParserTest {
 
     @Test
     void tetParseCommand_editPatientCommand_isEditCommand() {
-        String editPatientUserInput1 = "editp \\index 5 \\";
+        String editPatientUserInput1 = "editp \\index 5 \\name Himiko";
         String editPatientUserInput2 = "editp       \\index 3 \\name \\age 23 \\address pasir ris";
-        String editPatientUserInput3 = "         editp  \\index 4      \\\\\\\\\\";
+        String editPatientUserInput3 = "         editp  \\index 4 \\phone 97283449      \\\\\\\\\\";
 
         PatientList stub = new PatientList();
         Patient newPatient = new Patient("1", 1, "1", "1");
@@ -107,8 +111,12 @@ class ParserTest {
             assertFalse(type2 instanceof EditPatientCommand);
             assertFalse(type3 instanceof EditPatientCommand);
 
-        } catch (Exception | UnknownCommandException e) {
+        } catch (UnknownCommandException e) {
             assertEquals("Unknown command", e.getLocalizedMessage());
+        } catch (NoFieldCommandException e) {
+            assertEquals("Please ensure that the fields for adda is provided", e.getLocalizedMessage());
+        } catch (Exception e) {
+            assertTrue(true);
         }
     }
 
@@ -140,7 +148,7 @@ class ParserTest {
 
     @Test
     void testParseCommand_deletePatientCommand_isNotDeleteCommand() {
-        String deletePatientUserInput1 = "addp                        \\unknown \\age \\name \\12333";
+        String deletePatientUserInput1 = "addp                        \\unknown \\age 23 \\name \\12333";
         String deletePatientUserInput2 = "           listp";
         String deletePatientUserInput3 = "edipt               \\index 0";
 
