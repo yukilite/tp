@@ -16,12 +16,6 @@ public class AddAppointmentCommandStub extends AddAppointmentCommand {
     private String date;
     private String time;
 
-
-    /**
-     * The constructor for this stub class.
-     * @param appointmentInfo the map of information to be sent to this stub class constructor.
-     */
-
     public AddAppointmentCommandStub(Map<String, String> appointmentInfo) {
         super(appointmentInfo);
         this.date = appointmentInfo.get(DATE);
