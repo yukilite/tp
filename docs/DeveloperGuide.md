@@ -61,7 +61,7 @@ name and a summarized purpose.
 |---------|-------|
 |Stupendously AwesoMe (SAM) **records**|?| 
 |BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **storage**|?|
-|Amazing & Dazzling (A&D) Commands|facade classes that deals with input so that differenct classes can interact with each other|
+|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that differenct classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
 #### 2.2.1 SAM record module
