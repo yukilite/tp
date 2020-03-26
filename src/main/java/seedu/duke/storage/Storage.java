@@ -53,14 +53,13 @@ public class Storage {
             }
             throw new FileNotFoundException();
         }
-        //TODO: parse the text file, return List of Appointments
         List<Appointment> appointmentListToReturn = new ArrayList<>();
         Scanner s = new Scanner(appointmentSave);
         while (s.hasNext()) {
-            //TODO: parse savefile substring, update Appointment constructor
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
             String[] patientFields = appointmentString.split(" \\| ", 2);
+            assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
@@ -98,18 +97,26 @@ public class Storage {
             throw new FileNotFoundException();
 
         }
-        //TODO: parse the text file, return List of Patients
         List<Patient> patientListToReturn = new ArrayList<>();
         Scanner s = new Scanner(patientSave);
         while (s.hasNext()) {
-            //TODO: parse savefile substring, update Patient constructor
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
+            int delimiterCount = 0;
+            for (int i = 0; i < patientString.length(); i++) {
+                if (Character.toString(patientString.charAt(i)).equals("|")) {
+                    delimiterCount++;
+                }
+            }
+            assert delimiterCount == 3 : "not enough fields in this line:";
             String[] patientFields = patientString.split(" \\| ", 4);
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
                 }
+            }
+            if (patientFields[1].isEmpty()) {
+                patientFields[1] = "-1";
             }
             Patient newPatientToLoad = new Patient(patientFields[0], Integer.parseInt(patientFields[1]),
                     patientFields[2], patientFields[3]);
