@@ -26,6 +26,7 @@ The intended audience of this documentation are the developers, designers, softw
 operators and maintenance engineers. The below table summarizes the purposes of reading for each 
 audience.
 
+
 |Role|Purpose|
 |---------|-------|
 |Developers & Designers| To understand the architecture and follow the design to build the system|
@@ -163,7 +164,7 @@ Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 ![](images/ListAppointmentCommandSequence.png)
 
-   
+
 #### 2.2.4 Parser module
 **TODO**
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -191,9 +192,11 @@ help menu should be sufficient for basic usage.
 * HAMS should be resistant to software crashes and if a crash does happens, the latest patient and 
 appointment list should be saved. In addition, user should be able to manually save their work. 
 
+
 * Each function of HAMS can be executed in a single line.
 
 * 
+
 
 **TODO**
 {Give non-functional requirements}
