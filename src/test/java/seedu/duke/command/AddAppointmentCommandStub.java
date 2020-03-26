@@ -6,12 +6,13 @@ import seedu.duke.ui.Ui;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddAppointmentCommandStub extends AddAppointmentCommand{
+public class AddAppointmentCommandStub extends AddAppointmentCommand {
 
     private static final String DATE = "date";
     private static final String TIME = "time";
     private String date;
     private String time;
+
 
     public AddAppointmentCommandStub(Map<String, String> appointmentInfo) {
         super(appointmentInfo);

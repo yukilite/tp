@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Stub class for ListAppointmentCommandTest.
  */
-public class ListAppointmentCommandStub extends ListAppointmentCommand{
+public class ListAppointmentCommandStub extends ListAppointmentCommand {
     public ListAppointmentCommandStub() {
     }
 

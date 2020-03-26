@@ -38,6 +38,11 @@ class AddPatientCommandStub extends AddPatientCommand {
         this.contactNumber = patientInfo.get(CONTACT_NUMBER);
     }
 
+    /**
+     * Just to generate the fake map of information.
+     * @param choice the type of fake map to generate
+     * @return the fake map of information
+     */
     public static Map<String, String> generateMap(int choice) {
         Map<String, String> tempMap = new HashMap<>();
         if (choice == 1) {
@@ -56,6 +61,11 @@ class AddPatientCommandStub extends AddPatientCommand {
     }
 
 
+    /**
+     * To act as a stub for execute.
+     * @param ui      ui object for displaying information
+     * @param storage storage object to do auto saving
+     */
     public void execute(Ui ui, Storage storage) {
         PatientStub newPatient = new PatientStub(this.patientName, this.age, this.address, this.contactNumber);
 
