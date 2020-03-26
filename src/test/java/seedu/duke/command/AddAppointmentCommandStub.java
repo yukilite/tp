@@ -6,6 +6,9 @@ import seedu.duke.ui.Ui;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Stub class for AddAppointment class.
+ */
 public class AddAppointmentCommandStub extends AddAppointmentCommand {
 
     private static final String DATE = "date";
