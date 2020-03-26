@@ -16,6 +16,10 @@ public class AddAppointmentCommandStub extends AddAppointmentCommand {
     private String date;
     private String time;
 
+    /**
+     * Constructor thing
+     * @param appointmentInfo fake map of info
+     */
     public AddAppointmentCommandStub(Map<String, String> appointmentInfo) {
         super(appointmentInfo);
         this.date = appointmentInfo.get(DATE);
