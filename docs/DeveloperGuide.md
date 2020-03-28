@@ -8,6 +8,14 @@
         - [1.2.2. Value Proposition](#122-value-proposition)
     + [1.3. Definitions](#13-definitions)
 * [2. Design & Implementation](#2-design--implementation)
+    * [2.1. Project Overview](#21-project-overview)
+        * [2.2. Module Overview](#22-module-overview)
+            * [2.2.1. SAM record module ](#221-sam-record-module)
+            * [2.2.2. BRANDON storage module ](#222-brandon-storage-module)
+            * [2.2.3. AD command module ](#223-ad-command-module)
+            * [2.2.4. Parser Module ](#224-parser-module)
+                * [2.2.4.1. Object creation and input interpretation](#2241-object-creation-and-steps-in-input-interpretation)
+                * [2.2.4.2. Design Considerations ](#2242-design-considerations)
 * [3. User Stories](#3-user-stories)
 * [4. Non-functional requirements](#4-non-functional-requirements)
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
@@ -191,9 +199,9 @@ depending on the command type in Step 3.
     age -> 23, name -> Sam. 
 5. At the end of the execution, a reference to the command object will be returned. 
 
->![](images/SD_parser/capture2.JPG)
+![](images/SD_parser/capture2.JPG)
 
->![](images/SD_parser/capture.JPG)
+![](images/SD_parser/capture.JPG)
 
 Sequence Diagram when `parseCommand(userInput)` is initially called
 ![](images/SD_parser/Slide1.JPG)
@@ -235,7 +243,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 
 ![](images/SD_parser/Slide12.JPG)
 
->![](images/SD_parser/capture3.JPG)
+![](images/SD_parser/capture3.JPG)
 
 |Enum|PatientFieldKeys|AppointmentFieldKeys
 |--------|-------|------|
@@ -245,7 +253,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |.|ADDRESS|.|
 |.|CONTACT_NUMBER|.|
 
->![](images/SD_parser/capture4.JPG)
+![](images/SD_parser/capture4.JPG)
 
 |DukeExceptions|checkFieldEmpty|checkIndexValidity
 |--------|-------|------|
