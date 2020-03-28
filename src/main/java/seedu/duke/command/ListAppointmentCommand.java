@@ -5,12 +5,17 @@ import seedu.duke.ui.Ui;
 
 
 /**
- * Empty constructor. Only used to create the ListAppointmentCommand object.
+ * Command class to list the list of appointment.
+ * @author Andy
  */
 public class ListAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = "lista : List all the appointments.\n"
             + "Example: lista";
+
+    /**
+     * Empty constructor. Only used to create the ListAppointmentCommand object.
+     */
 
     public ListAppointmentCommand() {
     }

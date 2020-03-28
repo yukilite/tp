@@ -18,6 +18,7 @@ import java.util.Map;
  * <p>To elaborate, it converts the output of {@link seedu.duke.parser.Parser} into a {@link Patient} object, after
  * which the {@link Patient} object is then added into the {@link PatientList} list.
  * </p>
+ * @author Andy
  */
 public class AddPatientCommand extends Command {
 
