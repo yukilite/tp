@@ -14,6 +14,13 @@ public class Appointment {
     private String date;
     private String time;
 
+    /**
+     * This constructor converts the input date and time into the desired format. During initialization, the date
+     * and time will be in the right format.
+     * @param date the date input by user.
+     * @param time the time input by user.
+     * @throws ParseException this error occurs when date or string is empty.
+     */
     public Appointment(String date, String time) throws ParseException {
         assert date != null;
         assert time != null;
