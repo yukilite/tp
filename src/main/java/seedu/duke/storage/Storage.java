@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +38,7 @@ public class Storage {
      * @return appointmentListToReturn returns the appointment list in the save file
      * @throws FileNotFoundException this exception occurs when a file is not found
      */
-    public List<Appointment> loadSavedAppointments() throws FileNotFoundException {
+    public List<Appointment> loadSavedAppointments() throws FileNotFoundException, ParseException {
         File appointmentSave = new File(this.appointmentListSaveLocation);
         if (!appointmentSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
@@ -126,7 +128,7 @@ public class Storage {
      * @throws IOException this exception occurs if the patient's appointment details are unable to be written
      *                     to the local save file.
      */
-    public void saveAppointmentsList() throws IOException {
+    public void saveAppointmentsList() throws IOException, ParseException {
         FileWriter fwAppointmentSave;
         try {
             fwAppointmentSave = new FileWriter(this.appointmentListSaveLocation);

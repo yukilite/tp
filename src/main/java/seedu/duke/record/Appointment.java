@@ -1,5 +1,11 @@
 package seedu.duke.record;
 
+import seedu.duke.converter.TimeConverter;
+
+import java.sql.Time;
+import java.text.ParseException;
+import java.util.Date;
+
 /**
  * This class contains the date and time for each patient.
  */
@@ -8,9 +14,9 @@ public class Appointment {
     private String date;
     private String time;
 
-    public Appointment(String date, String time) {
-        this.date = date;
-        this.time = time;
+    public Appointment(String date, String time) throws ParseException {
+        this.date = TimeConverter.oldDate(date);
+        this.time = TimeConverter.oldTime(time);
     }
 
     public String getDate() {
@@ -22,9 +28,9 @@ public class Appointment {
      *
      * @param date date that needs to be updated
      */
-    public void setDate(String date) {
+    public void setDate(String date) throws ParseException {
         if (!date.isBlank()) {
-            this.date = date;
+            this.date = TimeConverter.oldDate(date);
         }
     }
 
@@ -41,9 +47,9 @@ public class Appointment {
      *
      * @param time time that needs to be updated
      */
-    public void setTime(String time) {
+    public void setTime(String time) throws ParseException {
         if (!time.isBlank()) {
-            this.time = time;
+            this.time = TimeConverter.oldTime(time);
         }
     }
 
@@ -55,7 +61,8 @@ public class Appointment {
      */
     @Override
     public String toString() {
-        String newToString = "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + "}";
+        String newToString = null;
+        newToString = "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + "}";
         return newToString;
     }
 
@@ -65,7 +72,7 @@ public class Appointment {
      * @param date date that needs to be updated
      * @param time time that needs to be updated
      */
-    public void setAppointmentInfo(String date, String time) {
+    public void setAppointmentInfo(String date, String time) throws ParseException {
         setDate(date);
         setTime(time);
     }

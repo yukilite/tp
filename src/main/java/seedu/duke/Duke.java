@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 
@@ -69,7 +70,7 @@ public class Duke {
         }
         try {
             appointmentListToLoad = storage.loadSavedAppointments();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ParseException e) {
             appointmentListToLoad = new ArrayList<>();
         } finally {
             appointmentList = new AppointmentList(appointmentListToLoad);
@@ -101,7 +102,11 @@ public class Duke {
 
             } catch (NoSuchElementException e) {
                 break;
+            } catch (ParseException e) {
+                System.out.println("Please fill in date in right format: dd/mm/yyyy and time in the 24" +
+                        "hour format: hhmm");
             }
+
         }
     }
 
