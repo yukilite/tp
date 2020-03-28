@@ -102,6 +102,11 @@ public class Patient {
         String newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
                 + " " + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
                 + getContactNumber() + "}";
+        if (age == -1) {
+            newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + "  " + "|"
+                    + " " + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
+                    + getContactNumber() + "}";
+        }
         return newToString;
     }
 
