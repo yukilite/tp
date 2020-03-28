@@ -166,8 +166,143 @@ Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 
 #### 2.2.4 Parser module
-**TODO**
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+This section describes the implementation of Parser class, as well as the design considerations and rational behind the 
+current implementation.
+
+The main purpose of the Parser class is as below.
+1.  To interpret user inputs so that the correct command can be executed 
+2.  Functions as the first line to sanitize user input
+
+As such, the Parser class only has one publicly callable method and that returns the command object for execution. 
+To assist the public method, Parser class has multiple private helper methods, as well as access to the Exception handler
+to ensure that the user input is formatted correctly. This way, purpose 1 and 2 is satisfied. 
+
+##### 2.2.4.1 Object creation and steps in input interpretation
+1.  The `Parser` object is first created in `Duke` class and subsequently used until program termination.
+2.  User input is received and handed over to `Parser` object for interpretation.
+3. In the `Parser` object, the type of command is first determined via helper method `getCommand(userInput)`.
+    + Example: `addp \age 23 \name Justin`, the `addp` command will be determined.
+4. The remaining fields will be recorded in a hashMap through either `fillPatientFields(userInput)` or `fillAppointmentFields(userInput)`
+depending on the command type in Step 3.
+    + The type of category of the command can be determined based on the last alphabet of the first word. 
+    + The command `addp` has the last alphabet is `p`, `fillPatientFields()` will be called. 
+    Likewise, if it ise `adda`, it will be `fillAppointmentFields()`.
+    + Example: `addp \name Sam \age 18`, the method `fillPatientFields(userInput)` will be called. The hashMap will contain
+    age -> 23, name -> Sam. 
+5. At the end of the execution, a reference to the command object will be returned. 
+
+>![](images/SD_parser/capture2.JPG)
+
+>![](images/SD_parser/capture.JPG)
+
+Sequence Diagram when `parseCommand(userInput)` is initially called
+![](images/SD_parser/Slide1.JPG)
+
+Sequence Diagram for `addp`
+![](images/SD_parser/Slide2.JPG)
+
+Sequence Diagram for `editp`
+![](images/SD_parser/Slide3.JPG)
+
+Sequence Diagram for `deletep`
+![](images/SD_parser/Slide4.JPG)
+
+Sequence Diagram for `adda`
+![](images/SD_parser/Slide5.JPG)
+
+Sequence Diagram for `edita`
+![](images/SD_parser/Slide6.JPG)
+
+Sequence Diagram for `deletea`
+![](images/SD_parser/Slide7.JPG)
+
+Sequence Diagram when it is an unknown command
+![](images/SD_parser/Slide8.JPG)
+
+Sequence Diagram for the creation of the command Object
+
+![](images/SD_parser/Slide9.JPG)
+
+Sequence Diagram for error checking when `DukeExpcetion` is called
+
+![](images/SD_parser/Slide10.JPG)
+
+Sequence Diagram for calling an enum
+
+![](images/SD_parser/Slide11.JPG)
+
+Sequence Diagram for error checking when `DukeExpcetion` is called
+
+![](images/SD_parser/Slide12.JPG)
+
+>![](images/SD_parser/capture3.JPG)
+
+|Enum|PatientFieldKeys|AppointmentFieldKeys
+|--------|-------|------|
+|.|INDEX|INDEX|
+|.|NAME|DATE|
+|.|AGE|TIME|
+|.|ADDRESS|.|
+|.|CONTACT_NUMBER|.|
+
+>![](images/SD_parser/capture4.JPG)
+
+|DukeExceptions|checkFieldEmpty|checkIndexValidity
+|--------|-------|------|
+|.|Based on the above enum table, checks that at least 1 field  is provided. <br><br>Throws NoFieldCommandException if all fields are empty|Check that the index provided is valid. <br><br> If it is less than 0 or not an integer, throw InvalidIndex and IndexNotInteger respectively.|
+
+
+
+##### 2.2.4.2 Design considerations
+###### Aspect: Symbol for delimiter
++   Alternative 1 (current choice): Backslash `/\` is used. 
+    *   Pros: 
+    
+        -   Backslash is the least used symbol in the english language.
+        
+    *   Cons: 
+    
+        - More caution must be exercised to used backslash in computer language as REGEX uses it as a delimiter by
+          default.
+          
+        - Might break the speed at which user type since backslash is located where it would be hard to reach with
+          regular typing. 
+
++   Alternative 2: Slash is `/` used.
+    * Pros:
+    
+        - easier to access when typing
+        
+    * Cons:
+    
+        - some people may have a slash in their legal name - `Suresh S/O Ravindran`
+     
+###### Aspect: Symbol for delimiter
++   Alternative 1 (current choice): Each command will call its own method to parse field. 
+    *   Pros: 
+    
+        -   Decouples commands from method, making the code more modular.
+        -   Increases testability, bugs found can be isolated to the individual command and method respectively
+        -   Changes to one method will only affect the command calling it and vice-versa.
+        
+    *   Cons: 
+    
+        -   Code duplication will increase
+ 
++   Alternative 2: Every command calls a common method to parse the remaining fields. 
+    * Pros:
+    
+        -   Less code duplication
+        
+        -   Easier to understand code. 
+        
+    * Cons:
+    
+        - Leads to tighter coupling
+        
+        -   All command depends on this common method to parse fields, if the method changes, it may return the wrong
+        result for some commands. 
+
 
 
 ## 3. User Stories
