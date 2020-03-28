@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class TimeConverterTest {
 
@@ -18,3 +20,4 @@ class TimeConverterTest {
         String oldTime = "2315";
         assertEquals("11:15 pm", TimeConverter.oldTime(oldTime));
     }
+}
