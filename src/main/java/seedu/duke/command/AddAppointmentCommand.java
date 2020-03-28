@@ -22,6 +22,7 @@ import java.util.Map;
  * added into the {@link AppointmentList} list. Finally, the {@link Storage} class will be used to save the updated
  * list into offline data to reflect the change.
  * </p>
+ * @author Andy
  */
 public class AddAppointmentCommand extends Command {
 
