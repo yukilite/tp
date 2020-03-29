@@ -21,6 +21,7 @@ public class Appointment {
      *
      * @param date      the date input by user.
      * @param time      the time input by user.
+     * @param patientId the patientid of the patient of this appointment.
      * @throws ParseException this error occurs when date or string is empty.
      */
     public Appointment(String date, String time, int patientId) throws ParseException {
@@ -82,7 +83,8 @@ public class Appointment {
     @Override public String toString() {
         String newToString = null;
         newToString =
-                "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + "}";
+                "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + " | " + "[PatientId]: "
+                        + getPatientId() + "}";
         return newToString;
     }
 

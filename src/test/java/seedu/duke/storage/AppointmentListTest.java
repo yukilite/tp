@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppointmentListTest {
     private AppointmentList testAppointmentList = new AppointmentList();
-    private Appointment testAppointment1 = new Appointment("29/03/2020", "1300");
-    private Appointment testAppointment2 = new Appointment("28/03/2020", "1400");
-    private Appointment testAppointment3 = new Appointment("27/03/2020", "1500");
+    private Appointment testAppointment1 = new Appointment("29/03/2020", "1300", 1);
+    private Appointment testAppointment2 = new Appointment("28/03/2020", "1400", 1);
+    private Appointment testAppointment3 = new Appointment("27/03/2020", "1500", 1);
 
     AppointmentListTest() throws ParseException {
     }

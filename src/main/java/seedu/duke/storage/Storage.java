@@ -69,14 +69,15 @@ public class Storage {
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
-            String[] patientFields = appointmentString.split(" \\| ", 2);
+            String[] patientFields = appointmentString.split(" \\| ", 3);
             assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
                 }
             }
-            Appointment newAppointmentToLoad = new Appointment(patientFields[0], patientFields[1]);
+            Appointment newAppointmentToLoad = new Appointment(patientFields[0], patientFields[1],
+                    Integer.parseInt(patientFields[3]));
             appointmentListToReturn.add(newAppointmentToLoad);
         }
 
@@ -141,8 +142,13 @@ public class Storage {
         return patientListToReturn;
     }
 
+    /**
+     * Load the state of the patient id(s) into our patient id management system.
+     * @throws FileNotFoundException if there is an error locating the file to save to.
+     */
     private void loadPatientIdState() throws FileNotFoundException {
 
+        /* Preparing the file reader */
         File patientIdSave = new File(this.patientIdSaveLocation);
         if (!patientIdSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
@@ -162,11 +168,15 @@ public class Storage {
 
         }
 
+        /* Actual file reading */
         Scanner s = new Scanner(patientIdSave);
 
+        /* There is information saved about the patientIds */
         if (s.hasNext()) {
             PatientIdManager.setNextTopNewNumber(Integer.parseInt(s.nextLine()));
         }
+
+        /* There are reusable patient id*/
         if (s.hasNext()) {
             String patientIdString = s.nextLine();
             String[] patientIdStringArray = patientIdString.split(WHITESPACE);
@@ -211,6 +221,7 @@ public class Storage {
      */
     public void savePatientList() throws IOException {
 
+
         FileWriter fwPatientSave;
         try {
             fwPatientSave = new FileWriter(this.patientListSaveLocation);
@@ -232,8 +243,13 @@ public class Storage {
         fwPatientSave.close();
     }
 
+    /**
+     * Save the patient id management system state.
+     * @throws IOException if the file cannot be written for some reason
+     */
     private void savePatientIdState() throws IOException {
 
+        /* Preparing file writer*/
         FileWriter fwPatientIdSave = null;
         try {
             fwPatientIdSave = new FileWriter(this.patientIdSaveLocation);
@@ -244,6 +260,7 @@ public class Storage {
         int tempNextTopNumber = PatientIdManager.getNextTopNewNumber();
         Queue<Integer> tempQueue = PatientIdManager.getNextNumberQueueThing();
 
+        /* Saving of actual patient id management system state data */
         fwPatientIdSave.write(tempNextTopNumber + LS);
         if (!tempQueue.isEmpty()) {
             for (Integer number : tempQueue) {

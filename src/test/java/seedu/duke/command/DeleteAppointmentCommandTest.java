@@ -14,11 +14,11 @@ class DeleteAppointmentCommandTest {
     @Test
     void execute() throws Exception {
         AppointmentList appointmentList = new AppointmentList();
-        appointmentList.getAppointmentList().add(new Appointment("14/03/2020", "1000"));
-        appointmentList.getAppointmentList().add(new Appointment("15/03/2020", "1100"));
-        appointmentList.getAppointmentList().add(new Appointment("16/03/2020", "0000"));
-        appointmentList.getAppointmentList().add(new Appointment("17/03/2020", "1300"));
-        appointmentList.getAppointmentList().add(new Appointment("18/03/2020", "1400"));
+        appointmentList.getAppointmentList().add(new Appointment("14/03/2020", "1000", 1));
+        appointmentList.getAppointmentList().add(new Appointment("15/03/2020", "1100", 1));
+        appointmentList.getAppointmentList().add(new Appointment("16/03/2020", "0000", 1));
+        appointmentList.getAppointmentList().add(new Appointment("17/03/2020", "1300", 1));
+        appointmentList.getAppointmentList().add(new Appointment("18/03/2020", "1400", 1));
         Map<String, String> fieldsToChange = new HashMap<>();
         fieldsToChange.put("index", "3");
         DeleteAppointmentCommand command = new DeleteAppointmentCommand(fieldsToChange);

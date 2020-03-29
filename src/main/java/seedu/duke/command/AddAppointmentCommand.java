@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -75,7 +76,9 @@ public class AddAppointmentCommand extends Command {
 
         if (this.patientId == -1) {
             Ui.showWrongPid();
+            return;
         }
+
         Appointment appointment = new Appointment(this.date, this.time, this.patientId);
 
         /* Hacky method to add appointments into the appointment list.*/
