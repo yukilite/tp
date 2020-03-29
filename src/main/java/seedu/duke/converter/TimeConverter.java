@@ -36,4 +36,32 @@ public class TimeConverter {
         String newTime = simpleDateFormat2.format(time);
         return newTime;
     }
+
+    /**
+     * This method converts the time back into the format of dd/mm/yyyy.
+     * @param oldDate the time entered by the user.
+     * @return convertedDate the time in the desired format.
+     * @throws ParseException the error occurs if the time is not found.
+     */
+    public static String convertDate(String oldDate) throws ParseException {
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("EEE dd MMM yyyy");
+        Date date = simpleDateFormat1.parse(oldDate);
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
+        String convertedDate = simpleDateFormat2.format(date);
+        return convertedDate;
+    }
+
+    /**
+     * This method converts the old time back into the format of hh:mm.
+     * @param oldTime the time entered by the user.
+     * @return convertedTime the time in the desired format.
+     * @throws ParseException the error occurs if the time is not found.
+     */
+    public static String convertTime(String oldTime) throws ParseException {
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm a");
+        Date time = simpleDateFormat1.parse(oldTime);
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("HHmm");
+        String convertedTime = simpleDateFormat2.format(time);
+        return convertedTime;
+    }
 }
