@@ -9,6 +9,8 @@ import seedu.duke.command.DeletePatientCommand;
 import seedu.duke.command.EditAppointmentCommand;
 import seedu.duke.command.EditPatientCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.FindAppointmentCommand;
+import seedu.duke.command.FindPatientCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListAppointmentCommand;
 import seedu.duke.command.ListPatientCommand;
@@ -48,6 +50,9 @@ public class Parser {
     private static final String DELETE_APPOINTMENT = "deletea";
     private static final String LIST_APPOINTMENT = "lista";
 
+    public static final String FIND_APPOINTMENT = "finda";
+    public static final String FIND_PATIENTS = "findp";
+
     /**
      * This methods returns the command from the user input string.
      *
@@ -55,7 +60,7 @@ public class Parser {
      * @return the actual command to execute.
      */
     private String[] getCommand(String fullCommand) {
-        String[] splits = fullCommand.split(" " + REGEX_BACKSLASH, LIMIT);
+        String[] splits = fullCommand.split(" ", LIMIT);
         return splits;
     }
 
@@ -295,6 +300,13 @@ public class Parser {
         return appointmentFieldsToDelete;
     }
 
+    private String getSearchValue(String[] commandParsed) throws NoFieldCommandException {
+        if (commandParsed.length == 1) {
+            throw new NoFieldCommandException(commandParsed[0]);
+        }
+        return commandParsed[1];
+    }
+
     /**
      * Returns the specific type of command object.
      * Throws an UnknownCommandException for the caller to catch when user supplied an unknown command.
@@ -360,12 +372,13 @@ public class Parser {
     public Command parseCommand(String fullCommand) throws
             UnknownCommandException, InvalidIndexException, IndexNotIntegerException, NoFieldCommandException {
 
-        String[] commandParsed = getCommand(fullCommand);
+        String trimCommand = fullCommand.trim();
+        String[] commandParsed = getCommand(trimCommand);
         String commandAsString = commandParsed[COMMAND_INDEX].trim();
 
         Command command;
         Map<String, String> fieldsToChange;
-
+        String searchValue;
         switch (commandAsString) {
 
         case ADD_PATIENT:
@@ -397,6 +410,14 @@ public class Parser {
             fieldsToChange = getAppointmentFieldsDelete(fullCommand);
             command = getCommandObject(commandAsString, fieldsToChange);
             break;
+
+        case FIND_PATIENTS:
+            searchValue = getSearchValue(commandParsed);
+            return new FindPatientCommand(searchValue);
+
+        case FIND_APPOINTMENT:
+            searchValue = getSearchValue(commandParsed);
+            return new FindAppointmentCommand(searchValue);
 
         default:
             command = getCommandObject(commandAsString, null);
