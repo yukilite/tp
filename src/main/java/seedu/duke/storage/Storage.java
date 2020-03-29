@@ -62,7 +62,6 @@ public class Storage {
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
-            System.out.println(appointmentString);
             String[] patientFields = appointmentString.split(" \\| ", 2);
             assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
             for (String field : patientFields) {
