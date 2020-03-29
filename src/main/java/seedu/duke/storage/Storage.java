@@ -2,6 +2,7 @@ package seedu.duke.storage;
 
 
 import seedu.duke.converter.TimeConverter;
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.ui.Ui;
@@ -13,12 +14,14 @@ import java.io.IOException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Storage {
 
+    public static final String PATIENT_ID_SAVE_FILEPATH = "saves/patientId.txt";
+    public static final String WHITESPACE = " ";
     private static final String SAVE_DIRECTORY = "saves";
     private static final String APPOINTMENT_LIST_SAVE_FILEPATH = "saves/appointments.txt";
     private static final String PATIENT_LIST_SAVE_FILEPATH = "saves/patients.txt";
@@ -28,10 +31,16 @@ public class Storage {
     private static AppointmentList appointmentList;
     private String appointmentListSaveLocation;
     private String patientListSaveLocation;
+    private String patientIdSaveLocation;
+
+    /**
+     * Constructor for Storage.
+     */
 
     public Storage() {
         this.appointmentListSaveLocation = APPOINTMENT_LIST_SAVE_FILEPATH;
         this.patientListSaveLocation = PATIENT_LIST_SAVE_FILEPATH;
+        this.patientIdSaveLocation = PATIENT_ID_SAVE_FILEPATH;
     }
 
     /**
@@ -62,7 +71,7 @@ public class Storage {
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
-            String[] patientFields = appointmentString.split(" \\| ", 2);
+            String[] patientFields = appointmentString.split(" \\| ", 3);
             assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
@@ -73,8 +82,8 @@ public class Storage {
             String convertedDate = TimeConverter.convertDate(patientFields[0]);
             String convertedTime = TimeConverter.convertTime(patientFields[1]);
 
-            Appointment newAppointmentToLoad = new Appointment(convertedDate, convertedTime);
-            appointmentListToReturn.add(newAppointmentToLoad);
+            Appointment newAppointmentToLoad =
+                    new Appointment(convertedDate, convertedTime, Integer.parseInt(patientFields[3]));
         }
 
         return appointmentListToReturn;
@@ -117,7 +126,7 @@ public class Storage {
                 }
             }
             assert delimiterCount == 3 : "not enough fields in this line:";
-            String[] patientFields = patientString.split(" \\| ", 4);
+            String[] patientFields = patientString.split(" \\| ", 5);
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
@@ -126,13 +135,62 @@ public class Storage {
             if (patientFields[1].isEmpty()) {
                 patientFields[1] = "-1";
             }
-            Patient newPatientToLoad = new Patient(patientFields[0], Integer.parseInt(patientFields[1]),
-                    patientFields[2], patientFields[3]);
+            Patient newPatientToLoad =
+                    new Patient(patientFields[0], Integer.parseInt(patientFields[1]), patientFields[2],
+                            patientFields[3], Integer.parseInt(patientFields[4]));
             patientListToReturn.add(newPatientToLoad);
 
         }
 
+        loadPatientIdState();
+
         return patientListToReturn;
+    }
+
+    /**
+     * Load the state of the patient id(s) into our patient id management system.
+     *
+     * @throws FileNotFoundException if there is an error locating the file to save to.
+     */
+    private void loadPatientIdState() throws FileNotFoundException {
+
+        /* Preparing the file reader */
+        File patientIdSave = new File(this.patientIdSaveLocation);
+        if (!patientIdSave.exists()) {
+            File newDirectory = new File(SAVE_DIRECTORY);
+            boolean isNewDirectoryCreated = newDirectory.mkdir();
+            if (isNewDirectoryCreated) {
+                File newFile = new File(PATIENT_ID_SAVE_FILEPATH);
+                try {
+                    newFile.createNewFile();
+                } catch (IOException e) {
+                    Ui.showFailedToCreateFile();
+                }
+
+            } else {
+                Ui.showFailedToCreateDirectory();
+            }
+            throw new FileNotFoundException();
+
+        }
+
+        /* Actual file reading */
+        Scanner s = new Scanner(patientIdSave);
+
+        /* There is information saved about the patientIds */
+        if (s.hasNext()) {
+            PatientIdManager.setNextTopNewNumber(Integer.parseInt(s.nextLine()));
+        }
+
+        /* There are reusable patient id*/
+        if (s.hasNext()) {
+            String patientIdString = s.nextLine();
+            String[] patientIdStringArray = patientIdString.split(WHITESPACE);
+
+            for (String number : patientIdStringArray) {
+                PatientIdManager.addBackPatientId(Integer.parseInt(number));
+            }
+        }
     }
 
     /**
@@ -152,7 +210,9 @@ public class Storage {
 
         for (int i = 0; i < AppointmentList.getTotalAppointments(); i++) {
             Appointment newAppointmentData = AppointmentList.getAppointmentRecord(i);
-            newAppointmentString = newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + LS;
+            newAppointmentString =
+                    newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + PIPE_DELIMITER
+                            + newAppointmentData.getPatientId() + LS;
             fwAppointmentSave.write(newAppointmentString);
 
         }
@@ -167,6 +227,7 @@ public class Storage {
      */
     public void savePatientList() throws IOException {
 
+
         FileWriter fwPatientSave;
         try {
             fwPatientSave = new FileWriter(this.patientListSaveLocation);
@@ -177,15 +238,45 @@ public class Storage {
 
         for (int i = 0; i < PatientList.getTotalPatients(); i++) {
             Patient newPatientData = PatientList.getPatientRecord(i);
-            newPatientString = newPatientData.getName() + PIPE_DELIMITER
-                    + newPatientData.getAge() + PIPE_DELIMITER
-                    + newPatientData.getAddress() + PIPE_DELIMITER
-                    + newPatientData.getContactNumber() + LS;
+            newPatientString = newPatientData.getName() + PIPE_DELIMITER + newPatientData.getAge() + PIPE_DELIMITER
+                    + newPatientData.getAddress() + PIPE_DELIMITER + newPatientData.getContactNumber() + PIPE_DELIMITER
+                    + newPatientData.getPatientID() + LS;
             fwPatientSave.write(newPatientString);
 
         }
 
+        savePatientIdState();
         fwPatientSave.close();
+    }
+
+    /**
+     * Save the patient id management system state.
+     *
+     * @throws IOException if the file cannot be written for some reason
+     */
+    private void savePatientIdState() throws IOException {
+
+        /* Preparing file writer*/
+        FileWriter fwPatientIdSave = null;
+        try {
+            fwPatientIdSave = new FileWriter(this.patientIdSaveLocation);
+        } catch (IOException e) {
+            throw new IOException();
+        }
+
+        int tempNextTopNumber = PatientIdManager.getNextTopNewNumber();
+        Queue<Integer> tempQueue = PatientIdManager.getNextNumberQueueThing();
+
+        /* Saving of actual patient id management system state data */
+        fwPatientIdSave.write(tempNextTopNumber + LS);
+        if (!tempQueue.isEmpty()) {
+            for (Integer number : tempQueue) {
+                fwPatientIdSave.write(number + WHITESPACE);
+            }
+        }
+        fwPatientIdSave.close();
+
+
     }
 
 }

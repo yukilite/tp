@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -33,8 +34,11 @@ public class AddAppointmentCommand extends Command {
             + "Example: " + EXAMPLE;
     private static final String DATE = "date";
     private static final String TIME = "time";
+    private static final String PATIENT_ID = "pid";
+    public static final String PID = "pid";
     private String date;
     private String time;
+    private int patientId;
 
     /**
      * Constructor for the appointment class.
@@ -44,6 +48,11 @@ public class AddAppointmentCommand extends Command {
     public AddAppointmentCommand(Map<String, String> appointmentInfo) {
         this.date = appointmentInfo.get(DATE);
         this.time = appointmentInfo.get(TIME);
+        try {
+            this.patientId = Integer.parseInt(appointmentInfo.get(PID));
+        } catch (NumberFormatException e) {
+            this.patientId = -1;
+        }
     }
 
     public String getDate() {
@@ -64,7 +73,13 @@ public class AddAppointmentCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, ParseException {
-        Appointment appointment = new Appointment(this.date, this.time);
+
+        if (this.patientId == -1) {
+            Ui.showWrongPid();
+            return;
+        }
+
+        Appointment appointment = new Appointment(this.date, this.time, this.patientId);
 
         /* Hacky method to add appointments into the appointment list.*/
         AppointmentList.getAppointmentList().add(appointment);
