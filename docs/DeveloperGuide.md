@@ -166,16 +166,17 @@ creates the connection from the ```Main``` class to the other classes required s
 
 To add a patient, the ```AddPatientCommand``` class is used. For this ```AddPatientCommand``` class, it serves as the 
 façade class for the ```Main```, ```Patient``` , ```PatientList``` and the ```Storage``` class to interact with one 
-another. 
+another. Also, to uniquely identify a patient, an unique patientId number is assigned to each patient when they are first added into the patient list.
 
 ![](images/AddPatientDiagram.png)
 
 1. The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
-regarding the patient to be added will be stored in the ```AddPatientCommand``` class object. 
+regarding the patient to be added will be stored in a Map, where the ```AddPatientCommand``` class object would read the Map content and store the information about the patient in said ```AddPatientCommand``` class object. 
+For the patient Id number, it will call upon the static class ```patientIdManager``` to get its unique patient id number. This unique Id number will be used later in the ```Patient``` object creation too.
 
 2. When the 
 ```execute(Ui ui, Storage storage)``` command is called, the  ```AddPatientCommand``` would first make use of the 
-```Patient``` class constructor to create a new ```Patient``` object. 
+```Patient``` class constructor to create a new ```Patient``` object based on the information stored back in step 1. 
 
 3. After which, it would then call the 
 ```PatientList```’s ```getPatientList()``` command to get the ```List``` patient list object such that the ```Patient``` 
@@ -206,7 +207,8 @@ interact with one another.
 ![](images/AddAppointmentDiagram.png)
 
 1. Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
-object, where the information of the appointment is again stored in the ```AddAppoinmentCommand``` object. 
+object, where the information of the appointment is again stored in a Map that the ```AddAppoinmentCommand``` object would read from. 
+Said information will be stored in the ```AddAppoinmentCommand``` object
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
@@ -288,7 +290,7 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - Lower SRP and (SoC)
 
-###### 2.2.4.5.1 Aspect: Autosaving or no
+###### 2.2.4.5.2 Aspect: Autosaving or no
 
 + Alternative 1 (current choice): Allow for autosaving after each command execution
     * Pros: 
@@ -305,6 +307,21 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - No recovery (or rather, no recovery for recent information) when HAMS crashes 
 
+###### 2.2.4.5.3 Aspect: Generation of Patient Id
+
++ Alternative 1 (current choice): Allow the reuse of the patient Id from deleted 
+    * Pros: 
+        - Allow for reuse, which prevents the patient Id number from running out.
+       
+    * Cons:
+        - Slightly more complicated implementation. Also it means that there is more information that is required to be saved (such as the list of patient Id to be reused) when HAMS shuts down.
+
++ Alternative 2: Always pick a new number (don't reuse deleted patient Id number)
+    * Pros: 
+        - Easier to implement and keep track of. Also, it does not need to save much more information about the patient Id numbers (just need to save the last number assigned).
+       
+    * Cons:
+        - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
 
 
 
