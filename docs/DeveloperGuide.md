@@ -124,6 +124,26 @@ The converter module consists of one class which converts the format of date and
 
 #### 2.2.3 BRANDON storage module
 
+The command module consists of 3 different classes. 
+The PatientList and AppointmentList classes act as data structures to store the records of Patient and Appointment 
+objects respectively. They function as ADTs, where various commands from Command objects can manipulate the records within.
+The Storage class manages the load and save operations involving the PatientList and PatientList class. 
+These operations are usually invoked on startup, whenever changes are made to the ADTs and before exiting the program.
+The class diagram for the storage module is as seen below: 
+
+
+![](images/storageclass.png)
+
+&nbsp;
+
+On startup, the loadSavedAppointment() and loadSavedPatient() methods are invoked. This allows the program to retrieve 
+previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
+within the program.
+
+![](images/loadsavedappt_seq.png)
+
+{To add saveAppointment sequence diagram and writeup}
+
 ###### [Back to top](#table-of-content)
 
 #### 2.2.4 A&D command module 
