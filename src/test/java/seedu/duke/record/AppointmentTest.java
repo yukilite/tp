@@ -17,12 +17,12 @@ class AppointmentTest {
     @Test
     void testGetTime() throws ParseException {
         Appointment appointment = new Appointment("22/7/2020", "1230");
-        assertEquals("12:30 pm", appointment.getTime());
+        assertEquals("12:30 PM", appointment.getTime());
     }
 
     @Test
     void testToString() throws ParseException {
         Appointment appointment = new Appointment("22/7/2020", "1230");
-        assertEquals("{[Date]: Wed 22 Jul 2020 |[Time]: 12:30 pm}", appointment.toString());
+        assertEquals("{[Date]: Wed 22 Jul 2020 |[Time]: 12:30 PM}", appointment.toString());
     }
 }
