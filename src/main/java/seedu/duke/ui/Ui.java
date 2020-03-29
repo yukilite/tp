@@ -65,6 +65,10 @@ public class Ui {
         System.out.println("Received a non-integer for age, setting age to be -1.");
     }
 
+    public static void showPatientIdError() {
+        System.out.println("Something is wrong with the patientId given. Creating new patientId");
+    }
+
     public static void showUpdatePatientSuccess() {
         System.out.println("Patient updated successfully!");
     }
@@ -102,25 +106,16 @@ public class Ui {
      * Prints HAMS logo.
      */
     public void printHello() {
-        System.out.println("            .---------.\n"
-                + "       _    |:: [-=-] |\n"
-                + "      | |   |_________|\n"
-                + "      |~|\n"
-                + "      |_|                    ,;;;;,\n"
-                + "       I\\  ,__ ,;;;, __,    ///\\\\\\\\\\\n"
-                + "       I |{   / . . \\   }   / \"  \\\\||\n"
-                + "       I | ) (   _   ) (    \\_= _///\n"
-                + "       I |{___'-. .-'___}\\___ )_\\\n"
-                + "       I ||~/,'~~~~~,\\~~|'---((  \\\n"
-                + "       I \\ //        \\\\ |     \\ \\ \\\n"
-                + "       I  \\/         // |     | /-/\n"
-                + "       I (/         (/  |     |/||\\\n"
-                + "       I  |             |     |    |\n"
-                + "       I  |             |     |____/\n"
-                + "       I  :-----_o_-----:      || |\n"
-                + "       I  | /~~|===|~~\\ |      (( |\n"
-                + "       I  ||   |===|   ||      ||_/\n"
-                + "      /^\\ \"~   '^^^'   \"\"     ((__|");
+        System.out.println(
+                "            .---------.\n" + "       _    |:: [-=-] |\n" + "      | |   |_________|\n" + "      |~|\n"
+                        + "      |_|                    ,;;;;,\n" + "       I\\  ,__ ,;;;, __,    ///\\\\\\\\\\\n"
+                        + "       I |{   / . . \\   }   / \"  \\\\||\n" + "       I | ) (   _   ) (    \\_= _///\n"
+                        + "       I |{___'-. .-'___}\\___ )_\\\n" + "       I ||~/,'~~~~~,\\~~|'---((  \\\n"
+                        + "       I \\ //        \\\\ |     \\ \\ \\\n" + "       I  \\/         // |     | /-/\n"
+                        + "       I (/         (/  |     |/||\\\n" + "       I  |             |     |    |\n"
+                        + "       I  |             |     |____/\n" + "       I  :-----_o_-----:      || |\n"
+                        + "       I  | /~~|===|~~\\ |      (( |\n" + "       I  ||   |===|   ||      ||_/\n"
+                        + "      /^\\ \"~   '^^^'   \"\"     ((__|");
 
         System.out.println(" ____      ____  ________  _____       ______    ___   ____    ____  ________  \n"
                 + "|_  _|    |_  _||_   __  ||_   _|    .' ___  | .'   `.|_   \\  /   _||_   __  | \n"
@@ -154,7 +149,7 @@ public class Ui {
         }
         int currentIndex = 1;
         for (Appointment result : foundAppointments) {
-            System.out.println(Integer.toString(currentIndex) + result.toString());
+            System.out.println(currentIndex + result.toString());
         }
     }
 
@@ -171,8 +166,12 @@ public class Ui {
         }
         int currentIndex = 1;
         for (Patient result : foundPatients) {
-            System.out.println(Integer.toString(currentIndex) + result.toString());
+            System.out.println(currentIndex + result.toString());
         }
     }
 
+    public static void showWrongPid() {
+        System.out.println("Wrong pid. This will not be added to the appointment list.");
+
+    }
 }

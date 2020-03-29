@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.ui.Ui;
@@ -11,8 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Storage {
@@ -22,14 +23,22 @@ public class Storage {
     private static final String PATIENT_LIST_SAVE_FILEPATH = "saves/patients.txt";
     private static final String PIPE_DELIMITER = " | ";
     private static final String LS = System.lineSeparator();
+    public static final String PATIENT_ID_SAVE_FILEPATH = "saves/patientId.txt";
+    public static final String WHITESPACE = " ";
     private static PatientList patientList;
     private static AppointmentList appointmentList;
     private String appointmentListSaveLocation;
     private String patientListSaveLocation;
+    private String patientIdSaveLocation;
+
+    /**
+     * Constructor for Storage.
+     */
 
     public Storage() {
         this.appointmentListSaveLocation = APPOINTMENT_LIST_SAVE_FILEPATH;
         this.patientListSaveLocation = PATIENT_LIST_SAVE_FILEPATH;
+        this.patientIdSaveLocation = PATIENT_ID_SAVE_FILEPATH;
     }
 
     /**
@@ -111,7 +120,7 @@ public class Storage {
                 }
             }
             assert delimiterCount == 3 : "not enough fields in this line:";
-            String[] patientFields = patientString.split(" \\| ", 4);
+            String[] patientFields = patientString.split(" \\| ", 5);
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
@@ -120,13 +129,52 @@ public class Storage {
             if (patientFields[1].isEmpty()) {
                 patientFields[1] = "-1";
             }
-            Patient newPatientToLoad = new Patient(patientFields[0], Integer.parseInt(patientFields[1]),
-                    patientFields[2], patientFields[3]);
+            Patient newPatientToLoad =
+                    new Patient(patientFields[0], Integer.parseInt(patientFields[1]), patientFields[2],
+                            patientFields[3], Integer.parseInt(patientFields[4]));
             patientListToReturn.add(newPatientToLoad);
 
         }
 
+        loadPatientIdState();
+
         return patientListToReturn;
+    }
+
+    private void loadPatientIdState() throws FileNotFoundException {
+
+        File patientIdSave = new File(this.patientIdSaveLocation);
+        if (!patientIdSave.exists()) {
+            File newDirectory = new File(SAVE_DIRECTORY);
+            boolean isNewDirectoryCreated = newDirectory.mkdir();
+            if (isNewDirectoryCreated) {
+                File newFile = new File(PATIENT_ID_SAVE_FILEPATH);
+                try {
+                    newFile.createNewFile();
+                } catch (IOException e) {
+                    Ui.showFailedToCreateFile();
+                }
+
+            } else {
+                Ui.showFailedToCreateDirectory();
+            }
+            throw new FileNotFoundException();
+
+        }
+
+        Scanner s = new Scanner(patientIdSave);
+
+        if (s.hasNext()) {
+            PatientIdManager.setNextTopNewNumber(Integer.parseInt(s.nextLine()));
+        }
+        if (s.hasNext()) {
+            String patientIdString = s.nextLine();
+            String[] patientIdStringArray = patientIdString.split(WHITESPACE);
+
+            for (String number : patientIdStringArray) {
+                PatientIdManager.addBackPatientId(Integer.parseInt(number));
+            }
+        }
     }
 
     /**
@@ -146,7 +194,9 @@ public class Storage {
 
         for (int i = 0; i < AppointmentList.getTotalAppointments(); i++) {
             Appointment newAppointmentData = AppointmentList.getAppointmentRecord(i);
-            newAppointmentString = newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + LS;
+            newAppointmentString =
+                    newAppointmentData.getDate() + PIPE_DELIMITER + newAppointmentData.getTime() + PIPE_DELIMITER
+                            + newAppointmentData.getPatientId() + LS;
             fwAppointmentSave.write(newAppointmentString);
 
         }
@@ -171,15 +221,38 @@ public class Storage {
 
         for (int i = 0; i < PatientList.getTotalPatients(); i++) {
             Patient newPatientData = PatientList.getPatientRecord(i);
-            newPatientString = newPatientData.getName() + PIPE_DELIMITER
-                    + newPatientData.getAge() + PIPE_DELIMITER
-                    + newPatientData.getAddress() + PIPE_DELIMITER
-                    + newPatientData.getContactNumber() + LS;
+            newPatientString = newPatientData.getName() + PIPE_DELIMITER + newPatientData.getAge() + PIPE_DELIMITER
+                    + newPatientData.getAddress() + PIPE_DELIMITER + newPatientData.getContactNumber() + PIPE_DELIMITER
+                    + newPatientData.getPatientID() + LS;
             fwPatientSave.write(newPatientString);
 
         }
 
+        savePatientIdState();
         fwPatientSave.close();
+    }
+
+    private void savePatientIdState() throws IOException {
+
+        FileWriter fwPatientIdSave = null;
+        try {
+            fwPatientIdSave = new FileWriter(this.patientIdSaveLocation);
+        } catch (IOException e) {
+            throw new IOException();
+        }
+
+        int tempNextTopNumber = PatientIdManager.getNextTopNewNumber();
+        Queue<Integer> tempQueue = PatientIdManager.getNextNumberQueueThing();
+
+        fwPatientIdSave.write(tempNextTopNumber + LS);
+        if (!tempQueue.isEmpty()) {
+            for (Integer number : tempQueue) {
+                fwPatientIdSave.write(number + WHITESPACE);
+            }
+        }
+        fwPatientIdSave.close();
+
+
     }
 
 }
