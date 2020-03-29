@@ -25,6 +25,7 @@ import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.NoKeyExistException;
+import seedu.duke.exceptions.PidEmptyException;
 import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
@@ -243,13 +244,16 @@ public class Parser {
      * @see AppointmentFieldKeys
      * @see #findValue(String fullcommand, String key) value returned by this method will be stored at key.
      */
-    private Map<String, String> getAppointmentFieldsAdd(String fullCommand) throws NoFieldCommandException {
+    private Map<String, String> getAppointmentFieldsAdd(String fullCommand) throws NoFieldCommandException,
+            PidEmptyException {
 
         Map<String, String> appointmentFieldsToAdd = new HashMap<>();
         fillAppointmentFields(fullCommand, appointmentFieldsToAdd);
 
         /* check if there is at least 1 field inside. */
         DukeExceptions.checkFieldEmptyAddAppointment(appointmentFieldsToAdd);
+
+        DukeExceptions.checkPidEmpty(appointmentFieldsToAdd);
 
         return appointmentFieldsToAdd;
     }
@@ -396,7 +400,8 @@ public class Parser {
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
     public Command parseCommand(String fullCommand) throws
-            UnknownCommandException, InvalidIndexException, IndexNotIntegerException, NoFieldCommandException {
+            UnknownCommandException, InvalidIndexException, IndexNotIntegerException, NoFieldCommandException,
+            PidEmptyException {
 
         String trimCommand = fullCommand.trim();
         String[] commandParsed = getCommand(trimCommand);
