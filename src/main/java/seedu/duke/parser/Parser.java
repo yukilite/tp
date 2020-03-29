@@ -25,6 +25,7 @@ import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Parser {
     private static final int COMMAND_INDEX = 0;
@@ -52,6 +53,8 @@ public class Parser {
 
     public static final String FIND_APPOINTMENT = "finda";
     public static final String FIND_PATIENTS = "findp";
+
+    public static final String UNIQUE_ID = "uniqueID";
 
     /**
      * This methods returns the command from the user input string.
@@ -133,6 +136,9 @@ public class Parser {
 
         //check if there is at least 1 field inside.
         DukeExceptions.checkFieldEmptyAddPatient(patientFieldsToAdd);
+
+        String uniqueID = UUID.randomUUID().toString();
+        patientFieldsToAdd.put(UNIQUE_ID, uniqueID);
 
         return patientFieldsToAdd;
     }
