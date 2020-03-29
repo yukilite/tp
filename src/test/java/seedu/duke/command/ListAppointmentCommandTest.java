@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,11 +18,11 @@ class ListAppointmentCommandTest {
 
     @Test
     void testListWithPatients() {
-        int ui = 1;
-        int storage = 1;
+        Ui ui = null;
+        Storage storage = null;
         int savedAppointmentList = 1;
         AppointmentListStub.createList(savedAppointmentList);
-        ListAppointmentCommandStub listAppointmentCommandStub = new ListAppointmentCommandStub();
+        ListAppointmentCommand listAppointmentCommandStub = new ListAppointmentCommandStub();
 
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -31,13 +33,13 @@ class ListAppointmentCommandTest {
 
     @Test
     void testListWithoutPatients() {
-        int ui = 1;
-        int storage = 1;
+        Ui ui = null;
+        Storage storage = null;
 
         int savedAppointmentList = 2;
 
         PatientListStub.createList(savedAppointmentList);
-        ListAppointmentCommandStub listAppointmentCommandStub = new ListAppointmentCommandStub();
+        ListAppointmentCommand listAppointmentCommandStub = new ListAppointmentCommandStub();
 
         /** Reused from https://coderanch.com/t/587280/java/assertEquals-println **/
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

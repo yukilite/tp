@@ -1,11 +1,14 @@
 package seedu.duke.command;
 
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
+
 import java.util.List;
 
 /**
  * Stub class for ListPatientCommand.
  */
-public class ListPatientCommandStub {
+public class ListPatientCommandStub extends ListPatientCommand {
     public ListPatientCommandStub() {
     }
 
@@ -15,7 +18,7 @@ public class ListPatientCommandStub {
      * @param ui      stub ui
      * @param storage stub storage
      */
-    public void execute(int ui, int storage) {
+    public void execute(Ui ui, Storage storage) {
         List<PatientStub> patientListStub = PatientListStub.getPatientList(); //getPatientList() method by @Brandonnn
         for (PatientStub p : patientListStub) {
             System.out.println(p); //override Patient class toString by @Sammmmm
