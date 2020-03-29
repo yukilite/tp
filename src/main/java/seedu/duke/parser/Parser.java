@@ -17,7 +17,6 @@ import seedu.duke.command.FindPatientCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListAppointmentCommand;
 import seedu.duke.command.ListPatientCommand;
-import seedu.duke.command.SaveCommand;
 import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
@@ -381,9 +380,6 @@ public class Parser {
 
         case CLEAR_ALL_COMMAND:
             return new ClearAllCommand();
-
-        case SAVE_COMMAND:
-            return new SaveCommand();
 
         default:
             DukeExceptions.throwUnknownCommand();
