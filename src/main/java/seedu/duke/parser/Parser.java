@@ -3,6 +3,9 @@ package seedu.duke.parser;
 import seedu.duke.Duke;
 import seedu.duke.command.AddAppointmentCommand;
 import seedu.duke.command.AddPatientCommand;
+import seedu.duke.command.ClearAllCommand;
+import seedu.duke.command.ClearAppointmentCommand;
+import seedu.duke.command.ClearPatientCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteAppointmentCommand;
 import seedu.duke.command.DeletePatientCommand;
@@ -14,6 +17,7 @@ import seedu.duke.command.FindPatientCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListAppointmentCommand;
 import seedu.duke.command.ListPatientCommand;
+import seedu.duke.command.SaveCommand;
 import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
@@ -55,6 +59,10 @@ public class Parser {
     public static final String FIND_PATIENTS = "findp";
 
     public static final String UNIQUE_ID = "uniqueID";
+    public static final String CLEAR_PATIENTS_COMMAND = "clearp";
+    public static final String CLEAR_APPOINTMENTS_COMMAND = "cleara";
+    public static final String CLEAR_ALL_COMMAND = "clearall";
+    public static final String SAVE_COMMAND = "save";
 
     /**
      * This methods returns the command from the user input string.
@@ -360,6 +368,18 @@ public class Parser {
 
         case EXIT_COMMAND:
             return new ExitCommand();
+
+        case CLEAR_PATIENTS_COMMAND:
+            return new ClearPatientCommand();
+
+        case CLEAR_APPOINTMENTS_COMMAND:
+            return new ClearAppointmentCommand();
+
+        case CLEAR_ALL_COMMAND:
+            return new ClearAllCommand();
+
+        case SAVE_COMMAND:
+            return new SaveCommand();
 
         default:
             DukeExceptions.throwUnknownCommand();
