@@ -234,14 +234,14 @@ For the 4 classes listed, there were some other design considerations that was d
             - Allow for recovery when crashing
             - Negligible performance effect on higher end computer system
        
-       * Cons:
+    * Cons:
             - Since saving is writing to disk, it may be an expensive process for weaker computer system. Weaker computer system may be slowed down by the constant saving
 
 + Alternative 2: Save only when exiting HAMS
     * Pros: 
             - Faster, especially for weaker computer systems
        
-       * Cons:
+    * Cons:
             - No recovery (or rather, no recovery for recent information) when HAMS crashes 
 
 
