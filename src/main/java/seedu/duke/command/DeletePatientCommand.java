@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -72,6 +73,9 @@ public class DeletePatientCommand extends Command {
         try {
             // Get the patient's record based on its index from the list
             Patient patient = PatientList.getPatientRecord(patientIndex - 1);
+
+            // Add back the patient id
+            PatientIdManager.addBackPatientId(patient.getPatientID());
 
             // Get the original appointment's list size
             int originalSize = PatientList.getTotalPatients();
