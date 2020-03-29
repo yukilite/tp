@@ -30,7 +30,7 @@ import java.util.List;
 public class FindAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "finda";
-    private static final String EXAMPLE = "finda 20-12-2020";
+    private static final String EXAMPLE = "finda 20/12/2020";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find an appointment by keyword.\n"
             + "Example: " + EXAMPLE;
     private String searchValue;

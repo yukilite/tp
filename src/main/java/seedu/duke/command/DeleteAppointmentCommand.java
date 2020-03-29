@@ -68,6 +68,7 @@ public class DeleteAppointmentCommand extends Command {
      * @see IOException
      * @see AppointmentList#getAppointmentRecord
      * @see Storage#saveAppointmentsList
+     * @see Ui#showDeleteAppointmentSuccess()
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {

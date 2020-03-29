@@ -134,6 +134,7 @@ public class EditPatientCommand extends Command {
      * @see PatientList#getPatientRecord
      * @see Patient#setPatientInfo
      * @see Storage#savePatientList
+     * @see Ui#showUpdatePatientSuccess
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {

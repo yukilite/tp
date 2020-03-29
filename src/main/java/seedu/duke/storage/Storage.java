@@ -72,7 +72,7 @@ public class Storage {
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
             String[] patientFields = appointmentString.split(" \\| ", 3);
-            assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
+            //assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
@@ -126,7 +126,7 @@ public class Storage {
                     delimiterCount++;
                 }
             }
-            assert delimiterCount == 3 : "not enough fields in this line:";
+            //assert delimiterCount == 3 : "not enough fields in this line:";
             String[] patientFields = patientString.split(" \\| ", 5);
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
