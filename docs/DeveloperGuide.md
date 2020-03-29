@@ -1,5 +1,6 @@
 # Developer Guide
 
+# Table of content
 <!-- TOC -->
 * [1. Introduction](#1-introduction)
     + [1.1. Purpose](#11-purpose)
@@ -35,6 +36,8 @@ operators and maintenance engineers. The below table summarizes the purposes of 
 audience.
 
 
+
+
 |Role|Purpose|
 |---------|-------|
 |Developers & Designers| To understand the architecture and follow the design to build the system|
@@ -52,6 +55,8 @@ audience.
 * *BRANDON* - Short for BRillant Ahead of its time Neat Dainty OrigNal, it is an acronym to describe the custom 
 implementation of the save file structure. 
 * *A&D* - Short of Amazing & Dazzling, it is an acronym to describe the command module.
+
+[Back to top](#table-of-content)
 
 ## 2. Design & Implementation
 ### 2.1 Project overview
@@ -73,7 +78,13 @@ name and a summarized purpose.
 |Parser|Parses the user input for command execution|
 
 #### 2.2.1 SAM record module
+
+[Back to top](#table-of-content)
+
 #### 2.2.2 BRANDON storage module
+
+[Back to top](#table-of-content)
+
 #### 2.2.3 A&D command module 
 
 The command module consist of 11 different classes, where each class does a different command by itself. 
@@ -98,14 +109,22 @@ another.
 
 ![](images/AddPatientDiagram.png)
 
-The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
-regarding the patient to be added will be stored in the ```AddPatientCommand``` class object. When the 
+1. The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
+regarding the patient to be added will be stored in the ```AddPatientCommand``` class object. 
+
+2. When the 
 ```execute(Ui ui, Storage storage)``` command is called, the  ```AddPatientCommand``` would first make use of the 
-```Patient``` class constructor to create a new ```Patient``` object. After which, it would then call the 
+```Patient``` class constructor to create a new ```Patient``` object. 
+
+3. After which, it would then call the 
 ```PatientList```’s ```getPatientList()``` command to get the ```List``` patient list object such that the ```Patient``` 
-object created beforehand can directly be inserted into the patient list. After adding the patient into the patient list 
+object created beforehand can directly be inserted into the patient list. 
+
+4. After adding the patient into the patient list 
 object, the ```Storage```’s ```savePatientList()``` function will be called next so that the newly update list of 
-```patient``` is saved as offline data.  When this operation is successful, it will call upon the ```Ui``` class’ 
+```patient``` is saved as offline data.  
+
+5. When the above operation is successful, it will call upon the ```Ui``` class’ 
 ```showPatientAddSuccess()``` function to display the success of adding the ```Patient``` object into the patient list.
 
 If the supplied patient age is a word or is missing, the age will be set to ```-1```. This value is chosen to indicate 
@@ -115,8 +134,9 @@ instead.
 Below shows the sequence diagram for ```AddPatientCommand``` class
 
 ![](images/AddPatientCommandSequence.png)
+ 
 
-##### 2.2.3.1 AddAppointmentClass
+##### 2.2.3.2 AddAppointmentClass
 
 To add an appointment, the ```AddAppointmentCommand``` class is used. For this ```AddAppointmentCommand``` class, it 
 serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
@@ -124,14 +144,22 @@ interact with one another.
 
 ![](images/AddAppointmentDiagram.png)
 
-Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
-object, where the information of the appointment is again stored in the ```AddAppoinmentCommand``` object. When 
+1. Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
+object, where the information of the appointment is again stored in the ```AddAppoinmentCommand``` object. 
+
+2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
-```Appointment``` class to make an ```Appointment``` Object. After which, the ```AddAppoinmentCommand``` object will 
+```Appointment``` class to make an ```Appointment``` Object. 
+
+3. After which, the ```AddAppoinmentCommand``` object will 
 call upon the ```AppointmentList``` object to obtain the list of ```Appointments``` (get the ```List``` object that 
 represents the list of appointments by ```AppointmentList```’s ```getAppointmentList()``` command) so that it can 
-directly add the new ```Appointment``` object into the appointment list. Finally, it will call upon the ```Storage``` 
-class’s ```saveAppoinmentList()``` function to save the updated appointment list. Upon successfully adding the 
+directly add the new ```Appointment``` object into the appointment list. 
+
+4. Finally, it will call upon the ```Storage``` 
+class’s ```saveAppoinmentList()``` function to save the updated appointment list. 
+
+5. Upon successfully adding the 
 ```Appointment``` object into the appointment list, it will call upon the ```Ui``` class’ 
 ```showAppointmentAddSuccess()``` function to display the success of adding the ```appointment``` into the appointment 
 list.
@@ -140,15 +168,17 @@ Below shows the sequence diagram for ```AddAppointmentCommand``` class
 
 ![](images/AddAppointCommandSequence.png)
 
-##### 2.2.3.1 ListPatientClass
+##### 2.2.3.3 ListPatientClass
 
 To display the list of patients, the ```ListPatientCommand``` class is called. This class serves as a façade class of 
 ```Main``` and ```Ui``` to interact with each other. 
 
 ![](images/ListPatientDiagram.png)
 
-This class is first created by the ```Parser``` class, where it is then returned to the ```Main``` class to have its
-```execute(Ui ui, Storage storage)``` function be called. When the ```Main``` class calls the 
+1. This class' object is first created by the ```Parser``` class, where it is then returned to the ```Main``` class to have its
+```execute(Ui ui, Storage storage)``` function be called. 
+
+2. When the ```Main``` class calls the 
 ```execute(Ui ui, Storage storage)``` function, ```ListPatientCommand``` will call upon the ```Ui```’s 
 ```showEntirePatientList()``` function to display the list of patients.
 
@@ -156,21 +186,65 @@ Below shows the sequence diagram for ```ListPatientCommand``` class
 
 ![](images/ListPatientCommandSequence.png)
 
-##### 2.2.3.1 ListAppointmentClass
+##### 2.2.3.4 ListAppointmentClass
 
 To display the list of appointments, the ```ListAppointmentCommand``` class is called. This class serves as a façade 
 class of ```Main``` and ```Ui``` to interact with each other. 
 
 ![](images/ListAppointmentDiagram.png)
 
-This class is first created by the ```Parser``` class, where it is then returned to the ```Main``` class to 
-have its ```execute(Ui ui, Storage storage)``` function be called. When the ```Main``` class calls the 
+1. This class' object is first created by the ```Parser``` class, where it is then returned to the ```Main``` class to 
+have its ```execute(Ui ui, Storage storage)``` function be called. 
+
+2. When the ```Main``` class calls the 
 ```execute(Ui ui, Storage storage)``` function, ```ListAppointmentCommand``` will call upon the ```Ui```’s 
 ```showEntireAppointmentList()``` function to display the list of appointments.
 
 Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 ![](images/ListAppointmentCommandSequence.png)
+
+[Back to top](#table-of-content)
+
+##### 2.2.3.5 Design considerations
+
+For the 4 classes listed, there were some other design considerations that was discussed for these 4 classes. Here, we will discuss the other choices and the pros and cons for them.
+
+###### 2.2.3.5.1 Aspect: Facade classes
++ Alternative 1 (current choice): Making all 4 classes facade classes
+   
+   * Pros: 
+        - Stronger Single Responsibility Principle (SRP) and Separation of Concerns Principle (SoC)
+   
+   * Cons:
+        - Higher dependencies and couplings on the other classes to work.
+
++ Alternative 2: Put the actual adding logic into the classes
+
+    * Pros:
+        - Weaker dependency and couplings on the other classes
+    
+    * Cons:
+        - Lower SRP and (SoC)
+
+###### 2.2.3.5.1 Aspect: Autosaving or no
+
++ Alternative 1 (current choice): Allow for autosaving after each command execution
+    * Pros: 
+            - Allow for recovery when crashing
+            - Negligible performance effect on higher end computer system
+       
+       * Cons:
+            - Since saving is writing to disk, it may be an expensive process for weaker computer system. Weaker computer system may be slowed down by the constant saving
+
++ Alternative 2: Save only when exiting HAMS
+    * Pros: 
+            - Faster, especially for weaker computer systems
+       
+       * Cons:
+            - No recovery (or rather, no recovery for recent information) when HAMS crashes 
+
+
 
 
 #### 2.2.4 Parser module
@@ -311,7 +385,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
         -   All command depends on this common method to parse fields, if the method changes, it may return the wrong
         result for some commands. 
 
-
+[Back to top](#table-of-content)
 
 ## 3. User Stories
 
@@ -328,6 +402,8 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |v1.0|admin assistant|save my data on shutdown|continue my work the next day|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
+[Back to top](#table-of-content)
+
 ## 4. Non-Functional Requirements
 * HAMS should be usable with minimal training, all commands should be self-explanatory and viewing the in-application
 help menu should be sufficient for basic usage. 
@@ -341,11 +417,15 @@ appointment list should be saved. In addition, user should be able to manually s
 * 
 
 
+
 **TODO**
 {Give non-functional requirements}
 
+[Back to top](#table-of-content)
 
 ## 5. Instructions for Manual Testing
 
 **TODO**
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+[Back to top](#table-of-content)
