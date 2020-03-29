@@ -1,4 +1,4 @@
-# User Guide For Hospital Management System v1.0
+# User Guide For Hospital Management System v2.0
 
 # Table of content
 <!-- TOC -->
