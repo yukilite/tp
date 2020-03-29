@@ -13,20 +13,32 @@ import java.util.Date;
 public class Appointment {
     private String date;
     private String time;
+    private int patientId;
 
     /**
      * This constructor converts the input date and time into the desired format. During initialization, the date
      * and time will be in the right format.
-     * @param date the date input by user.
-     * @param time the time input by user.
+     *
+     * @param date      the date input by user.
+     * @param time      the time input by user.
+     * @param patientId the patientid of the patient of this appointment.
      * @throws ParseException this error occurs when date or string is empty.
      */
-    public Appointment(String date, String time) throws ParseException {
+    public Appointment(String date, String time, int patientId) throws ParseException {
         assert date != null;
         assert time != null;
 
         this.date = TimeConverter.oldDate(date);
         this.time = TimeConverter.oldTime(time);
+        this.patientId = patientId;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getDate() {
@@ -69,10 +81,11 @@ public class Appointment {
      *
      * @return newToString The formatted string
      */
-    @Override
-    public String toString() {
+    @Override public String toString() {
         String newToString = null;
-        newToString = "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + "}";
+        newToString =
+                "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + " | " + "[PatientId]: "
+                        + getPatientId() + "}";
         return newToString;
     }
 
