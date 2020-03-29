@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 
-import seedu.duke.exceptions.DescriptionIsEmptyException;
 import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.UnknownCommandException;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.text.ParseException;
 import java.util.Scanner;
-
 
 public class Duke {
     public static int patientIndexNumber;
