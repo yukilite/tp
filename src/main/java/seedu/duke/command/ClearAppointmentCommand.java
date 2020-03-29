@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 /**
- * Clear all appointments from appointments' list
+ * Clear all appointments from appointments' list.
  *
  * @author Nguyen Thanh Duc
  * @version 2.0
@@ -25,12 +25,12 @@ public class ClearAppointmentCommand extends Command {
 
     /**
      * Method to clear all appointments in the list if available, if
-     * there is nothing to clear return a warning to users
+     * there is nothing to clear return a warning to users.
      *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @throws IOException
-     * @throws ParseException
+     * @throws IOException when there is error in the index's input
+     * @throws ParseException when there is error in the index's input
      * @see IOException
      * @see ParseException
      * @see DukeExceptions#checkEmptyAppointments
