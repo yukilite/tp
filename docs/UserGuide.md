@@ -400,10 +400,15 @@ Format: `exit`
 
    Command    |   Description 
    ------------- | ---------------
-`adda \date [date] \time [time]` |  Adds date and time of an appointment
+`adda \date [date] \time [time] \pid [pid]` |  Adds date and time of an appointment and links it to a patient based on their id
 `addp \name [name] \age [age] \address [address] \phone [phone]` | Adds name, age, address, and contact number of patient
+`finda [search value]`| Searches through all appointment records for the search value
+`findp [search value]`| Searches through all patient records for the search value
 `lista` | List all the appointments from the appointment's list
 `listp` | List all the patients from the patient's list
+`cleara`| Clears all appointment records
+`clearp`| Clears all patient records
+`clearall`| Clears both appointment and patient records
 `deletea \index [appointment number in list]` | Delete an appointment by the list's appointment number
 `deletep \index [patient number in list]` | Delete a patient by the list's patient number
 `edita \index [appointmentNumber] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
