@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.converter.TimeConverter;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.ui.Ui;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,6 +62,7 @@ public class Storage {
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
+            System.out.println(appointmentString);
             String[] patientFields = appointmentString.split(" \\| ", 2);
             assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
             for (String field : patientFields) {
@@ -67,7 +70,11 @@ public class Storage {
                     field = null;
                 }
             }
-            Appointment newAppointmentToLoad = new Appointment(patientFields[0], patientFields[1]);
+
+            String convertedDate = TimeConverter.convertDate(patientFields[0]);
+            String convertedTime = TimeConverter.convertTime(patientFields[1]);
+
+            Appointment newAppointmentToLoad = new Appointment(convertedDate, convertedTime);
             appointmentListToReturn.add(newAppointmentToLoad);
         }
 
