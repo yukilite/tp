@@ -56,7 +56,7 @@ audience.
 implementation of the save file structure. 
 * *A&D* - Short of Amazing & Dazzling, it is an acronym to describe the command module.
 
-######[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
 
 ## 2. Design & Implementation
 ### 2.1 Project overview
@@ -79,11 +79,11 @@ name and a summarized purpose.
 
 #### 2.2.1 SAM record module
 
-######[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
 
 #### 2.2.2 BRANDON storage module
 
-######[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
 
 #### 2.2.3 A&D command module 
 
@@ -204,7 +204,7 @@ Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 ![](images/ListAppointmentCommandSequence.png)
 
-[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
 
 ##### 2.2.3.5 Design considerations
 
@@ -385,7 +385,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
         -   All command depends on this common method to parse fields, if the method changes, it may return the wrong
         result for some commands. 
 
-######[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
 
 ## 3. User Stories
 
@@ -402,7 +402,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |v1.0|admin assistant|save my data on shutdown|continue my work the next day|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-######[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
 
 ## 4. Non-Functional Requirements
 * HAMS should be usable with minimal training, all commands should be self-explanatory and viewing the in-application
@@ -421,11 +421,11 @@ appointment list should be saved. In addition, user should be able to manually s
 **TODO**
 {Give non-functional requirements}
 
-######[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
 
 ## 5. Instructions for Manual Testing
 
 **TODO**
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
-######[Back to top](#table-of-content)
+###### [Back to top](#table-of-content)
