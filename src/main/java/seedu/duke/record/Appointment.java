@@ -24,6 +24,7 @@ public class Appointment {
     public Appointment(String date, String time) throws ParseException {
         assert date != null;
         assert time != null;
+
         this.date = TimeConverter.oldDate(date);
         this.time = TimeConverter.oldTime(time);
     }
