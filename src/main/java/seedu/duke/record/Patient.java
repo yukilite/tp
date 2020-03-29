@@ -28,6 +28,7 @@ public class Patient {
     }
 
     public String getName() {
+        assert name != null;
         return name;
     }
 
@@ -38,6 +39,7 @@ public class Patient {
      */
     public void setName(String name) {
         if (!name.isBlank()) {
+            assert name != null;
             this.name = name;
         }
     }
@@ -52,6 +54,7 @@ public class Patient {
      * @param age age that needs to be updated
      */
     public void setAge(int age) {
+        assert age >= 0;
         if (age >= 0) {
             this.age = age;
         }
@@ -72,6 +75,7 @@ public class Patient {
      */
     public void setAddress(String address) {
         if (!address.isBlank()) {
+            assert address != null;
             this.address = address;
         }
     }
@@ -87,6 +91,7 @@ public class Patient {
      */
     public void setContactNumber(String contactNumber) {
         if (!contactNumber.isBlank()) {
+            assert contactNumber != null;
             this.contactNumber = contactNumber;
         }
     }

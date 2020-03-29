@@ -6,6 +6,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Map;
 
 /**
@@ -121,7 +122,7 @@ public class EditAppointmentCommand extends Command {
 
             // Show updated successfully message
             Ui.showUpdateAppointmentSuccess();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | ParseException e) {
             return;
         }
     }

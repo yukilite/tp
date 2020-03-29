@@ -5,6 +5,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +60,7 @@ class AddAppointmentCommandTest {
     }
 
     @Test
-    void testAddNormalString() throws IOException {
+    void testAddNormalString() throws IOException, ParseException {
         Ui ui = null;
         Storage storage = null;
         Map<String, String> tempMap = AddAppointmentCommandStub.generateMap(1);

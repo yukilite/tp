@@ -27,19 +27,24 @@
 
 ## 1. Introduction
 
-HAMS is a CLI-based medical facility administration system that assists in the maintenance of various medical records.  
-Its functionality has some resemblance to the Duke ChatBot, a CS2113 individual project.
+This document serves as a user guide for HAMS. It teaches the user how to install HAMS, describes the features of HAMS, 
+explains how HAMS can be used and finally answer some frequently asked questions about HAMS.
+ 
+HAMS is a CLI-based medical facility administration system that assists in the maintenance of various medical records. 
 
 HAMS is designed for administrative assistants in medical facilities, like hospitals or polyclinics, that *prefer using
 CLI to keep track of various medical records* and *can type fast*.
+
     
 ### 1.1 Starting HAMS
 1. Ensure you have JDK 11 installed on your computer. You can download the installer for your OS from [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 2. Download the latest .jar file release for HAMS from [GitHub](https://github.com/AY1920S2-CS2113T-T13-3/tp/releases).
 3. Move the .jar to an empty folder.
 4. Open Command Prompt.
-5. In Command Prompt, change your current working directory to the folder containing the .jar using `cd <Path of folder containing .jar>`
-6. Run the .jar using `$ java -jar hams-1.0.jar`
+5. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
+6. Run the .jar using $ `java -jar hams-1.0.jar`
+
+[Back to top](#table-of-content)
  
 &nbsp;
 
@@ -55,6 +60,8 @@ The `lista` or `listp` command that HAMS provides can display all the Appointmen
 HAMS has an auto-save feature which stores Patient and Appointments every time you add or modify them. 
 With this feature, your tasks will be saved every time you leave the application and can be easily retrieved when you reopen the application subsequently.
 
+[Back to top](#table-of-content)
+
 &nbsp;
 
 ## 3. Command Format
@@ -68,11 +75,13 @@ For example, in `adda \date [date] \time [time]`, `adda` is the command keyword 
 
 A valid input would be `adda \date Mar 17 \time 2pm`.
 
+[Back to top](#table-of-content)
+
 &nbsp;
 
 ## 4. Command Usage
 
-### 4.1 `Patient` Commands
+### 4.1 Patient Commands
 
 #### 4.1.1 Add a new Patient record
 
@@ -91,7 +100,7 @@ Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 > For versions beyond 1.0, the above fields will have certain limits and validation of text and numbers imposed
 >upon.
 
-Examples of Usage
+##### Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
@@ -104,6 +113,8 @@ NOT OK | `addp` | ![](images/addp%20fail.PNG)
 > In the correct usage examples, the input order of the keywords can be randomized.  
 >
 >
+
+
 #### 4.1.2 List all existing Patients
 
 The command simply contains the 'listp' keyword.
@@ -174,8 +185,9 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 ##### Expected outcome:
 ![](images/editp_fail.PNG)
 
+[Back to top](#table-of-content)
 
-### 4.2 `Appointment` Commands
+### 4.2 Appointment Commands
 
 #### 4.2.1 Add a new Appointment record
 
@@ -258,8 +270,11 @@ Illustration will be displayed in the command's format and usage.
 ##### Expected outcome:
 <img src ="images/edita_eg1.PNG" width = "400">
 
-##### Result:
-<img src ="images/edita_eg1after.PNG" width = "400">
+###### Before:
+![](images/edita_before%20-%20crop.PNG)
+
+###### After:
+![](images/edita_eg1after%20-%20Crop.PNG)
 
 #### Example of usage: 
 `edita \index 3 \time 10pm \date 16-03-2020`
@@ -267,9 +282,16 @@ Illustration will be displayed in the command's format and usage.
 ##### Expected outcome:
 <img src ="images/edita_eg2.PNG" width = "400">
 
-##### Result:
+###### Before:
+![](images/edita_eg1after%20-%20Crop.PNG)
+
+###### After:
+![](images/edita_eg2after-crop.png)
+
+##### Final list:
 <img src ="images/edita_eg2after.PNG" width = "400">
 
+[Back to top] (#table-of-content)
 
 ### 4.3 View help
 
@@ -283,6 +305,8 @@ Format: `help`
 ##### Expected outcome 
 ![](images/help.PNG)
 
+[Back to top](#table-of-content)
+
 ### 4.4 Exit HAMS program
 
 This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in `/saves/appointments.txt` or `/saves/patients.txt`). These files will be loaded to the program when it is run again subsequently.
@@ -293,6 +317,8 @@ Format: `exit`
 
 ##### Expected outcome: 
 <img src ="images/exit_eg1.PNG" width = "400">
+
+[Back to top](#table-of-content)
 
 ## 5. Command Summary
 
@@ -322,5 +348,7 @@ Format: `exit`
 * `{[Name]: Tommy | [Age]: -1 | [Address]:  | [Contact Number]: 92331234}`
 
 **A**: The age field provided by the user is empty.
+
+[Back to top](#table-of-content)
 
 
