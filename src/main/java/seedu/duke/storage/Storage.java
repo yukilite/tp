@@ -83,7 +83,8 @@ public class Storage {
             String convertedTime = TimeConverter.convertTime(patientFields[1]);
 
             Appointment newAppointmentToLoad =
-                    new Appointment(convertedDate, convertedTime, Integer.parseInt(patientFields[3]));
+                    new Appointment(convertedDate, convertedTime, Integer.parseInt(patientFields[2]));
+            appointmentListToReturn.add(newAppointmentToLoad);
         }
 
         return appointmentListToReturn;
