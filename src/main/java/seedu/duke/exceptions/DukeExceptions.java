@@ -176,4 +176,11 @@ public class DukeExceptions {
             throw new NoFieldCommandException("edita");
         }
     }
+
+    public static void checkPidEmpty(Map<String, String> appointmentFieldsToAdd) throws PidEmptyException {
+        String pid = appointmentFieldsToAdd.get("pid");
+        if (pid.isEmpty()) {
+            throw new PidEmptyException();
+        }
+    }
 }
