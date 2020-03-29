@@ -65,8 +65,8 @@ public class Patient {
      * @param age age that needs to be updated
      */
     public void setAge(int age) {
-        assert age >= 0;
         if (age >= 0) {
+            assert age >= 0;
             this.age = age;
         }
     }
