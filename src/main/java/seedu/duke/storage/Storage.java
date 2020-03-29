@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.converter.TimeConverter;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.ui.Ui;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +69,11 @@ public class Storage {
                     field = null;
                 }
             }
-            Appointment newAppointmentToLoad = new Appointment(patientFields[0], patientFields[1]);
+
+            String convertedDate = TimeConverter.convertDate(patientFields[0]);
+            String convertedTime = TimeConverter.convertTime(patientFields[1]);
+
+            Appointment newAppointmentToLoad = new Appointment(convertedDate, convertedTime);
             appointmentListToReturn.add(newAppointmentToLoad);
         }
 
