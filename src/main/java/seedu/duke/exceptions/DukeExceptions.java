@@ -177,6 +177,13 @@ public class DukeExceptions {
         }
     }
 
+    /**
+     * Checks if the value of key "pid" is empty.
+     * If it is empty, throw a PidEmptyException.
+     *
+     * @param appointmentFieldsToAdd the HashMap of KeyValues
+     * @throws PidEmptyException If the value for the key "pid" is empty.
+     */
     public static void checkPidEmpty(Map<String, String> appointmentFieldsToAdd) throws PidEmptyException {
         String pid = appointmentFieldsToAdd.get("pid");
         if (pid.isEmpty()) {
