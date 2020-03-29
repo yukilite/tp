@@ -7,6 +7,7 @@ import java.util.Queue;
 /**
  * The class to manage patient id numbers. Also allows patient id to be reused if said patient is deleted from HAMS.
  * All done in 0(1) time.
+ * @author Andy
  */
 public class PatientIdManager {
 
