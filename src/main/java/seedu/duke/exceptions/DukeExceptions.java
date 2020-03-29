@@ -2,6 +2,8 @@ package seedu.duke.exceptions;
 
 import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
+import seedu.duke.storage.AppointmentList;
+import seedu.duke.storage.PatientList;
 
 import java.util.Map;
 
@@ -188,6 +190,45 @@ public class DukeExceptions {
         String pid = appointmentFieldsToAdd.get("pid");
         if (pid.isEmpty()) {
             throw new PidEmptyException();
+        }
+    }
+
+    /**
+     * Check if both lists are empty
+     * If it is empty, throw EmptyListsException
+     *
+     * @author Duc
+     * @throws EmptyListsException
+     */
+    public static void checkEmptyLists() throws EmptyListsException {
+        if (AppointmentList.getTotalAppointments() == 0 && PatientList.getTotalPatients() == 0) {
+            throw new EmptyListsException();
+        }
+    }
+
+    /**
+     * Check if appointment's list is empty
+     * If it is empty, throw EmptyAppointmentsException
+     *
+     * @author Duc
+     * @throws EmptyAppointmentsException
+     */
+    public static void checkEmptyAppointments() throws EmptyAppointmentsException {
+        if (AppointmentList.getTotalAppointments() == 0) {
+            throw new EmptyAppointmentsException();
+        }
+    }
+
+    /**
+     * Check if patient's list is empty
+     * If it is empty, throw EmptyPatientsException
+     *
+     * @author Duc
+     * @throws EmptyPatientsException
+     */
+    public static void checkEmptyPatients() throws EmptyPatientsException {
+        if (PatientList.getTotalPatients() == 0) {
+            throw new EmptyPatientsException();
         }
     }
 }
