@@ -12,11 +12,12 @@
     * [2.1. Project Overview](#21-project-overview)
         * [2.2. Module Overview](#22-module-overview)
             * [2.2.1. SAM record module ](#221-sam-record-module)
-            * [2.2.2. BRANDON storage module ](#222-brandon-storage-module)
-            * [2.2.3. AD command module ](#223-ad-command-module)
-            * [2.2.4. Parser Module ](#224-parser-module)
-                * [2.2.4.1. Object creation and input interpretation](#2241-object-creation-and-steps-in-input-interpretation)
-                * [2.2.4.2. Design Considerations ](#2242-design-considerations)
+            * [2.2.2. SAM converter module ](#222-converter-module)
+            * [2.2.3. BRANDON storage module ](#223-brandon-storage-module)
+            * [2.2.4. AD command module ](#224-ad-command-module)
+            * [2.2.5. Parser Module ](#225-parser-module)
+                * [2.2.5.1. Object creation and input interpretation](#2251-object-creation-and-steps-in-input-interpretation)
+                * [2.2.5.2. Design Considerations ](#2252-design-considerations)
 * [3. User Stories](#3-user-stories)
 * [4. Non-functional requirements](#4-non-functional-requirements)
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
@@ -82,13 +83,73 @@ name and a summarized purpose.
 
 #### 2.2.1 SAM record module
 
+The record module consists of 2 classes which represent the patients information and appointment details. 
+As a reflection of real world objects, the patient's class purpose is to store the particulars of a person while the 
+Appointment's class is to store the date-time data. 
+Thus, the rationale of both classes can be grouped as follows:
+>
+> As a reflection of real world entities, to create, store, and retrieve relevant information about the object.
+>
+Following the above purpose, both classes consist of only getter and setter methods. This would ensure a contiguous 
+flow in logical executions as these methods can be called whenever necessary.
+
+##### 2.2.1.1 Process of Object Creation
+Due to the nature of the above classes containing only getter and setter methods, following how the components interact 
+with each other would provide more accuracy in understanding how these classes are called and the role of its 
+methods. 
+To illustrate, 3 examples are used:
+* addp \name Samuel \age 18 \address NUS
+* editp \index 1 \name Justin \age 69 \Pasir Panjang
+* listp
+
+##### 2.2.1.2 Design Considerations
+###### Aspect: Data Type for Appointment's Date and Time
+
++ Alternative 1 (current choice): Store as a String
+    * Pros: 
+        - Easier implementation
+        - Greater user flexibility
+    * Cons:
+        -  Cannot sort if needed
+
++ Alternative 2: Store as Date
+    * Pros:
+        - Has flexibility to parse or format date using existing methods available for use.
+    * Cons:
+        - Immutable-value classes mean it is not thread-safe (using Java.util.SimpleDateFormat).
+
 ###### [Back to top](#table-of-content)
 
-#### 2.2.2 BRANDON storage module
+#### 2.2.2 Converter Module
+The converter module consists of one class which converts the format of date and time
 
 ###### [Back to top](#table-of-content)
 
-#### 2.2.3 A&D command module 
+#### 2.2.3 BRANDON storage module
+
+The command module consists of 3 different classes. 
+The PatientList and AppointmentList classes act as data structures to store the records of Patient and Appointment 
+objects respectively. They function as ADTs, where various commands from Command objects can manipulate the records within.
+The Storage class manages the load and save operations involving the PatientList and PatientList class. 
+These operations are usually invoked on startup, whenever changes are made to the ADTs and before exiting the program.
+The class diagram for the storage module is as seen below: 
+
+
+![](images/storageclass.png)
+
+&nbsp;
+
+On startup, the loadSavedAppointment() and loadSavedPatient() methods are invoked. This allows the program to retrieve 
+previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
+within the program.
+
+![](images/loadsavedappt_seq.png)
+
+{To add saveAppointment sequence diagram and writeup}
+
+###### [Back to top](#table-of-content)
+
+#### 2.2.4 A&D command module 
 
 The command module consist of 11 different classes, where each class does a different command by itself. 
 These classes allows the patients and appointments to be added into HAMS, allows the updating of patient and 
@@ -104,20 +165,21 @@ too. Every command class (other than the  ```ExitCommand``` and ```HelpCommand``
 creates the connection from the ```Main``` class to the other classes required such as ```Storage``` class,
 ```PatientList``` class and the ```Appointment``` class to name a few. 
 
-##### 2.2.3.1 AddPatientClass
+##### 2.2.4.1 AddPatientClass
 
 To add a patient, the ```AddPatientCommand``` class is used. For this ```AddPatientCommand``` class, it serves as the 
 façade class for the ```Main```, ```Patient``` , ```PatientList``` and the ```Storage``` class to interact with one 
-another. 
+another. Also, to uniquely identify a patient, an unique patientId number is assigned to each patient when they are first added into the patient list.
 
 ![](images/AddPatientDiagram.png)
 
 1. The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
-regarding the patient to be added will be stored in the ```AddPatientCommand``` class object. 
+regarding the patient to be added will be stored in a Map, where the ```AddPatientCommand``` class object would read the Map content and store the information about the patient in said ```AddPatientCommand``` class object. 
+For the patient Id number, it will call upon the static class ```patientIdManager``` to get its unique patient id number. This unique Id number will be used later in the ```Patient``` object creation too.
 
 2. When the 
 ```execute(Ui ui, Storage storage)``` command is called, the  ```AddPatientCommand``` would first make use of the 
-```Patient``` class constructor to create a new ```Patient``` object. 
+```Patient``` class constructor to create a new ```Patient``` object based on the information stored back in step 1. 
 
 3. After which, it would then call the 
 ```PatientList```’s ```getPatientList()``` command to get the ```List``` patient list object such that the ```Patient``` 
@@ -139,7 +201,7 @@ Below shows the sequence diagram for ```AddPatientCommand``` class
 ![](images/AddPatientCommandSequence.png)
  
 
-##### 2.2.3.2 AddAppointmentClass
+##### 2.2.4.2 AddAppointmentClass
 
 To add an appointment, the ```AddAppointmentCommand``` class is used. For this ```AddAppointmentCommand``` class, it 
 serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
@@ -148,7 +210,8 @@ interact with one another.
 ![](images/AddAppointmentDiagram.png)
 
 1. Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
-object, where the information of the appointment is again stored in the ```AddAppoinmentCommand``` object. 
+object, where the information of the appointment is again stored in a Map that the ```AddAppoinmentCommand``` object would read from. 
+Said information will be stored in the ```AddAppoinmentCommand``` object
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
@@ -171,7 +234,7 @@ Below shows the sequence diagram for ```AddAppointmentCommand``` class
 
 ![](images/AddAppointCommandSequence.png)
 
-##### 2.2.3.3 ListPatientClass
+##### 2.2.4.3 ListPatientClass
 
 To display the list of patients, the ```ListPatientCommand``` class is called. This class serves as a façade class of 
 ```Main``` and ```Ui``` to interact with each other. 
@@ -189,7 +252,7 @@ Below shows the sequence diagram for ```ListPatientCommand``` class
 
 ![](images/ListPatientCommandSequence.png)
 
-##### 2.2.3.4 ListAppointmentClass
+##### 2.2.4.4 ListAppointmentClass
 
 To display the list of appointments, the ```ListAppointmentCommand``` class is called. This class serves as a façade 
 class of ```Main``` and ```Ui``` to interact with each other. 
@@ -209,11 +272,11 @@ Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 ###### [Back to top](#table-of-content)
 
-##### 2.2.3.5 Design considerations
+##### 2.2.4.5 Design considerations
 
 For the 4 classes listed, there were some other design considerations that was discussed for these 4 classes. Here, we will discuss the other choices and the pros and cons for them.
 
-###### 2.2.3.5.1 Aspect: Facade classes
+###### 2.2.4.5.1 Aspect: Facade classes
 + Alternative 1 (current choice): Making all 4 classes facade classes
    
    * Pros: 
@@ -230,7 +293,7 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - Lower SRP and (SoC)
 
-###### 2.2.3.5.1 Aspect: Autosaving or no
+###### 2.2.4.5.2 Aspect: Autosaving or no
 
 + Alternative 1 (current choice): Allow for autosaving after each command execution
     * Pros: 
@@ -247,10 +310,25 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - No recovery (or rather, no recovery for recent information) when HAMS crashes 
 
+###### 2.2.4.5.3 Aspect: Generation of Patient Id
+
++ Alternative 1 (current choice): Allow the reuse of the patient Id from deleted 
+    * Pros: 
+        - Allow for reuse, which prevents the patient Id number from running out.
+       
+    * Cons:
+        - Slightly more complicated implementation. Also it means that there is more information that is required to be saved (such as the list of patient Id to be reused) when HAMS shuts down.
+
++ Alternative 2: Always pick a new number (don't reuse deleted patient Id number)
+    * Pros: 
+        - Easier to implement and keep track of. Also, it does not need to save much more information about the patient Id numbers (just need to save the last number assigned).
+       
+    * Cons:
+        - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
 
 
 
-#### 2.2.4 Parser module
+#### 2.2.5 Parser module
 This section describes the implementation of Parser class, as well as the design considerations and rational behind the 
 current implementation.
 
@@ -262,7 +340,7 @@ As such, the Parser class only has one publicly callable method and that returns
 To assist the public method, Parser class has multiple private helper methods, as well as access to the Exception handler
 to ensure that the user input is formatted correctly. This way, purpose 1 and 2 is satisfied. 
 
-##### 2.2.4.1 Object creation and steps in input interpretation
+##### 2.2.5.1 Object creation and steps in input interpretation
 1.  The `Parser` object is first created in `Duke` class and subsequently used until program termination.
 2.  User input is received and handed over to `Parser` object for interpretation.
 3. In the `Parser` object, the type of command is first determined via helper method `getCommand(userInput)`.
@@ -338,7 +416,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 
 
 
-##### 2.2.4.2 Design considerations
+##### 2.2.5.2 Design considerations
 ###### Aspect: Symbol for delimiter
 +   Alternative 1 (current choice): Backslash `/\` is used. 
     *   Pros: 

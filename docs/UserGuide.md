@@ -181,7 +181,7 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 ##### Expected outcome:
 ![](images/editp_success2.PNG)
 ###### Before:
-![](images/editp_before2.PNG)
+![](images/editp_after.PNG)
 ###### After:
 ![](images/editp_after2.PNG)
 
@@ -234,11 +234,14 @@ Format: `clearp`
 The program allows you to add a new Appointment record to the current list of Appointment records. With the addition 
 of the `pid` field, it allows users to link the appointment to a specific patient. 
 
-Format: `adda \date [date] \time [time] \pid [pid]`
+
+Format: `adda \date [date] \time [time] \pid [patient id]`
+
 
 * `adda` keyword
 * `\date` followed by the date of the appointment
 * `\time` followed by the time of the appointment
+
 * `\pid` followed by a unique Patient ID (pid).
 
 > ![](images/UG/adda_hint.JPG)
@@ -247,6 +250,7 @@ Format: `adda \date [date] \time [time] \pid [pid]`
 
 #### Example of usage: 
 - `adda \date 14/03/2020 \time 1000 \pid 1`
+
 
 ##### Expected outcome:
 <img src ="images/adda_eg1.PNG" width = "400">
