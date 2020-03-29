@@ -154,7 +154,8 @@ public class Ui {
         }
         int currentIndex = 1;
         for (Appointment result : foundAppointments) {
-            System.out.println(Integer.toString(currentIndex) + result.toString());
+            System.out.println(currentIndex + " " + result.toString());
+            currentIndex++;
         }
     }
 
@@ -171,8 +172,8 @@ public class Ui {
         }
         int currentIndex = 1;
         for (Patient result : foundPatients) {
-            System.out.println(Integer.toString(currentIndex) + result.toString());
+            System.out.println(currentIndex + " " + result.toString());
+            currentIndex++;
         }
     }
-
 }
