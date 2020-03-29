@@ -77,7 +77,7 @@ class ParserTest {
         String editPatientUserInput3 = "         editp  \\index 4 \\phone 97283449      \\\\\\\\\\";
 
         PatientList stub = new PatientList();
-        Patient newPatient = new Patient("1", 1, "1", "1");
+        Patient newPatient = new Patient("1", 1, "1", "1",1);
         for (int i = 0; i < 10; i += 1) {
             PatientList.getPatientList().add(newPatient);
         }
@@ -127,7 +127,7 @@ class ParserTest {
         String deletePatientUserInput3 = "deletep               \\index 1";
 
         PatientList stub = new PatientList();
-        Patient newPatient = new Patient("1", 1, "1", "1");
+        Patient newPatient = new Patient("1", 1, "1", "1",1);
         for (int i = 0; i < 10; i += 1) {
             PatientList.getPatientList().add(newPatient);
         }
