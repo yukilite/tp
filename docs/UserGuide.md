@@ -175,7 +175,7 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 ##### Expected outcome:
 ![](images/editp_success2.PNG)
 ###### Before:
-![](images/editp_before2.PNG)
+![](images/editp_after.PNG)
 ###### After:
 ![](images/editp_after2.PNG)
 
@@ -193,18 +193,19 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 
 The program allows you to add a new Appointment record to the current list of Appointment records. 
 
-Format: `adda \date [date] \time [time]`
+Format: `adda \date [date] \time [time] \pid [patient id]`
 
 * `adda` keyword
 * `\date` followed by the date of the appointment
 * `\time` followed by the time of the appointment
+* `\pid` followed by the patient id of the patient for this appointment
 >
 >**Notice:**
 > For version 1.0, both date and time are stored in string.
 >
 
 #### Example of usage: 
-- `adda \date 14-03-2020 \time 10am`
+- `adda \date 14-03-2020 \time 10am \pid 12`
 
 ##### Expected outcome:
 <img src ="images/adda_eg1.PNG" width = "400">
