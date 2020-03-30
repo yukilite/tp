@@ -53,6 +53,7 @@ CLI to keep track of various medical records* and *can type fast*.
 [Back to top](#table-of-content)
  
 &nbsp;
+
 ***
 
 ## 2. Features
@@ -241,7 +242,6 @@ Format: `adda \date [date] \time [time] \pid [patient id]`
 * `adda` keyword
 * `\date` followed by the date of the appointment
 * `\time` followed by the time of the appointment
-
 * `\pid` followed by a unique Patient ID (pid).
 
 > ![](images/UG/adda_hint.JPG)
