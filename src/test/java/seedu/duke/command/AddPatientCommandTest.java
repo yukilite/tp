@@ -15,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class AddPatientCommandTest {
 
-    Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121");
-    Patient newPatient2 = new Patient(" ", 15, " ", "15454455");
-    Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989");
-    Patient newPatient4 = new Patient("aeiwae", 13, "to", " ");
-    Patient newPatient5 = new Patient("LSDs", -1, "Lis", "12");
+    Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121", 123);
+    Patient newPatient2 = new Patient(" ", 15, " ", "15454455", 232);
+    Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989", 129991);
+    Patient newPatient4 = new Patient("aeiwae", 13, "to", " ", 11122);
+    Patient newPatient5 = new Patient("LSDs", -1, "Lis", "12", 7788);
 
 
     @Test
