@@ -67,6 +67,7 @@ public class DeletePatientCommand extends Command {
      * @see IOException
      * @see PatientList#getPatientRecord
      * @see Storage#savePatientList
+     * @see Ui#showDeletePatientSuccess
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {

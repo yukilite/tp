@@ -21,6 +21,9 @@
 * [3. User Stories](#3-user-stories)
 * [4. Non-functional requirements](#4-non-functional-requirements)
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
+    + [5.1, Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
+    + [5.2. Adding a patient](#52-adding-a-patient)
+    + [5.3. Deleting a patient](#53-delete-a-patient)
         
 <!-- TOC -->
 
@@ -133,7 +136,7 @@ in the `Appointment` class.
 
 #### 2.2.3 BRANDON storage module
 
-The command module consists of 3 different classes. 
+The Storage module consists of 3 different classes. 
 The PatientList and AppointmentList classes act as data structures to store the records of Patient and Appointment 
 objects respectively. They function as ADTs, where various commands from Command objects can manipulate the records within.
 The Storage class manages the load and save operations involving the PatientList and PatientList class. 
@@ -145,13 +148,25 @@ The class diagram for the storage module is as seen below:
 
 &nbsp;
 
-On startup, the loadSavedAppointment() and loadSavedPatient() methods are invoked. This allows the program to retrieve 
-previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
-within the program.
+On startup, Duke invokes the loadSavedAppointment() and loadSavedPatient() methods in Storage. This allows the program 
+to retrieve previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
+within the program. 
 
-![](images/loadsavedappt_seq.png)
+The Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
+new Appointments, and then add them to an ArrayList called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
+construct the static AppointmentList. The sequence diagram is shown below:
 
-{To add saveAppointment sequence diagram and writeup}
+![](images/loadsavedappt_seq.PNG)
+![](images/loadsavedappt_ref1.PNG)
+
+When the static AppointmentList or PatientList has changes, or the program is exiting, saveAppointmentList() or savePatientList() 
+is invoked respectively. This allows the Storage object to back up existing records to a local .txt file.
+
+The Storage object will create a FileWriter object called `fw`. The command will then iterate through the existing AppointmentList
+and parse each Appointment within, converting it to a string. `fw` then writes this string to the .txt file.
+The sequence diagram is shown below:
+
+![](images/saveapptlist_seq.PNG)
 
 ###### [Back to top](#table-of-content)
 
@@ -175,16 +190,17 @@ creates the connection from the ```Main``` class to the other classes required s
 
 To add a patient, the ```AddPatientCommand``` class is used. For this ```AddPatientCommand``` class, it serves as the 
 façade class for the ```Main```, ```Patient``` , ```PatientList``` and the ```Storage``` class to interact with one 
-another. 
+another. Also, to uniquely identify a patient, an unique patientId number is assigned to each patient when they are first added into the patient list.
 
 ![](images/AddPatientDiagram.png)
 
 1. The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
-regarding the patient to be added will be stored in the ```AddPatientCommand``` class object. 
+regarding the patient to be added will be stored in a Map, where the ```AddPatientCommand``` class object would read the Map content and store the information about the patient in said ```AddPatientCommand``` class object. 
+For the patient Id number, it will call upon the static class ```patientIdManager``` to get its unique patient id number. This unique Id number will be used later in the ```Patient``` object creation too.
 
 2. When the 
 ```execute(Ui ui, Storage storage)``` command is called, the  ```AddPatientCommand``` would first make use of the 
-```Patient``` class constructor to create a new ```Patient``` object. 
+```Patient``` class constructor to create a new ```Patient``` object based on the information stored back in step 1. 
 
 3. After which, it would then call the 
 ```PatientList```’s ```getPatientList()``` command to get the ```List``` patient list object such that the ```Patient``` 
@@ -215,7 +231,8 @@ interact with one another.
 ![](images/AddAppointmentDiagram.png)
 
 1. Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
-object, where the information of the appointment is again stored in the ```AddAppoinmentCommand``` object. 
+object, where the information of the appointment is again stored in a Map that the ```AddAppoinmentCommand``` object would read from. 
+Said information will be stored in the ```AddAppoinmentCommand``` object
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
@@ -297,7 +314,7 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - Lower SRP and (SoC)
 
-###### 2.2.4.5.1 Aspect: Autosaving or no
+###### 2.2.4.5.2 Aspect: Autosaving or no
 
 + Alternative 1 (current choice): Allow for autosaving after each command execution
     * Pros: 
@@ -314,6 +331,21 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - No recovery (or rather, no recovery for recent information) when HAMS crashes 
 
+###### 2.2.4.5.3 Aspect: Generation of Patient Id
+
++ Alternative 1 (current choice): Allow the reuse of the patient Id from deleted 
+    * Pros: 
+        - Allow for reuse, which prevents the patient Id number from running out.
+       
+    * Cons:
+        - Slightly more complicated implementation. Also it means that there is more information that is required to be saved (such as the list of patient Id to be reused) when HAMS shuts down.
+
++ Alternative 2: Always pick a new number (don't reuse deleted patient Id number)
+    * Pros: 
+        - Easier to implement and keep track of. Also, it does not need to save much more information about the patient Id numbers (just need to save the last number assigned).
+       
+    * Cons:
+        - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
 
 
 
@@ -470,7 +502,9 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |v1.0|admin assistant|have an interface|easily update the patient's personal information|
 |v1.0|admin assistant|register new patient's medical information|so that it can be stored and accessed whenever needed|
 |v1.0|admin assistant|save my data on shutdown|continue my work the next day|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v2.0|busy admin assistant|immediately know if the patient is scheduled for today|so I can process them better|
+|v2.0|admin assistant|be able to find a specific patient|check their appointment details|
+|v2.0|admin assistant|clear my lists|keep my list organized when the appointment is over|
 
 ###### [Back to top](#table-of-content)
 
@@ -481,12 +515,9 @@ help menu should be sufficient for basic usage.
 * HAMS should be resistant to software crashes and if a crash does happens, the latest patient and 
 appointment list should be saved. In addition, user should be able to manually save their work. 
 
-
 * Each function of HAMS can be executed in a single line.
 
-* 
-
-
+* HAMS should be fast and responsive
 
 **TODO**
 {Give non-functional requirements}
@@ -495,7 +526,59 @@ appointment list should be saved. In addition, user should be able to manually s
 
 ## 5. Instructions for Manual Testing
 
-**TODO**
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### 5.1 Startup, shutdown and restart with saved list.
+1. Initial launch
+    1. Download the latest release from [here](https://github.com/AY1920S2-CS2113T-T13-3/tp/releases)
+    2. Move the .jar to an empty folder
+    3. Open Command Prompt
+    4. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
+    5. Run the .jar using $ `java -jar hams-2.0.jar`
+    
+    Expected: Shows a welcome screen for HAMS.
+
+2. Shutdown
+    1. Run the .jar file
+    2. Test case: `exit`
+    
+    Expected: Bye message is printed and program closes.
+ 
+3. Restart with saved list
+    1. Run the .jar file
+    2. Add some patients and appointments.
+    3. Restart the program
+    4. Test case: `listp`
+    
+    Expected: Previous saved list should be shown.
+    
+### 5.2 Adding a patient
+1. Successfully adding a patient (All fields)
+    1. Run the .jar file.
+    2. Test case: `addp \name Justin \age 23 \address Pasir Ris \phone 91234567`
+    
+    Expected: Success message is printed. To double check, type `listp` and ensure that the test case
+    is inside.
+    
+2. Successfully adding a patient (at least 1 field)
+    1. Run the .jar file.
+    2. Test case: `addp \name Sam`
+    
+    Expected: Success message is printed. HAMS accept `addp` as long as 1 field is present. To double check, type `listp` and ensure that the test case
+    is inside.
+
+3. Unsuccessful add a patient  (no fields provided)
+    1. Run the .jar file.
+    2. Test case: `addp`
+    
+    Expected: Error message is printed. To double check, type `listp` and ensure that the test case
+    is **not** inside.
+
+### 5.3 Delete a patient
+
+1. Deleting a patient 
+    1. Prerequisites: list all patients using `listp`. Multiple patients in list.
+    2. Test case: `deletep \index 1`
+    
+    Expected: First patient in the list is deleted. 
+    
 
 ###### [Back to top](#table-of-content)
