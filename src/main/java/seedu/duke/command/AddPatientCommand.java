@@ -51,7 +51,9 @@ public class AddPatientCommand extends Command {
         } else {
             try {
                 this.age = Integer.parseInt(patientInfo.get(AGE));
-
+                if (this.age < 0) {
+                    System.out.println("Received age is a negative integer, setting age to be blank");
+                }
             } catch (NumberFormatException e) {
                 /** If string is given, a message will be shown and the age will be set to -1 **/
                 Ui.showSetAgeError();
