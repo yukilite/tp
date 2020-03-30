@@ -124,7 +124,7 @@ The converter module consists of one class which converts the format of date and
 
 #### 2.2.3 BRANDON storage module
 
-The command module consists of 3 different classes. 
+The Storage module consists of 3 different classes. 
 The PatientList and AppointmentList classes act as data structures to store the records of Patient and Appointment 
 objects respectively. They function as ADTs, where various commands from Command objects can manipulate the records within.
 The Storage class manages the load and save operations involving the PatientList and PatientList class. 
@@ -136,13 +136,25 @@ The class diagram for the storage module is as seen below:
 
 &nbsp;
 
-On startup, the loadSavedAppointment() and loadSavedPatient() methods are invoked. This allows the program to retrieve 
-previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
-within the program.
+On startup, Duke invokes the loadSavedAppointment() and loadSavedPatient() methods in Storage. This allows the program 
+to retrieve previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
+within the program. 
 
-![](images/loadsavedappt_seq.png)
+The Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
+new Appointments, and then add them to an ArrayList called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
+construct the static AppointmentList. The sequence diagram is shown below:
 
-{To add saveAppointment sequence diagram and writeup}
+![](images/loadsavedappt_seq.PNG)
+![](images/loadsavedappt_ref1.PNG)
+
+When the static AppointmentList or PatientList has changes, or the program is exiting, saveAppointmentList() or savePatientList() 
+is invoked respectively. This allows the Storage object to back up existing records to a local .txt file.
+
+The Storage object will create a FileWriter object called `fw`. The command will then iterate through the existing AppointmentList
+and parse each Appointment within, converting it to a string. `fw` then writes this string to the .txt file.
+The sequence diagram is shown below:
+
+![](images/saveapptlist_seq.PNG)
 
 ###### [Back to top](#table-of-content)
 
