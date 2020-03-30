@@ -16,3 +16,4 @@ bin/
 /text-ui-test/ACTUAL.txt
 saves/appointments.txt
 saves/patients.txt
+saves/patientId.txt
