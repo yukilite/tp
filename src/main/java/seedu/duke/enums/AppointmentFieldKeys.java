@@ -10,7 +10,8 @@ package seedu.duke.enums;
 public enum AppointmentFieldKeys {
     INDEX,
     DATE,
-    TIME;
+    TIME,
+    PATIENT_ID;
 
     @Override
     public String toString() {
@@ -21,6 +22,8 @@ public enum AppointmentFieldKeys {
             return "date";
         case TIME:
             return "time";
+        case PATIENT_ID:
+            return "pid";
         default:
             return null;
         }

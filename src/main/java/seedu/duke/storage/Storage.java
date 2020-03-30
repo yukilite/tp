@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.converter.TimeConverter;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.ui.Ui;
@@ -9,7 +10,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +40,7 @@ public class Storage {
      * @return appointmentListToReturn returns the appointment list in the save file
      * @throws FileNotFoundException this exception occurs when a file is not found
      */
-    public List<Appointment> loadSavedAppointments() throws FileNotFoundException {
+    public List<Appointment> loadSavedAppointments() throws FileNotFoundException, ParseException {
         File appointmentSave = new File(this.appointmentListSaveLocation);
         if (!appointmentSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
@@ -53,20 +57,23 @@ public class Storage {
             }
             throw new FileNotFoundException();
         }
-        //TODO: parse the text file, return List of Appointments
         List<Appointment> appointmentListToReturn = new ArrayList<>();
         Scanner s = new Scanner(appointmentSave);
         while (s.hasNext()) {
-            //TODO: parse savefile substring, update Appointment constructor
             //process each line, construct new Appointment object
             String appointmentString = s.nextLine();
             String[] patientFields = appointmentString.split(" \\| ", 2);
+            assert patientFields.length == 2 : "not enough fields in this line:" + appointmentString;
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
                 }
             }
-            Appointment newAppointmentToLoad = new Appointment(patientFields[0], patientFields[1]);
+
+            String convertedDate = TimeConverter.convertDate(patientFields[0]);
+            String convertedTime = TimeConverter.convertTime(patientFields[1]);
+
+            Appointment newAppointmentToLoad = new Appointment(convertedDate, convertedTime);
             appointmentListToReturn.add(newAppointmentToLoad);
         }
 
@@ -98,18 +105,26 @@ public class Storage {
             throw new FileNotFoundException();
 
         }
-        //TODO: parse the text file, return List of Patients
         List<Patient> patientListToReturn = new ArrayList<>();
         Scanner s = new Scanner(patientSave);
         while (s.hasNext()) {
-            //TODO: parse savefile substring, update Patient constructor
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
+            int delimiterCount = 0;
+            for (int i = 0; i < patientString.length(); i++) {
+                if (Character.toString(patientString.charAt(i)).equals("|")) {
+                    delimiterCount++;
+                }
+            }
+            assert delimiterCount == 3 : "not enough fields in this line:";
             String[] patientFields = patientString.split(" \\| ", 4);
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
                     field = null;
                 }
+            }
+            if (patientFields[1].isEmpty()) {
+                patientFields[1] = "-1";
             }
             Patient newPatientToLoad = new Patient(patientFields[0], Integer.parseInt(patientFields[1]),
                     patientFields[2], patientFields[3]);
@@ -126,7 +141,7 @@ public class Storage {
      * @throws IOException this exception occurs if the patient's appointment details are unable to be written
      *                     to the local save file.
      */
-    public void saveAppointmentsList() throws IOException {
+    public void saveAppointmentsList() throws IOException, ParseException {
         FileWriter fwAppointmentSave;
         try {
             fwAppointmentSave = new FileWriter(this.appointmentListSaveLocation);

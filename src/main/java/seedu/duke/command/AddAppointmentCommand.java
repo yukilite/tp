@@ -6,6 +6,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Map;
 
 /**
@@ -62,7 +63,7 @@ public class AddAppointmentCommand extends Command {
      *                     appointment list into offline data.
      */
     @Override
-    public void execute(Ui ui, Storage storage) throws IOException {
+    public void execute(Ui ui, Storage storage) throws IOException, ParseException {
         Appointment appointment = new Appointment(this.date, this.time);
 
         /* Hacky method to add appointments into the appointment list.*/

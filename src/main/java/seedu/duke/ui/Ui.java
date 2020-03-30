@@ -141,4 +141,39 @@ public class Ui {
         System.out.println(printSeparator() + printSeparator());
     }
 
+    /**
+     * This method prints out a list of Appointments containing a specific keyword in a readable format.
+     * It is used in the FindAppointmentCommand class.
+     *
+     * @param foundAppointments list of Appointment search results
+     */
+    public void printAppointmentSearchResults(List<Appointment> foundAppointments) {
+        if (foundAppointments.size() == 0) {
+            System.out.println("No appointment records containing the keyword were found.");
+            return;
+        }
+        int currentIndex = 1;
+        for (Appointment result : foundAppointments) {
+            System.out.println(currentIndex + " " + result.toString());
+            currentIndex++;
+        }
+    }
+
+    /**
+     * This method prints out a list of Patients containing a specific keyword in a readable format.
+     * It is used in the FindPatientCommand class.
+     *
+     * @param foundPatients list of Patient search results
+     */
+    public void printPatientSearchResults(List<Patient> foundPatients) {
+        if (foundPatients.size() == 0) {
+            System.out.println("No patient records containing the keyword were found.");
+            return;
+        }
+        int currentIndex = 1;
+        for (Patient result : foundPatients) {
+            System.out.println(currentIndex + " " + result.toString());
+            currentIndex++;
+        }
+    }
 }

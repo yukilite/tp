@@ -4,6 +4,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Super class for all the types of command sub-classes.
@@ -25,5 +26,5 @@ public abstract class Command {
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      */
-    public abstract void execute(Ui ui, Storage storage) throws IOException;
+    public abstract void execute(Ui ui, Storage storage) throws IOException, ParseException;
 }
