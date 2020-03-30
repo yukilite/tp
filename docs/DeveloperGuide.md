@@ -347,6 +347,32 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
 
+#### 2.2.4.6 EditAppointmentClass
+
+To edit an appointment, the ```EditAppointmentCommand``` class is used. For this ```EditAppointmentCommand``` class, it 
+serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```EditAppointmentCommand``` class is processed by ```Parser```
+
+2. When 
+the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
+```Appointment``` class to make an ```Appointment``` Object. 
+
+3. After which, the ```AddAppoinmentCommand``` object will 
+call upon the ```AppointmentList``` object to obtain the list of ```Appointments``` (get the ```List``` object that 
+represents the list of appointments by ```AppointmentList```’s ```getAppointmentList()``` command) so that it can 
+directly add the new ```Appointment``` object into the appointment list. 
+
+4. Finally, it will call upon the ```Storage``` 
+class’s ```saveAppoinmentList()``` function to save the updated appointment list. 
+
+5. Upon successfully adding the 
+```Appointment``` object into the appointment list, it will call upon the ```Ui``` class’ 
+```showAppointmentAddSuccess()``` function to display the success of adding the ```appointment``` into the appointment 
+list.
+
+Below shows the sequence diagram for ```AddAppointmentCommand``` class
 
 
 #### 2.2.5 Parser module
