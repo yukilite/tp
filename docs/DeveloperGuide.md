@@ -21,6 +21,9 @@
 * [3. User Stories](#3-user-stories)
 * [4. Non-functional requirements](#4-non-functional-requirements)
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
+    + [5.1, Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
+    + [5.2. Adding a patient](#52-adding-a-patient)
+    + [5.3. Deleting a patient](#53-delete-a-patient)
         
 <!-- TOC -->
 
@@ -516,7 +519,9 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |v1.0|admin assistant|have an interface|easily update the patient's personal information|
 |v1.0|admin assistant|register new patient's medical information|so that it can be stored and accessed whenever needed|
 |v1.0|admin assistant|save my data on shutdown|continue my work the next day|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v2.0|busy admin assistant|immediately know if the patient is scheduled for today|so I can process them better|
+|v2.0|admin assistant|be able to find a specific patient|check their appointment details|
+|v2.0|admin assistant|clear my lists|keep my list organized when the appointment is over|
 
 ###### [Back to top](#table-of-content)
 
@@ -527,12 +532,9 @@ help menu should be sufficient for basic usage.
 * HAMS should be resistant to software crashes and if a crash does happens, the latest patient and 
 appointment list should be saved. In addition, user should be able to manually save their work. 
 
-
 * Each function of HAMS can be executed in a single line.
 
-* 
-
-
+* HAMS should be fast and responsive
 
 **TODO**
 {Give non-functional requirements}
@@ -541,7 +543,59 @@ appointment list should be saved. In addition, user should be able to manually s
 
 ## 5. Instructions for Manual Testing
 
-**TODO**
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### 5.1 Startup, shutdown and restart with saved list.
+1. Initial launch
+    1. Download the latest release from [here](https://github.com/AY1920S2-CS2113T-T13-3/tp/releases)
+    2. Move the .jar to an empty folder
+    3. Open Command Prompt
+    4. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
+    5. Run the .jar using $ `java -jar hams-2.0.jar`
+    
+    Expected: Shows a welcome screen for HAMS.
+
+2. Shutdown
+    1. Run the .jar file
+    2. Test case: `exit`
+    
+    Expected: Bye message is printed and program closes.
+ 
+3. Restart with saved list
+    1. Run the .jar file
+    2. Add some patients and appointments.
+    3. Restart the program
+    4. Test case: `listp`
+    
+    Expected: Previous saved list should be shown.
+    
+### 5.2 Adding a patient
+1. Successfully adding a patient (All fields)
+    1. Run the .jar file.
+    2. Test case: `addp \name Justin \age 23 \address Pasir Ris \phone 91234567`
+    
+    Expected: Success message is printed. To double check, type `listp` and ensure that the test case
+    is inside.
+    
+2. Successfully adding a patient (at least 1 field)
+    1. Run the .jar file.
+    2. Test case: `addp \name Sam`
+    
+    Expected: Success message is printed. HAMS accept `addp` as long as 1 field is present. To double check, type `listp` and ensure that the test case
+    is inside.
+
+3. Unsuccessful add a patient  (no fields provided)
+    1. Run the .jar file.
+    2. Test case: `addp`
+    
+    Expected: Error message is printed. To double check, type `listp` and ensure that the test case
+    is **not** inside.
+
+### 5.3 Delete a patient
+
+1. Deleting a patient 
+    1. Prerequisites: list all patients using `listp`. Multiple patients in list.
+    2. Test case: `deletep \index 1`
+    
+    Expected: First patient in the list is deleted. 
+    
 
 ###### [Back to top](#table-of-content)

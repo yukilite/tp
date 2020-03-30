@@ -22,6 +22,7 @@
         + [4.2.4 Edit existing appointment record](#424-edit-an-existing-appointment)
         + [4.2.5 Find existing appointment record](#425-find-an-existing-appointment)
         + [4.2.6 Clear all appointment records](#426-clear-appointment-records)
+    + [4.3 Clear all records](#43-clear-all-records)
     + [4.4. Viewing help](#44-view-help)
     + [4.5. Exiting the program](#45-exit-hams-program)
 * [5. Command Summary](#5-command-summary)  
@@ -52,6 +53,7 @@ CLI to keep track of various medical records* and *can type fast*.
 [Back to top](#table-of-content)
  
 &nbsp;
+
 ***
 
 ## 2. Features
@@ -240,7 +242,6 @@ Format: `adda \date [date] \time [time] \pid [patient id]`
 * `adda` keyword
 * `\date` followed by the date of the appointment
 * `\time` followed by the time of the appointment
-
 * `\pid` followed by a unique Patient ID (pid).
 
 > ![](images/UG/adda_hint.JPG)
