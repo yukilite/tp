@@ -75,7 +75,7 @@ name and a summarized purpose.
 |---------|-------|
 |Stupendously AwesoMe (SAM) **records**|?| 
 |BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **storage**|?|
-|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that differenct classes can interact with each other|
+|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
 #### 2.2.1 SAM record module
@@ -94,10 +94,17 @@ flow in logical executions as these methods can be called whenever necessary.
 Due to the nature of the above classes containing only getter and setter methods, following how the components interact 
 with each other would provide more accuracy in understanding how these classes are called and the role of its 
 methods. 
-To illustrate, 3 examples are used:
-* addp \name Samuel \age 18 \address NUS
+To illustrate, the below example is used:
 * editp \index 1 \name Justin \age 69 \Pasir Panjang
-* listp
+
+![](images/SD_Patient.png)
+
+Upon startup, objects from ui , parser and storage are created. Prompted for user input, Duke receives the edita
+command which is forwarded to the parser to be interpreted respectively. Once the `EditPatientCommand` object is created,
+it retrieves the patient index to edit the existing patient information from the patientList. 
+The `Patient` class is called by its setter method, `setPatientInfo()`, to update the fields as provided by the user. This
+ensures that the encapsulated variables such as age, name, contact number and address are not only enforced but also
+protected. 
 
 ##### 2.2.1.2 Design Considerations
 ###### Aspect: Data Type for Appointment's Date and Time
@@ -118,7 +125,9 @@ To illustrate, 3 examples are used:
 ###### [Back to top](#table-of-content)
 
 #### 2.2.2 Converter Module
-The converter module consists of one class which converts the format of date and time
+The converter module consists of one class which converts the format of date and time using a custom format defined by
+special formatting characters (ie. SimpleDateFormat). This class is primarily used to format a user-input date and time
+in the `Appointment` class. 
 
 ###### [Back to top](#table-of-content)
 
