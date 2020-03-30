@@ -67,6 +67,9 @@ public class EditPatientCommand extends Command {
         } else {
             try {
                 this.age = Integer.parseInt(fieldsToChange.get(AGE));
+                if (this.age < 0) {
+                    System.out.println("Received age is a negative integer, setting age to be blank");
+                }
 
             } catch (NumberFormatException e) {
                 Ui.showSetAgeError();
