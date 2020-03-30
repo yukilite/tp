@@ -65,6 +65,10 @@ public class Ui {
         System.out.println("Received a non-integer for age, setting age to be -1.");
     }
 
+    public static void showPatientIdError() {
+        System.out.println("Something is wrong with the patientId given. Creating new patientId");
+    }
+
     public static void showUpdatePatientSuccess() {
         System.out.println("Patient updated successfully!");
     }
@@ -85,6 +89,10 @@ public class Ui {
         System.out.println("No existing 'save' directory found. Directory has been created.");
     }
 
+    public static void showWrongPid() {
+        System.out.println("Wrong pid. This will not be added to the appointment list.");
+
+    }
 
     public void showExceptionError(String localizedMessage) {
         System.out.println(localizedMessage);
@@ -102,25 +110,16 @@ public class Ui {
      * Prints HAMS logo.
      */
     public void printHello() {
-        System.out.println("            .---------.\n"
-                + "       _    |:: [-=-] |\n"
-                + "      | |   |_________|\n"
-                + "      |~|\n"
-                + "      |_|                    ,;;;;,\n"
-                + "       I\\  ,__ ,;;;, __,    ///\\\\\\\\\\\n"
-                + "       I |{   / . . \\   }   / \"  \\\\||\n"
-                + "       I | ) (   _   ) (    \\_= _///\n"
-                + "       I |{___'-. .-'___}\\___ )_\\\n"
-                + "       I ||~/,'~~~~~,\\~~|'---((  \\\n"
-                + "       I \\ //        \\\\ |     \\ \\ \\\n"
-                + "       I  \\/         // |     | /-/\n"
-                + "       I (/         (/  |     |/||\\\n"
-                + "       I  |             |     |    |\n"
-                + "       I  |             |     |____/\n"
-                + "       I  :-----_o_-----:      || |\n"
-                + "       I  | /~~|===|~~\\ |      (( |\n"
-                + "       I  ||   |===|   ||      ||_/\n"
-                + "      /^\\ \"~   '^^^'   \"\"     ((__|");
+        System.out.println(
+                "            .---------.\n" + "       _    |:: [-=-] |\n" + "      | |   |_________|\n" + "      |~|\n"
+                        + "      |_|                    ,;;;;,\n" + "       I\\  ,__ ,;;;, __,    ///\\\\\\\\\\\n"
+                        + "       I |{   / . . \\   }   / \"  \\\\||\n" + "       I | ) (   _   ) (    \\_= _///\n"
+                        + "       I |{___'-. .-'___}\\___ )_\\\n" + "       I ||~/,'~~~~~,\\~~|'---((  \\\n"
+                        + "       I \\ //        \\\\ |     \\ \\ \\\n" + "       I  \\/         // |     | /-/\n"
+                        + "       I (/         (/  |     |/||\\\n" + "       I  |             |     |    |\n"
+                        + "       I  |             |     |____/\n" + "       I  :-----_o_-----:      || |\n"
+                        + "       I  | /~~|===|~~\\ |      (( |\n" + "       I  ||   |===|   ||      ||_/\n"
+                        + "      /^\\ \"~   '^^^'   \"\"     ((__|");
 
         System.out.println(" ____      ____  ________  _____       ______    ___   ____    ____  ________  \n"
                 + "|_  _|    |_  _||_   __  ||_   _|    .' ___  | .'   `.|_   \\  /   _||_   __  | \n"
@@ -141,4 +140,39 @@ public class Ui {
         System.out.println(printSeparator() + printSeparator());
     }
 
+    /**
+     * This method prints out a list of Appointments containing a specific keyword in a readable format.
+     * It is used in the FindAppointmentCommand class.
+     *
+     * @param foundAppointments list of Appointment search results
+     */
+    public void printAppointmentSearchResults(List<Appointment> foundAppointments) {
+        if (foundAppointments.size() == 0) {
+            System.out.println("No appointment records containing the keyword were found.");
+            return;
+        }
+        int currentIndex = 1;
+        for (Appointment result : foundAppointments) {
+            System.out.println(currentIndex + " " + result.toString());
+            currentIndex++;
+        }
+    }
+
+    /**
+     * This method prints out a list of Patients containing a specific keyword in a readable format.
+     * It is used in the FindPatientCommand class.
+     *
+     * @param foundPatients list of Patient search results
+     */
+    public void printPatientSearchResults(List<Patient> foundPatients) {
+        if (foundPatients.size() == 0) {
+            System.out.println("No patient records containing the keyword were found.");
+            return;
+        }
+        int currentIndex = 1;
+        for (Patient result : foundPatients) {
+            System.out.println(currentIndex + " " + result.toString());
+            currentIndex++;
+        }
+    }
 }

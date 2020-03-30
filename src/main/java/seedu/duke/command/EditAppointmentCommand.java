@@ -1,11 +1,14 @@
 package seedu.duke.command;
 
+import seedu.duke.converter.TimeConverter;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
 import java.util.Map;
 
 /**
@@ -95,6 +98,7 @@ public class EditAppointmentCommand extends Command {
      * @see AppointmentList#getAppointmentRecord
      * @see Appointment#setAppointmentInfo
      * @see Storage#saveAppointmentsList
+     * @see Ui#showUpdateAppointmentSuccess
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
@@ -110,18 +114,18 @@ public class EditAppointmentCommand extends Command {
 
             // Check with assertions to make sure that the updated fields are correct
             assert date.equals(BLANK_STRING)
-                    || AppointmentList.getAppointmentRecord(index - 1).getDate().equals(this.date) :
-                    "Wrong date!";
+                    || AppointmentList.getAppointmentRecord(index - 1).getDate()
+                    .equals(TimeConverter.oldDate(this.date)) : "Wrong date!";
             assert time.equals(BLANK_STRING)
-                    || AppointmentList.getAppointmentRecord(index - 1).getTime().equals(this.time) :
-                    "Wrong time!";
+                    || AppointmentList.getAppointmentRecord(index - 1).getTime()
+                    .equals(TimeConverter.oldTime(this.time)) : "Wrong time!";
 
             // Auto-save the changes
             storage.saveAppointmentsList();
 
             // Show updated successfully message
             Ui.showUpdateAppointmentSuccess();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | ParseException e) {
             return;
         }
     }

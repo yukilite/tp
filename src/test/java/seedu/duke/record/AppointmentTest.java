@@ -2,25 +2,27 @@ package seedu.duke.record;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppointmentTest {
 
     @Test
-    void testGetDate() {
-        Appointment appointment = new Appointment("22 July 2020", "12.30pm");
-        assertEquals("22 July 2020", appointment.getDate());
+    void testGetDate() throws ParseException {
+        Appointment appointment = new Appointment("22/7/2020", "1230", 1);
+        assertEquals("Wed 22 Jul 2020", appointment.getDate());
     }
 
     @Test
-    void testGetTime() {
-        Appointment appointment = new Appointment("22 July 2020", "12:30pm");
-        assertEquals("12:30pm", appointment.getTime());
+    void testGetTime() throws ParseException {
+        Appointment appointment = new Appointment("22/7/2020", "1230", 1);
+        assertEquals("12:30 PM", appointment.getTime());
     }
 
     @Test
-    void testToString() {
-        Appointment appointment = new Appointment("22 July 2020", "12.30pm");
-        assertEquals("{[Date]: 22 July 2020 |[Time]: 12.30pm}", appointment.toString());
+    void testToString() throws ParseException {
+        Appointment appointment = new Appointment("22/7/2020", "1230", 1);
+        assertEquals("{[Date]: Wed 22 Jul 2020 |[Time]: 12:30 PM | [PatientId]: 1}", appointment.toString());
     }
 }

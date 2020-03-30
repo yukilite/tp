@@ -6,6 +6,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Map;
 
 /**
@@ -67,6 +68,7 @@ public class DeleteAppointmentCommand extends Command {
      * @see IOException
      * @see AppointmentList#getAppointmentRecord
      * @see Storage#saveAppointmentsList
+     * @see Ui#showDeleteAppointmentSuccess()
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
@@ -89,7 +91,7 @@ public class DeleteAppointmentCommand extends Command {
             // Show deleted appointment successfully message
             Ui.showDeleteAppointmentSuccess();
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | ParseException e) {
             return;
         }
     }

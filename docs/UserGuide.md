@@ -1,4 +1,4 @@
-# User Guide For Hospital Management System v1.0
+# User Guide For Hospital Management System v2.0
 
 # Table of content
 <!-- TOC -->
@@ -13,13 +13,18 @@
         + [4.1.2 List all existing patient records](#412-list-all-existing-patients)
         + [4.1.3 Delete existing patient record](#413-delete-an-existing-patient)
         + [4.1.4 Edit existing patient record](#414-edit-an-existing-patient)
+        + [4.1.5 Find existing patient record](#415-find-an-existing-patient)
+        + [4.1.6 Clear all patient records](#416-clear-patient-records)
     + [4.2. Appointment Commands](#42-appointment-commands)
         + [4.2.1 Add new appointment record](#421-add-a-new-appointment-record)
         + [4.2.2 List all existing appointment records](#422-list-all-existing-appointments)
         + [4.2.3 Delete existing appointment record](#423-delete-an-existing-appointment)
         + [4.2.4 Edit existing appointment record](#424-edit-an-existing-appointment)
-    + [4.3. Viewing help](#43-view-help)
-    + [4.4. Exiting the program](#44-exit-hams-program)
+        + [4.2.5 Find existing appointment record](#425-find-an-existing-appointment)
+        + [4.2.6 Clear all appointment records](#426-clear-appointment-records)
+    + [4.3 Clear all records](#43-clear-all-records)
+    + [4.4. Viewing help](#44-view-help)
+    + [4.5. Exiting the program](#45-exit-hams-program)
 * [5. Command Summary](#5-command-summary)  
 * [6. FAQ](#6-faq)  
 
@@ -27,21 +32,28 @@
 
 ## 1. Introduction
 
-HAMS is a CLI-based medical facility administration system that assists in the maintenance of various medical records.  
-Its functionality has some resemblance to the Duke ChatBot, a CS2113 individual project.
+This document serves as a user guide for HAMS. It teaches the user how to install HAMS, describes the features of HAMS, 
+explains how HAMS can be used and finally answer some frequently asked questions about HAMS.
+ 
+HAMS is a CLI-based medical facility administration system that assists in the maintenance of various medical records. 
 
 HAMS is designed for administrative assistants in medical facilities, like hospitals or polyclinics, that *prefer using
 CLI to keep track of various medical records* and *can type fast*.
+
+***
     
 ### 1.1 Starting HAMS
 1. Ensure you have JDK 11 installed on your computer. You can download the installer for your OS from [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 2. Download the latest .jar file release for HAMS from [GitHub](https://github.com/AY1920S2-CS2113T-T13-3/tp/releases).
 3. Move the .jar to an empty folder.
 4. Open Command Prompt.
-5. In Command Prompt, change your current working directory to the folder containing the .jar using `cd <Path of folder containing .jar>`
-6. Run the .jar using `$ java -jar hams-1.0.jar`
+5. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
+6. Run the .jar using $ `java -jar hams-2.0.jar`
+
+[Back to top](#table-of-content)
  
 &nbsp;
+***
 
 ## 2. Features
 
@@ -55,7 +67,11 @@ The `lista` or `listp` command that HAMS provides can display all the Appointmen
 HAMS has an auto-save feature which stores Patient and Appointments every time you add or modify them. 
 With this feature, your tasks will be saved every time you leave the application and can be easily retrieved when you reopen the application subsequently.
 
+[Back to top](#table-of-content)
+
 &nbsp;
+
+***
 
 ## 3. Command Format
 
@@ -66,13 +82,23 @@ For example, in `adda \date [date] \time [time]`, `adda` is the command keyword 
 `\date` and `\time` are compulsory labels to denoting what field the subsequent information belongs to.
 `[date]` is the date of the appointment to be supplied by you. `[time]` represents the time of the appointment to be supplied by you.
 
-A valid input would be `adda \date Mar 17 \time 2pm`.
+A valid input would be `adda \date 22/05/2020 \time 1200`.
+
+> ![](images/UG/command_format_hint.JPG)
+
+> ![](images/UG/command_format_hint2.JPG)
+
+> ![](images/UG/command_format_hint3.JPG)
+
+[Back to top](#table-of-content)
 
 &nbsp;
 
+***
+
 ## 4. Command Usage
 
-### 4.1 `Patient` Commands
+### 4.1 Patient Commands
 
 #### 4.1.1 Add a new Patient record
 
@@ -86,12 +112,11 @@ Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 * `\address` followed by the address of the patient
 * `\phone` followed by the contact number of the patient
 
->
->**Notice:**
-> For versions beyond 1.0, the above fields will have certain limits and validation of text and numbers imposed
->upon.
+> ![](images/UG/addp_hint.JPG)
 
-Examples of Usage
+> ![](images/UG/addp_warning.JPG)
+
+##### Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
@@ -99,11 +124,6 @@ OK | `addp \name Justin \address Pasir Ris \age 20 \phone 98889888` | ![](images
 OK | `addp \age 20 \phone 98889888 \name Justin \address Pasir Ris` | ![](images/addp%20success2.PNG)
 NOT OK | `addp` | ![](images/addp%20fail.PNG)
 
->
->**Notice:**
-> In the correct usage examples, the input order of the keywords can be randomized.  
->
->
 #### 4.1.2 List all existing Patients
 
 The command simply contains the 'listp' keyword.
@@ -113,7 +133,7 @@ Format: `listp`
 `listp`
 
 ##### Expected outcome 
-![](images/listp.PNG)
+![](images/listp.PNG) 
 
 #### 4.1.3 Delete an existing Patient
 
@@ -141,12 +161,9 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 * `\age` followed by the age of the patient
 * `\address` followed by the address of the patient
 * `\phone` the contact number of the patient
->
->**Notice:**
->Note that users do not need to include any single field that needs to be modified in the command.
->Illustration will be later shown in the command's format and usage.
->
->
+
+
+> ![](images/UG/editp_hint.JPG)
 
 #### Example of usage: 
 `editp \index 1  \name Justin \age 23 \address Clementi \phone 83487846`
@@ -164,7 +181,7 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 ##### Expected outcome:
 ![](images/editp_success2.PNG)
 ###### Before:
-![](images/editp_before2.PNG)
+![](images/editp_after.PNG)
 ###### After:
 ![](images/editp_after2.PNG)
 
@@ -174,25 +191,66 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 ##### Expected outcome:
 ![](images/editp_fail.PNG)
 
+[Back to top](#table-of-content)
 
-### 4.2 `Appointment` Commands
+#### 4.1.5 Find an existing patient
+The program allows you to find to an existing Patient record based on a search value.
+
+Format: `findp [search value]`
+
+* `findp` keyword
+* `search value` followed by a search value.
+
+> ![](images/UG/findp_hint.JPG)
+
+> ![](images/UG/warning_casesensitive.JPG)
+
+#### Example of usage: 
+`findp kurumi`
+
+##### Expected outcome: 
+![](images/UG/findp_kurumi.JPG)
+
+#### Example of no records found:
+`findp ayame`
+
+##### Expected outcome:
+![](images/UG/findp_nothing.JPG)
+
+#### 4.1.6 Clear patient records
+The program allows you to clear the patient list. 
+
+Format: `clearp`
+* `clearp` keyword
+
+>![](images/UG/clearp_warning.JPG)
+
+***
+
+### 4.2 Appointment Commands
 
 #### 4.2.1 Add a new Appointment record
 
-The program allows you to add a new Appointment record to the current list of Appointment records. 
+The program allows you to add a new Appointment record to the current list of Appointment records. With the addition 
+of the `pid` field, it allows users to link the appointment to a specific patient. 
 
-Format: `adda \date [date] \time [time]`
+
+Format: `adda \date [date] \time [time] \pid [patient id]`
+
 
 * `adda` keyword
 * `\date` followed by the date of the appointment
 * `\time` followed by the time of the appointment
->
->**Notice:**
-> For version 1.0, both date and time are stored in string.
->
+
+* `\pid` followed by a unique Patient ID (pid).
+
+> ![](images/UG/adda_hint.JPG)
+
+> ![](images/UG/Warning_pid.JPG)
 
 #### Example of usage: 
-- `adda \date 14-03-2020 \time 10am`
+- `adda \date 14/03/2020 \time 1000 \pid 1`
+
 
 ##### Expected outcome:
 <img src ="images/adda_eg1.PNG" width = "400">
@@ -226,10 +284,7 @@ OK? |   Usage    |   Outcome
 OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
 NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
 
->
->**Notice:**
->In the wrong usage example, the index is not in valid range.
->
+> ![](images/UG/deletea_hint.JPG)
 
 #### 4.2.4 Edit an existing Appointment
 
@@ -242,36 +297,84 @@ Format: `edita \index [appointmentNumber] \date [date] \time [time]`
 * `\date` followed by the date of the appointment 
 * `\time` followed by the time of the appointment
 
->
->**Notice:**
-> Note that users do not need to include any single field that needs to be modified in the command.
-Illustration will be displayed in the command's format and usage.
+> ![](images/UG/adda_hint.JPG)
 
-
+> ![](images/UG/edita_hint.JPG)
 
 #### Example List
 <img src ="images/edita_before.PNG" width = "400">
 
 #### Example of usage: 
-`edita \index 3 \date 20-05-2021 \time 11pm`
+`edita \index 3 \date 20/05/2021 \time 2300`
 
 ##### Expected outcome:
 <img src ="images/edita_eg1.PNG" width = "400">
 
-##### Result:
-<img src ="images/edita_eg1after.PNG" width = "400">
+###### Before:
+![](images/edita_before_crop.PNG)
+
+###### After:
+![](images/edita_eg1after_crop.PNG)
 
 #### Example of usage: 
-`edita \index 3 \time 10pm \date 16-03-2020`
+`edita \index 3 \time 1000 \date 16/03/2020`
 
 ##### Expected outcome:
 <img src ="images/edita_eg2.PNG" width = "400">
 
-##### Result:
+###### Before:
+![](images/edita_eg1after_crop.PNG)
+
+###### After:
+![](images/edita_eg2after-crop.png)
+
+##### Final list:
 <img src ="images/edita_eg2after.PNG" width = "400">
 
+#### 4.2.5 Find an existing Appointment
+The program allows you to find to an existing Appointment record based on a search value.
 
-### 4.3 View help
+Format: `finda [search value]`
+
+* `finda` keyword
+* `search value` followed by a search value.
+
+> ![](images/UG/findp_hint.JPG)
+
+> ![](images/UG/warning_casesensitive.JPG)
+
+#### Example of usage: 
+ `finda Fri`
+ 
+##### Expected outcome: 
+ ![](images/UG/finda_fri.JPG)
+ 
+#### Example of no records found:
+`finda Oct`
+ ![](images/UG/finda_nothing.JPG)
+
+#### 4.2.6 Clear appointment records
+
+The program allows you to clear the appointment list. 
+
+Format: `cleara`
+* `cleara` keyword
+
+>![](images/UG/cleara_warning.JPG)
+
+[Back to top] (#table-of-content)
+
+***
+
+## 4.3 Clear all records
+The program allows you to clear all lists.
+
+Format: `clearall`
+* `clearall` keyword
+
+>![](images/UG/clearall_warning.JPG) 
+
+### 4.4 View help
 
 The 'help' keyword provides you with a list of valid commands, their functions and their proper usages.
 
@@ -283,7 +386,9 @@ Format: `help`
 ##### Expected outcome 
 ![](images/help.PNG)
 
-### 4.4 Exit HAMS program
+[Back to top](#table-of-content)
+
+### 4.5 Exit HAMS program
 
 This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in `/saves/appointments.txt` or `/saves/patients.txt`). These files will be loaded to the program when it is run again subsequently.
 
@@ -294,14 +399,21 @@ Format: `exit`
 ##### Expected outcome: 
 <img src ="images/exit_eg1.PNG" width = "400">
 
+[Back to top](#table-of-content)
+
 ## 5. Command Summary
 
    Command    |   Description 
    ------------- | ---------------
-`adda \date [date] \time [time]` |  Adds date and time of an appointment
+`adda \date [date] \time [time] \pid [pid]` |  Adds date and time of an appointment and links it to a patient based on their id
 `addp \name [name] \age [age] \address [address] \phone [phone]` | Adds name, age, address, and contact number of patient
+`finda [search value]`| Searches through all appointment records for the search value
+`findp [search value]`| Searches through all patient records for the search value
 `lista` | List all the appointments from the appointment's list
 `listp` | List all the patients from the patient's list
+`cleara`| Clears all appointment records
+`clearp`| Clears all patient records
+`clearall`| Clears both appointment and patient records
 `deletea \index [appointment number in list]` | Delete an appointment by the list's appointment number
 `deletep \index [patient number in list]` | Delete a patient by the list's patient number
 `edita \index [appointmentNumber] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
@@ -322,5 +434,17 @@ Format: `exit`
 * `{[Name]: Tommy | [Age]: -1 | [Address]:  | [Contact Number]: 92331234}`
 
 **A**: The age field provided by the user is empty.
+
+**Q**: Why am I not able to find anything using finda or findp? 
+
+**A**: Please note that all search values are case-sensitive. For example, `Sam` will not match with `sam`
+because of the first letter capitalization. 
+
+**Q**: What is `pid` for in the command `adda`?
+
+**A**: `pid` stands for Patient ID, it is a unique ID tag to each patient. In order to link appointments 
+to the patient, the pid tag must be present. 
+
+[Back to top](#table-of-content)
 
 

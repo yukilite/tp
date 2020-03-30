@@ -1,7 +1,11 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,11 +60,11 @@ class AddAppointmentCommandTest {
     }
 
     @Test
-    void testAddNormalString() {
-        int ui = 1;
-        int storage = 1;
+    void testAddNormalString() throws IOException, ParseException {
+        Ui ui = null;
+        Storage storage = null;
         Map<String, String> tempMap = AddAppointmentCommandStub.generateMap(1);
-        AddAppointmentCommandStub addCommand = new AddAppointmentCommandStub(tempMap);
+        AddAppointmentCommand addCommand = new AddAppointmentCommandStub(tempMap);
         addCommand.execute(ui, storage);
         AppointmentStub tempAppointment =
                 AppointmentListStub.getAppointmentList().get(AppointmentListStub.getTotalAppointments() - 1);
@@ -70,9 +74,9 @@ class AddAppointmentCommandTest {
     }
 
     @Test
-    void testAddEmptyString() {
-        int ui = 1;
-        int storage = 1;
+    void testAddEmptyString() throws IOException {
+        Ui ui = null;
+        Storage storage = null;
         Map<String, String> tempMap = AddAppointmentCommandStub.generateMap(2);
         AddAppointmentCommandStub addCommand = new AddAppointmentCommandStub(tempMap);
         addCommand.execute(ui, storage);

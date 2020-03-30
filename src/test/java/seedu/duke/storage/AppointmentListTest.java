@@ -3,13 +3,18 @@ package seedu.duke.storage;
 import org.junit.jupiter.api.Test;
 import seedu.duke.record.Appointment;
 
+import java.text.ParseException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppointmentListTest {
     private AppointmentList testAppointmentList = new AppointmentList();
-    private Appointment testAppointment1 = new Appointment("april 1", "13:00");
-    private Appointment testAppointment2 = new Appointment("jun 4", "14:00");
-    private Appointment testAppointment3 = new Appointment("oct 11", "15:00");
+    private Appointment testAppointment1 = new Appointment("29/03/2020", "1300", 1);
+    private Appointment testAppointment2 = new Appointment("28/03/2020", "1400", 1);
+    private Appointment testAppointment3 = new Appointment("27/03/2020", "1500", 1);
+
+    AppointmentListTest() throws ParseException {
+    }
 
     @Test
     void appointmentListTest_Add() {
@@ -22,8 +27,8 @@ class AppointmentListTest {
     @Test
     void appointmentListTest_GetInfo() {
         testAppointmentList.getAppointmentList().add(testAppointment1);
-        assertEquals("april 1", testAppointmentList.getAppointmentRecord(0).getDate());
-        assertEquals("13:00", testAppointmentList.getAppointmentRecord(0).getTime());
+        assertEquals("Sun 29 Mar 2020", testAppointmentList.getAppointmentRecord(0).getDate());
+        assertEquals("01:00 PM", testAppointmentList.getAppointmentRecord(0).getTime());
     }
 
     @Test
@@ -33,7 +38,7 @@ class AppointmentListTest {
         testAppointmentList.getAppointmentList().add(testAppointment3);
         testAppointmentList.removeAppointmentRecord(0);
         assertEquals(2, testAppointmentList.getTotalAppointments());
-        assertEquals("jun 4", testAppointmentList.getAppointmentRecord(0).getDate());
+        assertEquals("Sat 28 Mar 2020", testAppointmentList.getAppointmentRecord(0).getDate());
 
     }
 }

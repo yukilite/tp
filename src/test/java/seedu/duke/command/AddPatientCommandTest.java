@@ -2,7 +2,10 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.record.Patient;
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class AddPatientCommandTest {
 
-    Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121");
-    Patient newPatient2 = new Patient(" ", 15, " ", "15454455");
-    Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989");
-    Patient newPatient4 = new Patient("aeiwae", 13, "to", " ");
-    Patient newPatient5 = new Patient("LSDs", -1, "Lis", "12");
+    Patient newPatient1 = new Patient("s;dlskd;l", 23, "Li", "121", 123);
+    Patient newPatient2 = new Patient(" ", 15, " ", "15454455", 232);
+    Patient newPatient3 = new Patient("ewuioaiwoe", 33, "Lo", "1989", 129991);
+    Patient newPatient4 = new Patient("aeiwae", 13, "to", " ", 11122);
+    Patient newPatient5 = new Patient("LSDs", -1, "Lis", "12", 7788);
 
 
     @Test
@@ -94,11 +97,11 @@ class AddPatientCommandTest {
     }
 
     @Test
-    void testAddNormalString() {
-        int ui = 1;
-        int storage = 1;
+    void testAddNormalString() throws IOException {
+        Ui ui = null;
+        Storage storage = null;
         Map<String,String> tempMap = AddPatientCommandStub.generateMap(1);
-        AddPatientCommandStub addCommand = new AddPatientCommandStub(tempMap);
+        AddPatientCommand addCommand = new AddPatientCommandStub(tempMap);
         addCommand.execute(ui,storage);
         PatientStub temppatient = PatientListStub.getPatientList().get(PatientListStub.getTotalPatients() - 1);
         PatientStub newPatient = new PatientStub("asd", 23,"asdsds","asdsadsad");
@@ -109,11 +112,11 @@ class AddPatientCommandTest {
     }
 
     @Test
-    void testAddEmptyString()  {
-        int ui = 1;
-        int storage = 1;
+    void testAddEmptyString() throws IOException {
+        Ui ui = null;
+        Storage storage = null;
         Map<String,String> tempMap = AddPatientCommandStub.generateMap(2);
-        AddPatientCommandStub addCommand = new AddPatientCommandStub(tempMap);
+        AddPatientCommand addCommand = new AddPatientCommandStub(tempMap);
         addCommand.execute(ui,storage);
         PatientStub temppatient = PatientListStub.getPatientList().get(PatientListStub.getTotalPatients() - 1);
         PatientStub newPatient = new PatientStub("", -1,"","");
