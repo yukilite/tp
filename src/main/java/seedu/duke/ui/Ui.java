@@ -62,7 +62,7 @@ public class Ui {
     }
 
     public static void showSetAgeError() {
-        System.out.println("Received a non-integer for age, setting age to be -1.");
+        System.out.println("Received a non-integer for age, setting age to be blank.");
     }
 
     public static void showPatientIdError() {
