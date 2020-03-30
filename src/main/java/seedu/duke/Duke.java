@@ -1,12 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-
-import seedu.duke.exceptions.DescriptionIsEmptyException;
 import seedu.duke.exceptions.IndexNotIntegerException;
-import seedu.duke.exceptions.NoFieldCommandException;
-import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.exceptions.InvalidIndexException;
+import seedu.duke.exceptions.NoFieldCommandException;
+import seedu.duke.exceptions.PidEmptyException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -17,11 +16,11 @@ import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
 
 public class Duke {
     public static int patientIndexNumber;
@@ -69,7 +68,7 @@ public class Duke {
         }
         try {
             appointmentListToLoad = storage.loadSavedAppointments();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ParseException e) {
             appointmentListToLoad = new ArrayList<>();
         } finally {
             appointmentList = new AppointmentList(appointmentListToLoad);
@@ -92,8 +91,9 @@ public class Duke {
                 c.execute(ui, storage);
                 isExit = c.isExit();
 
-            } catch (UnknownCommandException | InvalidIndexException
-                    | IndexNotIntegerException | NoFieldCommandException e) {
+            } catch (UnknownCommandException | InvalidIndexException | IndexNotIntegerException
+                    | NoFieldCommandException | PidEmptyException e) {
+
                 ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
@@ -101,6 +101,9 @@ public class Duke {
 
             } catch (NoSuchElementException e) {
                 break;
+            } catch (ParseException e) {
+                System.out.println("Please fill in date in right format: dd/mm/yyyy and "
+                        + "time in the 24 hour format: hhmm");
             }
         }
     }

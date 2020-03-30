@@ -11,6 +11,7 @@ public class Patient {
     private int age;
     private String address;
     private String contactNumber;
+    private int patientID;
 
     /**
      * This method stores the patient information when the user enters an input.
@@ -19,15 +20,26 @@ public class Patient {
      * @param age           the age of the patient
      * @param address       the address of the patient
      * @param contactNumber the phone number of the patient
+     * @param patientID     the patientID number
      */
-    public Patient(String name, int age, String address, String contactNumber) {
+    public Patient(String name, int age, String address, String contactNumber, int patientID) {
         this.name = name;
         this.age = age;
         this.address = address;
         this.contactNumber = contactNumber;
+        this.patientID = patientID;
+    }
+
+    public int getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
     }
 
     public String getName() {
+        assert name != null;
         return name;
     }
 
@@ -38,6 +50,7 @@ public class Patient {
      */
     public void setName(String name) {
         if (!name.isBlank()) {
+            assert name != null;
             this.name = name;
         }
     }
@@ -53,6 +66,7 @@ public class Patient {
      */
     public void setAge(int age) {
         if (age >= 0) {
+            assert age >= 0;
             this.age = age;
         }
     }
@@ -72,6 +86,7 @@ public class Patient {
      */
     public void setAddress(String address) {
         if (!address.isBlank()) {
+            assert address != null;
             this.address = address;
         }
     }
@@ -87,6 +102,7 @@ public class Patient {
      */
     public void setContactNumber(String contactNumber) {
         if (!contactNumber.isBlank()) {
+            assert contactNumber != null;
             this.contactNumber = contactNumber;
         }
     }
@@ -97,15 +113,16 @@ public class Patient {
      *
      * @return newToString The formatted string
      */
-    @Override
-    public String toString() {
-        String newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|"
-                + " " + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
-                + getContactNumber() + "}";
+    @Override public String toString() {
+        String newToString =
+                "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|" + " "
+                        + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
+                        + getContactNumber() + " | " + "[PatientID]: " + getPatientID() + "}";
         if (age == -1) {
-            newToString = "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + "  " + "|"
-                    + " " + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
-                    + getContactNumber() + "}";
+            newToString =
+                    "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + "  " + "|" + " " + "[Address]:"
+                            + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " " + getContactNumber()
+                            + " | " + "[PatientID]: " + getPatientID() + "}";
         }
         return newToString;
     }
