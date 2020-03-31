@@ -118,7 +118,7 @@ public class Patient {
                 "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|" + " "
                         + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "
                         + getContactNumber() + " | " + "[PatientID]: " + getPatientID() + "}";
-        if (age == -1) {
+        if (age <= -1) {
             newToString =
                     "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + "  " + "|" + " " + "[Address]:"
                             + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " " + getContactNumber()
