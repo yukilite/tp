@@ -132,7 +132,7 @@ These operations are usually invoked on startup, whenever changes are made to th
 The class diagram for the storage module is as seen below: 
 
 
-![](images/storageclass.png)
+![](images/storageclass.PNG)
 
 &nbsp;
 
