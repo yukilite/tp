@@ -50,7 +50,7 @@ CLI to keep track of various medical records* and *can type fast*.
 5. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
 6. Run the .jar using $ `java -jar hams-2.0.jar`
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
  
 &nbsp;
 
@@ -68,7 +68,7 @@ The `lista` or `listp` command that HAMS provides can display all the Appointmen
 HAMS has an auto-save feature which stores Patient and Appointments every time you add or modify them. 
 With this feature, your tasks will be saved every time you leave the application and can be easily retrieved when you reopen the application subsequently.
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
 
 &nbsp;
 
@@ -91,7 +91,7 @@ A valid input would be `adda \date 22/05/2020 \time 1200`.
 
 > ![](images/UG/command_format_hint3.JPG)
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
 
 &nbsp;
 
@@ -192,7 +192,7 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 ##### Expected outcome:
 ![](images/editp_fail.PNG)
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
 
 #### 4.1.5 Find an existing patient
 The program allows you to find to an existing Patient record based on a search value.
@@ -362,7 +362,7 @@ Format: `cleara`
 
 >![](images/UG/cleara_warning.JPG)
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
 
 ***
 
@@ -386,7 +386,7 @@ Format: `help`
 ##### Expected outcome 
 ![](images/help.PNG)
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
 
 ### 4.5 Exit HAMS program
 
@@ -401,7 +401,7 @@ Format: `exit`
 ##### Expected outcome: 
 <img src ="images/exit_eg1.PNG" width = "400">
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
 
 ## 5. Command Summary
 
@@ -447,6 +447,6 @@ because of the first letter capitalization.
 **A**: `pid` stands for Patient ID, it is a unique ID tag to each patient. In order to link appointments 
 to the patient, the pid tag must be present. 
 
-[Back to top :arrow_up_small:](#table-of-content)
+### [Back to top :arrow_up_small:](#table-of-content)
 
 
