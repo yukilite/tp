@@ -59,7 +59,7 @@ audience.
 implementation of the save file structure. 
 * *A&D* - Short of Amazing & Dazzling, it is an acronym to describe the command module.
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 2. Design & Implementation
 ### 2.1 Project overview
@@ -126,7 +126,7 @@ also protected.
     * Cons:
         - Immutable-value classes mean it is not thread-safe (using Java.util.SimpleDateFormat).
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.2 Converter Module
 The converter module consists of one class which converts the format of date and time using a custom format defined by
@@ -136,7 +136,7 @@ object constructor.
 
 ![](images/SD_Converter.png)
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.3 BRANDON storage module
 
@@ -172,7 +172,7 @@ The sequence diagram is shown below:
 
 ![](images/saveapptlist_seq.PNG)
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.4 A&D command module 
 
@@ -295,7 +295,7 @@ Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 ![](images/ListAppointmentCommandSequence.png)
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ##### 2.2.4.5 Design considerations
 
@@ -517,7 +517,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
         -   All command depends on this common method to parse fields, if the method changes, it may return the wrong
         result for some commands. 
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 3. User Stories
 
@@ -536,7 +536,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |v2.0|admin assistant|be able to find a specific patient|check their appointment details|
 |v2.0|admin assistant|clear my lists|keep my list organized when the appointment is over|
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 4. Non-Functional Requirements
 * HAMS should be usable with minimal training, all commands should be self-explanatory and viewing the in-application
@@ -552,7 +552,7 @@ appointment list should be saved. In addition, user should be able to manually s
 **TODO**
 {Give non-functional requirements}
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 5. Instructions for Manual Testing
 
@@ -611,4 +611,4 @@ appointment list should be saved. In addition, user should be able to manually s
     Expected: First patient in the list is deleted. 
     
 
-### [Back to top :arrow_up_small:](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
