@@ -43,6 +43,7 @@ public class AddPatientCommand extends Command {
      * Constructor for the AddPatientCommand.
      *
      * @param patientInfo the map containing the patient information
+     * @see PatientIdManager#getNextPatientId
      */
     public AddPatientCommand(Map<String, String> patientInfo) {
         this.patientName = patientInfo.get(PATIENT_NAME);

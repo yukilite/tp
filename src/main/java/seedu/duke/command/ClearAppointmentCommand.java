@@ -54,6 +54,8 @@ public class ClearAppointmentCommand extends Command {
 
             // Show all items in both lists deleted message
             // ui.showAppointmentsDeleted(); // TODO Justin
+            System.out.println("All appointment cleared!");
+
         } catch (EmptyAppointmentsException e) {
             System.out.println("There is nothing to clear in appointments' list");
             // ui.showNothingToClearAppointments() // TODO Justin
