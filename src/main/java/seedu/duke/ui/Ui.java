@@ -41,9 +41,10 @@ public class Ui {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
         if (appointmentList.isEmpty()) {
             System.out.println("No appointment records present!");
-        }
-        for (Appointment a : appointmentList) {
-            System.out.println(a);
+        } else {
+            for (Appointment a : appointmentList) {
+                System.out.println(a);
+            }
         }
     }
 
