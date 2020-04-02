@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.EmptyPatientsException;
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
@@ -36,6 +37,7 @@ public class ClearPatientCommand extends Command {
      * @see DukeExceptions#checkEmptyAppointments
      * @see PatientList#getPatientList
      * @see Storage#savePatientList
+     * @see PatientIdManager#clearPatientId()
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, ParseException {
@@ -46,6 +48,9 @@ public class ClearPatientCommand extends Command {
             // Clear all the items in patients' list
             PatientList.getPatientList().clear();
 
+            // Reset the patient id manager state
+            PatientIdManager.clearPatientId();
+
             // Make sure that the size of patients' list is 0
             assert PatientList.getTotalPatients() == 0;
 
@@ -54,6 +59,8 @@ public class ClearPatientCommand extends Command {
 
             // Show all patients deleted message
             // ui.showPatientsDeleted(); //TODO Justin
+            System.out.println("All patients cleared!");
+
         } catch (EmptyPatientsException e) {
             System.out.println("There is nothing to clear in patients' list");
             // ui.showNothingToClearPatients(); //TODO Justin

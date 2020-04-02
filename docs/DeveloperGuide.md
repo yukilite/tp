@@ -41,7 +41,6 @@ audience.
 
 
 
-
 |Role|Purpose|
 |---------|-------|
 |Developers & Designers| To understand the architecture and follow the design to build the system|
@@ -60,7 +59,7 @@ audience.
 implementation of the save file structure. 
 * *A&D* - Short of Amazing & Dazzling, it is an acronym to describe the command module.
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 2. Design & Implementation
 ### 2.1 Project overview
@@ -74,17 +73,19 @@ The major code can be broken down into modules. The below table is the breakdown
 name and a summarized purpose.
 
 **TODO**
+
 |Module name|Purpose|
 |---------|-------|
-|Stupendously AwesoMe (SAM) **records**|?| 
+|Records|Contains and provides access to user information|
+|Converter|Formats user input| 
 |BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **storage**|?|
-|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that differenct classes can interact with each other|
+|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
 #### 2.2.1 SAM record module
 
 The record module consists of 2 classes which represent the patients information and appointment details. 
-As a reflection of real world objects, the patient's class purpose is to store the particulars of a person while the 
+As a reflection of real world objects, the Patient's class purpose is to store the particulars of a person while the 
 Appointment's class is to store the date-time data. 
 Thus, the rationale of both classes can be grouped as follows:
 >
@@ -97,10 +98,17 @@ flow in logical executions as these methods can be called whenever necessary.
 Due to the nature of the above classes containing only getter and setter methods, following how the components interact 
 with each other would provide more accuracy in understanding how these classes are called and the role of its 
 methods. 
-To illustrate, 3 examples are used:
-* addp \name Samuel \age 18 \address NUS
+To illustrate, the below example is used:
 * editp \index 1 \name Justin \age 69 \Pasir Panjang
-* listp
+
+![](images/SD_Patient.png)
+
+Upon startup, objects from ui, parser and storage are created. Prompted for user input, Duke receives the "editp"
+command which is forwarded to the parser to be interpreted respectively. Once the `EditPatientCommand` object is 
+created, it retrieves the patient index to edit the existing patient information from the patientList. 
+The `Patient` class is called by its setter method, `setPatientInfo()`, to update the fields as provided by the user. 
+This ensures that the encapsulated variables such as age, name, contact number and address are not only enforced but
+also protected. 
 
 ##### 2.2.1.2 Design Considerations
 ###### Aspect: Data Type for Appointment's Date and Time
@@ -118,12 +126,17 @@ To illustrate, 3 examples are used:
     * Cons:
         - Immutable-value classes mean it is not thread-safe (using Java.util.SimpleDateFormat).
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.2 Converter Module
-The converter module consists of one class which converts the format of date and time
+The converter module consists of one class which converts the format of date and time using a custom format defined by
+special formatting characters (ie. SimpleDateFormat). This class is primarily used to format a user-input date and time
+in the `Appointment` class. As illustrated below, its methods are called during the creation of the `Appointment`
+object constructor. 
 
-###### [Back to top](#table-of-content)
+![](images/SD_Converter.png)
+
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.3 BRANDON storage module
 
@@ -135,7 +148,7 @@ These operations are usually invoked on startup, whenever changes are made to th
 The class diagram for the storage module is as seen below: 
 
 
-![](images/storageclass.png)
+![](images/storageclass.PNG)
 
 &nbsp;
 
@@ -159,7 +172,7 @@ The sequence diagram is shown below:
 
 ![](images/saveapptlist_seq.PNG)
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.4 A&D command module 
 
@@ -282,7 +295,7 @@ Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 ![](images/ListAppointmentCommandSequence.png)
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ##### 2.2.4.5 Design considerations
 
@@ -504,7 +517,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
         -   All command depends on this common method to parse fields, if the method changes, it may return the wrong
         result for some commands. 
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 3. User Stories
 
@@ -523,7 +536,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |v2.0|admin assistant|be able to find a specific patient|check their appointment details|
 |v2.0|admin assistant|clear my lists|keep my list organized when the appointment is over|
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 4. Non-Functional Requirements
 * HAMS should be usable with minimal training, all commands should be self-explanatory and viewing the in-application
@@ -539,7 +552,7 @@ appointment list should be saved. In addition, user should be able to manually s
 **TODO**
 {Give non-functional requirements}
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 5. Instructions for Manual Testing
 
@@ -598,4 +611,4 @@ appointment list should be saved. In addition, user should be able to manually s
     Expected: First patient in the list is deleted. 
     
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
