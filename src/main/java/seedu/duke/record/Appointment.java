@@ -81,7 +81,8 @@ public class Appointment {
      *
      * @return newToString The formatted string
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         String newToString = null;
         newToString =
                 "{" + "[Date]:" + " " + getDate() + " " + "|" + "[Time]:" + " " + getTime() + " | " + "[PatientId]: "
