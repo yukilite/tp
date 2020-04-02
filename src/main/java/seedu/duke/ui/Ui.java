@@ -25,11 +25,13 @@ public class Ui {
      */
     public static void showEntirePatientList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn
+        int index = 1;
         if (patientList.isEmpty()) {
             System.out.println("No patient records found!");
         } else {
             for (Patient p : patientList) {
-                System.out.println(p); //override Patient class toString by @Sammmmm
+                System.out.println(index + ". " + p); //override Patient class toString by @Sammmmm
+                index ++;
             }
         }
     }
