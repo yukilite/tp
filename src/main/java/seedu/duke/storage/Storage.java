@@ -54,14 +54,16 @@ public class Storage {
         if (!appointmentSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
             boolean isNewDirectoryCreated = newDirectory.mkdir();
-            if (isNewDirectoryCreated) {
+            if (isNewDirectoryCreated || newDirectory.exists()) {
                 File newFile = new File(APPOINTMENT_LIST_SAVE_FILEPATH);
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
+                    System.out.println("here 1");
                     Ui.showFailedToCreateFile();
                 }
             } else {
+                System.out.println("here 2");
                 Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
@@ -101,15 +103,17 @@ public class Storage {
         if (!patientSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
             boolean isNewDirectoryCreated = newDirectory.mkdir();
-            if (isNewDirectoryCreated) {
+            if (isNewDirectoryCreated || newDirectory.exists()) {
                 File newFile = new File(PATIENT_LIST_SAVE_FILEPATH);
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
+                    System.out.println("here 3");
                     Ui.showFailedToCreateFile();
                 }
 
             } else {
+                System.out.println("here 4");
                 Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
@@ -160,7 +164,7 @@ public class Storage {
         if (!patientIdSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
             boolean isNewDirectoryCreated = newDirectory.mkdir();
-            if (isNewDirectoryCreated) {
+            if (isNewDirectoryCreated || newDirectory.exists()) {
                 File newFile = new File(PATIENT_ID_SAVE_FILEPATH);
                 try {
                     newFile.createNewFile();
@@ -169,6 +173,7 @@ public class Storage {
                 }
 
             } else {
+                System.out.println("here 5");
                 Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
