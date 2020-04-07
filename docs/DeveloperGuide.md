@@ -240,7 +240,11 @@ Said information will be stored in the ```AddAppoinmentCommand``` object
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
-```Appointment``` class to make an ```Appointment``` Object. 
+```Appointment``` class to make an ```Appointment``` Object. Note that in the the constructor of ```AddAppointment``` it also checks to see if the patient id is a patient id that actually exist (as in a patient has that patient id
+). This check is done by calling the ```checkPatientIdUsed``` method of ```PatientIdManager``` class. If the patient id
+ supplied with the appointment detail does not belong to any of the present patients, the ```AddAppointmentCommand``` 
+ constructor will **not** create the ```Appointment```  and will show an error instead. The ```Appointment``` object
+  will only be created if the patient id that is supplied exists (as in one of the patient has said patient id).
 
 3. After which, the ```AddAppoinmentCommand``` object will 
 call upon the ```AppointmentList``` object to obtain the list of ```Appointments``` (get the ```List``` object that 
