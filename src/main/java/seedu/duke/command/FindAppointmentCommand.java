@@ -71,11 +71,13 @@ public class FindAppointmentCommand extends Command {
                 System.out.println("invalid time form");
                 return;
             }
+            isTimeInput = true;
         } else if (Integer.valueOf(this.getSearchValue().length()) == 10) {
             if (!checkValidDate(this.getSearchValue())) {
                 System.out.println("invalid date form");
                 return;
             }
+            isDateInput = true;
         } else {
             return;
         }
