@@ -139,6 +139,8 @@ public class Parser {
 
         fillPatientFields(fullCommand, patientFieldsToAdd);
 
+        DukeExceptions.checkValidPhoneNumber(patientFieldsToAdd);
+
         //check if there is at least 1 field inside.
         DukeExceptions.checkFieldEmptyAddPatient(patientFieldsToAdd);
 
@@ -171,6 +173,8 @@ public class Parser {
         patientFieldsToEdit.put(PatientFieldKeys.INDEX.toString(), indexValue);
 
         fillPatientFields(fullCommand, patientFieldsToEdit);
+
+        DukeExceptions.checkValidPhoneNumber(patientFieldsToEdit);
 
         //check if there is at least 1 field inside.
         DukeExceptions.checkFieldEmptyEditPatient(patientFieldsToEdit);
