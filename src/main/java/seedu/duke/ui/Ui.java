@@ -101,10 +101,6 @@ public class Ui {
 
     }
 
-    public static void showNegativeAgeError() {
-        System.out.println("Received age is a negative integer, keeping the original age");
-    }
-
     public void showExceptionError(String localizedMessage) {
         System.out.println(localizedMessage);
     }
