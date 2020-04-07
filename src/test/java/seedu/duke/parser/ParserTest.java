@@ -114,7 +114,7 @@ class ParserTest {
         } catch (UnknownCommandException e) {
             assertEquals("Unknown command", e.getLocalizedMessage());
         } catch (NoFieldCommandException e) {
-            assertEquals("Please ensure that the fields for adda is provided", e.getLocalizedMessage());
+            assertEquals("Please ensure that at least one field for adda is provided", e.getLocalizedMessage());
         } catch (Exception e) {
             assertTrue(true);
         }
