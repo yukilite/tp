@@ -13,6 +13,7 @@ import java.util.Map;
 public class DukeExceptions {
     private static final String BLANK_STRING = "";
     public static final String ADD_PATIENT_COMMAND = "addp";
+    private static final String ADD_PATIENT_COMMAND = "addp";
 
     /**
      * This method throws a NoKeyExistException if the key is not found in the input that the user supplied
