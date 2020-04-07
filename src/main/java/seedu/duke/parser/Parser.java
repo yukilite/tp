@@ -29,7 +29,6 @@ import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class Parser {
     private static final int COMMAND_INDEX = 0;
@@ -58,11 +57,9 @@ public class Parser {
     public static final String FIND_APPOINTMENT = "finda";
     public static final String FIND_PATIENTS = "findp";
 
-    public static final String UNIQUE_ID = "uniqueID";
     public static final String CLEAR_PATIENTS_COMMAND = "clearp";
     public static final String CLEAR_APPOINTMENTS_COMMAND = "cleara";
     public static final String CLEAR_ALL_COMMAND = "clearall";
-    public static final String SAVE_COMMAND = "save";
 
     /**
      * This methods returns the command from the user input string.
