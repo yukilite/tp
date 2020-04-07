@@ -197,8 +197,8 @@ public class DukeExceptions {
      * Check if both lists are empty.
      * If it is empty, throw EmptyListsException.
      *
-     * @author Duc
      * @throws EmptyListsException when both lists are empty
+     * @author Duc
      */
     public static void checkEmptyLists() throws EmptyListsException {
         if (AppointmentList.getTotalAppointments() == 0 && PatientList.getTotalPatients() == 0) {
@@ -210,8 +210,8 @@ public class DukeExceptions {
      * Check if appointment's list is empty.
      * If it is empty, throw EmptyAppointmentsException.
      *
-     * @author Duc
      * @throws EmptyAppointmentsException when appointment's list is empty
+     * @author Duc
      */
     public static void checkEmptyAppointments() throws EmptyAppointmentsException {
         if (AppointmentList.getTotalAppointments() == 0) {
@@ -223,12 +223,31 @@ public class DukeExceptions {
      * Check if patient's list is empty.
      * If it is empty, throw EmptyPatientsException.
      *
-     * @author Duc
      * @throws EmptyPatientsException when patient's list is empty
+     * @author Duc
      */
     public static void checkEmptyPatients() throws EmptyPatientsException {
         if (PatientList.getTotalPatients() == 0) {
             throw new EmptyPatientsException();
         }
+    }
+
+    /**
+     * Uses Regex matches the given phone number for validation.
+     * Returns true if the phone number is valid.
+     *
+     * @param phoneNumber the phone number to check.
+     * @return returns true if the phone number is valid.
+     */
+    public static boolean checkIsValidPhoneNumber(String phoneNumber) {
+
+        //phoneNumber first digits matches 6 or 8 or 9, follow by any 7 digits.
+        if (phoneNumber.matches("(6|8|9)\\d{7}")) {
+            return true;
+        //phoneNumber first digits matches 6 or 8 or 9, then 3 digits and a whitespace and then 4 digits.
+        } else if (phoneNumber.matches("(6|8|9)\\d{3}[\\s]\\d{4}")) {
+            return true;
+        }
+        return false;
     }
 }
