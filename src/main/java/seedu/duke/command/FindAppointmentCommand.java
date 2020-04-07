@@ -4,8 +4,11 @@ import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
+import seedu.duke.converter.TimeConverter;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class FindAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find an appointment by keyword.\n"
             + "Example: " + EXAMPLE;
     private String searchValue;
+    private TimeConverter timeConverter;
 
     /**
      * Constructor for the find appointment command class.
@@ -45,7 +49,7 @@ public class FindAppointmentCommand extends Command {
         this.searchValue = searchValue;
     }
 
-    public String getsearchValue() {
+    public String getSearchValue() {
         return searchValue;
     }
 
@@ -60,15 +64,68 @@ public class FindAppointmentCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
+        boolean isDateInput = false;
+        boolean isTimeInput = false;
+        if (Integer.valueOf(this.getSearchValue().length()) == 8) {
+            if (!checkValidTime(this.getSearchValue())) {
+                System.out.println("invalid time form");
+                return;
+            }
+        } else if (Integer.valueOf(this.getSearchValue().length()) == 10) {
+            if (!checkValidDate(this.getSearchValue())) {
+                System.out.println("invalid date form");
+                return;
+            }
+        } else {
+            return;
+        }
+
+        String parsedSearchValue = null;
+
+        if (isDateInput){
+            try {
+                parsedSearchValue = timeConverter.oldDate(timeConverter.convertDate(this.getSearchValue()));
+            } catch (ParseException e) {
+                System.out.println("conversion problem 1");
+            }
+        }
+        if (isTimeInput) {
+            try {
+                parsedSearchValue = timeConverter.oldTime(timeConverter.convertTime(this.getSearchValue()));
+            } catch (ParseException e) {
+                System.out.println("conversion problem 2");
+            }
+
+        }
+
         List<Appointment> searchResults = new ArrayList<>();
         /*get the list of all Appointments from Storage to conduct search*/
         for (Appointment appointment : AppointmentList.getAppointmentList()) {
-            if (appointment.getDate().contains(this.getsearchValue())
-                    || appointment.getTime().contains(getsearchValue())) {
+            if (appointment.getDate().contains(parsedSearchValue)
+                    || appointment.getTime().contains(parsedSearchValue)) {
                 searchResults.add(appointment);
             }
         }
         ui.printAppointmentSearchResults(searchResults);
+
     }
 
+    private boolean checkValidDate(String dateInput){
+        try {
+            this.timeConverter.convertDate(dateInput);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkValidTime(String timeInput){
+        try {
+            this.timeConverter.convertTime(timeInput);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
 }
+
