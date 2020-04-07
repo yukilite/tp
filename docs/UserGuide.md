@@ -50,9 +50,10 @@ CLI to keep track of various medical records* and *can type fast*.
 5. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
 6. Run the .jar using $ `java -jar hams-2.0.jar`
 
-[Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
  
 &nbsp;
+
 ***
 
 ## 2. Features
@@ -67,7 +68,7 @@ The `lista` or `listp` command that HAMS provides can display all the Appointmen
 HAMS has an auto-save feature which stores Patient and Appointments every time you add or modify them. 
 With this feature, your tasks will be saved every time you leave the application and can be easily retrieved when you reopen the application subsequently.
 
-[Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 &nbsp;
 
@@ -90,7 +91,7 @@ A valid input would be `adda \date 22/05/2020 \time 1200`.
 
 > ![](images/UG/command_format_hint3.JPG)
 
-[Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 &nbsp;
 
@@ -191,7 +192,7 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 ##### Expected outcome:
 ![](images/editp_fail.PNG)
 
-[Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 #### 4.1.5 Find an existing patient
 The program allows you to find to an existing Patient record based on a search value.
@@ -241,7 +242,6 @@ Format: `adda \date [date] \time [time] \pid [patient id]`
 * `adda` keyword
 * `\date` followed by the date of the appointment
 * `\time` followed by the time of the appointment
-
 * `\pid` followed by a unique Patient ID (pid).
 
 > ![](images/UG/adda_hint.JPG)
@@ -362,7 +362,7 @@ Format: `cleara`
 
 >![](images/UG/cleara_warning.JPG)
 
-[Back to top] (#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ***
 
@@ -386,11 +386,13 @@ Format: `help`
 ##### Expected outcome 
 ![](images/help.PNG)
 
-[Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ### 4.5 Exit HAMS program
 
-This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in `/saves/appointments.txt` or `/saves/patients.txt`). These files will be loaded to the program when it is run again subsequently.
+This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in
+ `/saves/appointments.txt` and `/saves/patients.txt` respectively. Also, the patient id state will also be saved in
+  `/saves/patientId.txt`). These files will be loaded to the program when it is run again subsequently.
 
 Format: `exit`
 #### Example of usage: 
@@ -399,7 +401,7 @@ Format: `exit`
 ##### Expected outcome: 
 <img src ="images/exit_eg1.PNG" width = "400">
 
-[Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 5. Command Summary
 
@@ -429,11 +431,11 @@ Format: `exit`
 
 **A**: Yes. The system is keyword-sensitive. Regardless of the order given, it stores the information within each command used respectively. Both examples provided above would result in the same information stored. 
 
-**Q**: Why does my patient list display a "-1" in the age field?
+**Q**: Why does my patient list does not display any value in the age field?
 
-* `{[Name]: Tommy | [Age]: -1 | [Address]:  | [Contact Number]: 92331234}`
+* `{[Name]: Tommy | [Age]:  | [Address]:  | [Contact Number]: 92331234}`
 
-**A**: The age field provided by the user is empty.
+**A**: The age supplied might not be in the correct format (eg age given is a negative number or as a string).
 
 **Q**: Why am I not able to find anything using finda or findp? 
 
@@ -445,6 +447,6 @@ because of the first letter capitalization.
 **A**: `pid` stands for Patient ID, it is a unique ID tag to each patient. In order to link appointments 
 to the patient, the pid tag must be present. 
 
-[Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 

@@ -34,7 +34,7 @@ public class PatientIdManager {
 
     /**
      * Getter method to get the queue of reusable patientID numbers.
-     * @return
+     * @return the queue containing the reusable patientId numbers.
      */
     public static Queue<Integer> getNextNumberQueueThing() {
         return nextNumberQueueThing;
@@ -70,6 +70,18 @@ public class PatientIdManager {
         assert patientID > 0 && patientID < nextTopNewNumber;
         assert !nextNumberQueueThing.contains(patientID);
         nextNumberQueueThing.add(patientID);
+
+    }
+
+    /**
+     * Called only when the clear all patient command is called.
+     * <p>
+     *     This reset the patient Id manager state back to the beginning.
+     * </p>
+     */
+    public static void clearPatientId() {
+        nextTopNewNumber = 0;
+        nextNumberQueueThing.clear();
 
     }
 
