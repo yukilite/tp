@@ -31,7 +31,7 @@ public class Ui {
         } else {
             for (Patient p : patientList) {
                 System.out.println(index + ". " + p); //override Patient class toString by @Sammmmm
-                index ++;
+                index++;
             }
         }
     }
@@ -41,11 +41,13 @@ public class Ui {
      */
     public static void showEntireAppointmentList() {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
+        int index = 1;
         if (appointmentList.isEmpty()) {
             System.out.println("No appointment records present!");
         } else {
             for (Appointment a : appointmentList) {
-                System.out.println(a);
+                System.out.println(index + ". " + a);
+                index++;
             }
         }
     }
