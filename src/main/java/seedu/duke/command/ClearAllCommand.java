@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.EmptyListsException;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -23,6 +24,10 @@ public class ClearAllCommand extends Command {
     public static final String EXAMPLE = "clearall";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clear all patients and appointments from both lists.\n"
             + "Example: " + EXAMPLE;
+
+    public ClearAllCommand() throws InvalidFormatException {
+
+    }
 
     /**
      * Method to clear all the items in both lists if available, if

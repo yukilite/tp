@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
@@ -45,7 +46,7 @@ public class AddPatientCommand extends Command {
      * @param patientInfo the map containing the patient information
      * @see PatientIdManager#getNextPatientId
      */
-    public AddPatientCommand(Map<String, String> patientInfo) {
+    public AddPatientCommand(Map<String, String> patientInfo) throws InvalidFormatException {
         this.patientName = patientInfo.get(PATIENT_NAME);
         if (patientInfo.get(AGE).isBlank()) {
             this.age = -1;

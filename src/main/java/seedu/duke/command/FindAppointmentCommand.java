@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -41,7 +42,7 @@ public class FindAppointmentCommand extends Command {
      * @param searchValue the <code>String</code> object representing the keyword to search for in
      *                    each Appointment object's fields
      */
-    public FindAppointmentCommand(String searchValue) {
+    public FindAppointmentCommand(String searchValue) throws InvalidFormatException {
         this.searchValue = searchValue;
     }
 

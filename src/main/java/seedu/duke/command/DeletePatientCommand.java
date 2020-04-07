@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
@@ -32,7 +33,7 @@ public class DeletePatientCommand extends Command {
      * @param fieldsToChange a hash map with only 1 item which is a field called
      *                       "index" and the value of the index needed to delete
      */
-    public DeletePatientCommand(Map<String, String> fieldsToChange) {
+    public DeletePatientCommand(Map<String, String> fieldsToChange) throws InvalidFormatException {
 
         try {
             this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));

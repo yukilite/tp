@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -20,7 +21,7 @@ public class AddAppointmentCommandStub extends AddAppointmentCommand {
      * Constructor thing.
      * @param appointmentInfo fake map of info.
      */
-    public AddAppointmentCommandStub(Map<String, String> appointmentInfo) {
+    public AddAppointmentCommandStub(Map<String, String> appointmentInfo) throws InvalidFormatException {
         super(appointmentInfo);
         this.date = appointmentInfo.get(DATE);
         this.time = appointmentInfo.get(TIME);

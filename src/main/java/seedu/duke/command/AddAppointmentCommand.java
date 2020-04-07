@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
@@ -45,7 +46,7 @@ public class AddAppointmentCommand extends Command {
      *
      * @param appointmentInfo the <code>Map</code> that contains the information relating to the appointment.
      */
-    public AddAppointmentCommand(Map<String, String> appointmentInfo) {
+    public AddAppointmentCommand(Map<String, String> appointmentInfo) throws InvalidFormatException {
         this.date = appointmentInfo.get(DATE);
         this.time = appointmentInfo.get(TIME);
         try {

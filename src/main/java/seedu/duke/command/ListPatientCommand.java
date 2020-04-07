@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -15,7 +16,7 @@ public class ListPatientCommand extends Command {
      * Empty constructor. Only used to create the ListPatientCommand object.
      */
 
-    public ListPatientCommand() {
+    public ListPatientCommand() throws InvalidFormatException {
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -33,6 +34,10 @@ public class HelpCommand extends Command {
             + "\n" + "\n" + ListPatientCommand.MESSAGE_USAGE
             + "\n" + "\n" + HelpCommand.MESSAGE_USAGE
             + "\n" + "\n" + ExitCommand.MESSAGE_USAGE;
+
+    public HelpCommand() throws InvalidFormatException {
+
+    }
 
     /**
      * Method to print out all the commands that user can input with usage and examples of them.

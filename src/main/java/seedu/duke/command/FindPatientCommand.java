@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -41,7 +42,7 @@ public class FindPatientCommand extends Command {
      * @param searchValue the <code>String</code> object representing the keyword to search for in
      *                    each Patient object's fields
      */
-    public FindPatientCommand(String searchValue) {
+    public FindPatientCommand(String searchValue) throws InvalidFormatException {
         this.searchValue = searchValue;
     }
 

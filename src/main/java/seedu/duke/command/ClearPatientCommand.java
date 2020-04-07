@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.EmptyPatientsException;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -23,6 +24,10 @@ public class ClearPatientCommand extends Command {
     public static final String EXAMPLE = "clearp";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clear all patients from the list.\n"
             + "Example: " + EXAMPLE;
+
+    public ClearPatientCommand() throws InvalidFormatException {
+
+    }
 
     /**
      * Method to clear all patients in the list if available, if

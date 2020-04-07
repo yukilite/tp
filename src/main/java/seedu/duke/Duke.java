@@ -6,6 +6,7 @@ import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.PidEmptyException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -92,7 +93,7 @@ public class Duke {
                 isExit = c.isExit();
 
             } catch (UnknownCommandException | InvalidIndexException | IndexNotIntegerException
-                    | NoFieldCommandException | PidEmptyException e) {
+                    | NoFieldCommandException | PidEmptyException | InvalidFormatException e) {
 
                 ui.showExceptionError(e.getLocalizedMessage());
 

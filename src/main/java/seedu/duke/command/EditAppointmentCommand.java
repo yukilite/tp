@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.converter.TimeConverter;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -42,7 +43,7 @@ public class EditAppointmentCommand extends Command {
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
      */
-    public EditAppointmentCommand(Map<String, String> fieldsToChange) {
+    public EditAppointmentCommand(Map<String, String> fieldsToChange) throws InvalidFormatException {
         try {
             this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
             if (index > AppointmentList.getTotalAppointments() || index <= 0) {
