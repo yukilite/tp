@@ -1,7 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.IndexNotIntegerException;
+import seedu.duke.exceptions.InvalidIndexException;
+import seedu.duke.exceptions.NoFieldCommandException;
+import seedu.duke.exceptions.PidEmptyException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
