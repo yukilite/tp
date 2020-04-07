@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * Represents the user interface that will interact with the user.
- *
  * @author Justin
  */
 public class Ui {
@@ -26,8 +25,14 @@ public class Ui {
      */
     public static void showEntirePatientList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn
-        for (Patient p : patientList) {
-            System.out.println(p); //override Patient class toString by @Sammmmm
+        int index = 1;
+        if (patientList.isEmpty()) {
+            System.out.println("No patient records found!");
+        } else {
+            for (Patient p : patientList) {
+                System.out.println(index + ". " + p); //override Patient class toString by @Sammmmm
+                index ++;
+            }
         }
     }
 
@@ -36,8 +41,12 @@ public class Ui {
      */
     public static void showEntireAppointmentList() {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
-        for (Appointment a : appointmentList) {
-            System.out.println(a);
+        if (appointmentList.isEmpty()) {
+            System.out.println("No appointment records present!");
+        } else {
+            for (Appointment a : appointmentList) {
+                System.out.println(a);
+            }
         }
     }
 
@@ -62,7 +71,11 @@ public class Ui {
     }
 
     public static void showSetAgeError() {
-        System.out.println("Received a non-integer for age, setting age to be -1.");
+        System.out.println("Received a non-integer for age, setting age to be blank.");
+    }
+
+    public static void showPatientIdError() {
+        System.out.println("Something is wrong with the patientId given. Creating new patientId");
     }
 
     public static void showUpdatePatientSuccess() {
@@ -85,6 +98,10 @@ public class Ui {
         System.out.println("No existing 'save' directory found. Directory has been created.");
     }
 
+    public static void showWrongPid() {
+        System.out.println("Wrong pid. This will not be added to the appointment list.");
+
+    }
 
     public void showExceptionError(String localizedMessage) {
         System.out.println(localizedMessage);
@@ -102,25 +119,16 @@ public class Ui {
      * Prints HAMS logo.
      */
     public void printHello() {
-        System.out.println("            .---------.\n"
-                + "       _    |:: [-=-] |\n"
-                + "      | |   |_________|\n"
-                + "      |~|\n"
-                + "      |_|                    ,;;;;,\n"
-                + "       I\\  ,__ ,;;;, __,    ///\\\\\\\\\\\n"
-                + "       I |{   / . . \\   }   / \"  \\\\||\n"
-                + "       I | ) (   _   ) (    \\_= _///\n"
-                + "       I |{___'-. .-'___}\\___ )_\\\n"
-                + "       I ||~/,'~~~~~,\\~~|'---((  \\\n"
-                + "       I \\ //        \\\\ |     \\ \\ \\\n"
-                + "       I  \\/         // |     | /-/\n"
-                + "       I (/         (/  |     |/||\\\n"
-                + "       I  |             |     |    |\n"
-                + "       I  |             |     |____/\n"
-                + "       I  :-----_o_-----:      || |\n"
-                + "       I  | /~~|===|~~\\ |      (( |\n"
-                + "       I  ||   |===|   ||      ||_/\n"
-                + "      /^\\ \"~   '^^^'   \"\"     ((__|");
+        System.out.println(
+                "            .---------.\n" + "       _    |:: [-=-] |\n" + "      | |   |_________|\n" + "      |~|\n"
+                        + "      |_|                    ,;;;;,\n" + "       I\\  ,__ ,;;;, __,    ///\\\\\\\\\\\n"
+                        + "       I |{   / . . \\   }   / \"  \\\\||\n" + "       I | ) (   _   ) (    \\_= _///\n"
+                        + "       I |{___'-. .-'___}\\___ )_\\\n" + "       I ||~/,'~~~~~,\\~~|'---((  \\\n"
+                        + "       I \\ //        \\\\ |     \\ \\ \\\n" + "       I  \\/         // |     | /-/\n"
+                        + "       I (/         (/  |     |/||\\\n" + "       I  |             |     |    |\n"
+                        + "       I  |             |     |____/\n" + "       I  :-----_o_-----:      || |\n"
+                        + "       I  | /~~|===|~~\\ |      (( |\n" + "       I  ||   |===|   ||      ||_/\n"
+                        + "      /^\\ \"~   '^^^'   \"\"     ((__|");
 
         System.out.println(" ____      ____  ________  _____       ______    ___   ____    ____  ________  \n"
                 + "|_  _|    |_  _||_   __  ||_   _|    .' ___  | .'   `.|_   \\  /   _||_   __  | \n"
@@ -144,7 +152,6 @@ public class Ui {
     /**
      * This method prints out a list of Appointments containing a specific keyword in a readable format.
      * It is used in the FindAppointmentCommand class.
-     *
      * @param foundAppointments list of Appointment search results
      */
     public void printAppointmentSearchResults(List<Appointment> foundAppointments) {
@@ -162,7 +169,6 @@ public class Ui {
     /**
      * This method prints out a list of Patients containing a specific keyword in a readable format.
      * It is used in the FindPatientCommand class.
-     *
      * @param foundPatients list of Patient search results
      */
     public void printPatientSearchResults(List<Patient> foundPatients) {

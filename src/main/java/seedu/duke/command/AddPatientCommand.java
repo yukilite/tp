@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -31,15 +32,18 @@ public class AddPatientCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a patient to the patient's list.\n"
             + "Example: " + EXAMPLE;
+    public static final String PATIENT_ID = "pid";
     private String patientName;
     private int age;
     private String address;
     private String contactNumber;
+    private int patientID;
 
     /**
      * Constructor for the AddPatientCommand.
      *
      * @param patientInfo the map containing the patient information
+     * @see PatientIdManager#getNextPatientId
      */
     public AddPatientCommand(Map<String, String> patientInfo) {
         this.patientName = patientInfo.get(PATIENT_NAME);
@@ -48,7 +52,9 @@ public class AddPatientCommand extends Command {
         } else {
             try {
                 this.age = Integer.parseInt(patientInfo.get(AGE));
-
+                if (this.age < 0) {
+                    System.out.println("Received age is a negative integer, setting age to be blank");
+                }
             } catch (NumberFormatException e) {
                 /** If string is given, a message will be shown and the age will be set to -1 **/
                 Ui.showSetAgeError();
@@ -57,6 +63,7 @@ public class AddPatientCommand extends Command {
         }
         this.address = patientInfo.get(ADDRESS);
         this.contactNumber = patientInfo.get(CONTACT_NUMBER);
+        this.patientID = PatientIdManager.getNextPatientId();
     }
 
     public int getAge() {
@@ -75,7 +82,7 @@ public class AddPatientCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws IOException {
 
-        Patient newPatient = new Patient(this.patientName, this.age, this.address, this.contactNumber);
+        Patient newPatient = new Patient(this.patientName, this.age, this.address, this.contactNumber,this.patientID);
 
         /** Hacky method to add patient into patient list **/
         PatientList.getPatientList().add(newPatient);
@@ -89,6 +96,8 @@ public class AddPatientCommand extends Command {
                 "Wrong address!";
         assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getContactNumber()
                 .equals(this.contactNumber) : "Wrong number!";
+        assert PatientList.getPatientList().get(PatientList.getTotalPatients() - 1).getPatientID()
+                == this.patientID : "Wrong patientID!";
 
 
         /** Autosaving upon each add **/
