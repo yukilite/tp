@@ -9,6 +9,6 @@ public class NoFieldCommandException extends Exception {
 
     @Override
     public String getLocalizedMessage() {
-        return "Please ensure that the fields for " + this.command + " is provided";
+        return "Please ensure that at least one field for " + this.command + " is provided";
     }
 }
