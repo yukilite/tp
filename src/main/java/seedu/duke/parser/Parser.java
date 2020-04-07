@@ -22,6 +22,7 @@ import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.InvalidIndexException;
+import seedu.duke.exceptions.InvalidPhoneNumberException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.NoKeyExistException;
 import seedu.duke.exceptions.PidEmptyException;
@@ -114,7 +115,7 @@ public class Parser {
                 continue;
             }
 
-            String key = WHITESPACE + REGEX_BACKSLASH + field;
+            String key = WHITESPACE + REGEX_BACKSLASH + field + WHITESPACE;
             String value = findValue(fullCommand, key);
             patientFieldsToAdd.put(field, value);
         }
@@ -133,7 +134,8 @@ public class Parser {
      * @see PatientFieldKeys for the list of keys guaranteed to be in the HashMap.
      * @see #findValue(String fullCommand, String key) value returned by this method will be stored at key.
      */
-    private Map<String, String> getPatientFieldsAdd(String fullCommand) throws NoFieldCommandException {
+    private Map<String, String> getPatientFieldsAdd(String fullCommand) throws NoFieldCommandException,
+            InvalidPhoneNumberException {
 
         Map<String, String> patientFieldsToAdd = new HashMap<>();
 
@@ -163,7 +165,7 @@ public class Parser {
      * @throws NoFieldCommandException  when all fields are blank.
      */
     private Map<String, String> getPatientFieldsEdit(String fullCommand) throws InvalidIndexException,
-            IndexNotIntegerException, NoFieldCommandException {
+            IndexNotIntegerException, NoFieldCommandException, InvalidPhoneNumberException {
 
         Map<String, String> patientFieldsToEdit = new HashMap<>();
 
@@ -395,7 +397,7 @@ public class Parser {
      */
     public Command parseCommand(String fullCommand) throws
             UnknownCommandException, InvalidIndexException, IndexNotIntegerException, NoFieldCommandException,
-            PidEmptyException {
+            PidEmptyException, InvalidPhoneNumberException {
 
         String trimCommand = fullCommand.trim();
         String[] commandParsed = getCommand(trimCommand);

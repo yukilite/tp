@@ -238,8 +238,10 @@ public class DukeExceptions {
      * Returns true if the phone number is valid.
      *
      * @param patientFieldsToAdd the hash map that contains phone number.
+     * @throws InvalidPhoneNumberException when the phone number is invalid.
      */
-    public static void checkValidPhoneNumber(Map<String, String> patientFieldsToAdd) {
+    public static void checkValidPhoneNumber(Map<String, String> patientFieldsToAdd)
+            throws InvalidPhoneNumberException {
 
         String phoneNumber = patientFieldsToAdd.get(PatientFieldKeys.CONTACT_NUMBER.toString());
 
@@ -253,7 +255,7 @@ public class DukeExceptions {
         } else if (phoneNumber.matches("(6|8|9)\\d{3}[\\s]\\d{4}")) {
             return;
         }
-        Ui.printInvalidPhoneNumberMessage();
-        patientFieldsToAdd.replace(PatientFieldKeys.CONTACT_NUMBER.toString(), BLANK_STRING);
+
+        throw new InvalidPhoneNumberException();
     }
 }
