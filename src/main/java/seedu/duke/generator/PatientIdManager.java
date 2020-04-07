@@ -80,7 +80,20 @@ public class PatientIdManager {
 
     }
 
+    /**
+     * Check to see if the patient id actually belongs to any of the patients present.
+     * @param patientID the patient id to check
+     * @return True if patient id exist. False if it does not
+     */
     public static boolean checkPatientIdUsed(int patientID) {
+
+        /* Quick checks */
+        if (patientID > Integer.MAX_VALUE) {
+            return false;
+        }
+        if (patientID < 0) {
+            return false;
+        }
         Integer number = patientIdMap.get(patientID);
         if (number == null) {
             return false;
