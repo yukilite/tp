@@ -53,6 +53,7 @@ public class PatientIdManager {
         if (nextNumberQueueThing.isEmpty()) {
             returnNumber = nextTopNewNumber;
             nextTopNewNumber = nextTopNewNumber + 1;
+            patientIdMap.put(returnNumber,1);
             return returnNumber;
         }
         returnNumber = nextNumberQueueThing.remove();

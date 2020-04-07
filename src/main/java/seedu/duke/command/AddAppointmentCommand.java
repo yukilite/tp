@@ -53,6 +53,9 @@ public class AddAppointmentCommand extends Command {
             if (this.patientId < 0) {
                 this.patientId = -1;
             }
+            if (!PatientIdManager.checkPatientIdUsed(patientId)) {
+                this.patientId = -2;
+            }
 
         } catch (NumberFormatException e) {
             this.patientId = -1;
@@ -80,6 +83,11 @@ public class AddAppointmentCommand extends Command {
 
         if (this.patientId == -1) {
             Ui.showWrongPid();
+            return;
+        }
+
+        if (this.patientId == -2) {
+            System.out.println("Patient Id don't exist!");
             return;
         }
 
