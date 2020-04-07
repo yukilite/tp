@@ -145,9 +145,6 @@ public class Parser {
         //check if there is at least 1 field inside.
         DukeExceptions.checkFieldEmptyAddPatient(patientFieldsToAdd);
 
-        String uniqueID = UUID.randomUUID().toString();
-        patientFieldsToAdd.put(UNIQUE_ID, uniqueID);
-
         return patientFieldsToAdd;
     }
 
