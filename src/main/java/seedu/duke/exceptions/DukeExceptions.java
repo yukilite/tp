@@ -238,7 +238,6 @@ public class DukeExceptions {
      * Returns true if the phone number is valid.
      *
      * @param patientFieldsToAdd the hash map that contains phone number.
-     * @return returns true if the phone number is valid.
      */
     public static void checkValidPhoneNumber(Map<String, String> patientFieldsToAdd) {
 
