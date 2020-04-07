@@ -101,6 +101,14 @@ public class Ui {
 
     }
 
+    public static void showNoPidExist() {
+        System.out.println("Patient Id don't exist! No appointment record will be made.");
+    }
+
+    public static void showWrongAge() {
+        System.out.println("Received age seems wrong, setting age to be blank");
+    }
+
     public void showExceptionError(String localizedMessage) {
         System.out.println(localizedMessage);
     }

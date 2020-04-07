@@ -87,7 +87,7 @@ public class AddAppointmentCommand extends Command {
         }
 
         if (this.patientId == -2) {
-            System.out.println("Patient Id don't exist!");
+            Ui.showNoPidExist();
             return;
         }
 
