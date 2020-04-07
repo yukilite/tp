@@ -78,12 +78,13 @@ With this feature, your tasks will be saved every time you leave the application
 
 Words enclosed within angle brackets `[]` are the parameters to be supplied by the user. Other keywords stated are compulsory and they should be included.
 
-For example, in `adda \date [date] \time [time]`, `adda` is the command keyword that adds an Appointment record. 
+For example, in `adda \date [date] \time [time] \pid [patient id]`, `adda` is the command keyword that adds an
+ Appointment record. 
 
 `\date` and `\time` are compulsory labels to denoting what field the subsequent information belongs to.
 `[date]` is the date of the appointment to be supplied by you. `[time]` represents the time of the appointment to be supplied by you.
 
-A valid input would be `adda \date 22/05/2020 \time 1200`.
+A valid input would be `adda \date 22/05/2020 \time 1200 \pid 1`.
 
 > ![](images/UG/command_format_hint.JPG)
 

@@ -6,6 +6,7 @@ import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Map;
 
@@ -52,8 +53,8 @@ public class AddPatientCommand extends Command {
         } else {
             try {
                 this.age = Integer.parseInt(patientInfo.get(AGE));
-                if (this.age < 0) {
-                    System.out.println("Received age is a negative integer, setting age to be blank");
+                if (this.age < 0 || this.age > Integer.MAX_VALUE) {
+                    Ui.showWrongAge();
                 }
             } catch (NumberFormatException e) {
                 /** If string is given, a message will be shown and the age will be set to -1 **/
