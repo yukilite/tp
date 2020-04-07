@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import com.sun.source.tree.WhileLoopTree;
 import seedu.duke.Duke;
 import seedu.duke.command.AddAppointmentCommand;
 import seedu.duke.command.AddPatientCommand;
@@ -169,7 +170,7 @@ public class Parser {
 
         Map<String, String> patientFieldsToEdit = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "editp"); //TODO remove magic string
         patientFieldsToEdit.put(PatientFieldKeys.INDEX.toString(), indexValue);
@@ -202,7 +203,7 @@ public class Parser {
 
         Map<String, String> patientFieldsToDelete = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "deletep"); //TODO remove magic string
 
@@ -225,7 +226,7 @@ public class Parser {
                 continue;
             }
 
-            String key = WHITESPACE + REGEX_BACKSLASH + field;
+            String key = WHITESPACE + REGEX_BACKSLASH + field + WHITESPACE;
             String value = findValue(fullCommand, key);
             appointmentFieldsToChange.put(field, value);
         }
@@ -277,7 +278,7 @@ public class Parser {
 
         Map<String, String> appointmentFieldsToEdit = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "edita"); //TODO remove magic string
 
@@ -309,7 +310,7 @@ public class Parser {
 
         Map<String, String> appointmentFieldsToDelete = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "deletea"); //TODO remove magic string
 
