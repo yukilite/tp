@@ -1,6 +1,8 @@
 package seedu.duke.generator;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 
@@ -15,6 +17,8 @@ public class PatientIdManager {
     private static int nextTopNewNumber = 0; // Patient ID to choose if queue is empty
     private static Queue<Integer> nextNumberQueueThing = new LinkedList<>(); // Queue of patient id numbers from
     // deleted patients
+    private static Map<Integer,Integer> patientIdMap = new HashMap<>(); // Map containing all the patientid used thus
+    // far
 
     /**
      * Get nextTopNewNumber value.
@@ -52,6 +56,7 @@ public class PatientIdManager {
             return returnNumber;
         }
         returnNumber = nextNumberQueueThing.remove();
+        patientIdMap.put(returnNumber,1);
         return returnNumber;
     }
 
@@ -70,7 +75,16 @@ public class PatientIdManager {
         assert patientID > 0 && patientID < nextTopNewNumber;
         assert !nextNumberQueueThing.contains(patientID);
         nextNumberQueueThing.add(patientID);
+        patientIdMap.put(patientID,null);
 
+    }
+
+    public static boolean checkPatientIdUsed(int patientID) {
+        Integer number = patientIdMap.get(patientID);
+        if (number == null) {
+            return false;
+        }
+        return true;
     }
 
     /**

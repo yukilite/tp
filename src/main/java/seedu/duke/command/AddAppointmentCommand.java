@@ -50,6 +50,10 @@ public class AddAppointmentCommand extends Command {
         this.time = appointmentInfo.get(TIME);
         try {
             this.patientId = Integer.parseInt(appointmentInfo.get(PID));
+            if (this.patientId < 0) {
+                this.patientId = -1;
+            }
+
         } catch (NumberFormatException e) {
             this.patientId = -1;
         }
