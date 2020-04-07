@@ -21,6 +21,9 @@
 * [3. User Stories](#3-user-stories)
 * [4. Non-functional requirements](#4-non-functional-requirements)
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
+    + [5.1, Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
+    + [5.2. Adding a patient](#52-adding-a-patient)
+    + [5.3. Deleting a patient](#53-delete-a-patient)
         
 <!-- TOC -->
 
@@ -35,7 +38,6 @@ Hospital Administrative Management System (HAMS).
 The intended audience of this documentation are the developers, designers, software testers,
 operators and maintenance engineers. The below table summarizes the purposes of reading for each 
 audience.
-
 
 
 
@@ -57,7 +59,7 @@ audience.
 implementation of the save file structure. 
 * *A&D* - Short of Amazing & Dazzling, it is an acronym to describe the command module.
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 2. Design & Implementation
 ### 2.1 Project overview
@@ -71,17 +73,19 @@ The major code can be broken down into modules. The below table is the breakdown
 name and a summarized purpose.
 
 **TODO**
+
 |Module name|Purpose|
 |---------|-------|
-|Stupendously AwesoMe (SAM) **records**|?| 
+|Records|Contains and provides access to user information|
+|Converter|Formats user input| 
 |BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **storage**|?|
-|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that differenct classes can interact with each other|
+|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
 #### 2.2.1 SAM record module
 
 The record module consists of 2 classes which represent the patients information and appointment details. 
-As a reflection of real world objects, the patient's class purpose is to store the particulars of a person while the 
+As a reflection of real world objects, the Patient's class purpose is to store the particulars of a person while the 
 Appointment's class is to store the date-time data. 
 Thus, the rationale of both classes can be grouped as follows:
 >
@@ -94,10 +98,17 @@ flow in logical executions as these methods can be called whenever necessary.
 Due to the nature of the above classes containing only getter and setter methods, following how the components interact 
 with each other would provide more accuracy in understanding how these classes are called and the role of its 
 methods. 
-To illustrate, 3 examples are used:
-* addp \name Samuel \age 18 \address NUS
+To illustrate, the below example is used:
 * editp \index 1 \name Justin \age 69 \Pasir Panjang
-* listp
+
+![](images/SD_Patient.png)
+
+Upon startup, objects from ui, parser and storage are created. Prompted for user input, Duke receives the "editp"
+command which is forwarded to the parser to be interpreted respectively. Once the `EditPatientCommand` object is 
+created, it retrieves the patient index to edit the existing patient information from the patientList. 
+The `Patient` class is called by its setter method, `setPatientInfo()`, to update the fields as provided by the user. 
+This ensures that the encapsulated variables such as age, name, contact number and address are not only enforced but
+also protected. 
 
 ##### 2.2.1.2 Design Considerations
 ###### Aspect: Data Type for Appointment's Date and Time
@@ -115,16 +126,21 @@ To illustrate, 3 examples are used:
     * Cons:
         - Immutable-value classes mean it is not thread-safe (using Java.util.SimpleDateFormat).
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.2 Converter Module
-The converter module consists of one class which converts the format of date and time
+The converter module consists of one class which converts the format of date and time using a custom format defined by
+special formatting characters (ie. SimpleDateFormat). This class is primarily used to format a user-input date and time
+in the `Appointment` class. As illustrated below, its methods are called during the creation of the `Appointment`
+object constructor. 
 
-###### [Back to top](#table-of-content)
+![](images/SD_Converter.png)
+
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.3 BRANDON storage module
 
-The command module consists of 3 different classes. 
+The Storage module consists of 3 different classes. 
 The PatientList and AppointmentList classes act as data structures to store the records of Patient and Appointment 
 objects respectively. They function as ADTs, where various commands from Command objects can manipulate the records within.
 The Storage class manages the load and save operations involving the PatientList and PatientList class. 
@@ -132,19 +148,31 @@ These operations are usually invoked on startup, whenever changes are made to th
 The class diagram for the storage module is as seen below: 
 
 
-![](images/storageclass.png)
+![](images/storageclass.PNG)
 
 &nbsp;
 
-On startup, the loadSavedAppointment() and loadSavedPatient() methods are invoked. This allows the program to retrieve 
-previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
-within the program.
+On startup, Duke invokes the loadSavedAppointment() and loadSavedPatient() methods in Storage. This allows the program 
+to retrieve previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
+within the program. 
 
-![](images/loadsavedappt_seq.png)
+The Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
+new Appointments, and then add them to an ArrayList called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
+construct the static AppointmentList. The sequence diagram is shown below:
 
-{To add saveAppointment sequence diagram and writeup}
+![](images/loadsavedappt_seq.PNG)
+![](images/loadsavedappt_ref1.PNG)
 
-###### [Back to top](#table-of-content)
+When the static AppointmentList or PatientList has changes, or the program is exiting, saveAppointmentList() or savePatientList() 
+is invoked respectively. This allows the Storage object to back up existing records to a local .txt file.
+
+The Storage object will create a FileWriter object called `fw`. The command will then iterate through the existing AppointmentList
+and parse each Appointment within, converting it to a string. `fw` then writes this string to the .txt file.
+The sequence diagram is shown below:
+
+![](images/saveapptlist_seq.PNG)
+
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.4 A&D command module 
 
@@ -267,7 +295,7 @@ Below shows the sequence diagram for ```ListAppointmentCommand``` class
 
 ![](images/ListAppointmentCommandSequence.png)
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ##### 2.2.4.5 Design considerations
 
@@ -323,6 +351,32 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
 
+#### 2.2.4.6 EditAppointmentClass
+
+To edit an appointment, the ```EditAppointmentCommand``` class is used. For this ```EditAppointmentCommand``` class, it 
+serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```EditAppointmentCommand``` class is processed by ```Parser```
+
+2. When 
+the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
+```Appointment``` class to make an ```Appointment``` Object. 
+
+3. After which, the ```AddAppoinmentCommand``` object will 
+call upon the ```AppointmentList``` object to obtain the list of ```Appointments``` (get the ```List``` object that 
+represents the list of appointments by ```AppointmentList```’s ```getAppointmentList()``` command) so that it can 
+directly add the new ```Appointment``` object into the appointment list. 
+
+4. Finally, it will call upon the ```Storage``` 
+class’s ```saveAppoinmentList()``` function to save the updated appointment list. 
+
+5. Upon successfully adding the 
+```Appointment``` object into the appointment list, it will call upon the ```Ui``` class’ 
+```showAppointmentAddSuccess()``` function to display the success of adding the ```appointment``` into the appointment 
+list.
+
+Below shows the sequence diagram for ```AddAppointmentCommand``` class
 
 
 #### 2.2.5 Parser module
@@ -463,7 +517,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
         -   All command depends on this common method to parse fields, if the method changes, it may return the wrong
         result for some commands. 
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 3. User Stories
 
@@ -478,9 +532,11 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |v1.0|admin assistant|have an interface|easily update the patient's personal information|
 |v1.0|admin assistant|register new patient's medical information|so that it can be stored and accessed whenever needed|
 |v1.0|admin assistant|save my data on shutdown|continue my work the next day|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v2.0|busy admin assistant|immediately know if the patient is scheduled for today|so I can process them better|
+|v2.0|admin assistant|be able to find a specific patient|check their appointment details|
+|v2.0|admin assistant|clear my lists|keep my list organized when the appointment is over|
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 4. Non-Functional Requirements
 * HAMS should be usable with minimal training, all commands should be self-explanatory and viewing the in-application
@@ -489,21 +545,70 @@ help menu should be sufficient for basic usage.
 * HAMS should be resistant to software crashes and if a crash does happens, the latest patient and 
 appointment list should be saved. In addition, user should be able to manually save their work. 
 
-
 * Each function of HAMS can be executed in a single line.
 
-* 
-
-
+* HAMS should be fast and responsive
 
 **TODO**
 {Give non-functional requirements}
 
-###### [Back to top](#table-of-content)
+### [Back to top &#x2191;](#table-of-content)
 
 ## 5. Instructions for Manual Testing
 
-**TODO**
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### 5.1 Startup, shutdown and restart with saved list.
+1. Initial launch
+    1. Download the latest release from [here](https://github.com/AY1920S2-CS2113T-T13-3/tp/releases)
+    2. Move the .jar to an empty folder
+    3. Open Command Prompt
+    4. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
+    5. Run the .jar using $ `java -jar hams-2.0.jar`
+    
+    Expected: Shows a welcome screen for HAMS.
 
-###### [Back to top](#table-of-content)
+2. Shutdown
+    1. Run the .jar file
+    2. Test case: `exit`
+    
+    Expected: Bye message is printed and program closes.
+ 
+3. Restart with saved list
+    1. Run the .jar file
+    2. Add some patients and appointments.
+    3. Restart the program
+    4. Test case: `listp`
+    
+    Expected: Previous saved list should be shown.
+    
+### 5.2 Adding a patient
+1. Successfully adding a patient (All fields)
+    1. Run the .jar file.
+    2. Test case: `addp \name Justin \age 23 \address Pasir Ris \phone 91234567`
+    
+    Expected: Success message is printed. To double check, type `listp` and ensure that the test case
+    is inside.
+    
+2. Successfully adding a patient (at least 1 field)
+    1. Run the .jar file.
+    2. Test case: `addp \name Sam`
+    
+    Expected: Success message is printed. HAMS accept `addp` as long as 1 field is present. To double check, type `listp` and ensure that the test case
+    is inside.
+
+3. Unsuccessful add a patient  (no fields provided)
+    1. Run the .jar file.
+    2. Test case: `addp`
+    
+    Expected: Error message is printed. To double check, type `listp` and ensure that the test case
+    is **not** inside.
+
+### 5.3 Delete a patient
+
+1. Deleting a patient 
+    1. Prerequisites: list all patients using `listp`. Multiple patients in list.
+    2. Test case: `deletep \index 1`
+    
+    Expected: First patient in the list is deleted. 
+    
+
+### [Back to top &#x2191;](#table-of-content)
