@@ -105,6 +105,10 @@ public class Ui {
 
     }
 
+    public static void printInvalidPhoneNumberMessage() {
+        System.out.println("Invalid phone number, phone number field will be set to empty.");
+    }
+
     public void showExceptionError(String localizedMessage) {
         System.out.println(localizedMessage);
     }
