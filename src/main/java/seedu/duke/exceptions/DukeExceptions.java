@@ -4,6 +4,7 @@ import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
+import seedu.duke.ui.Ui;
 
 import java.util.Map;
 
@@ -12,7 +13,6 @@ import java.util.Map;
  */
 public class DukeExceptions {
     private static final String BLANK_STRING = "";
-    public static final String ADD_PATIENT_COMMAND = "addp";
     private static final String ADD_PATIENT_COMMAND = "addp";
 
     /**
@@ -237,18 +237,24 @@ public class DukeExceptions {
      * Uses Regex matches the given phone number for validation.
      * Returns true if the phone number is valid.
      *
-     * @param phoneNumber the phone number to check.
+     * @param patientFieldsToAdd the hash map that contains phone number.
      * @return returns true if the phone number is valid.
      */
-    public static boolean checkIsValidPhoneNumber(String phoneNumber) {
+    public static void checkValidPhoneNumber(Map<String, String> patientFieldsToAdd) {
+
+        String phoneNumber = patientFieldsToAdd.get(PatientFieldKeys.CONTACT_NUMBER.toString());
+
+        if (phoneNumber.isEmpty()) {
+            return;
+        }
 
         //phoneNumber first digits matches 6 or 8 or 9, follow by any 7 digits.
         if (phoneNumber.matches("(6|8|9)\\d{7}")) {
-            return true;
-        //phoneNumber first digits matches 6 or 8 or 9, then 3 digits and a whitespace and then 4 digits.
+            return;
         } else if (phoneNumber.matches("(6|8|9)\\d{3}[\\s]\\d{4}")) {
-            return true;
+            return;
         }
-        return false;
+        Ui.printInvalidPhoneNumberMessage();
+        patientFieldsToAdd.replace(PatientFieldKeys.CONTACT_NUMBER.toString(), BLANK_STRING);
     }
 }
