@@ -18,6 +18,6 @@ class TimeConverterTest {
     @Test
     void testOldTime() throws ParseException {
         String oldTime = "2315";
-        assertEquals("11:15 pm", TimeConverter.oldTime(oldTime));
+        assertEquals("11:15 PM", TimeConverter.oldTime(oldTime));
     }
 }

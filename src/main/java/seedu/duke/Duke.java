@@ -1,11 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.IndexNotIntegerException;
-import seedu.duke.exceptions.InvalidIndexException;
-import seedu.duke.exceptions.NoFieldCommandException;
-import seedu.duke.exceptions.PidEmptyException;
-import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.*;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -92,7 +88,7 @@ public class Duke {
                 isExit = c.isExit();
 
             } catch (UnknownCommandException | InvalidIndexException | IndexNotIntegerException
-                    | NoFieldCommandException | PidEmptyException e) {
+                    | NoFieldCommandException | PidEmptyException | ParseException e) {
 
                 ui.showExceptionError(e.getLocalizedMessage());
 
@@ -101,10 +97,8 @@ public class Duke {
 
             } catch (NoSuchElementException e) {
                 break;
-            } catch (ParseException e) {
-                System.out.println("Please fill in date in right format: dd/mm/yyyy and "
-                        + "time in the 24 hour format: hhmm");
             }
+
         }
     }
 
