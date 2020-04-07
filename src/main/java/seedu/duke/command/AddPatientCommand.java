@@ -6,7 +6,6 @@ import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Map;
 
