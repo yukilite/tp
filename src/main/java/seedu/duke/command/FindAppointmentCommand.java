@@ -55,8 +55,12 @@ public class FindAppointmentCommand extends Command {
 
     /**
      * For this execution, the existing list of Appointment records is searched for a keyword.
-     * Records that contain the keyword will be added to a separate List and printed out in a readable format.
      *
+     *<p>
+     * We check the searchValue to see if it is of the correct format (dd/mm/yyyy for date, hh:mm am/pm for time)
+     * If input is invalid format, we exit. Else, we search the list of Appointments for the search keyword.
+     * Records that contain the keyword will be added to a separate List and printed out in a readable format.
+     *</p>
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException this exception is thrown by the {@link Storage} class if it fails to save the current
@@ -66,39 +70,47 @@ public class FindAppointmentCommand extends Command {
     public void execute(Ui ui, Storage storage) throws IOException {
         boolean isDateInput = false;
         boolean isTimeInput = false;
+        /* the time string hh:mm (am/pm) should have 8 characters in total
+        *  the date string dd/mm/yyyy should have 10 characters in total
+        *  we only check strings of these two lengths if they are in the correct format
+        */
         if (Integer.valueOf(this.getSearchValue().length()) == 8) {
             if (!checkValidTime(this.getSearchValue())) {
-                System.out.println("invalid time form");
+                ui.printInvalidAppointmentSearchTimeMessage();
                 return;
             }
             isTimeInput = true;
         } else if (Integer.valueOf(this.getSearchValue().length()) == 10) {
             if (!checkValidDate(this.getSearchValue())) {
-                System.out.println("invalid date form");
+                ui.printInvalidAppointmentSearchDateMessage();
                 return;
             }
             isDateInput = true;
         } else {
+            ui.printInvalidAppointmentSearchFormatMessage();
             return;
         }
 
         String parsedSearchValue = null;
 
-        if (isDateInput){
+        if (isDateInput) {
             try {
-                parsedSearchValue = timeConverter.oldDate(timeConverter.convertDate(this.getSearchValue()));
+                parsedSearchValue = timeConverter.oldDate(this.getSearchValue());
             } catch (ParseException e) {
-                System.out.println("conversion problem 1");
+                ui.printSearchValueConversionErrorMessage();
+                return;
             }
         }
         if (isTimeInput) {
             try {
-                parsedSearchValue = timeConverter.oldTime(timeConverter.convertTime(this.getSearchValue()));
+                parsedSearchValue = timeConverter.oldTime(this.getSearchValue());
             } catch (ParseException e) {
-                System.out.println("conversion problem 2");
+                ui.printSearchValueConversionErrorMessage();
+                return;
             }
-
         }
+
+        assert parsedSearchValue != null : "The searchValue should contain a non-null value.";
 
         List<Appointment> searchResults = new ArrayList<>();
         /*get the list of all Appointments from Storage to conduct search*/
@@ -112,18 +124,30 @@ public class FindAppointmentCommand extends Command {
 
     }
 
-    private boolean checkValidDate(String dateInput){
+    /**
+     * This method checks if the search input is a valid date.
+     *
+     * @param dateInput the date input (determined to be a date due to its length)
+     * @return a boolean indicating if the input is a valid date.
+     */
+    private boolean checkValidDate(String dateInput) {
         try {
-            this.timeConverter.convertDate(dateInput);
+            this.timeConverter.oldDate(dateInput);
         } catch (ParseException e) {
             return false;
         }
         return true;
     }
 
-    private boolean checkValidTime(String timeInput){
+    /**
+     * This method checks if the search input is a valid time.
+     *
+     * @param timeInput the input (determined to be a time search value due to its length)
+     * @return a boolean indicating if the value is a valid date.
+     */
+    private boolean checkValidTime(String timeInput) {
         try {
-            this.timeConverter.convertTime(timeInput);
+            this.timeConverter.oldTime(timeInput);
         } catch (ParseException e) {
             return false;
         }

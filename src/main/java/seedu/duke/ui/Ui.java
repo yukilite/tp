@@ -180,4 +180,23 @@ public class Ui {
             currentIndex++;
         }
     }
+
+    public void printInvalidAppointmentSearchDateMessage() {
+        System.out.println("The input does not follow the correct time search format: \n\'hh:mm (am/pm)\'\n"
+                + "Please try again. ");
+    }
+
+    public void printInvalidAppointmentSearchTimeMessage() {
+        System.out.println("The input does not follow the correct date search format: \n"
+                + "\'dd/mm/yyyy\'\nPlease try again. ");
+    }
+
+    public void printInvalidAppointmentSearchFormatMessage() {
+        System.out.println("The input does not follow the correct date or time search format: "
+                + "\n\'dd/mm/yyyy\' for dates\n\'hh:mm (am/pm)\' for times\nPlease try again. ");
+    }
+
+    public void printSearchValueConversionErrorMessage() {
+        System.out.println("An error occured when trying to parse the search input. Please try again.");
+    }
 }
