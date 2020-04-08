@@ -101,6 +101,14 @@ public class Ui {
 
     }
 
+    public static void printSaveFileCorruptedMessage() {
+        System.out.println("A save file was corrupted. Clearing save file data...");
+    }
+
+    public static void printFileCreationErrorMessage() {
+        System.out.println("An error occured while attempting to create the save file.");
+    }
+
     public void showExceptionError(String localizedMessage) {
         System.out.println(localizedMessage);
     }
@@ -182,13 +190,13 @@ public class Ui {
     }
 
     public void printInvalidAppointmentSearchDateMessage() {
-        System.out.println("The input does not follow the correct time search format: \n\'hh:mm (am/pm)\'\n"
+        System.out.println("The input does not follow the correct time search format: \n\'dd/mm/yyyy\'\n"
                 + "Please try again. ");
     }
 
     public void printInvalidAppointmentSearchTimeMessage() {
-        System.out.println("The input does not follow the correct date search format: \n"
-                + "\'dd/mm/yyyy\'\nPlease try again. ");
+        System.out.println("The input does not follow the correct time search format: \n"
+                + "\'hh:mm (am/pm)\'\nPlease try again. ");
     }
 
     public void printInvalidAppointmentSearchFormatMessage() {

@@ -6,6 +6,7 @@ import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.ui.Ui;
+import seedu.duke.exceptions.FileCorruptedException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,7 +50,8 @@ public class Storage {
      * @return appointmentListToReturn returns the appointment list in the save file
      * @throws FileNotFoundException this exception occurs when a file is not found
      */
-    public List<Appointment> loadSavedAppointments() throws FileNotFoundException, ParseException {
+    public List<Appointment> loadSavedAppointments() throws FileNotFoundException, ParseException,
+            FileCorruptedException {
         File appointmentSave = new File(this.appointmentListSaveLocation);
         if (!appointmentSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
@@ -59,11 +61,9 @@ public class Storage {
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
-                    System.out.println("here 1");
                     Ui.showFailedToCreateFile();
                 }
             } else {
-                System.out.println("here 2");
                 Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
@@ -81,12 +81,46 @@ public class Storage {
                 }
             }
 
-            String convertedDate = TimeConverter.convertDate(patientFields[0]);
-            String convertedTime = TimeConverter.convertTime(patientFields[1]);
+            String convertedDate = null;
+            String convertedTime = null;
 
-            Appointment newAppointmentToLoad =
-                    new Appointment(convertedDate, convertedTime, Integer.parseInt(patientFields[2]));
-            appointmentListToReturn.add(newAppointmentToLoad);
+            try {
+                convertedDate = TimeConverter.convertDate(patientFields[0]);
+                convertedTime = TimeConverter.convertTime(patientFields[1]);
+            } catch (ArrayIndexOutOfBoundsException | ParseException e) {
+                Ui.printSaveFileCorruptedMessage();
+                appointmentSave.delete();
+                try {
+                    appointmentSave.createNewFile();
+                } catch (IOException newError) {
+                    Ui.printFileCreationErrorMessage();
+                    return null;
+                }
+                throw new FileCorruptedException();
+            }
+
+            assert convertedDate != null;
+            assert convertedTime != null;
+
+            try {
+                Appointment newAppointmentToLoad =
+                        new Appointment(convertedDate, convertedTime, Integer.parseInt(patientFields[2]));
+                appointmentListToReturn.add(newAppointmentToLoad);
+            } catch (Exception e) {
+                Ui.printSaveFileCorruptedMessage();
+                appointmentSave.delete();
+                File patientSave = new File(this.patientListSaveLocation);
+                patientSave.delete();
+                File patientIdSave = new File(this.patientIdSaveLocation);
+                patientIdSave.delete();
+                try {
+                    appointmentSave.createNewFile();
+                } catch (IOException newError) {
+                    Ui.printFileCreationErrorMessage();
+                    return null;
+                }
+                throw new FileCorruptedException();
+            }
         }
 
         return appointmentListToReturn;
@@ -98,7 +132,7 @@ public class Storage {
      * @return patientListToReturn the patient list for the save file.
      * @throws FileNotFoundException this exception occurs if a file is not found.
      */
-    public List<Patient> loadSavedPatients() throws FileNotFoundException {
+    public List<Patient> loadSavedPatients() throws FileNotFoundException, FileCorruptedException {
         File patientSave = new File(this.patientListSaveLocation);
         if (!patientSave.exists()) {
             File newDirectory = new File(SAVE_DIRECTORY);
@@ -108,12 +142,10 @@ public class Storage {
                 try {
                     newFile.createNewFile();
                 } catch (IOException e) {
-                    System.out.println("here 3");
                     Ui.showFailedToCreateFile();
                 }
 
             } else {
-                System.out.println("here 4");
                 Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();
@@ -124,13 +156,6 @@ public class Storage {
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
-            int delimiterCount = 0;
-            for (int i = 0; i < patientString.length(); i++) {
-                if (Character.toString(patientString.charAt(i)).equals("|")) {
-                    delimiterCount++;
-                }
-            }
-            //assert delimiterCount == 3 : "not enough fields in this line:";
             String[] patientFields = patientString.split(" \\| ", 5);
             for (String field : patientFields) {
                 if (field.trim().isEmpty()) {
@@ -140,11 +165,26 @@ public class Storage {
             if (patientFields[1].isEmpty()) {
                 patientFields[1] = "-1";
             }
-            Patient newPatientToLoad =
-                    new Patient(patientFields[0], Integer.parseInt(patientFields[1]), patientFields[2],
-                            patientFields[3], Integer.parseInt(patientFields[4]));
-            patientListToReturn.add(newPatientToLoad);
-
+            try {
+                Patient newPatientToLoad =
+                        new Patient(patientFields[0], Integer.parseInt(patientFields[1]), patientFields[2],
+                                patientFields[3], Integer.parseInt(patientFields[4]));
+                patientListToReturn.add(newPatientToLoad);
+            } catch (Exception e) {
+                Ui.printSaveFileCorruptedMessage();
+                patientSave.delete();
+                File appointmentSave = new File(this.appointmentListSaveLocation);
+                appointmentSave.delete();
+                File patientIdSave = new File(this.patientIdSaveLocation);
+                patientIdSave.delete();
+                try {
+                    patientSave.createNewFile();
+                } catch (IOException newError) {
+                    Ui.printFileCreationErrorMessage();
+                    return null;
+                }
+                throw new FileCorruptedException();
+            }
         }
 
         loadPatientIdState();
@@ -173,7 +213,6 @@ public class Storage {
                 }
 
             } else {
-                System.out.println("here 5");
                 Ui.showFailedToCreateDirectory();
             }
             throw new FileNotFoundException();

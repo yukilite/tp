@@ -1,11 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.IndexNotIntegerException;
-import seedu.duke.exceptions.InvalidIndexException;
-import seedu.duke.exceptions.NoFieldCommandException;
-import seedu.duke.exceptions.PidEmptyException;
-import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.*;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -61,14 +57,14 @@ public class Duke {
         List<Appointment> appointmentListToLoad = null;
         try {
             patientListToLoad = storage.loadSavedPatients();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | FileCorruptedException e) {
             patientListToLoad = new ArrayList<>();
         } finally {
             patientList = new PatientList(patientListToLoad);
         }
         try {
             appointmentListToLoad = storage.loadSavedAppointments();
-        } catch (FileNotFoundException | ParseException e) {
+        } catch (FileNotFoundException | ParseException | FileCorruptedException e) {
             appointmentListToLoad = new ArrayList<>();
         } finally {
             appointmentList = new AppointmentList(appointmentListToLoad);
