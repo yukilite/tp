@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -124,6 +125,7 @@ public class Storage {
         }
         List<Patient> patientListToReturn = new ArrayList<>();
         Scanner s = new Scanner(patientSave);
+        Map<Integer, Integer> patientIdMap = new HashMap<>();
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
@@ -147,19 +149,22 @@ public class Storage {
                     new Patient(patientFields[0], Integer.parseInt(patientFields[1]), patientFields[2],
                             patientFields[3], Integer.parseInt(patientFields[4]));
             patientListToReturn.add(newPatientToLoad);
+            patientIdMap.put(Integer.parseInt(patientFields[4]), 1);
+
 
         }
 
-        loadPatientIdState();
+        loadPatientIdState(patientIdMap);
 
         return patientListToReturn;
     }
 
     /**
      * Load the state of the patient id(s) into our patient id management system.
+     * @param patientIdMap the map of patient id as obtained from patient information.
      * @throws FileNotFoundException if there is an error locating the file to save to.
      */
-    private void loadPatientIdState() throws FileNotFoundException {
+    private void loadPatientIdState(Map<Integer, Integer> patientIdMap) throws FileNotFoundException {
 
         /* Preparing the file reader */
         File patientIdSave = new File(this.patientIdSaveLocation);
@@ -198,22 +203,9 @@ public class Storage {
                 PatientIdManager.addBackPatientId(Integer.parseInt(number));
             }
         }
-        /* Getting the map of patient id that exist from saved file */
-        /* Obtained solution from
-        https://stackoverflow.com/questions/12747946/how-to-write-and-read-a-file-with-a-hashmap*/
 
-        File toLoad = new File(this.patientIdExistSaveLocation);
-        FileInputStream fis = new FileInputStream(toLoad);
-        ObjectInputStream ois = null;
-
-        try {
-            ois = new ObjectInputStream(fis);
-            PatientIdManager.setPatientIdMap((HashMap<Integer,Integer>)ois.readObject());
-            ois.close();
-            fis.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        /* Loadking back the hash table of existing patient id */
+        PatientIdManager.setPatientIdMap(patientIdMap);
 
 
     }
@@ -297,24 +289,6 @@ public class Storage {
             }
         }
         fwPatientIdSave.close();
-
-        /* Saving the map of patient id that exist */
-        /* Obtained solution from
-        https://stackoverflow.com/questions/12747946/how-to-write-and-read-a-file-with-a-hashmap*/
-
-        try {
-            File patientIdExistFile = new File(this.patientIdExistSaveLocation);
-            FileOutputStream fos = new FileOutputStream(patientIdExistFile);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-            oos.writeObject(PatientIdManager.getPatientIdMap());
-            oos.flush();
-            oos.close();
-            fos.close();
-
-        } catch (Exception e) {
-            System.out.println("Something went wrong with adding of map of patient id!");
-        }
 
 
     }
