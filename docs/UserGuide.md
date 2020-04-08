@@ -142,7 +142,7 @@ Format: `listp`
 
 The program allows you to delete an existing Patient record by its index in the list. The command contains:
 
-Format: `deletep \index [patient number in list]`
+Format: `deletep \index [index number in list]`
 
 * `deletep` keyword
 * `\index` followed by the index number of the patient to be deleted 
@@ -163,7 +163,7 @@ NOT OK | `deletep \index a` | ![](images/delete_fail.PNG)
 
 The program allows you to make changes to an existing Patient record by its index in the list. 
 
-Format: `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]`
+Format: `editp \index [index number in list] \name [name] \age [age] \address [address] \phone [phone]`
 
 * `editp` keyword
 * `\index` followed by the index number of the Patient record in the list
@@ -286,7 +286,7 @@ Format: `lista`
 
 The program allows you to delete an existing Appointment record by its index in the list. 
 
-Format: `deletea \index [appointment number in list]`
+Format: `deletea \index [index number in list]`
 
 * `deletea` keyword
 * `\index` followed by the index number of the Appointment to be deleted 
@@ -308,7 +308,7 @@ NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "
 
 The program allows you to make changes to an existing Appointment record by its index in the list.
 
-Format: `edita \index [appointmentNumber] \date [date] \time [time]`
+Format: `edita \index [index number in list] \date [date] \time [time]`
  
 * `edita` keyword
 * `\index` followed by the index number of the Appointment in the list.
@@ -438,10 +438,10 @@ Format: `exit`
 `cleara`| Clears all appointment records
 `clearp`| Clears all patient records
 `clearall`| Clears both appointment and patient records
-`deletea \index [appointment number in list]` | Delete an appointment by the list's appointment number
-`deletep \index [patient number in list]` | Delete a patient by the list's patient number
-`edita \index [appointmentNumber] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
-`editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
+`deletea \index [index number in list]` | Delete an appointment by the list's appointment number
+`deletep \index [index number in list]` | Delete a patient by the list's patient number
+`edita \index [index number in list] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
+`editp \index [index number in list] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
 `help` | Give you a manual on a list of valid commands and their usage
 `exit` | Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
