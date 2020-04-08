@@ -124,6 +124,7 @@ public class PatientIdManager {
     public static void clearPatientId() {
         nextTopNewNumber = 0;
         nextNumberQueueThing.clear();
+        patientIdMap.clear();
 
     }
 
