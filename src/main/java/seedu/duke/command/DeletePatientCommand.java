@@ -3,11 +3,13 @@ package seedu.duke.command;
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Patient;
+import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -76,14 +78,27 @@ public class DeletePatientCommand extends Command {
             // Get the patient's record based on its index from the list
             Patient patient = PatientList.getPatientRecord(patientIndex - 1);
 
+            // Get the patient's patient ID
+            int deletedPatientId = patient.getPatientID();
+
             // Add back the patient id
-            PatientIdManager.addBackPatientId(patient.getPatientID());
+            PatientIdManager.addBackPatientId(deletedPatientId);
 
             // Get the original appointment's list size
             int originalSize = PatientList.getTotalPatients();
 
             // Remove the patient's information from the patient's list
             PatientList.getPatientList().remove(patient);
+
+            // Find appointments with the deleted patient IDs and delete those appointments also
+            for (int i = 0; i < AppointmentList.getTotalAppointments(); i++) {
+                int idToBeDeleted = AppointmentList.getAppointmentRecord(i).getPatientId();
+                if (idToBeDeleted == deletedPatientId) {
+                    Map<String, String> appointmentsFieldsToChange = new HashMap<>();
+                    appointmentsFieldsToChange.put("index", Integer.toString(i + 1));
+                    new DeleteAppointmentCommand(appointmentsFieldsToChange).execute(ui, storage);
+                }
+            }
 
             // Check with assertions that the size has been decremented
             assert PatientList.getTotalPatients() == originalSize - 1;
@@ -93,7 +108,7 @@ public class DeletePatientCommand extends Command {
 
             // Show deleted patient successfully message
             Ui.showDeletePatientSuccess();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | InvalidFormatException e) {
             return;
         }
     }
