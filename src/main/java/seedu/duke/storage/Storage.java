@@ -109,10 +109,6 @@ public class Storage {
             } catch (Exception e) {
                 Ui.printSaveFileCorruptedMessage();
                 appointmentSave.delete();
-                File patientSave = new File(this.patientListSaveLocation);
-                patientSave.delete();
-                File patientIdSave = new File(this.patientIdSaveLocation);
-                patientIdSave.delete();
                 try {
                     appointmentSave.createNewFile();
                 } catch (IOException newError) {
@@ -173,10 +169,6 @@ public class Storage {
             } catch (Exception e) {
                 Ui.printSaveFileCorruptedMessage();
                 patientSave.delete();
-                File appointmentSave = new File(this.appointmentListSaveLocation);
-                appointmentSave.delete();
-                File patientIdSave = new File(this.patientIdSaveLocation);
-                patientIdSave.delete();
                 try {
                     patientSave.createNewFile();
                 } catch (IOException newError) {
