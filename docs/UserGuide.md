@@ -115,6 +115,8 @@ Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
 > ![](images/UG/addp_hint.JPG)
 
+> ![](images/UG/patientid_hint.JPG)
+
 > ![](images/UG/limit_warning.JPG)
 
 ##### Examples of Usage
@@ -139,10 +141,15 @@ Format: `listp`
 #### 4.1.3 Delete an existing Patient
 
 The program allows you to delete an existing Patient record by its index in the list. The command contains:
+
+Format: `deletep \index [patient number in list]`
+
 * `deletep` keyword
 * `\index` followed by the index number of the patient to be deleted 
 
-Format: `deletep \index [patient number in list]`
+> ![](images/UG/deletep_editp_hint.JPG)
+
+#### Example of usage:
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
@@ -163,8 +170,11 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 * `\address` followed by the address of the patient
 * `\phone` the contact number of the patient
 
-
 > ![](images/UG/editp_hint.JPG)
+
+> ![](images/UG/patientid_hint.JPG)
+
+> ![](images/UG/deletep_editp_hint.JPG)
 
 > ![](images/UG/limit_warning.JPG)
 
@@ -237,9 +247,7 @@ Format: `clearp`
 The program allows you to add a new Appointment record to the current list of Appointment records. With the addition 
 of the `pid` field, it allows users to link the appointment to a specific patient. 
 
-
 Format: `adda \date [date] \time [time] \pid [patient id]`
-
 
 * `adda` keyword
 * `\date` followed by the date of the appointment
@@ -279,6 +287,8 @@ Format: `deletea \index [appointment number in list]`
 * `deletea` keyword
 * `\index` followed by the index number of the Appointment to be deleted 
 
+> ![](images/UG/deletea_edita_hint.JPG)
+
 Examples of Usage
 
 OK? |   Usage    |   Outcome 
@@ -300,6 +310,8 @@ Format: `edita \index [appointmentNumber] \date [date] \time [time]`
 * `\time` followed by the time of the appointment
 
 > ![](images/UG/adda_hint.JPG)
+
+> ![](images/UG/deletea_edita_hint.JPG)
 
 > ![](images/UG/edita_hint.JPG)
 
