@@ -75,12 +75,10 @@ public class FindAppointmentCommand extends Command {
         *  we only check strings of these two lengths if they are in the correct format
         */
         if (Integer.valueOf(this.getSearchValue().length()) == 8) {
-            System.out.println(this.getSearchValue());
             if (!checkValidTime(this.getSearchValue())) {
                 ui.printInvalidAppointmentSearchTimeMessage();
                 return;
             }
-            System.out.println("here 2");
             isTimeInput = true;
         } else if (Integer.valueOf(this.getSearchValue().length()) == 10) {
             if (!checkValidDate(this.getSearchValue())) {
@@ -104,12 +102,8 @@ public class FindAppointmentCommand extends Command {
             }
         }
         if (isTimeInput) {
-            try {
-                parsedSearchValue = timeConverter.oldTime(this.getSearchValue());
-            } catch (ParseException e) {
-                ui.printSearchValueConversionErrorMessage();
-                return;
-            }
+            parsedSearchValue = this.getSearchValue();
+
         }
 
         assert parsedSearchValue != null : "The searchValue should contain a non-null value.";
@@ -149,7 +143,7 @@ public class FindAppointmentCommand extends Command {
      */
     private boolean checkValidTime(String timeInput) {
         try {
-            this.timeConverter.oldTime(timeInput);
+            this.timeConverter.convertTime(timeInput);
         } catch (ParseException e) {
             return false;
         }
