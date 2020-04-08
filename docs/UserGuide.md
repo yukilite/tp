@@ -147,6 +147,8 @@ Format: `deletep \index [patient number in list]`
 * `deletep` keyword
 * `\index` followed by the index number of the patient to be deleted 
 
+> ![](images/UG/index_compulsory.JPG)
+
 > ![](images/UG/deletep_editp_hint.JPG)
 
 #### Example of usage:
@@ -169,6 +171,8 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 * `\age` followed by the age of the patient
 * `\address` followed by the address of the patient
 * `\phone` the contact number of the patient
+
+> ![](images/UG/index_compulsory.JPG)
 
 > ![](images/UG/editp_hint.JPG)
 
@@ -287,6 +291,8 @@ Format: `deletea \index [appointment number in list]`
 * `deletea` keyword
 * `\index` followed by the index number of the Appointment to be deleted 
 
+> ![](images/UG/index_compulsory.JPG)
+
 > ![](images/UG/deletea_edita_hint.JPG)
 
 Examples of Usage
@@ -312,6 +318,8 @@ Format: `edita \index [appointmentNumber] \date [date] \time [time]`
 > ![](images/UG/adda_hint.JPG)
 
 > ![](images/UG/deletea_edita_hint.JPG)
+
+> ![](images/UG/index_compulsory.JPG)
 
 > ![](images/UG/edita_hint.JPG)
 
