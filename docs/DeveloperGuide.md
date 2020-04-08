@@ -172,6 +172,16 @@ The sequence diagram is shown below:
 
 ![](images/saveapptlist_seq.PNG)
 
+#####2.2.3.1 FindPatient/FindAppointment
+Design considerations for findPatient:
+- general search
+- include multiple fields in search
+
+Design considerations for findAppointment:
+- using specified formats for date and time, only allow one to be searched at any time
+- general search
+
+
 ### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.4 A&D command module 

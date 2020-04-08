@@ -38,6 +38,8 @@ public class FindAppointmentCommand extends Command {
             + "Example: " + EXAMPLE;
     private String searchValue;
     private TimeConverter timeConverter;
+    private static final int TIME_INPUT_LENGTH = 8;
+    private static final int DATE_INPUT_LENGTH = 10;
 
     /**
      * Constructor for the find appointment command class.
@@ -74,13 +76,13 @@ public class FindAppointmentCommand extends Command {
         *  the date string dd/mm/yyyy should have 10 characters in total
         *  we only check strings of these two lengths if they are in the correct format
         */
-        if (Integer.valueOf(this.getSearchValue().length()) == 8) {
+        if (Integer.valueOf(this.getSearchValue().length()) == TIME_INPUT_LENGTH) {
             if (!checkValidTime(this.getSearchValue())) {
                 ui.printInvalidAppointmentSearchTimeMessage();
                 return;
             }
             isTimeInput = true;
-        } else if (Integer.valueOf(this.getSearchValue().length()) == 10) {
+        } else if (Integer.valueOf(this.getSearchValue().length()) == DATE_INPUT_LENGTH) {
             if (!checkValidDate(this.getSearchValue())) {
                 ui.printInvalidAppointmentSearchDateMessage();
                 return;
