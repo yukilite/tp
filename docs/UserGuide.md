@@ -115,7 +115,7 @@ Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
 > ![](images/UG/addp_hint.JPG)
 
-> ![](images/UG/addp_warning.JPG)
+> ![](images/UG/limit_warning.JPG)
 
 ##### Examples of Usage
 
@@ -165,6 +165,8 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 
 
 > ![](images/UG/editp_hint.JPG)
+
+> ![](images/UG/limit_warning.JPG)
 
 #### Example of usage: 
 `editp \index 1  \name Justin \age 23 \address Clementi \phone 83487846`
