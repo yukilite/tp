@@ -89,8 +89,8 @@ public class Storage {
                 convertedTime = TimeConverter.convertTime(patientFields[1]);
             } catch (ArrayIndexOutOfBoundsException | ParseException e) {
                 Ui.printSaveFileCorruptedMessage();
-                appointmentSave.delete();
                 try {
+                    appointmentSave.delete();
                     appointmentSave.createNewFile();
                 } catch (IOException newError) {
                     Ui.printFileCreationErrorMessage();
@@ -108,8 +108,8 @@ public class Storage {
                 appointmentListToReturn.add(newAppointmentToLoad);
             } catch (Exception e) {
                 Ui.printSaveFileCorruptedMessage();
-                appointmentSave.delete();
                 try {
+                    appointmentSave.delete();
                     appointmentSave.createNewFile();
                 } catch (IOException newError) {
                     Ui.printFileCreationErrorMessage();
@@ -168,8 +168,8 @@ public class Storage {
                 patientListToReturn.add(newPatientToLoad);
             } catch (Exception e) {
                 Ui.printSaveFileCorruptedMessage();
-                patientSave.delete();
                 try {
+                    patientSave.delete();
                     patientSave.createNewFile();
                 } catch (IOException newError) {
                     Ui.printFileCreationErrorMessage();
