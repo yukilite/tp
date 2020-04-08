@@ -92,7 +92,7 @@ public class Duke {
                 isExit = c.isExit();
 
             } catch (UnknownCommandException | InvalidIndexException | IndexNotIntegerException
-                    | NoFieldCommandException | PidEmptyException e) {
+                    | NoFieldCommandException | PidEmptyException | ParseException e) {
 
                 ui.showExceptionError(e.getLocalizedMessage());
 
@@ -101,10 +101,8 @@ public class Duke {
 
             } catch (NoSuchElementException e) {
                 break;
-            } catch (ParseException e) {
-                System.out.println("Please fill in date in right format: dd/mm/yyyy and "
-                        + "time in the 24 hour format: hhmm");
             }
+
         }
     }
 
