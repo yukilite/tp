@@ -130,7 +130,7 @@ NOT OK | `addp` | ![](images/addp%20fail.PNG)
 
 #### 4.1.2 List all existing Patients
 
-The program allows your to list all existing Patients. The command simply contains the 'listp' keyword.
+The program allows you to list all existing Patients. The command simply contains the 'listp' keyword.
 
 Format: `listp`
 
@@ -277,16 +277,16 @@ NOT OK | `adda \date 31/02/2020 \time 1234 \pid 1` | <img src="images/UG/adda_fa
 
 #### 4.2.2 List all existing Appointments
 
-The command simply contains the 'lista' keyword.
+The program allows you to list all existing Appointments. The command simply contains the 'lista' keyword.
 
 Format: `lista`
 
 #### Example of usage: 
-`lista`
 
-##### Expected outcome:
-<img src ="images/lista_eg1.PNG" width = "400">
-
+Is Appointment list empty? |   Usage    |   Outcome 
+-------------------------- | ---------- | -------------
+NO | `lista` | <img src ="images/UG/lista_not_empty.JPG" width="600">
+YES | `lista` | <img src ="images/UG/lista_empty.JPG" width="600">
 
 #### 4.2.3 Delete an existing Appointment
 
