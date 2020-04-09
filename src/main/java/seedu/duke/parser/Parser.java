@@ -88,7 +88,7 @@ public class Parser {
         try {
             DukeExceptions.doesKeyExist(keyValue);
 
-            String valueString = keyValue[VALUE_STRING_INDEX];
+            String valueString = WHITESPACE + keyValue[VALUE_STRING_INDEX];
 
             String delimiter = WHITESPACE + REGEX_BACKSLASH;
             String[] b = valueString.split(delimiter, LIMIT);
