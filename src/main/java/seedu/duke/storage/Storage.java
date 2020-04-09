@@ -170,7 +170,6 @@ public class Storage {
             if (patientFields[1].isEmpty()) {
                 patientFields[1] = "-1";
             }
-
             try {
                 Patient newPatientToLoad =
                         new Patient(patientFields[0], Integer.parseInt(patientFields[1]), patientFields[2],
@@ -188,7 +187,6 @@ public class Storage {
                 }
                 throw new FileCorruptedException();
             }
-
         }
 
         loadPatientIdState(patientIdMap);

@@ -111,7 +111,8 @@ public class Ui {
 
     public static void printFileCreationErrorMessage() {
         System.out.println("An error occured while attempting to create the save file.");
-
+    }
+    
     public static void showNoPidExist() {
         System.out.println("Patient Id don't exist! No appointment record will be made.");
     }
@@ -221,8 +222,10 @@ public class Ui {
 
     public void printSearchValueConversionErrorMessage() {
         System.out.println("An error occured when trying to parse the search input. Please try again.");
-
+    }
+    
     public void showAllItemsDeleted() {
         System.out.println("Both list cleared!");
+
     }
 }
