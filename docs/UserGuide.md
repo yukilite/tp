@@ -432,11 +432,6 @@ Format: `help`
 
 ##### Expected outcome 
 
-HTML version
-<img src="images/UG/help_part1.JPG" width="831">
-<img src="images/UG/help_part2.JPG" width="831">
-
-Markdown version
 ![](images/UG/help_part1.JPG)
 ![](images/UG/help_part2.JPG)
 
