@@ -407,6 +407,20 @@ Format: `clearall`
 
 >![](images/UG/clearall_warning.JPG) 
 
+#### Example list
+
+ <img src="images/UG/findp_patient_list.JPG" width="600">
+
+ <img src="images/UG/lista_not_empty.JPG" width="600">
+ 
+#### Example of usage:
+ 
+ **Please refer to the example lists above**
+ 
+ Is both list empty? |   Usage    |   Outcome & After  |
+ --------------------| ---------- | ------------------ |
+ NO | `clearall` | <img src="images/UG/clearall.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600"> 
+
 ### 4.4 View help
 
 The 'help' keyword provides you with a list of valid commands, their functions and their proper usages.
@@ -417,7 +431,14 @@ Format: `help`
 `help`
 
 ##### Expected outcome 
-![](images/help.PNG)
+
+HTML version
+<img src="images/UG/help_part1.JPG" width="831">
+<img src="images/UG/help_part2.JPG" width="831">
+
+Markdown version
+![](images/UG/help_part1.JPG)
+![](images/UG/help_part2.JPG)
 
 ### [Back to top &#x2191;](#table-of-content)
 
