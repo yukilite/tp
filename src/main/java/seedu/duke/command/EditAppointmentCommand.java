@@ -101,7 +101,7 @@ public class EditAppointmentCommand extends Command {
      * @see Ui#showUpdateAppointmentSuccess
      */
     @Override
-    public void execute(Ui ui, Storage storage) throws IOException {
+    public void execute(Ui ui, Storage storage) throws IOException, ParseException {
         try {
             // Get the appointment's record based on its index from the list
             Appointment appointment = AppointmentList.getAppointmentRecord(index - 1);
@@ -125,7 +125,7 @@ public class EditAppointmentCommand extends Command {
 
             // Show updated successfully message
             Ui.showUpdateAppointmentSuccess();
-        } catch (IndexOutOfBoundsException | ParseException e) {
+        } catch (IndexOutOfBoundsException e) {
             return;
         }
     }

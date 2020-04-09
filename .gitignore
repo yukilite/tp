@@ -17,3 +17,4 @@ bin/
 saves/appointments.txt
 saves/patients.txt
 saves/patientId.txt
+saves/patientsIdExist.txt
