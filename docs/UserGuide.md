@@ -137,7 +137,7 @@ Format: `listp`
 #### Example of usage: 
 
 Is Patient list empty? |   Usage    |   Outcome   
----------------------- | ---------- | ----------- 
+:--------------------: | ---------- | ----------- 
 NO |`listp` | <img src="images/listp.PNG">  
 YES | `listp` | <img src="images/UG/clearp_success.JPG" width="600"> 
 
@@ -284,7 +284,7 @@ Format: `lista`
 #### Example of usage: 
 
 Is Appointment list empty? |   Usage    |   Outcome 
--------------------------- | ---------- | -------------
+:------------------------: | ---------- | -------------
 NO | `lista` | <img src ="images/UG/lista_not_empty.JPG" width="600">
 YES | `lista` | <img src ="images/UG/lista_empty.JPG" width="600">
 
@@ -417,8 +417,8 @@ Format: `clearall`
  
  **Please refer to the example lists above**
  
- Is both list empty? |   Usage    |   Outcome & After  |
- --------------------| ---------- | ------------------ |
+Is both list empty? |   Usage    |   Outcome & After  |
+:------------------:| ---------- | ------------------ |
  NO | `clearall` | <img src="images/UG/clearall.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600"> 
 
 ### 4.4 View help
@@ -432,11 +432,6 @@ Format: `help`
 
 ##### Expected outcome 
 
-HTML version
-<img src="images/UG/help_part1.JPG" width="831">
-<img src="images/UG/help_part2.JPG" width="831">
-
-Markdown version
 ![](images/UG/help_part1.JPG)
 ![](images/UG/help_part2.JPG)
 

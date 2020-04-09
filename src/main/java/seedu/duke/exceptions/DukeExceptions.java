@@ -233,29 +233,4 @@ public class DukeExceptions {
         }
     }
 
-    /**
-     * Uses Regex matches the given phone number for validation.
-     * Returns true if the phone number is valid.
-     *
-     * @param patientFieldsToAdd the hash map that contains phone number.
-     * @throws InvalidPhoneNumberException when the phone number is invalid.
-     */
-    public static void checkValidPhoneNumber(Map<String, String> patientFieldsToAdd)
-            throws InvalidPhoneNumberException {
-
-        String phoneNumber = patientFieldsToAdd.get(PatientFieldKeys.CONTACT_NUMBER.toString());
-
-        if (phoneNumber.isEmpty()) {
-            return;
-        }
-
-        //phoneNumber first digits matches 6 or 8 or 9, follow by any 7 digits.
-        if (phoneNumber.matches("(6|8|9)\\d{7}")) {
-            return;
-        } else if (phoneNumber.matches("(6|8|9)\\d{3}[\\s]\\d{4}")) {
-            return;
-        }
-
-        throw new InvalidPhoneNumberException();
-    }
 }
