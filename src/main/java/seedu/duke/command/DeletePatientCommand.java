@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
+import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
@@ -9,6 +10,8 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,25 +93,35 @@ public class DeletePatientCommand extends Command {
             // Remove the patient's information from the patient's list
             PatientList.getPatientList().remove(patient);
 
-            // Find appointments with the deleted patient IDs and delete those appointments also
-            for (int i = 0; i < AppointmentList.getTotalAppointments(); i++) {
-                int idToBeDeleted = AppointmentList.getAppointmentRecord(i).getPatientId();
-                if (idToBeDeleted == deletedPatientId) {
-                    Map<String, String> appointmentsFieldsToChange = new HashMap<>();
-                    appointmentsFieldsToChange.put("index", Integer.toString(i + 1));
-                    new DeleteAppointmentCommand(appointmentsFieldsToChange).execute(ui, storage);
-                }
-            }
-
             // Check with assertions that the size has been decremented
             assert PatientList.getTotalPatients() == originalSize - 1;
 
-            // Auto-save the changes
+            // A new list to store the newly update appointments
+            ArrayList<Appointment> newList = new ArrayList<>();
+
+            // Find appointments with the deleted patient IDs and delete those appointments also
+            for (int i = 0; i < AppointmentList.getTotalAppointments(); i++) {
+                Appointment appointment = AppointmentList.getAppointmentRecord(i);
+                int idToBeDeleted = appointment.getPatientId();
+                if (idToBeDeleted != deletedPatientId) {
+                    newList.add(appointment);
+                } else {
+                    Ui.showDeleteAppointmentSuccess();
+                }
+            }
+
+            // Update the appointment list after deleting patientIDs being deleted
+            AppointmentList.setAppointmentList(newList);
+
+            // Auto-save the changes in patient list
             storage.savePatientList();
+
+            // Auto-save the change in the appointments with patient IDs being deleted
+            storage.saveAppointmentsList();
 
             // Show deleted patient successfully message
             Ui.showDeletePatientSuccess();
-        } catch (IndexOutOfBoundsException | InvalidFormatException e) {
+        } catch (IndexOutOfBoundsException | ParseException e) {
             return;
         }
     }
