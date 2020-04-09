@@ -3,7 +3,6 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.IndexNotIntegerException;
 import seedu.duke.exceptions.InvalidIndexException;
-import seedu.duke.exceptions.InvalidPhoneNumberException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.PidEmptyException;
 import seedu.duke.exceptions.UnknownCommandException;
@@ -93,7 +92,7 @@ public class Duke {
                 isExit = c.isExit();
 
             } catch (UnknownCommandException | InvalidIndexException | IndexNotIntegerException
-                    | NoFieldCommandException | PidEmptyException | InvalidPhoneNumberException e) {
+                    | NoFieldCommandException | PidEmptyException e) {
 
                 ui.showExceptionError(e.getLocalizedMessage());
 
