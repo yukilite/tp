@@ -48,7 +48,7 @@ CLI to keep track of various medical records* and *can type fast*.
 3. Move the .jar to an empty folder.
 4. Open Command Prompt.
 5. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
-6. Run the .jar using $ `java -jar hams-2.0.jar`
+6. Run the .jar using $ `java -jar (latest version).jar`
 
 ### [Back to top &#x2191;](#table-of-content)
  
@@ -130,18 +130,19 @@ NOT OK | `addp` | ![](images/addp%20fail.PNG)
 
 #### 4.1.2 List all existing Patients
 
-The command simply contains the 'listp' keyword.
+The program allows your to list all existing Patients. The command simply contains the 'listp' keyword.
 
 Format: `listp`
-#### Example of usage: 
-`listp`
 
-##### Expected outcome 
-![](images/listp.PNG) 
+#### Example of usage: 
+Is Patient list empty? |   Usage    |   Outcome   |
+---------------------- | ---------- | ----------- |
+NO |`listp` | <img src="images/listp.PNG"> | 
+YES | `listp` | <img src="images/UG/clearp_success.JPG" width="600"> |
 
 #### 4.1.3 Delete an existing Patient
 
-The program allows you to delete an existing Patient record by its index in the list. The command contains:
+The program allows you to delete an existing Patient record by its index in the list. 
 
 Format: `deletep \index [index number in list]`
 
@@ -158,7 +159,6 @@ OK? |   Usage    |   Outcome
 ------------- | ------------- | ---------------
 OK | `deletep \index 2` | ![](images/delete_success.PNG)
 NOT OK | `deletep \index a` | ![](images/delete_fail.PNG)
-
 
 #### 4.1.4 Edit an existing Patient
 
@@ -184,31 +184,21 @@ Format: `editp \index [index number in list] \name [name] \age [age] \address [a
 
 > ![](images/UG/limit_warning.JPG)
 
-#### Example of usage: 
-`editp \index 1  \name Justin \age 23 \address Clementi \phone 83487846`
+#### Example List (Before)
+ <img src ="images/Patient_list_before.PNG" width = "600">
 
-##### Expected outcome:
-![](images/editp_success.PNG)
-###### Before:
-![](images/editp_before.PNG)
-###### After:
-![](images/editp_after.PNG)
+#### Examples of usage:
 
-#### Example of usage: 
-`editp \age 99 \address Bedok \phone 89993999 \name Justin \index 1`
+**Please refer to the above "Before" list to compare the changes.**
 
-##### Expected outcome:
-![](images/editp_success2.PNG)
-###### Before:
-![](images/editp_after.PNG)
-###### After:
-![](images/editp_after2.PNG)
+OK? |   Usage    |   Outcome & After |
+------------- | ------------- | --------------- |
+OK | `editp \index 2  \name Lam \phone 83487846` | <img src ="images/UG/editp_success1.JPG" width = "600">  <img src ="images/UG/editp_after.JPG" width = "600"> 
+OK | `editp \age 99 \address Bedok \phone 89993999 \name Justin \index 3` |  <img src ="images/UG/editp_success2.JPG" width = "600"> <img src ="images/UG/editp_after1.JPG" width = "600">
+NOT OK | `editp \index a \address Paris Ris \phone 93489678` | <img src ="editp_fail" width = "600"> 
 
-#### Example of wrong usage: 
-`editp \index a \address Paris Ris \phone 93489678`
-
-##### Expected outcome:
-![](images/editp_fail.PNG)
+#### Final List 
+<img src ="images/UG/Patient_list_after.JPG" width="600">
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -224,25 +214,35 @@ Format: `findp [search value]`
 
 > ![](images/UG/warning_casesensitive.JPG)
 
-#### Example of usage: 
-`findp kurumi`
+#### Example list 
+<img src="images/UG/findp_patient_list.JPG" width="600">
 
-##### Expected outcome: 
-![](images/UG/findp_kurumi.JPG)
+#### Examples of usage: 
 
-#### Example of no records found:
-`findp ayame`
+**Please refer to the example list above**
 
-##### Expected outcome:
-![](images/UG/findp_nothing.JPG)
+Does it exist in list? |   Usage    |   Outcome  |
+:--------------------: | ---------- | ---------- |
+ YES |`findp kurumi` | <img src="images/UG/findp_kurumi.JPG" width="600">
+ NO | `findp ayame` | <img src="images/UG/findp_nothing.JPG" width="600">
 
 #### 4.1.6 Clear patient records
 The program allows you to clear the patient list. 
 
 Format: `clearp`
-* `clearp` keyword
 
 >![](images/UG/clearp_warning.JPG)
+
+#### Example list
+<img src="images/UG/findp_patient_list.JPG" width="600">
+
+#### Example of usage:
+
+**Please refer to the example list above**
+
+|   Usage    |   Outcome & After  |
+-------------| ------------------ |
+`clearp` | <img src="images/UG/clearp.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600">
 
 ***
 
