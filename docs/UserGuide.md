@@ -325,16 +325,18 @@ Format: `edita \index [index number in list] \date [date] \time [time]`
 
 > ![](images/UG/edita_warning.JPG)
 
-#### Example List
+#### Example List (Before)
 <img src ="images/edita_before.PNG" width = "400">
 
 #### Example of usage: 
 
-OK? |   Usage    |   Outcome  | Before | After |
-------------- | ------------- | --------------- | ---- | ---- |
-OK | `edita \index 3 \date 20/05/2021 \time 2300` | ![](images/edita_eg1.PNG) | ![](images/edita_before_crop.PNG) | ![](images/edita_eg1after_crop2.PNG) |
-OK | `edita \index 1 \time 1300` | ![](images/edita_eg2.PNG) | ![](images/edita_eg1after_crop.PNG) | ![](images/edita_eg2after-crop.png) |                       
-NOT OK | `edita` | ![](images/edita_error.PNG) | No change | No change |    
+**Please refer to the above "Before" list.**
+
+OK? |   Usage    |   Outcome  | After |
+------------- | ------------- | --------------- | ---- |
+OK | `edita \index 3 \date 20/05/2021 \time 2300` | ![](images/edita_eg1.PNG) | ![](images/edita_eg1after_crop2.PNG) |
+OK | `edita \index 1 \time 1300` | ![](images/edita_eg2.PNG) | ![](images/edita_eg2after-crop.png) |                       
+NOT OK | `edita` | ![](images/edita_error.PNG) | No change |   
                  
 ##### Final list:
 <img src ="images/edita_eg2after.PNG" width = "400">
