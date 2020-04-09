@@ -94,7 +94,7 @@ public class Duke {
 
             } catch (UnknownCommandException | InvalidIndexException | IndexNotIntegerException
                     | NoFieldCommandException | PidEmptyException | InvalidPhoneNumberException e) {
-
+                
                 ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
@@ -102,9 +102,10 @@ public class Duke {
 
             } catch (NoSuchElementException e) {
                 break;
+
             } catch (ParseException e) {
-                System.out.println("Please fill in date in right format: dd/mm/yyyy and "
-                        + "time in the 24 hour format: hhmm");
+                System.out.println("Please fill in a valid date in the right format: dd/mm/yyyy and/or "
+                        + "a valid time in the 24 hour format: hhmm");
             }
         }
     }
