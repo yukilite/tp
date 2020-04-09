@@ -24,13 +24,13 @@ class EditPatientCommandTest {
         fieldsToChange.put("name", "Joe Harris");
         fieldsToChange.put("age", "20");
         fieldsToChange.put("address", "Jurong East");
-        fieldsToChange.put("phone", "8225 3819");
+        fieldsToChange.put("phone", "82253819");
         EditPatientCommand command = new EditPatientCommand(fieldsToChange);
         assertEquals(3, command.getPatientIndex());
         assertEquals("Joe Harris", command.getPatientName());
         assertEquals(20, command.getAge());
         assertEquals("Jurong East", command.getAddress());
-        assertEquals("8225 3819", command.getContactNumber());
+        assertEquals("82253819", command.getContactNumber());
     }
 
     //Test case 2
@@ -40,12 +40,12 @@ class EditPatientCommandTest {
         fieldsToChange.put("name", "");
         fieldsToChange.put("age", "");
         fieldsToChange.put("address", "");
-        fieldsToChange.put("phone", "8225 3819");
+        fieldsToChange.put("phone", "82253819");
         EditPatientCommand command = new EditPatientCommand(fieldsToChange);
         assertEquals(3, command.getPatientIndex());
         assertEquals("", command.getPatientName());
         assertEquals(-1, command.getAge());
         assertEquals("", command.getAddress());
-        assertEquals("8225 3819", command.getContactNumber());
+        assertEquals("82253819", command.getContactNumber());
     }
 }

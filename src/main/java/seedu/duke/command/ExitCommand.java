@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -17,6 +18,10 @@ public class ExitCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Type to exit the program.\n"
             + "Example: " + COMMAND_WORD;
+
+    public ExitCommand() throws InvalidFormatException {
+
+    }
 
     /**
      * Set the termination of the program to be true.

@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -11,6 +12,10 @@ import java.text.ParseException;
  */
 
 public abstract class Command {
+
+    public Command() throws InvalidFormatException {
+
+    }
 
     /**
      * Method to return false in default for exit.

@@ -26,6 +26,7 @@ import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.NoKeyExistException;
 import seedu.duke.exceptions.PidEmptyException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.InvalidFormatException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -329,7 +330,7 @@ public class Parser {
      * @throws UnknownCommandException Throws custom duke exception to catch and print error message.
      */
     private Command getCommandObject(String command, Map<String, String> fieldsToChange) throws
-            UnknownCommandException {
+            UnknownCommandException, InvalidFormatException {
 
         switch (command) {
         case ADD_PATIENT:
@@ -391,7 +392,7 @@ public class Parser {
      */
     public Command parseCommand(String fullCommand) throws
             UnknownCommandException, InvalidIndexException, IndexNotIntegerException, NoFieldCommandException,
-            PidEmptyException {
+            PidEmptyException, InvalidFormatException {
 
         String trimCommand = fullCommand.trim();
         String[] commandParsed = getCommand(trimCommand);

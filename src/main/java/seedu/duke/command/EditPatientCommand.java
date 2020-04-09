@@ -1,5 +1,10 @@
 package seedu.duke.command;
 
+import seedu.duke.data.Address;
+import seedu.duke.data.Age;
+import seedu.duke.data.Name;
+import seedu.duke.data.Phone;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -45,7 +50,7 @@ public class EditPatientCommand extends Command {
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
      */
-    public EditPatientCommand(Map<String, String> fieldsToChange) {
+    public EditPatientCommand(Map<String, String> fieldsToChange) throws InvalidFormatException {
         try {
             this.patientIndex = Integer.parseInt(fieldsToChange.get(PATIENT_INDEX));
             if (patientIndex > PatientList.getTotalPatients() || patientIndex <= 0) {
@@ -58,27 +63,10 @@ public class EditPatientCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             Ui.showIndexError();
         }
-
-        this.patientName = fieldsToChange.get(PATIENT_NAME);
-        boolean isAgeEqualNull = fieldsToChange.get(AGE).isBlank();
-
-        if (isAgeEqualNull) {
-            this.age = -1;
-        } else {
-            try {
-                this.age = Integer.parseInt(fieldsToChange.get(AGE));
-                if (this.age < 0) {
-                    System.out.println("Received age is a negative integer, ignoring changes to age");
-                }
-
-            } catch (NumberFormatException e) {
-                Ui.showSetAgeError();
-                this.age = -1;
-            }
-        }
-
-        this.address = fieldsToChange.get(ADDRESS);
-        this.contactNumber = fieldsToChange.get(CONTACT_NUMBER);
+        this.patientName = new Name(fieldsToChange.get(PATIENT_NAME)).toString();
+        this.age = new Age(fieldsToChange.get(AGE)).getAge();
+        this.address = new Address(fieldsToChange.get(ADDRESS)).toString();
+        this.contactNumber = new Phone(fieldsToChange.get(CONTACT_NUMBER)).toString();
     }
 
     /**
@@ -167,7 +155,7 @@ public class EditPatientCommand extends Command {
 
             // Show updated successfully patient's list message
             Ui.showUpdatePatientSuccess();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return;
         }
     }
