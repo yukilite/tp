@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.EmptyListsException;
-import seedu.duke.generator.*;
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
