@@ -4,6 +4,7 @@ import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
+import seedu.duke.ui.Ui;
 
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 public class DukeExceptions {
     private static final String BLANK_STRING = "";
-    public static final String ADD_PATIENT_COMMAND = "addp";
+    private static final String ADD_PATIENT_COMMAND = "addp";
 
     /**
      * This method throws a NoKeyExistException if the key is not found in the input that the user supplied
@@ -197,8 +198,8 @@ public class DukeExceptions {
      * Check if both lists are empty.
      * If it is empty, throw EmptyListsException.
      *
-     * @author Duc
      * @throws EmptyListsException when both lists are empty
+     * @author Duc
      */
     public static void checkEmptyLists() throws EmptyListsException {
         if (AppointmentList.getTotalAppointments() == 0 && PatientList.getTotalPatients() == 0) {
@@ -210,8 +211,8 @@ public class DukeExceptions {
      * Check if appointment's list is empty.
      * If it is empty, throw EmptyAppointmentsException.
      *
-     * @author Duc
      * @throws EmptyAppointmentsException when appointment's list is empty
+     * @author Duc
      */
     public static void checkEmptyAppointments() throws EmptyAppointmentsException {
         if (AppointmentList.getTotalAppointments() == 0) {
@@ -223,12 +224,38 @@ public class DukeExceptions {
      * Check if patient's list is empty.
      * If it is empty, throw EmptyPatientsException.
      *
-     * @author Duc
      * @throws EmptyPatientsException when patient's list is empty
+     * @author Duc
      */
     public static void checkEmptyPatients() throws EmptyPatientsException {
         if (PatientList.getTotalPatients() == 0) {
             throw new EmptyPatientsException();
         }
+    }
+
+    /**
+     * Uses Regex matches the given phone number for validation.
+     * Returns true if the phone number is valid.
+     *
+     * @param patientFieldsToAdd the hash map that contains phone number.
+     * @throws InvalidPhoneNumberException when the phone number is invalid.
+     */
+    public static void checkValidPhoneNumber(Map<String, String> patientFieldsToAdd)
+            throws InvalidPhoneNumberException {
+
+        String phoneNumber = patientFieldsToAdd.get(PatientFieldKeys.CONTACT_NUMBER.toString());
+
+        if (phoneNumber.isEmpty()) {
+            return;
+        }
+
+        //phoneNumber first digits matches 6 or 8 or 9, follow by any 7 digits.
+        if (phoneNumber.matches("(6|8|9)\\d{7}")) {
+            return;
+        } else if (phoneNumber.matches("(6|8|9)\\d{3}[\\s]\\d{4}")) {
+            return;
+        }
+
+        throw new InvalidPhoneNumberException();
     }
 }
