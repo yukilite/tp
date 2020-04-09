@@ -323,6 +323,8 @@ Format: `edita \index [index number in list] \date [date] \time [time]`
 
 > ![](images/UG/edita_hint.JPG)
 
+> ![](images/UG/edita_warning.JPG)
+
 #### Example List
 <img src ="images/edita_before.PNG" width = "400">
 
@@ -468,6 +470,10 @@ because of the first letter capitalization.
 
 **A**: `pid` stands for Patient ID, it is a unique ID tag to each patient. In order to link appointments 
 to the patient, the pid tag must be present. 
+
+**Q**: I accidentally put in the wrong Patient ID when adding an appointment using `adda`. How can I change the patientID?
+
+**A**: Unfortunately upon entering the Patient ID in `adda`, there is no way of changing the Patient ID. Please remove the incorrect appointment and add the correct appointment in again.
 
 ### [Back to top &#x2191;](#table-of-content)
 
