@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.EmptyAppointmentsException;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
@@ -22,6 +23,10 @@ public class ClearAppointmentCommand extends Command {
     public static final String EXAMPLE = "cleara";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clear all appointments from the list.\n"
             + "Example: " + EXAMPLE;
+
+    public ClearAppointmentCommand() throws InvalidFormatException {
+
+    }
 
     /**
      * Method to clear all appointments in the list if available, if
