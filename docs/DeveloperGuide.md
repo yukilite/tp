@@ -11,8 +11,8 @@
 * [2. Design & Implementation](#2-design--implementation)
     * [2.1. Project Overview](#21-project-overview)
         * [2.2. Module Overview](#22-module-overview)
-            * [2.2.1. SAM record module ](#221-sam-record-module)
-            * [2.2.2. SAM converter module ](#222-converter-module)
+            * [2.2.1. Record module ](#221-sam-record-module)
+            * [2.2.2. Converter module ](#222-converter-module)
             * [2.2.3. BRANDON storage module ](#223-brandon-storage-module)
             * [2.2.4. AD command module ](#224-ad-command-module)
             * [2.2.5. Parser Module ](#225-parser-module)
@@ -82,7 +82,7 @@ name and a summarized purpose.
 |Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
-#### 2.2.1 SAM record module
+#### 2.2.1 Record module
 
 The record module consists of 2 classes which represent the patients information and appointment details. 
 As a reflection of real world objects, the Patient's class purpose is to store the particulars of a person while the 
