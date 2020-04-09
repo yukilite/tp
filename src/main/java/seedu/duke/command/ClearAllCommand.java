@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.EmptyListsException;
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -51,6 +52,9 @@ public class ClearAllCommand extends Command {
 
             // Clear all the items in patients' list
             PatientList.getPatientList().clear();
+
+            // Reset the patient id manager state
+            PatientIdManager.clearPatientId();
 
             // Make sure that the size of both patients' list and appointments' list are 0
             assert AppointmentList.getTotalAppointments() == 0 && PatientList.getTotalPatients() == 0;
