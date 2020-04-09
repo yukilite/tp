@@ -90,7 +90,7 @@ public class PatientIdManager {
             return;
         }
 
-        assert patientID > 0 && patientID < nextTopNewNumber;
+        assert patientID >= 0 && patientID < nextTopNewNumber;
         assert !nextNumberQueueThing.contains(patientID);
         nextNumberQueueThing.add(patientID);
         patientIdMap.put(patientID, null);
