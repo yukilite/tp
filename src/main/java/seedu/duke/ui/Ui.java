@@ -221,7 +221,8 @@ public class Ui {
 
     public void printSearchValueConversionErrorMessage() {
         System.out.println("An error occured when trying to parse the search input. Please try again.");
-
+    }
+    
     public void showAllItemsDeleted() {
         System.out.println("Both list cleared!");
 
