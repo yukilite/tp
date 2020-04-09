@@ -305,8 +305,8 @@ Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
-OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
-NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
+OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "600">
+NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "600">
 
 > ![](images/UG/deletea_hint.JPG)
 
@@ -357,17 +357,23 @@ Format: `finda [search value]`
 
 > ![](images/UG/findp_hint.JPG)
 
+> ![](images/UG/finda_search_by_date.JPG)
+
+> ![](images/UG/finda_search_by_time.JPG)
+
 > ![](images/UG/warning_casesensitive.JPG)
 
+#### Example list:
+<img src ="images/UG/lista_not_empty.JPG" width="600">
+
 #### Example of usage: 
- `finda Fri`
- 
-##### Expected outcome: 
- ![](images/UG/finda_fri.JPG)
- 
-#### Example of no records found:
-`finda Oct`
- ![](images/UG/finda_nothing.JPG)
+
+**Please refer to the example list above**
+
+Does it exist in list? |   Usage    |   Outcome  |
+:--------------------: | ---------- | ---------- |
+YES | `finda Fri` | <img src="images/UG/finda_fri.JPG" width="600">
+NO | `finda Oct` | <img src="images/UG/finda_nothing.JPG" width="600">
 
 #### 4.2.6 Clear appointment records
 
