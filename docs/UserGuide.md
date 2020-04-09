@@ -334,11 +334,11 @@ Format: `edita \index [index number in list] \date [date] \time [time]`
 
 **Please refer to the above "Before" list to compare the changes.**
 
-OK? |   Usage    |   Outcome  | After |
-------------- | ------------- | --------------- | ---- |
-OK | `edita \index 3 \date 20/05/2021 \time 2300` | <img src ="images/edita_eg1.PNG" width = "400"> | <img src ="images/edita_eg1after_crop2.PNG" width = "400"> |
-OK | `edita \index 1 \time 1300` | <img src ="images/edita_eg2.PNG" width = "400"> | <img src ="images/edita_eg2after-crop.png" width = "400"> |                       
-NOT OK | `edita` | <img src ="images/edita_error.PNG" width = "400"> | HTML |   
+OK? |   Usage    |   Outcome & After |
+------------- | ------------- | --------------- |
+OK | `edita \index 3 \date 20/05/2021 \time 2300` | <img src ="images/edita_eg1.PNG" width = "400"> <img src ="images/edita_eg1after_crop2.PNG" width = "400"> |  |
+OK | `edita \index 1 \time 1300` | <img src ="images/edita_eg2.PNG" width = "400"> <img src ="images/edita_eg2after-crop.png" width = "400"> |  |                       
+NOT OK | `edita` | <img src ="images/edita_error.PNG" width = "400"> |   
                  
 ##### Final list:
 <img src ="images/edita_eg2after.PNG" width = "400">
