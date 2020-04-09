@@ -42,7 +42,7 @@ public class TimeConverter {
     }
 
     /**
-     * This method converts the time back into the format of dd/mm/yyyy.
+     * This method converts the date back into the format of dd/mm/yyyy.
      * @param oldDate the time entered by the user.
      * @return convertedDate the time in the desired format.
      * @throws ParseException the error occurs if the time is not found.

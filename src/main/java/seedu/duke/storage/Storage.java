@@ -9,13 +9,20 @@ import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.FileCorruptedException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -26,6 +33,7 @@ public class Storage {
     private static final String SAVE_DIRECTORY = "saves";
     private static final String APPOINTMENT_LIST_SAVE_FILEPATH = "saves/appointments.txt";
     private static final String PATIENT_LIST_SAVE_FILEPATH = "saves/patients.txt";
+    private static final String PATIENT_ID_PRESENT_SAVE_FILEPATH = "saves/patientsIdExist.txt";
     private static final String PIPE_DELIMITER = " | ";
     private static final String LS = System.lineSeparator();
     private static PatientList patientList;
@@ -33,6 +41,7 @@ public class Storage {
     private String appointmentListSaveLocation;
     private String patientListSaveLocation;
     private String patientIdSaveLocation;
+    private String patientIdExistSaveLocation;
 
     /**
      * Constructor for Storage.
@@ -42,11 +51,11 @@ public class Storage {
         this.appointmentListSaveLocation = APPOINTMENT_LIST_SAVE_FILEPATH;
         this.patientListSaveLocation = PATIENT_LIST_SAVE_FILEPATH;
         this.patientIdSaveLocation = PATIENT_ID_SAVE_FILEPATH;
+        this.patientIdExistSaveLocation = PATIENT_ID_PRESENT_SAVE_FILEPATH;
     }
 
     /**
      * load save file for Appointments list.
-     *
      * @return appointmentListToReturn returns the appointment list in the save file
      * @throws FileNotFoundException this exception occurs when a file is not found
      */
@@ -124,7 +133,6 @@ public class Storage {
 
     /**
      * load save file for Patients list.
-     *
      * @return patientListToReturn the patient list for the save file.
      * @throws FileNotFoundException this exception occurs if a file is not found.
      */
@@ -149,6 +157,7 @@ public class Storage {
         }
         List<Patient> patientListToReturn = new ArrayList<>();
         Scanner s = new Scanner(patientSave);
+        Map<Integer, Integer> patientIdMap = new HashMap<>();
         while (s.hasNext()) {
             //process each line, construct new Appointment object
             String patientString = s.nextLine();
@@ -161,11 +170,13 @@ public class Storage {
             if (patientFields[1].isEmpty()) {
                 patientFields[1] = "-1";
             }
+
             try {
                 Patient newPatientToLoad =
                         new Patient(patientFields[0], Integer.parseInt(patientFields[1]), patientFields[2],
                                 patientFields[3], Integer.parseInt(patientFields[4]));
                 patientListToReturn.add(newPatientToLoad);
+                patientIdMap.put(Integer.parseInt(patientFields[4]), 1);
             } catch (Exception e) {
                 Ui.printSaveFileCorruptedMessage();
                 try {
@@ -177,19 +188,20 @@ public class Storage {
                 }
                 throw new FileCorruptedException();
             }
+
         }
 
-        loadPatientIdState();
+        loadPatientIdState(patientIdMap);
 
         return patientListToReturn;
     }
 
     /**
      * Load the state of the patient id(s) into our patient id management system.
-     *
+     * @param patientIdMap the map of patient id as obtained from patient information.
      * @throws FileNotFoundException if there is an error locating the file to save to.
      */
-    private void loadPatientIdState() throws FileNotFoundException {
+    private void loadPatientIdState(Map<Integer, Integer> patientIdMap) throws FileNotFoundException {
 
         /* Preparing the file reader */
         File patientIdSave = new File(this.patientIdSaveLocation);
@@ -228,11 +240,15 @@ public class Storage {
                 PatientIdManager.addBackPatientId(Integer.parseInt(number));
             }
         }
+
+        /* Loadking back the hash table of existing patient id */
+        PatientIdManager.setPatientIdMap(patientIdMap);
+
+
     }
 
     /**
      * This method saves the patient's appointment details from the AppointmentList into the local save file.
-     *
      * @throws IOException this exception occurs if the patient's appointment details are unable to be written
      *                     to the local save file.
      */
@@ -259,7 +275,6 @@ public class Storage {
 
     /**
      * This method saves the patient list into the local save file.
-     *
      * @throws IOException this exception occurs if the patient data was unable to be written to the local save file.
      */
     public void savePatientList() throws IOException {
@@ -288,7 +303,6 @@ public class Storage {
 
     /**
      * Save the patient id management system state.
-     *
      * @throws IOException if the file cannot be written for some reason
      */
     private void savePatientIdState() throws IOException {

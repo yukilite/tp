@@ -50,6 +50,13 @@ public class AddAppointmentCommand extends Command {
         this.time = appointmentInfo.get(TIME);
         try {
             this.patientId = Integer.parseInt(appointmentInfo.get(PID));
+            if (this.patientId < 0) {
+                this.patientId = -1;
+            }
+            if (!PatientIdManager.checkPatientIdUsed(patientId)) {
+                this.patientId = -2;
+            }
+
         } catch (NumberFormatException e) {
             this.patientId = -1;
         }
@@ -76,6 +83,11 @@ public class AddAppointmentCommand extends Command {
 
         if (this.patientId == -1) {
             Ui.showWrongPid();
+            return;
+        }
+
+        if (this.patientId == -2) {
+            Ui.showNoPidExist();
             return;
         }
 

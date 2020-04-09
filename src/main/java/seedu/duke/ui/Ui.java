@@ -25,11 +25,13 @@ public class Ui {
      */
     public static void showEntirePatientList() {
         List<Patient> patientList = PatientList.getPatientList(); //getPatientList() method by @Brandonnn
+        int index = 1;
         if (patientList.isEmpty()) {
             System.out.println("No patient records found!");
         } else {
             for (Patient p : patientList) {
-                System.out.println(p); //override Patient class toString by @Sammmmm
+                System.out.println(index + ". " + p); //override Patient class toString by @Sammmmm
+                index++;
             }
         }
     }
@@ -39,11 +41,13 @@ public class Ui {
      */
     public static void showEntireAppointmentList() {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
+        int index = 1;
         if (appointmentList.isEmpty()) {
             System.out.println("No appointment records present!");
         } else {
             for (Appointment a : appointmentList) {
-                System.out.println(a);
+                System.out.println(index + ". " + a);
+                index++;
             }
         }
     }
@@ -107,6 +111,17 @@ public class Ui {
 
     public static void printFileCreationErrorMessage() {
         System.out.println("An error occured while attempting to create the save file.");
+
+    public static void showNoPidExist() {
+        System.out.println("Patient Id don't exist! No appointment record will be made.");
+    }
+
+    public static void showWrongAge() {
+        System.out.println("Received age seems wrong, setting age to be blank");
+    }
+      
+    public static void printInvalidPhoneNumberMessage() {
+        System.out.println("Invalid phone number, phone number field will be set to empty.");
     }
 
     public void showExceptionError(String localizedMessage) {
@@ -206,5 +221,8 @@ public class Ui {
 
     public void printSearchValueConversionErrorMessage() {
         System.out.println("An error occured when trying to parse the search input. Please try again.");
+
+    public void showAllItemsDeleted() {
+        System.out.println("Both list cleared!");
     }
 }

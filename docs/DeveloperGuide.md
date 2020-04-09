@@ -11,8 +11,8 @@
 * [2. Design & Implementation](#2-design--implementation)
     * [2.1. Project Overview](#21-project-overview)
         * [2.2. Module Overview](#22-module-overview)
-            * [2.2.1. SAM record module ](#221-sam-record-module)
-            * [2.2.2. SAM converter module ](#222-converter-module)
+            * [2.2.1. Record module ](#221-sam-record-module)
+            * [2.2.2. Converter module ](#222-converter-module)
             * [2.2.3. BRANDON storage module ](#223-brandon-storage-module)
             * [2.2.4. AD command module ](#224-ad-command-module)
             * [2.2.5. Parser Module ](#225-parser-module)
@@ -82,7 +82,7 @@ name and a summarized purpose.
 |Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
-#### 2.2.1 SAM record module
+#### 2.2.1 Record module
 
 The record module consists of 2 classes which represent the patients information and appointment details. 
 As a reflection of real world objects, the Patient's class purpose is to store the particulars of a person while the 
@@ -234,6 +234,10 @@ instead.
 Below shows the sequence diagram for ```AddPatientCommand``` class
 
 ![](images/AddPatientCommandSequence.png)
+
+![](images/AddPatientCommandSequenceAddIntoPatientList.png)
+
+![](images/AddPatientCommandSequenceAutoSavePatientList.png)
  
 
 ##### 2.2.4.2 AddAppointmentClass
@@ -250,7 +254,11 @@ Said information will be stored in the ```AddAppoinmentCommand``` object
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
-```Appointment``` class to make an ```Appointment``` Object. 
+```Appointment``` class to make an ```Appointment``` Object. Note that in the the constructor of ```AddAppointment``` it also checks to see if the patient id is a patient id that actually exist (as in a patient has that patient id
+). This check is done by calling the ```checkPatientIdUsed``` method of ```PatientIdManager``` class. If the patient id
+ supplied with the appointment detail does not belong to any of the present patients, the ```AddAppointmentCommand``` 
+ constructor will **not** create the ```Appointment```  and will show an error instead. The ```Appointment``` object
+  will only be created if the patient id that is supplied exists (as in one of the patient has said patient id).
 
 3. After which, the ```AddAppoinmentCommand``` object will 
 call upon the ```AppointmentList``` object to obtain the list of ```Appointments``` (get the ```List``` object that 
@@ -268,6 +276,10 @@ list.
 Below shows the sequence diagram for ```AddAppointmentCommand``` class
 
 ![](images/AddAppointCommandSequence.png)
+
+![](images/AddAppointCommandSequenceAddNewAppointment.png)
+
+![](images/AddAppointCommandSequenceAutoSavingAppointList.png)
 
 ##### 2.2.4.3 ListPatientClass
 
@@ -347,7 +359,7 @@ For the 4 classes listed, there were some other design considerations that was d
 
 ###### 2.2.4.5.3 Aspect: Generation of Patient Id
 
-+ Alternative 1 (current choice): Allow the reuse of the patient Id from deleted 
++ Alternative 1 (current choice): Allow the reuse of the patient Id from deleted patients
     * Pros: 
         - Allow for reuse, which prevents the patient Id number from running out.
        
@@ -360,6 +372,24 @@ For the 4 classes listed, there were some other design considerations that was d
        
     * Cons:
         - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
+        
+###### 2.2.4.5.4 Aspect: Deciding how to reuse Patient Id
+
++ Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
+ assigned the longest
+    * Pros: 
+        - Easy to implement (just use a Queue) and ensures an O(1) time.
+    * Cons:
+        - Patient id number is not really in sequence (it is possible for a bigger patient id number might be assigned
+         first before a smaller patient id number). As a result, the new patient id number is not that predictable
+          (unless you are keeping track of which patient id numbers are deleted first).
+
++ Alternative 2: Sort the reusable patient id first such that the smallest patient id is always reused first 
+    * Pros: 
+        - Patient id number is in sequence (always assign the smaller patient id number first), which seems to make
+         it easier to predict the next patient's patient id number.
+    * Cons:
+        - Sorting is O(n log n) time, hence making it slightly slower than current implementation.
 
 #### 2.2.4.6 EditAppointmentClass
 
