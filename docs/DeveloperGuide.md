@@ -408,6 +408,9 @@ list.
 
 Below shows the sequence diagram for ```AddAppointmentCommand``` class
 
+#### 2.2.4.n PatientIdManger class
+
+The ```PatientIdManager``` class manages the patient ids of the 
 
 #### 2.2.5 Parser module
 This section describes the implementation of Parser class, as well as the design considerations and rational behind the 
