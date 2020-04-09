@@ -330,7 +330,7 @@ Format: `edita \index [index number in list] \date [date] \time [time]`
 
 #### Example of usage: 
 
-**Please refer to the above "Before" list.**
+**Please refer to the above "Before" list to compare the changes.**
 
 OK? |   Usage    |   Outcome  | After |
 ------------- | ------------- | --------------- | ---- |
