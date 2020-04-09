@@ -30,7 +30,6 @@ import seedu.duke.exceptions.InvalidFormatException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class Parser {
     private static final int COMMAND_INDEX = 0;
@@ -59,11 +58,9 @@ public class Parser {
     public static final String FIND_APPOINTMENT = "finda";
     public static final String FIND_PATIENTS = "findp";
 
-    public static final String UNIQUE_ID = "uniqueID";
     public static final String CLEAR_PATIENTS_COMMAND = "clearp";
     public static final String CLEAR_APPOINTMENTS_COMMAND = "cleara";
     public static final String CLEAR_ALL_COMMAND = "clearall";
-    public static final String SAVE_COMMAND = "save";
 
     /**
      * This methods returns the command from the user input string.
@@ -118,7 +115,7 @@ public class Parser {
                 continue;
             }
 
-            String key = WHITESPACE + REGEX_BACKSLASH + field;
+            String key = WHITESPACE + REGEX_BACKSLASH + field + WHITESPACE;
             String value = findValue(fullCommand, key);
             patientFieldsToAdd.put(field, value);
         }
@@ -146,9 +143,6 @@ public class Parser {
         //check if there is at least 1 field inside.
         DukeExceptions.checkFieldEmptyAddPatient(patientFieldsToAdd);
 
-        String uniqueID = UUID.randomUUID().toString();
-        patientFieldsToAdd.put(UNIQUE_ID, uniqueID);
-
         return patientFieldsToAdd;
     }
 
@@ -172,7 +166,7 @@ public class Parser {
 
         Map<String, String> patientFieldsToEdit = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "editp"); //TODO remove magic string
         patientFieldsToEdit.put(PatientFieldKeys.INDEX.toString(), indexValue);
@@ -203,7 +197,7 @@ public class Parser {
 
         Map<String, String> patientFieldsToDelete = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "deletep"); //TODO remove magic string
 
@@ -226,7 +220,7 @@ public class Parser {
                 continue;
             }
 
-            String key = WHITESPACE + REGEX_BACKSLASH + field;
+            String key = WHITESPACE + REGEX_BACKSLASH + field + WHITESPACE;
             String value = findValue(fullCommand, key);
             appointmentFieldsToChange.put(field, value);
         }
@@ -278,7 +272,7 @@ public class Parser {
 
         Map<String, String> appointmentFieldsToEdit = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "edita"); //TODO remove magic string
 
@@ -310,7 +304,7 @@ public class Parser {
 
         Map<String, String> appointmentFieldsToDelete = new HashMap<>();
 
-        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString();
+        String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
         DukeExceptions.checkIndexValidity(indexValue, "deletea"); //TODO remove magic string
 

@@ -63,7 +63,6 @@ public class EditPatientCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             Ui.showIndexError();
         }
-
         this.patientName = new Name(fieldsToChange.get(PATIENT_NAME)).toString();
         this.age = new Age(fieldsToChange.get(AGE)).getAge();
         this.address = new Address(fieldsToChange.get(ADDRESS)).toString();

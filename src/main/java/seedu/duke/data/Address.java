@@ -7,7 +7,7 @@ import seedu.duke.exceptions.InvalidFormatException;
  */
 public class Address {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses is limited to 64 characters";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Patient's addresses is limited to 64 characters";
 
     public String address;
 

@@ -48,7 +48,7 @@ CLI to keep track of various medical records* and *can type fast*.
 3. Move the .jar to an empty folder.
 4. Open Command Prompt.
 5. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
-6. Run the .jar using $ `java -jar hams-2.0.jar`
+6. Run the .jar using $ `java -jar (latest version).jar`
 
 ### [Back to top &#x2191;](#table-of-content)
  
@@ -78,12 +78,12 @@ With this feature, your tasks will be saved every time you leave the application
 
 Words enclosed within angle brackets `[]` are the parameters to be supplied by the user. Other keywords stated are compulsory and they should be included.
 
-For example, in `adda \date [date] \time [time]`, `adda` is the command keyword that adds an Appointment record. 
+For example, in `adda \date [date] \time [time] \pid [patient id]`, `adda` is the command keyword that adds an Appointment record. 
 
 `\date` and `\time` are compulsory labels to denoting what field the subsequent information belongs to.
 `[date]` is the date of the appointment to be supplied by you. `[time]` represents the time of the appointment to be supplied by you.
 
-A valid input would be `adda \date 22/05/2020 \time 1200`.
+A valid input would be `adda \date 22/05/2020 \time 1200 \pid 1`.
 
 > ![](images/UG/command_format_hint.JPG)
 
@@ -103,7 +103,8 @@ A valid input would be `adda \date 22/05/2020 \time 1200`.
 
 #### 4.1.1 Add a new Patient record
 
-The program allows you to add a new Patient record to the current list of Patient records. 
+The program allows you to add a new Patient record to the current list of Patient records. Note that patient id
+ number (pid) is decided by HAMS and not the user.
 
 Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
@@ -115,7 +116,9 @@ Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
 > ![](images/UG/addp_hint.JPG)
 
-> ![](images/UG/addp_warning.JPG)
+> ![](images/UG/patientid_hint.JPG)
+
+> ![](images/UG/limit_warning.JPG)
 
 ##### Examples of Usage
 
@@ -127,34 +130,43 @@ NOT OK | `addp` | ![](images/addp%20fail.PNG)
 
 #### 4.1.2 List all existing Patients
 
-The command simply contains the 'listp' keyword.
+The program allows you to list all existing Patients. The command simply contains the 'listp' keyword.
 
 Format: `listp`
-#### Example of usage: 
-`listp`
 
-##### Expected outcome 
-![](images/listp.PNG) 
+#### Example of usage: 
+
+Is Patient list empty? |   Usage    |   Outcome   
+:--------------------: | ---------- | ----------- 
+NO |`listp` | <img src="images/listp.PNG">  
+YES | `listp` | <img src="images/UG/clearp_success.JPG" width="600"> 
 
 #### 4.1.3 Delete an existing Patient
 
-The program allows you to delete an existing Patient record by its index in the list. The command contains:
+The program allows you to delete an existing Patient record by its index in the list. 
+
+Format: `deletep \index [index number in list]`
+
 * `deletep` keyword
 * `\index` followed by the index number of the patient to be deleted 
 
-Format: `deletep \index [patient number in list]`
+> ![](images/UG/index_compulsory.JPG)
+
+> ![](images/UG/deletep_editp_hint.JPG)
+
+#### Example of usage:
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
 OK | `deletep \index 2` | ![](images/delete_success.PNG)
 NOT OK | `deletep \index a` | ![](images/delete_fail.PNG)
 
-
 #### 4.1.4 Edit an existing Patient
 
-The program allows you to make changes to an existing Patient record by its index in the list. 
+The program allows you to make changes to an existing Patient record by its index in the list. Note that you cannot
+ edit the patient id number.
 
-Format: `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]`
+Format: `editp \index [index number in list] \name [name] \age [age] \address [address] \phone [phone]`
 
 * `editp` keyword
 * `\index` followed by the index number of the Patient record in the list
@@ -163,34 +175,31 @@ Format: `editp \index [patientNumber] \name [name] \age [age] \address [address]
 * `\address` followed by the address of the patient
 * `\phone` the contact number of the patient
 
+> ![](images/UG/index_compulsory.JPG)
 
 > ![](images/UG/editp_hint.JPG)
 
-#### Example of usage: 
-`editp \index 1  \name Justin \age 23 \address Clementi \phone 83487846`
+> ![](images/UG/patientid_hint.JPG)
 
-##### Expected outcome:
-![](images/editp_success.PNG)
-###### Before:
-![](images/editp_before.PNG)
-###### After:
-![](images/editp_after.PNG)
+> ![](images/UG/deletep_editp_hint.JPG)
 
-#### Example of usage: 
-`editp \age 99 \address Bedok \phone 89993999 \name Justin \index 1`
+> ![](images/UG/limit_warning.JPG)
 
-##### Expected outcome:
-![](images/editp_success2.PNG)
-###### Before:
-![](images/editp_after.PNG)
-###### After:
-![](images/editp_after2.PNG)
+#### Example List (Before)
+ <img src ="images/Patient_list_before.PNG" width = "600">
 
-#### Example of wrong usage: 
-`editp \index a \address Paris Ris \phone 93489678`
+#### Examples of usage:
 
-##### Expected outcome:
-![](images/editp_fail.PNG)
+**Please refer to the above "Before" list to compare the changes.**
+
+OK? |   Usage    |   Outcome & After |
+------------- | ------------- | --------------- |
+OK | `editp \index 2  \name Lam \phone 83487846` | <img src ="images/UG/editp_success1.JPG" width = "600">  <img src ="images/UG/editp_after.JPG" width = "600"> 
+OK | `editp \age 99 \address Bedok \phone 89993999 \name Justin \index 3` |  <img src ="images/UG/editp_success2.JPG" width = "600"> <img src ="images/UG/editp_after1.JPG" width = "600">
+NOT OK | `editp \index a \address Paris Ris \phone 93489678` | <img src ="images/UG/editp_fail.JPG" width = "600"> 
+
+#### Final List 
+<img src ="images/UG/Patient_list_after.JPG" width="600">
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -206,25 +215,35 @@ Format: `findp [search value]`
 
 > ![](images/UG/warning_casesensitive.JPG)
 
-#### Example of usage: 
-`findp kurumi`
+#### Example list 
+<img src="images/UG/findp_patient_list.JPG" width="600">
 
-##### Expected outcome: 
-![](images/UG/findp_kurumi.JPG)
+#### Examples of usage: 
 
-#### Example of no records found:
-`findp ayame`
+**Please refer to the example list above**
 
-##### Expected outcome:
-![](images/UG/findp_nothing.JPG)
+Does it exist in list? |   Usage    |   Outcome  |
+:--------------------: | ---------- | ---------- |
+ YES |`findp kurumi` | <img src="images/UG/findp_kurumi.JPG" width="600">
+ NO | `findp ayame` | <img src="images/UG/findp_nothing.JPG" width="600">
 
 #### 4.1.6 Clear patient records
 The program allows you to clear the patient list. 
 
 Format: `clearp`
-* `clearp` keyword
 
 >![](images/UG/clearp_warning.JPG)
+
+#### Example list
+<img src="images/UG/findp_patient_list.JPG" width="600">
+
+#### Example of usage:
+
+**Please refer to the example list above**
+
+|   Usage    |   Outcome & After  |
+-------------| ------------------ |
+`clearp` | <img src="images/UG/clearp.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600">
 
 ***
 
@@ -235,9 +254,7 @@ Format: `clearp`
 The program allows you to add a new Appointment record to the current list of Appointment records. With the addition 
 of the `pid` field, it allows users to link the appointment to a specific patient. 
 
-
 Format: `adda \date [date] \time [time] \pid [patient id]`
-
 
 * `adda` keyword
 * `\date` followed by the date of the appointment
@@ -248,41 +265,48 @@ Format: `adda \date [date] \time [time] \pid [patient id]`
 
 > ![](images/UG/Warning_pid.JPG)
 
+> ![](images/UG/appointment_invalid_date.JPG)
+
 #### Example of usage: 
-- `adda \date 14/03/2020 \time 1000 \pid 1`
 
-
-##### Expected outcome:
-<img src ="images/adda_eg1.PNG" width = "400">
+OK? |   Usage    |   Outcome 
+--- | ---------- | -------------
+OK  | `adda \date 14/03/2020 \time 1000 \pid 1` | <img src ="images/adda_eg1.PNG" width = "600">
+NOT OK | `adda \date 14/03/2020` | <img src="images/UG/adda_fail.JPG" width="600">
+NOT OK | `adda \date 31/02/2020 \time 1234 \pid 1` | <img src="images/UG/adda_fail_invalid_date.JPG" width="600">
 
 #### 4.2.2 List all existing Appointments
 
-The command simply contains the 'lista' keyword.
+The program allows you to list all existing Appointments. The command simply contains the 'lista' keyword.
 
 Format: `lista`
 
 #### Example of usage: 
-`lista`
 
-##### Expected outcome:
-<img src ="images/lista_eg1.PNG" width = "400">
-
+Is Appointment list empty? |   Usage    |   Outcome 
+:------------------------: | ---------- | -------------
+NO | `lista` | <img src ="images/UG/lista_not_empty.JPG" width="600">
+YES | `lista` | <img src ="images/UG/lista_empty.JPG" width="600">
 
 #### 4.2.3 Delete an existing Appointment
 
 The program allows you to delete an existing Appointment record by its index in the list. 
 
-Format: `deletea \index [appointment number in list]`
+Format: `deletea \index [index number in list]`
 
 * `deletea` keyword
 * `\index` followed by the index number of the Appointment to be deleted 
+
+> ![](images/UG/index_compulsory.JPG)
+
+> ![](images/UG/deletea_edita_hint.JPG)
 
 Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
-OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
-NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
+OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "600">
+NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "600">
 
 > ![](images/UG/deletea_hint.JPG)
 
@@ -290,7 +314,7 @@ NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "
 
 The program allows you to make changes to an existing Appointment record by its index in the list.
 
-Format: `edita \index [appointmentNumber] \date [date] \time [time]`
+Format: `edita \index [index number in list] \date [date] \time [time]`
  
 * `edita` keyword
 * `\index` followed by the index number of the Appointment in the list.
@@ -299,35 +323,27 @@ Format: `edita \index [appointmentNumber] \date [date] \time [time]`
 
 > ![](images/UG/adda_hint.JPG)
 
+> ![](images/UG/deletea_edita_hint.JPG)
+
+> ![](images/UG/index_compulsory.JPG)
+
 > ![](images/UG/edita_hint.JPG)
 
-#### Example List
+> ![](images/UG/edita_warning.JPG)
+
+#### Example List (Before)
 <img src ="images/edita_before.PNG" width = "400">
 
 #### Example of usage: 
-`edita \index 3 \date 20/05/2021 \time 2300`
 
-##### Expected outcome:
-<img src ="images/edita_eg1.PNG" width = "400">
+**Please refer to the above "Before" list to compare the changes.**
 
-###### Before:
-![](images/edita_before_crop.PNG)
-
-###### After:
-![](images/edita_eg1after_crop.PNG)
-
-#### Example of usage: 
-`edita \index 3 \time 1000 \date 16/03/2020`
-
-##### Expected outcome:
-<img src ="images/edita_eg2.PNG" width = "400">
-
-###### Before:
-![](images/edita_eg1after_crop.PNG)
-
-###### After:
-![](images/edita_eg2after-crop.png)
-
+OK? |   Usage    |   Outcome & After |
+------------- | ------------- | --------------- |
+OK | `edita \index 3 \date 20/05/2021 \time 2300` | <img src ="images/edita_eg1.PNG" width = "600"> <img src ="images/edita_eg1after_crop2.PNG" width = "600"> |  |
+OK | `edita \index 1 \time 1300` | <img src ="images/edita_eg2.PNG" width = "600"> <img src ="images/edita_eg2after-crop.png" width = "600"> |  |                       
+NOT OK | `edita` | <img src ="images/edita_error.PNG" width = "600"> |   
+                 
 ##### Final list:
 <img src ="images/edita_eg2after.PNG" width = "400">
 
@@ -341,17 +357,23 @@ Format: `finda [search value]`
 
 > ![](images/UG/findp_hint.JPG)
 
+> ![](images/UG/finda_search_by_date.JPG)
+
+> ![](images/UG/finda_search_by_time.JPG)
+
 > ![](images/UG/warning_casesensitive.JPG)
 
+#### Example list:
+<img src ="images/UG/lista_not_empty.JPG" width="600">
+
 #### Example of usage: 
- `finda Fri`
- 
-##### Expected outcome: 
- ![](images/UG/finda_fri.JPG)
- 
-#### Example of no records found:
-`finda Oct`
- ![](images/UG/finda_nothing.JPG)
+
+**Please refer to the example list above**
+
+Does it exist in list? |   Usage    |   Outcome  |
+:--------------------: | ---------- | ---------- |
+YES | `finda Fri` | <img src="images/UG/finda_fri.JPG" width="600">
+NO | `finda Oct` | <img src="images/UG/finda_nothing.JPG" width="600">
 
 #### 4.2.6 Clear appointment records
 
@@ -361,6 +383,17 @@ Format: `cleara`
 * `cleara` keyword
 
 >![](images/UG/cleara_warning.JPG)
+
+#### Example list
+ <img src="images/UG/lista_not_empty.JPG" width="600">
+ 
+ #### Example of usage:
+ 
+ **Please refer to the example list above**
+ 
+ |   Usage    |   Outcome & After  |
+ -------------| ------------------ |
+ `cleara` | <img src="images/UG/clear_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600">
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -374,6 +407,20 @@ Format: `clearall`
 
 >![](images/UG/clearall_warning.JPG) 
 
+#### Example list
+
+ <img src="images/UG/findp_patient_list.JPG" width="600">
+
+ <img src="images/UG/lista_not_empty.JPG" width="600">
+ 
+#### Example of usage:
+ 
+ **Please refer to the example lists above**
+ 
+Is both list empty? |   Usage    |   Outcome & After  |
+:------------------:| ---------- | ------------------ |
+ NO | `clearall` | <img src="images/UG/clearall.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600"> 
+
 ### 4.4 View help
 
 The 'help' keyword provides you with a list of valid commands, their functions and their proper usages.
@@ -384,7 +431,9 @@ Format: `help`
 `help`
 
 ##### Expected outcome 
-![](images/help.PNG)
+
+![](images/UG/help_part1.JPG)
+![](images/UG/help_part2.JPG)
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -416,10 +465,10 @@ Format: `exit`
 `cleara`| Clears all appointment records
 `clearp`| Clears all patient records
 `clearall`| Clears both appointment and patient records
-`deletea \index [appointment number in list]` | Delete an appointment by the list's appointment number
-`deletep \index [patient number in list]` | Delete a patient by the list's patient number
-`edita \index [appointmentNumber] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
-`editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
+`deletea \index [index number in list]` | Delete an appointment by the list's appointment number
+`deletep \index [index number in list]` | Delete a patient by the list's patient number
+`edita \index [index number in list] \date [date] \time [time]` | Edit date or time of an appointment by the list's appointment number
+`editp \index [index number in list] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
 `help` | Give you a manual on a list of valid commands and their usage
 `exit` | Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
@@ -446,6 +495,10 @@ because of the first letter capitalization.
 
 **A**: `pid` stands for Patient ID, it is a unique ID tag to each patient. In order to link appointments 
 to the patient, the pid tag must be present. 
+
+**Q**: I accidentally put in the wrong Patient ID when adding an appointment using `adda`. How can I change the patientID?
+
+**A**: Unfortunately upon entering the Patient ID in `adda`, there is no way of changing the Patient ID. Please remove the incorrect appointment and add the correct appointment in again.
 
 ### [Back to top &#x2191;](#table-of-content)
 

@@ -7,7 +7,8 @@ import seedu.duke.exceptions.InvalidFormatException;
  */
 public class Phone {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should contain 8 numbers";
+    public static final String MESSAGE_PHONE_CONSTRAINTS = "Patient's phone numbers should contain 8 numbers "
+            + "and no whitespaces between digits";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
 
     public String phone;
