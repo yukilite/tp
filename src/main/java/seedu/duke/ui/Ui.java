@@ -111,6 +111,7 @@ public class Ui {
 
     public static void showWrongAge() {
         System.out.println("Received age seems wrong, setting age to be blank");
+    }
       
     public static void printInvalidPhoneNumberMessage() {
         System.out.println("Invalid phone number, phone number field will be set to empty.");
