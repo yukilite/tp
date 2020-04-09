@@ -112,6 +112,7 @@ public class Ui {
     public static void printFileCreationErrorMessage() {
         System.out.println("An error occured while attempting to create the save file.");
     }
+    
     public static void showNoPidExist() {
         System.out.println("Patient Id don't exist! No appointment record will be made.");
     }
