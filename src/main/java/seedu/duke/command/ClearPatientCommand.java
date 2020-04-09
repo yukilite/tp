@@ -53,6 +53,9 @@ public class ClearPatientCommand extends Command {
             // Clear all the items in patients' list
             PatientList.getPatientList().clear();
 
+            // CLear all the appointments as well
+            new ClearAppointmentCommand().execute(ui, storage);
+
             // Reset the patient id manager state
             PatientIdManager.clearPatientId();
 
@@ -66,7 +69,7 @@ public class ClearPatientCommand extends Command {
             // ui.showPatientsDeleted(); //TODO Justin
             System.out.println("All patients cleared!");
 
-        } catch (EmptyPatientsException e) {
+        } catch (EmptyPatientsException | InvalidFormatException e) {
             System.out.println("There is nothing to clear in patients' list");
             // ui.showNothingToClearPatients(); //TODO Justin
         }
