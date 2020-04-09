@@ -135,10 +135,10 @@ The program allows your to list all existing Patients. The command simply contai
 Format: `listp`
 
 #### Example of usage: 
-Is Patient list empty? |   Usage    |   Outcome   |
----------------------- | ---------- | ----------- |
-NO |`listp` | <img src="images/listp.PNG"> | 
-YES | `listp` | <img src="images/UG/clearp_success.JPG" width="600"> |
+Is Patient list empty? |   Usage    |   Outcome   
+---------------------- | ---------- | ----------- 
+NO |`listp` | <img src="images/listp.PNG">  
+YES | `listp` | <img src="images/UG/clearp_success.JPG" width="600"> 
 
 #### 4.1.3 Delete an existing Patient
 
@@ -195,7 +195,9 @@ OK? |   Usage    |   Outcome & After |
 ------------- | ------------- | --------------- |
 OK | `editp \index 2  \name Lam \phone 83487846` | <img src ="images/UG/editp_success1.JPG" width = "600">  <img src ="images/UG/editp_after.JPG" width = "600"> 
 OK | `editp \age 99 \address Bedok \phone 89993999 \name Justin \index 3` |  <img src ="images/UG/editp_success2.JPG" width = "600"> <img src ="images/UG/editp_after1.JPG" width = "600">
-NOT OK | `editp \index a \address Paris Ris \phone 93489678` | <img src ="editp_fail" width = "600"> 
+NOT OK | `editp \index a \address Paris Ris \phone 93489678` | <img src ="images/UG/editp_fail.JPG" width = "600"> 
+
+![](images/UG/editp_fail.JPG)
 
 #### Final List 
 <img src ="images/UG/Patient_list_after.JPG" width="600">
