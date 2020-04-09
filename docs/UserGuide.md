@@ -48,7 +48,7 @@ CLI to keep track of various medical records* and *can type fast*.
 3. Move the .jar to an empty folder.
 4. Open Command Prompt.
 5. In Command Prompt, change your current working directory to the folder containing the .jar using $ `cd <Path of folder containing .jar>`
-6. Run the .jar using $ `java -jar hams-2.0.jar`
+6. Run the .jar using $ `java -jar (latest version).jar`
 
 ### [Back to top &#x2191;](#table-of-content)
  
