@@ -71,7 +71,6 @@ class ParserTest {
         }
     }
 
-    /*
     @Test
     void tetParseCommand_editPatientCommand_isEditCommand() {
         String editPatientUserInput1 = "editp \\index 5 \\name Himiko";
@@ -97,7 +96,6 @@ class ParserTest {
             fail("Should not have thrown any exception");
         }
     }
-    */
 
     @Test
     void testParseCommand_editPatientCommand_isNotEditCommand() {
