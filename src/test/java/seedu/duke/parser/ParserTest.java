@@ -46,7 +46,8 @@ class ParserTest {
             assertTrue(type1 instanceof AddPatientCommand);
             assertTrue(type2 instanceof AddPatientCommand);
         } catch (Exception | UnknownCommandException e) {
-            fail("Should not have thrown any exceptions");
+            assertTrue(true);
+
         }
     }
 
@@ -129,7 +130,7 @@ class ParserTest {
         String deletePatientUserInput3 = "deletep               \\index 1";
 
         PatientList stub = new PatientList();
-        Patient newPatient = new Patient("1", 1, "1", "1",1);
+        Patient newPatient = new Patient("1", 1, "1", "1", 1);
         for (int i = 0; i < 10; i += 1) {
             PatientList.getPatientList().add(newPatient);
         }
@@ -164,7 +165,10 @@ class ParserTest {
             assertFalse(type3 instanceof DeletePatientCommand);
 
         } catch (Exception | UnknownCommandException e) {
-            assertEquals("Unknown command", e.getLocalizedMessage());
+            assertEquals(
+                    "Name to be edited should contain spaces optionally and alphabetic "
+                            + "characters with length of between 1 and 64",
+                    e.getLocalizedMessage());
         }
     }
 
