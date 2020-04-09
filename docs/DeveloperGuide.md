@@ -263,7 +263,7 @@ class’s ```saveAppoinmentList()``` function to save the updated appointment li
 ```showAppointmentAddSuccess()``` function to display the success of adding the ```appointment``` into the appointment 
 list.
 
-Below shows the sequence diagram for ```AddAppointmentCommand``` class
+Below shows the sequence diagram for ```AddAppointmentCommand``` class:
 
 ![](images/AddAppointCommandSequence.png)
 
