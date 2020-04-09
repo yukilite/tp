@@ -130,7 +130,7 @@ NOT OK | `addp` | ![](images/addp%20fail.PNG)
 
 #### 4.1.2 List all existing Patients
 
-The program allows your to list all existing Patients. The command simply contains the 'listp' keyword.
+The program allows you to list all existing Patients. The command simply contains the 'listp' keyword.
 
 Format: `listp`
 
@@ -265,25 +265,28 @@ Format: `adda \date [date] \time [time] \pid [patient id]`
 
 > ![](images/UG/Warning_pid.JPG)
 
+> ![](images/UG/appointment_invalid_date.JPG)
+
 #### Example of usage: 
-- `adda \date 14/03/2020 \time 1000 \pid 1`
 
-
-##### Expected outcome:
-<img src ="images/adda_eg1.PNG" width = "400">
+OK? |   Usage    |   Outcome 
+--- | ---------- | -------------
+OK  | `adda \date 14/03/2020 \time 1000 \pid 1` | <img src ="images/adda_eg1.PNG" width = "600">
+NOT OK | `adda \date 14/03/2020` | <img src="images/UG/adda_fail.JPG" width="600">
+NOT OK | `adda \date 31/02/2020 \time 1234 \pid 1` | <img src="images/UG/adda_fail_invalid_date.JPG" width="600">
 
 #### 4.2.2 List all existing Appointments
 
-The command simply contains the 'lista' keyword.
+The program allows you to list all existing Appointments. The command simply contains the 'lista' keyword.
 
 Format: `lista`
 
 #### Example of usage: 
-`lista`
 
-##### Expected outcome:
-<img src ="images/lista_eg1.PNG" width = "400">
-
+Is Appointment list empty? |   Usage    |   Outcome 
+-------------------------- | ---------- | -------------
+NO | `lista` | <img src ="images/UG/lista_not_empty.JPG" width="600">
+YES | `lista` | <img src ="images/UG/lista_empty.JPG" width="600">
 
 #### 4.2.3 Delete an existing Appointment
 
@@ -302,8 +305,8 @@ Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
-OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "400">
-NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "400">
+OK | `deletea \index 3` | <img src ="images/delete_eg1.PNG" width = "600">
+NOT OK | `deletea \index 999` | <img src ="images/delete_wrongeg1.PNG" width = "600">
 
 > ![](images/UG/deletea_hint.JPG)
 
@@ -354,17 +357,23 @@ Format: `finda [search value]`
 
 > ![](images/UG/findp_hint.JPG)
 
+> ![](images/UG/finda_search_by_date.JPG)
+
+> ![](images/UG/finda_search_by_time.JPG)
+
 > ![](images/UG/warning_casesensitive.JPG)
 
+#### Example list:
+<img src ="images/UG/lista_not_empty.JPG" width="600">
+
 #### Example of usage: 
- `finda Fri`
- 
-##### Expected outcome: 
- ![](images/UG/finda_fri.JPG)
- 
-#### Example of no records found:
-`finda Oct`
- ![](images/UG/finda_nothing.JPG)
+
+**Please refer to the example list above**
+
+Does it exist in list? |   Usage    |   Outcome  |
+:--------------------: | ---------- | ---------- |
+YES | `finda Fri` | <img src="images/UG/finda_fri.JPG" width="600">
+NO | `finda Oct` | <img src="images/UG/finda_nothing.JPG" width="600">
 
 #### 4.2.6 Clear appointment records
 
@@ -374,6 +383,17 @@ Format: `cleara`
 * `cleara` keyword
 
 >![](images/UG/cleara_warning.JPG)
+
+#### Example list
+ <img src="images/UG/lista_not_empty.JPG" width="600">
+ 
+ #### Example of usage:
+ 
+ **Please refer to the example list above**
+ 
+ |   Usage    |   Outcome & After  |
+ -------------| ------------------ |
+ `cleara` | <img src="images/UG/clear_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600">
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -387,6 +407,20 @@ Format: `clearall`
 
 >![](images/UG/clearall_warning.JPG) 
 
+#### Example list
+
+ <img src="images/UG/findp_patient_list.JPG" width="600">
+
+ <img src="images/UG/lista_not_empty.JPG" width="600">
+ 
+#### Example of usage:
+ 
+ **Please refer to the example lists above**
+ 
+ Is both list empty? |   Usage    |   Outcome & After  |
+ --------------------| ---------- | ------------------ |
+ NO | `clearall` | <img src="images/UG/clearall.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600"> 
+
 ### 4.4 View help
 
 The 'help' keyword provides you with a list of valid commands, their functions and their proper usages.
@@ -397,7 +431,14 @@ Format: `help`
 `help`
 
 ##### Expected outcome 
-![](images/help.PNG)
+
+HTML version
+<img src="images/UG/help_part1.JPG" width="831">
+<img src="images/UG/help_part2.JPG" width="831">
+
+Markdown version
+![](images/UG/help_part1.JPG)
+![](images/UG/help_part2.JPG)
 
 ### [Back to top &#x2191;](#table-of-content)
 

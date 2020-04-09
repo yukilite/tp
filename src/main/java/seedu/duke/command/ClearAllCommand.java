@@ -31,7 +31,7 @@ public class ClearAllCommand extends Command {
      *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @throws IOException when there is error in the index's input
+     * @throws IOException    when there is error in the index's input
      * @throws ParseException when there is error in the index's input
      * @see IOException
      * @see ParseException
@@ -66,7 +66,7 @@ public class ClearAllCommand extends Command {
             storage.savePatientList();
 
             // Show all items in both lists deleted message
-            // ui.showAllItemsDeleted(); //TODO Justin
+            ui.showAllItemsDeleted();
         } catch (EmptyListsException e) {
             System.out.println("There is nothing to clear in both lists");
             // ui.showNothingToClearBothLists(); // TODO Justin

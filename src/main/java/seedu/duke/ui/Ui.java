@@ -196,4 +196,8 @@ public class Ui {
             currentIndex++;
         }
     }
+
+    public void showAllItemsDeleted() {
+        System.out.println("Both list cleared!");
+    }
 }
