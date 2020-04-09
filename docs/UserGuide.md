@@ -265,12 +265,15 @@ Format: `adda \date [date] \time [time] \pid [patient id]`
 
 > ![](images/UG/Warning_pid.JPG)
 
+> ![](images/UG/appointment_invalid_date.JPG)
+
 #### Example of usage: 
-- `adda \date 14/03/2020 \time 1000 \pid 1`
 
-
-##### Expected outcome:
-<img src ="images/adda_eg1.PNG" width = "400">
+OK? |   Usage    |   Outcome 
+--- | ---------- | -------------
+OK  | `adda \date 14/03/2020 \time 1000 \pid 1` | <img src ="images/adda_eg1.PNG" width = "600">
+NOT OK | `adda \date 14/03/2020` | <img src="images/UG/adda_fail.JPG" width="600">
+NOT OK | `adda \date 31/02/2020 \time 1234 \pid 1` | <img src="images/UG/adda_fail_invalid_date.JPG" width="600">
 
 #### 4.2.2 List all existing Appointments
 
