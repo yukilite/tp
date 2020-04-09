@@ -94,7 +94,7 @@ public class Duke {
 
             } catch (UnknownCommandException | InvalidIndexException | IndexNotIntegerException
                     | NoFieldCommandException | PidEmptyException | InvalidPhoneNumberException e) {
-                
+
                 ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
