@@ -104,7 +104,8 @@ A valid input would be `adda \date 22/05/2020 \time 1200 \pid 1`.
 
 #### 4.1.1 Add a new Patient record
 
-The program allows you to add a new Patient record to the current list of Patient records. 
+The program allows you to add a new Patient record to the current list of Patient records. Note that patient id
+ number (pid) is decided by HAMS and not the user.
 
 Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
@@ -153,7 +154,8 @@ NOT OK | `deletep \index a` | ![](images/delete_fail.PNG)
 
 #### 4.1.4 Edit an existing Patient
 
-The program allows you to make changes to an existing Patient record by its index in the list. 
+The program allows you to make changes to an existing Patient record by its index in the list. Note that you cannot
+ edit the patient id number.
 
 Format: `editp \index [patientNumber] \name [name] \age [age] \address [address] \phone [phone]`
 

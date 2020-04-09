@@ -224,6 +224,10 @@ instead.
 Below shows the sequence diagram for ```AddPatientCommand``` class
 
 ![](images/AddPatientCommandSequence.png)
+
+![](images/AddPatientCommandSequenceAddIntoPatientList.png)
+
+![](images/AddPatientCommandSequenceAutoSavePatientList.png)
  
 
 ##### 2.2.4.2 AddAppointmentClass
@@ -262,6 +266,10 @@ list.
 Below shows the sequence diagram for ```AddAppointmentCommand``` class
 
 ![](images/AddAppointCommandSequence.png)
+
+![](images/AddAppointCommandSequenceAddNewAppointment.png)
+
+![](images/AddAppointCommandSequenceAutoSavingAppointList.png)
 
 ##### 2.2.4.3 ListPatientClass
 
@@ -341,7 +349,7 @@ For the 4 classes listed, there were some other design considerations that was d
 
 ###### 2.2.4.5.3 Aspect: Generation of Patient Id
 
-+ Alternative 1 (current choice): Allow the reuse of the patient Id from deleted 
++ Alternative 1 (current choice): Allow the reuse of the patient Id from deleted patients
     * Pros: 
         - Allow for reuse, which prevents the patient Id number from running out.
        
@@ -354,6 +362,24 @@ For the 4 classes listed, there were some other design considerations that was d
        
     * Cons:
         - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
+        
+###### 2.2.4.5.4 Aspect: Deciding how to reuse Patient Id
+
++ Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
+ assigned the longest
+    * Pros: 
+        - Easy to implement (just use a Queue) and ensures an O(1) time.
+    * Cons:
+        - Patient id number is not really in sequence (it is possible for a bigger patient id number might be assigned
+         first before a smaller patient id number). As a result, the new patient id number is not that predictable
+          (unless you are keeping track of which patient id numbers are deleted first).
+
++ Alternative 2: Sort the reusable patient id first such that the smallest patient id is always reused first 
+    * Pros: 
+        - Patient id number is in sequence (always assign the smaller patient id number first), which seems to make
+         it easier to predict the next patient's patient id number.
+    * Cons:
+        - Sorting is O(n log n) time, hence making it slightly slower than current implementation.
 
 #### 2.2.4.6 EditAppointmentClass
 
