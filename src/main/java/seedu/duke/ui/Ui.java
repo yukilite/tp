@@ -205,6 +205,9 @@ public class Ui {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f2a093a24cbf30b2596223b44935142576ab76fd
     public void printInvalidAppointmentSearchDateMessage() {
         System.out.println("The input does not follow the correct time search format: \n\'dd/mm/yyyy\'\n"
                 + "Please try again. ");
@@ -222,9 +225,15 @@ public class Ui {
 
     public void printSearchValueConversionErrorMessage() {
         System.out.println("An error occured when trying to parse the search input. Please try again.");
+<<<<<<< HEAD
 =======
     public void showAllItemsDeleted() {
         System.out.println("Both list cleared!");
 >>>>>>> 93f96f31ee9c2b862573553fdb930f24f330f7db
+=======
+
+    public void showAllItemsDeleted() {
+        System.out.println("Both list cleared!");
+>>>>>>> f2a093a24cbf30b2596223b44935142576ab76fd
     }
 }
