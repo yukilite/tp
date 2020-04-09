@@ -351,32 +351,185 @@ For the 4 classes listed, there were some other design considerations that was d
     * Cons:
         - Much more likely to run out of patient id numbers, especially if patients are getting added and deleted from HAMS continuously and consecutively.
 
-#### 2.2.4.6 EditAppointmentClass
+#### 2.2.4.6 EditAppointmentCommand Class
 
 To edit an appointment, the ```EditAppointmentCommand``` class is used. For this ```EditAppointmentCommand``` class, it 
-serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
+serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
 interact with one another. 
 
 1. The ```EditAppointmentCommand``` class is processed by ```Parser```
 
 2. When 
-the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
+the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```EditAppointmentCommand``` class would call upon the 
 ```Appointment``` class to make an ```Appointment``` Object. 
 
-3. After which, the ```AddAppoinmentCommand``` object will 
-call upon the ```AppointmentList``` object to obtain the list of ```Appointments``` (get the ```List``` object that 
-represents the list of appointments by ```AppointmentList```’s ```getAppointmentList()``` command) so that it can 
-directly add the new ```Appointment``` object into the appointment list. 
+3. After which, the ```EditAppoinmentCommand``` object will  call upon the ```AppointmentList``` object to get the record 
+of the record of the appointment based on the index with ```getAppointmentRecord``` .
 
-4. Finally, it will call upon the ```Storage``` 
-class’s ```saveAppoinmentList()``` function to save the updated appointment list. 
+4. After that, ```EditAppoinmentCommand``` will  call the ```setAppointmentInfo``` method from ```Patient`` to update the
+appointment.
 
-5. Upon successfully adding the 
+5. The ```AppointmentList``` will be updated with the newly updated appointment.
+
+6. Finally, it will call upon the ```Storage``` class’s ```saveAppoinmentList()``` function to save the updated appointment list. 
+
+7. Upon successfully editing the 
 ```Appointment``` object into the appointment list, it will call upon the ```Ui``` class’ 
-```showAppointmentAddSuccess()``` function to display the success of adding the ```appointment``` into the appointment 
+```showUpdateAppointmentSuccess()``` function to display the success of adding the ```appointment``` in the appointment 
 list.
 
-Below shows the sequence diagram for ```AddAppointmentCommand``` class
+Below shows the sequence diagram for ```EditAppointmentCommand``` class.
+
+#### 2.2.4.7 EditPatientCommand CLass
+
+To edit an appointment, the ```EditPatientCommand``` class is used. For this ```EditPatientCommand``` class, it 
+serves as a facade class for the ```Main```, ```Patient```, ```PatientList```, ```Ui``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```EditPatientCommand``` class is processed by ```Parser```
+
+2. When 
+the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```EditPatientCommand``` class would call upon the 
+```Patient``` class to make a ```Patient``` Object. 
+
+3. After which, the ```EditPatientCommand``` object will  call upon the ```PatientList``` object to get the record 
+of the record of the patient based on the index with ```getPatientRecord``` .
+
+4. After that, ```EditPatientCommand``` will  call the ```setPatientInfo``` method from ```Patient`` to update the
+patient.
+
+5. The ```AppointmentList``` will be updated with the newly updated patient.
+
+6. Finally, it will call upon the ```Storage``` class’s ```savePatienttList()``` function to save the updated patient list. 
+
+7. Upon successfully editing the 
+```Patient``` object into the appointment list, it will call upon the ```Ui``` class’ 
+```showUpdatePatientSuccess()``` function to display the success of adding the ```patient``` in the appointment 
+list.
+
+Below shows the sequence diagram for ```EditPatientCommand``` class.
+
+#### 2.2.4.8 DeleteAppointmentCommand Class
+
+To delete an appointment, the ```DeleteAppointmentCommand``` class is used. For this ```DeleteAppointmentCommand``` class, it 
+serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```DeleteAppointmentCommand``` class is processed by ```Parser```
+
+2. When the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```DeleteAppointmentCommand``` class would call upon the 
+```Appointment``` class to make an ```Appointment``` Object. 
+
+3. After which, the ```DeleteAppoinmentCommand``` object will  call upon the ```AppointmentList``` object to get the appointment
+list with ```getAppointmentList()``` and remove the appointment record with given index from ```getAppointmentRecord()```
+
+4. Finally, it will call upon the ```Storage``` class’s ```saveAppoinmentList()``` function to save the updated appointment list. 
+
+5. Upon successfully deleting the 
+```Appointment``` object into the appointment list, it will call upon the ```Ui``` class’ 
+```showDeleteAppointmentSuccess()``` function to display the success of deleting the ```appointment```from the appointment 
+list.
+
+Below shows the sequence diagram for ```DeleteAppointmentCommand``` class.
+
+#### 2.2.4.9 DeletePatientCommand Class
+
+To delete an appointment, the ```DeletePatientCommand``` class is used. For this ```DeletePatientCommand``` class, it 
+serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```DeletePatientCommand``` class is processed by ```Parser```
+
+2. When the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```DeletePatientCommand``` class would call upon the 
+```Patient``` class to make a ```Patient``` Object. 
+
+3. After which, the ```DeletePatientCommand``` object will  call upon the ```PatientList``` object to get the patient
+list with ```getPatientList()``` and remove the patient record with given index from ```getPatientRecord()```
+
+4. Then it will go through all the items in ```AppointmentList``` with the patientId of the patient that has been deleted
+
+4. Finally, it will call upon the ```Storage``` class’s ```savePatientList()``` function to save the updated patient list. 
+
+5. Upon successfully deleting the ```Patient``` object from the patient list, it will call upon the ```Ui``` class’ 
+```showDeletePatientSuccess()``` function to display the success of deleting the ```patient```from the patient 
+list.
+
+Below shows the sequence diagram for ```DeletePatientCommand``` class.
+
+#### 2.2.4.10 ClearAllCommand Class
+
+To clear both appointment list and patient list, the ```ClearAllCommand``` class is used. For this ```ClearAllCommand``` class, it 
+serves as a facade class for the ```Main```, ```PatientList```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```ClearAllCommand``` class is processed by ```Parser```
+
+2. When the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```ClearAllCommand``` class would call upon the 
+```PatientList``` and ```AppointmentList``` to clear all the items in both lists
+
+3. It will call upon the ```Storage``` class’s ```savePatientList()``` and ```saveAppointmentList()```function 
+to save the updated patient list and appointment list.
+
+4. Upon successfully clearing all the lists, it will call upon the ```Ui``` class’ ```showAllItemsDeleted()``` function 
+to display the success of clearing all the items.
+
+Below shows the sequence diagram for ```ClearAllCommand``` class.
+
+#### 2.2.4.11 ClearAppointmentCommand Class
+
+To clear appointment list, the ```ClearAppointmentCommand``` class is used. For this ```ClearAppointmentCommand``` class, it 
+serves as a facade class for the ```Main```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```ClearAppointmentCommand``` class is processed by ```Parser```
+
+2. When the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```ClearAppointmentCommand``` class would call upon the 
+```AppointmentList``` to clear the items in appointment list.
+
+3. It will call upon the ```Storage``` class’s ```saveAppointmentList()```function to save the updated appointment list.
+
+4. Upon successfully clearing the list, it will call upon the ```Ui``` class’ ```showAppointmentsDeleted()``` function 
+to display the success of clearing all the items in appointment list.
+
+Below shows the sequence diagram for ```ClearAppointmentCommand``` class.
+
+#### 2.2.4.12 ClearPatientCommand Class
+
+To clear patient list, the ```ClearPatientCommand``` class is used. For this ```ClearPatientCommand``` class, it 
+serves as a facade class for the ```Main```, ```PatientList```, ```Ui``` and the ```Storage``` class to 
+interact with one another. 
+
+1. The ```ClearPatientCommand``` class is processed by ```Parser```
+
+2. When the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```ClearPatientCommand``` class would call upon the 
+```PatientList``` to clear the items in patient list.
+
+3. It will call upon the ```Storage``` class’s ```savePatientList()```function to save the updated patient list.
+
+4. Upon successfully clearing the list, it will call upon the ```Ui``` class’ ```showPatientsDeleted()``` function 
+to display the success of clearing all the items in patient list.
+
+Below shows the sequence diagram for ```ClearPatientCommand``` class.
+
+#### 2.2.4.13 HelpCommand
+
+To see the help usage for the commands in HAMS, the ```HelpCommand``` class is used. For this ```HelpCommand``` class, it 
+serves as a facade class for the ```Main```, ```Ui``` class to interact. The purpose of the class is to print out the usage
+for all the commands in HAMS through ```showHelpUsage()``` in ```Ui```.
+
+Below shows the sequence diagram for ```HelpCommand``` class.
+ 
+#### 2.2.4.14 ExitCommand
+ 
+To print the bye message for HAMS, the ```HelpCommand``` class is used. For this ```ClearPatientCommand``` class, it 
+serves as a facade class for the ```Main```, ```Ui``` class to interact.
+
+1. The ```Main``` class will check whether ```isExit()``` is set to be true or not.
+
+2. ```Ui``` class' ```showByeMessage()``` method is used to print the bye message for users.
+ 
+Below shows the sequence diagram for ```ExitCommand``` class.
+
 
 
 #### 2.2.5 Parser module
