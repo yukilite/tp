@@ -66,7 +66,7 @@ public class ClearAllCommand extends Command {
             storage.savePatientList();
 
             // Show all items in both lists deleted message
-            // ui.showAllItemsDeleted(); //TODO Justin
+             ui.showAllItemsDeleted();
         } catch (EmptyListsException e) {
             System.out.println("There is nothing to clear in both lists");
             // ui.showNothingToClearBothLists(); // TODO Justin
