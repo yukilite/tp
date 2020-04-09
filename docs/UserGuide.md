@@ -384,6 +384,17 @@ Format: `cleara`
 
 >![](images/UG/cleara_warning.JPG)
 
+#### Example list
+ <img src="images/UG/lista_not_empty.JPG" width="600">
+ 
+ #### Example of usage:
+ 
+ **Please refer to the example list above**
+ 
+ |   Usage    |   Outcome & After  |
+ -------------| ------------------ |
+ `cleara` | <img src="images/UG/clear_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600">
+
 ### [Back to top &#x2191;](#table-of-content)
 
 ***
