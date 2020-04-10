@@ -14,12 +14,10 @@ maintaining medical records. It is written in Java
     - Justification: Each of the other classes are very highly cohesive and isolated from one another. The command
      classes, which acts as facade classes, make use of the other classes methods and properties such that the other
       classes can interact with one another to actually execute the user commands.
-    - Highlights: The add patient and add appointment class has its own checks as well to catch other errors that the
-     parser might has missed out on. The implementation for the commands classes is surprisingly challenging because
+    - Highlights: The implementation for the commands classes is surprisingly challenging because
       not only do I have to understand how every other classes works, what the classes can do and what their
-       intricacies (be it obvious or hidden) are, I also have to figure out how to carefully stitch the different
-        functionalities present in the other
-        classes too so as to execute the user's commands. 
+       intricacies and subtleties are, I also have to figure out how to carefully stitch the different
+        functionalities present in the other classes too so as to execute the user's commands. 
 
 - **Major enhancement 2:**  Added a patient id manager to manage the different patient id.
     - What it does: Able to manage the different patient's patient id such as giving new patients a unique patient id
@@ -39,15 +37,22 @@ maintaining medical records. It is written in Java
 - **Minor enhancement:** Helped in the creation of the abstract command class that all commands inherits from. Also
  fixed bugs in other classes so that it not only interact correctly with the facade class but also the other classes
   too.
-- **Code contributed:** [[tP Code Dashboard]](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#breakdown=true&search=andy-aw-why&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos)
+- **Code contributed:** [tP Code Dashboard](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#breakdown=true&search=andy-aw-why&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos)
 
 - **Other contribution:** 
-    - Wrote extensive tests for my commands classes despite being facade classes
-    - Correct minor typos and formatting issues in the user and developer guide
+	- Project Management:
+		- Fixed issues from PE dry run: issues [#93](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/93), [#109](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/109), [#113](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/113), [#123](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/123) 
+	- Documentation:
+		- Correct minor typos and formatting issues in the user and developer guide. Also provided the format for the user guide.
+	- Enhancements to existing features:
+    	- Wrote extensive tests for my command and patientid classes: Pr [#28](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/28), [#134](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/134)
+	- Community:
+		- Reviewed other groups' DG ([example 1](https://github.com/nus-cs2113-AY1920S2/tp/pull/14),[example 2](https://github.com/nus-cs2113-AY1920S2/tp/pull/24))
+		- Found bugs for other groups' program ([ped report](https://github.com/andy-aw-why/ped/issues))
 
 ### Contributions to the User Guide
 ```
-Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
+Given below are some sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
 ```
 
 # Table of content
