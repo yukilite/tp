@@ -57,7 +57,6 @@ audience.
 * *SAM* - Short for Stupendously AwsoMe, an acronym to describe the records module.
 * *BRANDON* - Short for BRillant Ahead of its time Neat Dainty OrigNal, it is an acronym to describe the custom 
 implementation of the save file structure. 
-* *A&D* - Short of Amazing & Dazzling, it is an acronym to describe the command module.
 
 ### [Back to top &#x2191;](#table-of-content)
 
