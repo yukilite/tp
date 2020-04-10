@@ -51,10 +51,10 @@ maintaining medical records. It is written in Java.
     - Justifications: It abstracts out lengthy checks for classes that class `DukeExceptions's` methods. This reduces code 
     duplication and increases abstraction.
     
-    For example: 
+        For example: 
     
-    `DukeExceptions.checkIndexValidity(indexValue, String);` is a one liner called for different commands to check if
-    the index is valid. If it is not abstracted out, then there will be duplicated code blocks.
+        `DukeExceptions.checkIndexValidity(indexValue, String);` is a one liner called for different commands to check if
+         the index is valid. If it is not abstracted out, then there will be duplicated code blocks.
     
     - Highlights: 
     
@@ -145,10 +145,10 @@ NOT OK | `editp \index a \address Paris Ris \phone 93489678` | <img src ="../ima
 
 ### Handling of duplicate fields
 
-####Current implementation: 
+#### Current implementation: 
 ![](../images/UG/command_format_hint3.JPG)
 
-####Proposed implementation:
+#### Proposed implementation:
 ![](../images/UG/last_occur.JPG)
 
 Context: The user has typed a lot of stuff, and realizes that somewhere at the 
