@@ -82,6 +82,15 @@ Provided below are sections I contributed to the Developer Guide. They demonstra
 technical contributions to the project and rationale for technical implementation.
 ```
 
+#### 1.2.2. Value Proposition
+We are focused on providing a user-friendly application for front-desk administrative support assistants to quickly create, edit
+and delete patients' information and appointments. 
+
+|Stakeholders|Value|
+|------------|-----|
+|Patients|Accelerated waiting process|
+|Front-desk administrative staff|Improved organisation in patient and appointment details. Potential automated notification processes |
+
 #### 2.2.1 Record module
 
 The record module consists of 2 classes which represent the patients information and appointment details. 
