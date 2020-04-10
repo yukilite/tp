@@ -4,7 +4,6 @@ import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
-import seedu.duke.ui.Ui;
 
 import java.util.Map;
 
@@ -28,16 +27,6 @@ public class DukeExceptions {
         if (keyValue.length != 2) {
             throw new NoKeyExistException();
         }
-    }
-
-    /**
-     * This method throws a UnknownCommandException when the user supplied in an unknown command.
-     * All commands available are listed as final Strings in Parser class.
-     *
-     * @throws UnknownCommandException when user supplied command are not amongst the final Strings.
-     */
-    public static void throwUnknownCommand() throws UnknownCommandException {
-        throw new UnknownCommandException();
     }
 
     /**
@@ -151,7 +140,8 @@ public class DukeExceptions {
             String field = af.toString();
 
             assert field != null;
-            if (field.equals(AppointmentFieldKeys.INDEX.toString())) {
+            if (field.equals(AppointmentFieldKeys.INDEX.toString())
+                    || field.equals(AppointmentFieldKeys.PATIENT_ID.toString())) {
                 continue;
             }
 
