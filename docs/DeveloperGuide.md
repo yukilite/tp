@@ -14,7 +14,7 @@
             * [2.2.1. Record module ](#221-sam-record-module)
             * [2.2.2. Converter module ](#222-converter-module)
             * [2.2.3. BRANDON storage module ](#223-brandon-storage-module)
-            * [2.2.4. AD command module ](#224-ad-command-module)
+            * [2.2.4. Command module ](#224-command-module)
             * [2.2.5. Parser Module ](#225-parser-module)
                 * [2.2.5.1. Object creation and input interpretation](#2251-object-creation-and-steps-in-input-interpretation)
                 * [2.2.5.2. Design Considerations ](#2252-design-considerations)
@@ -57,7 +57,6 @@ audience.
 * *SAM* - Short for Stupendously AwsoMe, an acronym to describe the records module.
 * *BRANDON* - Short for BRillant Ahead of its time Neat Dainty OrigNal, it is an acronym to describe the custom 
 implementation of the save file structure. 
-* *A&D* - Short of Amazing & Dazzling, it is an acronym to describe the command module.
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -79,7 +78,7 @@ name and a summarized purpose.
 |Records|Contains and provides access to user information|
 |Converter|Formats user input| 
 |BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **storage**|?|
-|Amazing & Dazzling (A&D) Commands|Facade classes that deals with input so that different classes can interact with each other|
+|Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
 #### 2.2.1 Record module
@@ -184,7 +183,7 @@ Design considerations for findAppointment:
 
 ### [Back to top &#x2191;](#table-of-content)
 
-#### 2.2.4 A&D command module 
+#### 2.2.4 Command module 
 
 The command module consist of 11 different classes, where each class does a different command by itself. 
 These classes allows the patients and appointments to be added into HAMS, allows the updating of patient and 
@@ -238,7 +237,6 @@ Below shows the sequence diagram for ```AddPatientCommand``` class
 ![](images/AddPatientCommandSequenceAddIntoPatientList.png)
 
 ![](images/AddPatientCommandSequenceAutoSavePatientList.png)
- 
 
 ##### 2.2.4.2 AddAppointmentCommand Class
 
@@ -332,6 +330,39 @@ Not only that, it ia also able to check if a patient id exist (as in is there an
 Other than the getter and the setter methods, the most important methods in ```PatientIdManager``` are
  ```getNextPatientId()```, ```addBackPatientId()```, ```checkPatientIdUsed()``` and ```clearPatientId()```
  
+ For ```checkPatientIdUsed()```, its purpose is to see if a patient Id is a currently used patient id (as in there is
+ a patient currently that has this patient id). It achieves this using a hash table called ```patientIdMap```, where the
+  key is the patient id
+  number and its value is either null (this patient id has not been used) or 1 (this patient id has been used
+  ). Whenever an appointment is added into HAMS, HAMS needs to ensure that the appointment's patient id corresponds
+   to an actual patient in HAMS. This method helps by checking if the patient id supplied in the appointment entry
+    belongs to an actual patient by checking the key-value pair in the ```patientIdMap``` and see if the patient id's
+     value is 1 in said map
+ 
+ To summarize ```checkPatientIdUsed()```
+ 
+ 1) Get the patient id to check.
+ 2) Let the patient id be the key. See the patient id's value in the ```patientIdMap``` hash table. If it is 1
+ , return true (patient currently exist), else return false.
+ 
+ ```checkPatientIdUsed()``` is used by the ```addAppointmentCommand``` class when adding an appointment to check if
+  the patient id supplied belongs to a real patient currently in HAMS.
+  
+For ```addBackPatientId()```, its purpose is to save the patient id of deleted patients by storing them in the
+ reusable patient id queue ```nextNumberQueueThing```. This will be useful for the ```getNextPatientId()``` method to get a patient id from a deleted patient. We also need to update the ```patientIdMap``` to reflect the changes made.
+ 
+ To summarize ```addBackPatientId()```
+ 
+ 1) Get the deleted patient id.
+ 2) Check to see if the patient id is a valid id. A valid patient id is an id that does not exist in the reusable
+  patient id queue and its value cannot be below 0 and (equal and above) ```nextTopNewNumber```.
+ 3) If the patient id is a valid id, then add it in the reusable patient id queue. Else, ignore it.
+ 4) Once it is deleted, update the ```patientIdMap``` map to reflect that the patient id now do not belong to any patient currently (set the corresponding value to null in the map).
+ 
+ ```addBackPatientId()``` is used by the ```deletePatientClass``` when deleting a patient to store the deleted
+  patient id number.
+  
+ 
 For ```getNextPatientId()```, its purpose is to supply a new patient id for a patient, be it a newly created id or an
  id from a deleted patient (reusing id). This is achieved with a combination of a queue (called the
   ```nextNumberQueueThing```) that serves to store
@@ -359,6 +390,8 @@ For example, when we just started HAMS and there has not been any deletion of pa
       stored in the queue. For the new patient added (patient number 4), instead of using the current
        ```nextTopNewNumber``` (which is 2), we will use
        the patient number present in the queue, which is 1. Thus, patient number 4 has the patient id of 1.
+
+Finaly, once we chosen a number, we need to update ```patientIdMap``` map to reflect that there is now a new patient id that is used by a patient
        
 One property of ```nextTopNewNumber``` is that all patient id numbers in the queue should be lesser than
  ```nextTopNewNumber``` (```nextTopNewNumber``` serves as the current upper-bound of the possible patient id). There
@@ -371,41 +404,11 @@ To summarize ```getNextPatientId()```
 2) If it is not empty, we take a patient id from the queue.
 3) On the other hand, if it is empty, we use the value of ```nextTopNewNumber``` for the patient id. We then increase
  the value of ```nextTopNewNumber``` by 1.
+4) Once we decided on which patient id to use, update the ```patientIdMap``` map to reflect that the patient id now belongs to a patient (set the corresponding value in the map to 1).
 
 ```getNextPatientId()``` is used by the ```addPatientCommandClass``` when adding a patient to get a unique patient id
  for the new patient.
 
-For ```addBackPatientId()```, its purpose is to save the patient id of deleted patients by storing them in the
- reusable patient id queue.
- 
- To summarize ```addBackPatientId()```
- 
- 1) Get the deleted patient id.
- 2) Check to see if the patient id is a valid id. A valid patient id is an id that does not exist in the reusable
-  patient id queue and its value cannot be below 0 and (equal and above) ```nextTopNewNumber```.
- 3) If the patient id is a valid id, then add it in the reusable patient id queue. Else, ignore it.
- 
- ```addBackPatientId()``` is used by the ```deletePatientClass``` when deleting a patient to store the deleted
-  patient id number.
-   
-For ```checkPatientIdUsed()```, its purpose is to see if a patient Id is a currently used patient id (as in there is
- a patient currently that has this patient id). It achieves this using a hash table called ```patientIdMap```, where the
-  key is the patient id
-  number and its value is either null (this patient id has not been used) or 1 (this patient id has been used
-  ). Whenever an appointment is added into HAMS, HAMS needs to ensure that the appointment's patient id corresponds
-   to an actual patient in HAMS. This method helps by checking if the patient id supplied in the appointment entry
-    belongs to an actual patient by checking the key-value pair in the ```patientIdMap``` and see if the patient id's
-     value is 1 in said map
- 
- To summarize ```checkPatientIdUsed()```
- 
- 1) Get the patient id to check.
- 2) Let the patient id be the key. See the patient id's value in the ```patientIdMap``` hash table. If it is 1
- , return true (patient currently exist), else return false.
- 
- ```checkPatientIdUsed()``` is used by the ```addAppointmentCommand``` class when adding an appointment to check if
-  the patient id supplied belongs to a real patient currently in HAMS.
-  
 Lastly, for ```clearPatientId()```, it resets the value of  ```nextTopNewNumber```, clears the reusable patient id queue
  ```nextNumberQueueThing``` and finally clears the hash table ```patientIdMap```. This method serves to reset the
   ```patientIdManager``` back to its default state.
@@ -473,9 +476,23 @@ For the 5 classes listed, there were some other design considerations that was d
         
 ###### 2.2.4.6.4 Aspect: Deciding how to reuse Patient Id
 
-<<<<<<< HEAD
++ Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
+ assigned the longest
+    * Pros:
+        - Easy to implement (just use a Queue) and ensures an O(1) time.
+    * Cons:
+        - Patient id number is not really in sequence (it is possible for a bigger patient id number might be assigned
+         first before a smaller patient id number). As a result, the new patient id number is not that predictable
+          (unless you are keeping track of which patient id numbers are deleted first).
+
++ Alternative 2: Sort the reusable patient id first such that the smallest patient id is always reused first 
+    * Pros: 
+        - Patient id number is in sequence (always assign the smaller patient id number first), which seems to make
+         it easier to predict the next patient's patient id number.
+    * Cons:
+        - Sorting is O(n log n) time, hence making it slightly slower than current implementation.
+
 #### 2.2.4.6 EditAppointmentCommand Class
-=======
 + Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
  assigned the longest
     * Pros: 
@@ -671,8 +688,7 @@ serves as a facade class for the ```Main```, ```Ui``` class to interact.
  
 Below shows the sequence diagram for ```ExitCommand``` class.
 
-
-
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.5 Parser module
 This section describes the implementation of Parser class, as well as the design considerations and rational behind the 
