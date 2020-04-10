@@ -71,7 +71,6 @@ class ParserTest {
         }
     }
 
-    /*
     @Test
     void tetParseCommand_editPatientCommand_isEditCommand() {
         String editPatientUserInput1 = "editp \\index 5 \\name Himiko";
@@ -97,7 +96,6 @@ class ParserTest {
             fail("Should not have thrown any exception");
         }
     }
-    */
 
     @Test
     void testParseCommand_editPatientCommand_isNotEditCommand() {
@@ -165,10 +163,7 @@ class ParserTest {
             assertFalse(type3 instanceof DeletePatientCommand);
 
         } catch (Exception | UnknownCommandException e) {
-            assertEquals(
-                    "Name to be edited should contain spaces optionally and alphabetic "
-                            + "characters with length of between 1 and 64",
-                    e.getLocalizedMessage());
+            assertEquals("Unknown command", e.getLocalizedMessage());
         }
     }
 
