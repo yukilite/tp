@@ -4,7 +4,6 @@ import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
-import seedu.duke.ui.Ui;
 
 import java.util.Map;
 
@@ -151,7 +150,8 @@ public class DukeExceptions {
             String field = af.toString();
 
             assert field != null;
-            if (field.equals(AppointmentFieldKeys.INDEX.toString())) {
+            if (field.equals(AppointmentFieldKeys.INDEX.toString())
+                    || field.equals(AppointmentFieldKeys.PATIENT_ID.toString())) {
                 continue;
             }
 
