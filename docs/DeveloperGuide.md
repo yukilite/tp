@@ -39,8 +39,6 @@ The intended audience of this documentation are the developers, designers, softw
 operators and maintenance engineers. The below table summarizes the purposes of reading for each 
 audience.
 
-
-
 |Role|Purpose|
 |---------|-------|
 |Developers & Designers| To understand the architecture and follow the design to build the system|
@@ -49,14 +47,19 @@ audience.
 |Maintenance Engineers| To understand how the system was built in order to perform enhancement or re-engineering work|
 
 #### 1.2.2. Value Proposition
-**TODO {Describe the value proposition: what problem does it solve?}**
+We are focused on providing a user-friendly application for front-desk administrative support assistants to quickly create, edit
+and delete patients' information and appointments. 
+
+|Stakeholders|Value|
+|------------|-----|
+|Patients|Accelerated waiting process|
+|Front-desk administrative staff|Improved organisation in patient and appointment details. Potential automated notification processes |
 
 ### 1.3. Definitions
-**TODO**
-* *HAMS* - Short for Hospital Administrative Management System.
-* *SAM* - Short for Stupendously AwsoMe, an acronym to describe the records module.
-* *BRANDON* - Short for BRillant Ahead of its time Neat Dainty OrigNal, it is an acronym to describe the custom 
-implementation of the save file structure. 
+|Term|Description|
+|----|-----------|
+|||
+|||
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -77,7 +80,7 @@ name and a summarized purpose.
 |---------|-------|
 |Records|Contains and provides access to user information|
 |Converter|Formats user input| 
-|BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **storage**|?|
+|BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **Storage**|?|
 |Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
@@ -87,9 +90,11 @@ The record module consists of 2 classes which represent the patients information
 As a reflection of real world objects, the Patient's class purpose is to store the particulars of a person while the 
 Appointment's class is to store the date-time data. 
 Thus, the rationale of both classes can be grouped as follows:
+
 >
 > As a reflection of real world entities, to create, store, and retrieve relevant information about the object.
 >
+
 Following the above purpose, both classes consist of only getter and setter methods. This would ensure a contiguous 
 flow in logical executions as these methods can be called whenever necessary.
 
@@ -859,9 +864,6 @@ appointment list should be saved. In addition, user should be able to manually s
 * Each function of HAMS can be executed in a single line.
 
 * HAMS should be fast and responsive
-
-**TODO**
-{Give non-functional requirements}
 
 ### [Back to top &#x2191;](#table-of-content)
 
