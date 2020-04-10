@@ -13,6 +13,9 @@ maintaining medical records. It is written in Java.
     Furthermore, the user may enter invalid inputs and the application should be able to prompt users with proper 
     error messages.
     
+    * Highlights: This implementation was initially planned using the Date format to facilitate the storage of 
+    Appointment Date but it meant changing many existing commands/additions so we decided to simplify it.
+    
     * Credits: Used SimpleDateFormat to implement the formatting.
 
 * **Enhancement 2**: added the `Appointment` and `Patient` classes.
