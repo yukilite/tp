@@ -105,7 +105,7 @@ methods.
 To illustrate, the below example is used:
 * editp \index 1 \name Justin \age 69 \Pasir Panjang
 
-![](images/SD_Patient.png)
+![](images/SD_Patient.PNG)
 
 Upon startup, objects from ui, parser and storage are created. Prompted for user input, Duke receives the "editp"
 command which is forwarded to the parser to be interpreted respectively. Once the `EditPatientCommand` object is 
@@ -138,7 +138,7 @@ special formatting characters (ie. SimpleDateFormat). This class is primarily us
 in the `Appointment` class. As illustrated below, its methods are called during the creation of the `Appointment`
 object constructor. 
 
-![](images/SD_Converter.png)
+![](images/SD_Converter.PNG)
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -422,8 +422,6 @@ Lastly, for ```clearPatientId()```, it resets the value of  ```nextTopNewNumber`
  ```patientIdManager``` state since both commands clears all the current patients in HAMS, which meant that all the
   patient id in HAMS must be reset as there are no patients left.
 
-### [Back to top &#x2191;](#table-of-content)
-
 ##### 2.2.4.6 Design considerations
 
 For the 5 classes listed, there were some other design considerations that was discussed for these 5 classes. Here
@@ -481,8 +479,6 @@ For the 5 classes listed, there were some other design considerations that was d
         
 ###### 2.2.4.6.4 Aspect: Deciding how to reuse Patient Id
 
-<<<<<<< HEAD
-=======
 + Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
  assigned the longest
     * Pros:
@@ -498,24 +494,8 @@ For the 5 classes listed, there were some other design considerations that was d
          it easier to predict the next patient's patient id number.
     * Cons:
         - Sorting is O(n log n) time, hence making it slightly slower than current implementation.
-
-#### 2.2.4.6 EditAppointmentCommand Class
->>>>>>> 2f3140c0f14b2b4784c01256b24aa09db13b6ef0
-+ Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
- assigned the longest
-    * Pros: 
-        - Easy to implement (just use a Queue) and ensures an O(1) time.
-    * Cons:
-        - Patient id number is not really in sequence (it is possible for a bigger patient id number might be assigned
-         first before a smaller patient id number). As a result, the new patient id number is not that predictable
-          (unless you are keeping track of which patient id numbers are deleted first).
-
-+ Alternative 2: Sort the reusable patient id first such that the smallest patient id is always reused first 
-    * Pros: 
-        - Patient id number is in sequence (always assign the smaller patient id number first), which seems to make
-         it easier to predict the next patient's patient id number.
-    * Cons:
-        - Sorting is O(n log n) time, hence making it slightly slower than current implementation.
+        
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.4.7 EditAppointmentClass
 
