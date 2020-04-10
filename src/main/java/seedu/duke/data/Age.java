@@ -1,14 +1,14 @@
 package seedu.duke.data;
 
 import seedu.duke.exceptions.InvalidFormatException;
-import seedu.duke.ui.Ui;
 
 /**
  * Class to validate age.
+ * @author DUC
  */
 public class Age {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "The format of age is postive integer within 0 and 150";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "The format of age is positive integer within 0 and 150";
 
     public int age;
 
@@ -26,7 +26,6 @@ public class Age {
             try {
                 this.age = Integer.parseInt(age);
             } catch (NumberFormatException e) {
-                Ui.showSetAgeError();
                 this.age = -1;
             }
         }
