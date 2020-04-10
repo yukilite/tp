@@ -45,7 +45,7 @@ maintaining medical records. It is written in Java
 	- Documentation:
 		- Correct minor typos and formatting issues in the user and developer guide. Also provided the format for the user guide.
 	- Enhancements to existing features:
-    	- Wrote extensive tests for my command and patientid classes: Pr [#28](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/28), [#134](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/134)
+    		- Wrote extensive tests for my command and patientid classes: Pr [#28](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/28), [#134](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/134)
 	- Community:
 		- Reviewed other groups' DG ([example 1](https://github.com/nus-cs2113-AY1920S2/tp/pull/14),[example 2](https://github.com/nus-cs2113-AY1920S2/tp/pull/24))
 		- Found bugs for other groups' program ([ped report](https://github.com/andy-aw-why/ped/issues))
