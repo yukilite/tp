@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.converter.TimeConverter;
 import seedu.duke.exceptions.InvalidFormatException;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;

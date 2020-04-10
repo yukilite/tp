@@ -39,8 +39,6 @@ The intended audience of this documentation are the developers, designers, softw
 operators and maintenance engineers. The below table summarizes the purposes of reading for each 
 audience.
 
-
-
 |Role|Purpose|
 |---------|-------|
 |Developers & Designers| To understand the architecture and follow the design to build the system|
@@ -49,14 +47,19 @@ audience.
 |Maintenance Engineers| To understand how the system was built in order to perform enhancement or re-engineering work|
 
 #### 1.2.2. Value Proposition
-**TODO {Describe the value proposition: what problem does it solve?}**
+We are focused on providing a user-friendly application for front-desk administrative support assistants to quickly create, edit
+and delete patients' information and appointments. 
+
+|Stakeholders|Value|
+|------------|-----|
+|Patients|Accelerated waiting process|
+|Front-desk administrative staff|Improved organisation in patient and appointment details. Potential automated notification processes |
 
 ### 1.3. Definitions
-**TODO**
-* *HAMS* - Short for Hospital Administrative Management System.
-* *SAM* - Short for Stupendously AwsoMe, an acronym to describe the records module.
-* *BRANDON* - Short for BRillant Ahead of its time Neat Dainty OrigNal, it is an acronym to describe the custom 
-implementation of the save file structure. 
+|Term|Description|
+|----|-----------|
+|||
+|||
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -77,7 +80,7 @@ name and a summarized purpose.
 |---------|-------|
 |Records|Contains and provides access to user information|
 |Converter|Formats user input| 
-|BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **storage**|?|
+|BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **Storage**|?|
 |Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
@@ -87,9 +90,11 @@ The record module consists of 2 classes which represent the patients information
 As a reflection of real world objects, the Patient's class purpose is to store the particulars of a person while the 
 Appointment's class is to store the date-time data. 
 Thus, the rationale of both classes can be grouped as follows:
+
 >
 > As a reflection of real world entities, to create, store, and retrieve relevant information about the object.
 >
+
 Following the above purpose, both classes consist of only getter and setter methods. This would ensure a contiguous 
 flow in logical executions as these methods can be called whenever necessary.
 
@@ -476,6 +481,8 @@ For the 5 classes listed, there were some other design considerations that was d
         
 ###### 2.2.4.6.4 Aspect: Deciding how to reuse Patient Id
 
+<<<<<<< HEAD
+=======
 + Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
  assigned the longest
     * Pros:
@@ -493,6 +500,7 @@ For the 5 classes listed, there were some other design considerations that was d
         - Sorting is O(n log n) time, hence making it slightly slower than current implementation.
 
 #### 2.2.4.6 EditAppointmentCommand Class
+>>>>>>> 2f3140c0f14b2b4784c01256b24aa09db13b6ef0
 + Alternative 1 (current choice): For reusable patient id, just choose the patient id number that have not been
  assigned the longest
     * Pros: 
@@ -538,7 +546,9 @@ list.
 
 Below shows the sequence diagram for ```EditAppointmentCommand``` class.
 
-#### 2.2.4.7 EditPatientCommand CLass
+![](images/EditAppointmentSequenceDiagram.png)
+
+#### 2.2.4.8 EditPatientCommand CLass
 
 To edit an appointment, the ```EditPatientCommand``` class is used. For this ```EditPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Patient```, ```PatientList```, ```Ui``` and the ```Storage``` class to 
@@ -567,7 +577,9 @@ list.
 
 Below shows the sequence diagram for ```EditPatientCommand``` class.
 
-#### 2.2.4.8 DeleteAppointmentCommand Class
+![](images/EditPatientSequenceDiagram.png)
+
+#### 2.2.4.9 DeleteAppointmentCommand Class
 
 To delete an appointment, the ```DeleteAppointmentCommand``` class is used. For this ```DeleteAppointmentCommand``` class, it 
 serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
@@ -590,7 +602,9 @@ list.
 
 Below shows the sequence diagram for ```DeleteAppointmentCommand``` class.
 
-#### 2.2.4.9 DeletePatientCommand Class
+![](images/DeleteAppointmentSequenceDiagram.png)
+
+#### 2.2.4.10 DeletePatientCommand Class
 
 To delete an appointment, the ```DeletePatientCommand``` class is used. For this ```DeletePatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
@@ -614,7 +628,9 @@ list.
 
 Below shows the sequence diagram for ```DeletePatientCommand``` class.
 
-#### 2.2.4.10 ClearAllCommand Class
+![](images/DeletePatientSequenceDiagram.png)
+
+#### 2.2.4.11 ClearAllCommand Class
 
 To clear both appointment list and patient list, the ```ClearAllCommand``` class is used. For this ```ClearAllCommand``` class, it 
 serves as a facade class for the ```Main```, ```PatientList```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
@@ -633,7 +649,9 @@ to display the success of clearing all the items.
 
 Below shows the sequence diagram for ```ClearAllCommand``` class.
 
-#### 2.2.4.11 ClearAppointmentCommand Class
+![](images/ClearAllSequenceDiagram.png)
+
+#### 2.2.4.12 ClearAppointmentCommand Class
 
 To clear appointment list, the ```ClearAppointmentCommand``` class is used. For this ```ClearAppointmentCommand``` class, it 
 serves as a facade class for the ```Main```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
@@ -651,7 +669,9 @@ to display the success of clearing all the items in appointment list.
 
 Below shows the sequence diagram for ```ClearAppointmentCommand``` class.
 
-#### 2.2.4.12 ClearPatientCommand Class
+![](images/ClearAppointmentSequenceDiagram.png)
+
+#### 2.2.4.13 ClearPatientCommand Class
 
 To clear patient list, the ```ClearPatientCommand``` class is used. For this ```ClearPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```PatientList```, ```Ui``` and the ```Storage``` class to 
@@ -669,15 +689,19 @@ to display the success of clearing all the items in patient list.
 
 Below shows the sequence diagram for ```ClearPatientCommand``` class.
 
-#### 2.2.4.13 HelpCommand
+![](images/ClearPatientSequenceDiagram.png)
+
+#### 2.2.4.14 HelpCommand
 
 To see the help usage for the commands in HAMS, the ```HelpCommand``` class is used. For this ```HelpCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact. The purpose of the class is to print out the usage
 for all the commands in HAMS through ```showHelpUsage()``` in ```Ui```.
 
 Below shows the sequence diagram for ```HelpCommand``` class.
+
+![](images/HelpSequenceDiagram.png)
  
-#### 2.2.4.14 ExitCommand
+#### 2.2.4.15 ExitCommand
  
 To print the bye message for HAMS, the ```HelpCommand``` class is used. For this ```ClearPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact.
@@ -688,7 +712,10 @@ serves as a facade class for the ```Main```, ```Ui``` class to interact.
  
 Below shows the sequence diagram for ```ExitCommand``` class.
 
+![](images/ExitSequenceDiagram.png)
+
 ### [Back to top &#x2191;](#table-of-content)
+
 
 #### 2.2.5 Parser module
 This section describes the implementation of Parser class, as well as the design considerations and rational behind the 
@@ -859,9 +886,6 @@ appointment list should be saved. In addition, user should be able to manually s
 * Each function of HAMS can be executed in a single line.
 
 * HAMS should be fast and responsive
-
-**TODO**
-{Give non-functional requirements}
 
 ### [Back to top &#x2191;](#table-of-content)
 
