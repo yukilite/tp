@@ -764,7 +764,7 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 
 ##### 2.2.5.2 Design considerations
 ###### Aspect: Symbol for delimiter
-+   Alternative 1 (current choice): Backslash `/\` is used. 
++   Alternative 1 (current choice): Backslash `\` is used. 
     *   Pros: 
     
         -   Backslash is the least used symbol in the english language.
