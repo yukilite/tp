@@ -417,8 +417,6 @@ Lastly, for ```clearPatientId()```, it resets the value of  ```nextTopNewNumber`
  ```patientIdManager``` state since both commands clears all the current patients in HAMS, which meant that all the
   patient id in HAMS must be reset as there are no patients left.
 
-### [Back to top &#x2191;](#table-of-content)
-
 ##### 2.2.4.6 Design considerations
 
 For the 5 classes listed, there were some other design considerations that was discussed for these 5 classes. Here
@@ -491,6 +489,8 @@ For the 5 classes listed, there were some other design considerations that was d
          it easier to predict the next patient's patient id number.
     * Cons:
         - Sorting is O(n log n) time, hence making it slightly slower than current implementation.
+        
+### [Back to top &#x2191;](#table-of-content)
 
 #### 2.2.4.7 EditAppointmentClass
 
