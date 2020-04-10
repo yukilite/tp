@@ -205,8 +205,6 @@ NOT OK | `editp \index a \address Paris Ris \phone 93489678` | <img src ="images
 #### Final List 
 <img src ="images/UG/Patient_list_after.JPG" width="600">
 
-### [Back to top &#x2191;](#table-of-content)
-
 #### 4.1.5 Find an existing patient
 The program allows you to find to an existing Patient record based on a search value.
 
@@ -448,7 +446,7 @@ Format: `help`
 
 ### [Back to top &#x2191;](#table-of-content)
 
-
+***
 
 ### 4.5 Exit HAMS program
 
@@ -464,6 +462,8 @@ Format: `exit`
 <img src ="images/exit_eg1.PNG" width = "400">
 
 ### [Back to top &#x2191;](#table-of-content)
+
+&nbsp;
 
 ***
 
@@ -488,6 +488,8 @@ Format: `exit`
 `exit` | Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
 
 ### [Back to top &#x2191;](#table-of-content)
+
+&nbsp;
 
 ***
 
