@@ -30,16 +30,6 @@ public class DukeExceptions {
     }
 
     /**
-     * This method throws a UnknownCommandException when the user supplied in an unknown command.
-     * All commands available are listed as final Strings in Parser class.
-     *
-     * @throws UnknownCommandException when user supplied command are not amongst the final Strings.
-     */
-    public static void throwUnknownCommand() throws UnknownCommandException {
-        throw new UnknownCommandException();
-    }
-
-    /**
      * Checks the validity of the index. If it is not valid, throws one of the two exceptions.
      *
      * @param indexAsString The index as a string
