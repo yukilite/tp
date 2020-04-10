@@ -5,7 +5,7 @@ Hospital Administrative Management System (HAMS) is a CLI-based medical facility
 maintaining medical records. It is written in Java.
 
 ### Summary of Contributions
-* **Enhancement**: added the Converter module 
+* **Enhancement 1**: added the ability to format date and time 
 
     * What it does: allows the user input to be formatted into a desired date and time output.
     
@@ -14,24 +14,37 @@ maintaining medical records. It is written in Java.
     error messages.
     
     * Credits: Used SimpleDateFormat to implement the formatting.
-* **Minor Enhancement**: added the Appointment and Patient classes.
-* Code contributed: [[tP Code Dashboard]](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#breakdown=true&search=yukilite&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos)
-* Other contributions:
+
+* **Enhancement 2**: added the `Appointment` and `Patient` classes.
+    
+    * What it does: `Appointment` class stores the appointment date, time and patientID while `Patient` class contains
+    the the patient's particulars.
+    
+    * Justification: Allows the encapsulated variables such as name, address, age and contact number to only be
+     accessed using setter and getter methods to ensure they are protected. 
+     
+* **Code contributed**: [[tP Code Dashboard]](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#breakdown=true&search=yukilite&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos)
+
+* **Other contributions**:
+    * Project Management: 
+        * Fixed team's Gradle errors (Pull requests [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe))
+        
     * Enhancements to existing features: 
-        * Wrote additional tests for existing features to increase coverage from xx% to xx% (Pull requests egs).
+        * Wrote additional tests for existing features to increase coverage from xx% to xx% (Pull requests [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe)).
     
     * Documentation: 
-        * Did cosmetics tweaks to the User Guide: ()
+        * Did cosmetics tweaks to the User Guide: [#46](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/46)
     * Community:
     
-    * 
+    
 ### Contributions to the User Guide
+
 ```
 Provided below are sections I contributed to the User Guide. I took charge of editing the presentation using markdown 
 features like tables and bulleting in the first version for submission.
-
 ```
-## 6. FAQ
+
+#### 6. FAQ
 **Q**: Would my details be captured if I randomize the input order of the keywords?
 
 * `addp \phone 12345678 \address NUS \age 22 \name John Doe`
@@ -57,10 +70,12 @@ to the patient, the pid tag must be present.
 
 
 ### Contributions to the Developer Guide
+
 ```
 Provided below are sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
 technical contributions to the project and rationale for technical implementation.
 ```
+
 #### 2.2.1 Record module
 
 The record module consists of 2 classes which represent the patients information and appointment details. 
