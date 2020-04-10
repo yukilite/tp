@@ -4,10 +4,12 @@ import seedu.duke.exceptions.InvalidFormatException;
 
 /**
  * Used to validate the format of address.
+ * @author DUC
  */
 public class Address {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Patient's addresses is limited to 64 characters";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Patient's addresses is limited to 64 characters "
+            + "including of whitespaces";
 
     public String address;
 
