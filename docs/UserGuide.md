@@ -120,7 +120,9 @@ Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
 > ![](images/UG/limit_warning.JPG)
 
-##### Examples of Usage
+> ![](images/UG/addp_format_no_value.JPG)
+
+#### Examples of Usage
 
 OK? |   Usage    |   Outcome 
 ------------- | ------------- | ---------------
@@ -184,6 +186,8 @@ Format: `editp \index [index number in list] \name [name] \age [age] \address [a
 > ![](images/UG/deletep_editp_hint.JPG)
 
 > ![](images/UG/limit_warning.JPG)
+
+> ![](images/UG/editp_format_no_value.JPG)
 
 #### Example List (Before)
  <img src ="images/Patient_list_before.PNG" width = "600">
