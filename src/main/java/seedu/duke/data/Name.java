@@ -9,7 +9,7 @@ import seedu.duke.exceptions.InvalidFormatException;
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS = "Name to be added/edited should contain spaces optionally "
-            + "and alphabetic characters with length of between 1 and 64 with";
+            + "and alphabetic characters with length of between 1 and 64";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alpha} ]+";
 
     public String name;
