@@ -26,7 +26,6 @@
                                                                                
 ================================================================================================================================================
 Hello I am HAMS. What can I do for you today?
-No existing 'save' directory found. Directory has been created.
 Unknown command
 Unknown command
 Unknown command
