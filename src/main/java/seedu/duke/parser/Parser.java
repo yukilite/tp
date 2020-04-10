@@ -377,8 +377,7 @@ public class Parser {
             return new ClearAllCommand();
 
         default:
-            DukeExceptions.throwUnknownCommand();
-            return null;
+            throw new UnknownCommandException();
         }
     }
 
