@@ -504,6 +504,17 @@ to the patient, the pid tag must be present.
 
 **A**: Unfortunately upon entering the Patient ID in `adda`, there is no way of changing the Patient ID. Please remove the incorrect appointment and add the correct appointment in again.
 
+**Q**: Why when I try to delete a patient in the list, some appointments are being deleted also?
+
+**A**: Because once you delete a patient, all the appointments related to him/her (through an attribute called ```pid```) are deleted also. Only when there are no appointments
+related to the patients, they are not deleted.
+
+**Q**: Why when I try to clear all the patients in the patient list, the appointments are cleared also?
+
+**A**: The reason is that there is a dependency of appointments on patients. Each patient can be assigned to multiple appointments through ```pid```. Like mentioned in the previous
+question, you can realize that once we clear all the patients, the presence of such appointments are no longer valid (All appointments belong to all patients). Hence, they are cleared
+also.
+
 ### [Back to top &#x2191;](#table-of-content)
 
 
