@@ -14,7 +14,7 @@
             * [2.2.1. Record module ](#221-sam-record-module)
             * [2.2.2. Converter module ](#222-converter-module)
             * [2.2.3. BRANDON storage module ](#223-brandon-storage-module)
-            * [2.2.4. AD command module ](#224-ad-command-module)
+            * [2.2.4. Command module ](#224-command-module)
             * [2.2.5. Parser Module ](#225-parser-module)
                 * [2.2.5.1. Object creation and input interpretation](#2251-object-creation-and-steps-in-input-interpretation)
                 * [2.2.5.2. Design Considerations ](#2252-design-considerations)
