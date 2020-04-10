@@ -27,15 +27,18 @@ maintaining medical records. It is written in Java.
 
 * **Other contributions**:
     * Project Management: 
-        * Fixed team's Gradle errors (Pull requests [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe))
+        * Fixed team's Gradle errors (Pull requests [#34](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/34), [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe))
         
     * Enhancements to existing features: 
         * Wrote additional tests for existing features to increase coverage from xx% to xx% (Pull requests [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe)).
     
     * Documentation: 
-        * Did cosmetics tweaks to the User Guide: [#46](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/46)
-    * Community:
+        * Reorganised content in the User Guide: [#46](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/46)
     
+    * Community:
+        * PR Reviews (with non-trivial content): [#1](https://github.com/yukilite/ped/issues/1), [#3](https://github.com/yukilite/ped/issues/3)
+        , [#4](https://github.com/yukilite/ped/issues/4)
+        * Reported bugs and suggestions for other team in the module: [#5](https://github.com/nus-cs2113-AY1920S2/tp/pull/5)
     
 ### Contributions to the User Guide
 
