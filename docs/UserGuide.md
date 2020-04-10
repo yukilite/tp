@@ -249,6 +249,8 @@ Format: `clearp`
 -------------| ------------------ |
 `clearp` | <img src="images/UG/clearp.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600">
 
+### [Back to top &#x2191;](#table-of-content)
+
 ***
 
 ### 4.2 Appointment Commands
@@ -391,7 +393,7 @@ Format: `cleara`
 #### Example list
  <img src="images/UG/lista_not_empty.JPG" width="600">
  
- #### Example of usage:
+#### Example of usage:
  
  **Please refer to the example list above**
  
@@ -403,7 +405,7 @@ Format: `cleara`
 
 ***
 
-## 4.3 Clear all records
+### 4.3 Clear all records
 The program allows you to clear all lists.
 
 Format: `clearall`
@@ -424,6 +426,11 @@ Format: `clearall`
 Is both list empty? |   Usage    |   Outcome & After  |
 :------------------:| ---------- | ------------------ |
  NO | `clearall` | <img src="images/UG/clearall.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600"> 
+ 
+
+### [Back to top &#x2191;](#table-of-content)
+
+***
 
 ### 4.4 View help
 
@@ -441,6 +448,8 @@ Format: `help`
 
 ### [Back to top &#x2191;](#table-of-content)
 
+
+
 ### 4.5 Exit HAMS program
 
 This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in
@@ -455,6 +464,8 @@ Format: `exit`
 <img src ="images/exit_eg1.PNG" width = "400">
 
 ### [Back to top &#x2191;](#table-of-content)
+
+***
 
 ## 5. Command Summary
 
@@ -475,6 +486,10 @@ Format: `exit`
 `editp \index [index number in list] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
 `help` | Give you a manual on a list of valid commands and their usage
 `exit` | Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
+
+### [Back to top &#x2191;](#table-of-content)
+
+***
 
 ## 6. FAQ
 **Q**: Would my details be captured if I randomize the input order of the keywords?
