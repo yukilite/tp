@@ -105,7 +105,7 @@ methods.
 To illustrate, the below example is used:
 * editp \index 1 \name Justin \age 69 \Pasir Panjang
 
-![](images/SD_Patient.png)
+![](images/SD_Patient.PNG)
 
 Upon startup, objects from ui, parser and storage are created. Prompted for user input, Duke receives the "editp"
 command which is forwarded to the parser to be interpreted respectively. Once the `EditPatientCommand` object is 
@@ -138,7 +138,7 @@ special formatting characters (ie. SimpleDateFormat). This class is primarily us
 in the `Appointment` class. As illustrated below, its methods are called during the creation of the `Appointment`
 object constructor. 
 
-![](images/SD_Converter.png)
+![](images/SD_Converter.PNG)
 
 ### [Back to top &#x2191;](#table-of-content)
 
