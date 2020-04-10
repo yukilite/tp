@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -21,7 +22,7 @@ class ListPatientCommandTest {
     private static final String EMPTY = "";
 
     @Test
-    void testListWithPatients() {
+    void testListWithPatients() throws InvalidFormatException {
         Ui ui = null;
         Storage storage = null;
         int savedPatientList = 1;
@@ -38,7 +39,7 @@ class ListPatientCommandTest {
     }
 
     @Test
-    void testListWithoutPatients() {
+    void testListWithoutPatients() throws InvalidFormatException {
         Ui ui = null;
         Storage storage = null;
 

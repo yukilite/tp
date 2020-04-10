@@ -29,7 +29,7 @@ public class AppointmentList {
         return appointmentList;
     }
 
-    public void setAppointmentList(List appointmentListInput) {
+    public static void setAppointmentList(List appointmentListInput) {
         appointmentList = appointmentListInput;
     }
 

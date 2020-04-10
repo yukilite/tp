@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.record.Patient;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -41,7 +42,7 @@ public class FindPatientCommand extends Command {
      * @param searchValue the <code>String</code> object representing the keyword to search for in
      *                    each Patient object's fields
      */
-    public FindPatientCommand(String searchValue) {
+    public FindPatientCommand(String searchValue) throws InvalidFormatException {
         this.searchValue = searchValue;
     }
 
@@ -62,12 +63,13 @@ public class FindPatientCommand extends Command {
     public void execute(Ui ui, Storage storage) throws IOException {
         List<Patient> searchResults = new ArrayList<>();
         /*get the list of all Patients from Storage to conduct search*/
-        for (Patient appointment : PatientList.getPatientList()) {
-            if (appointment.getName().contains(this.getsearchValue())
-                    || Integer.toString(appointment.getAge()).contains(this.getsearchValue())
-                    || appointment.getAddress().contains(this.getsearchValue())
-                    || appointment.getContactNumber().contains(this.getsearchValue())) {
-                searchResults.add(appointment);
+        for (Patient patient : PatientList.getPatientList()) {
+            if (patient.getName().contains(this.getsearchValue())
+                    || Integer.toString(patient.getAge()).contains(this.getsearchValue())
+                    || patient.getAddress().contains(this.getsearchValue())
+                    || patient.getContactNumber().contains(this.getsearchValue())
+                    || Integer.toString(patient.getPatientID()).contains(this.getsearchValue())) {
+                searchResults.add(patient);
             }
         }
         ui.printPatientSearchResults(searchResults);
