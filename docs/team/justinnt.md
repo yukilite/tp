@@ -48,4 +48,5 @@ maintaining medical records. It is written in Java.
     duplication and increases abstraction.
     
     - Highlights: 
-     
+    
+        - It is easy to add new checks and exceptions, since all checks in DukeExceptions are  
