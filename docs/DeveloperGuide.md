@@ -820,45 +820,187 @@ depending on the command type in Step 3.
 
 >![](images/SD_parser/Capture.JPG)
 
-Sequence Diagram when `parseCommand(userInput)` is initially called
+##### Sequence Diagram when `parseCommand(userInput)` is initially called
 ![](images/SD_parser/Slide1.JPG)
 
-Sequence Diagram for `addp`
+The userInput is first captured and then passed into `parseCommand(userInput)` method. As seen in the Sequence Diagram 
+above, different appointment will result in different alternate paths taken. 
+
+Below is the list of commands available as of v2.1. You can find their individual Sequence Diagram in the following sections 
+below. 
+
+-  Adding a patient: `addp`
+-  Editing a patient: `editp`
+-  Deleting a patient: `deletep`
+-  Adding an appointment: `adda`
+-  Editing an appointment: `edita`
+-  Deleting an appointment: `deletea`
+-  Finding a patient: `findp`
+-  Finding an appointment: `finda`
+-  Clearing patient list: `clearp`
+-  Clearing appointment list: `cleara`
+-  Clearing all list: `clearall`
+-  Show help menu: `help`
+-  Exit program: `exit`
+
+We decided to categorize `clearp`, `cleara`, `clearall`, `help` and `exit`, in the `[else]` alt branch. This is because 
+these 4 commands do not require any additional parsing. As such, the default `[else]` will be executed for these commands. 
+You can find the Sequence diagram for default `[else]` [here](#sequence-diagram-for-default-else).
+
+##### Sequence Diagram for `addp`
+
 ![](images/SD_parser/Slide2.JPG)
 
-Sequence Diagram for `editp`
+When you provide an `addp` command, an internal method, `getPatientFieldAdd(userInput)` is called. A HashMap will 
+then be created.
+
+We can update the HashMap by calling this method - `fillPatientFields(userInput, HashMap)`. The HashMap
+based on the [fields](#13-definitions) the user provide.
+
+For example a valid user input: `addp \name Justin \age 23`. `fillPatientFields(userInput, HashMap)` will update the HashMap
+to contain these key value pairs.
+
+-   name -> Justin
+-   age -> 23   
+
+Next, we will call DukeException#checkEmptyField() to ensure that there is at least 1 field provided that is not empty. 
+
+Finally, a hashMap will be returned so that the `AddPatientCommand` object can be created.
+
+##### Sequence Diagram for `editp`
+
 ![](images/SD_parser/Slide3.JPG)
 
-Sequence Diagram for `deletep`
+When you provide an `editp` command, an internal method, `getPatientFieldEdit(userInput)` is called. A HashMap will 
+then be created.
+
+We first get the index value from the userInput and check its value. If it is not valid, we will throw an error.
+
+Supposed the index is valid, then we move on to filling the hashMap. The steps of filling the hashMap is similar to that of
+`addp`.
+
+##### Sequence Diagram for `deletep`
+
 ![](images/SD_parser/Slide4.JPG)
 
-Sequence Diagram for `adda`
+When you provide an `deletep` command, an internal method, `getPatientFieldDelete(userInput)` is called. A HashMap will 
+then be created.
+
+We first get the index value from the userInput and check its value. If it is not valid, we will throw an error.
+
+When the index is valid, we will add the index and its value into the HashMap.
+
+This HashMap will then be returned so that a `DeletePatientCommand` object can be created. 
+
+##### Sequence Diagram for `adda`
+
 ![](images/SD_parser/Slide5.JPG)
 
-Sequence Diagram for `edita`
+When you provide an `adda` command, an internal method, `getAppointmentFieldAdd(userInput)` is called. A HashMap will 
+then be created.
+
+We can update the HashMap by calling this method - `fillAppointmentFields(userInput, HashMap)`. The HashMap
+based on the [fields](#13-definitions) the user provide.
+
+For example a valid user input: `adda \time 1234 \date 22/05/2020 \pid 1`. `fillAppointmentFields(userInput, HashMap)` will update the HashMap
+to contain these key value pairs.
+
+-   time -> 1234
+-   date -> 22/05/2020
+-   pid -> 1   
+
+Next, we will call DukeException#checkEmptyField() to ensure that there is at least 1 field provided that is not empty. 
+Then, we will call DukeException#checkPidEmpty() to ensure that the pid field is not empty. This is because pid is compulsory.
+
+Finally, a hashMap will be returned so that the `AddAppointmentCommand` object can be created.
+
+##### Sequence Diagram for `edita`
+
 ![](images/SD_parser/Slide6.JPG)
 
-Sequence Diagram for `deletea`
+When you provide an `edita` command, an internal method, `getAppointmentFieldEdit(userInput)` is called. A HashMap will 
+then be created.
+
+We first get the index value from the userInput and check its value. If it is not valid, we will throw an error.
+
+Supposed the index is valid, then we move on to filling the hashMap. 
+
+Next, we will call DukeException#checkEmptyField() to ensure that there is at least 1 field provided that is not empty.
+
+Finally a hashMap will be returned so that the `EditAppointmentCommand` object can be created.
+
+##### Sequence Diagram for `deletea`
+
 ![](images/SD_parser/Slide7.JPG)
 
-Sequence Diagram when it is an unknown command
+When you provide a `deletea` command, an internal method, `getAppointmentFieldDelete(userInput)` is called. A HashMap will 
+then be created.
+
+We first get the index value from the userInput and check its value. If it is not valid, we will throw an error.
+
+When the index is valid, we will add the index and its value into the HashMap.
+
+This HashMap will then be returned so that a `DeleteAppointmentCommand` object can be created. 
+
+##### Sequence Diagram for `findp`
+
+![](images/SD_parser/findp.JPG)
+
+When you provide a `findp` command, an internal method, `getSearchValue(userInput)` is called. The sequence diagram for
+for this method is [here](#sequence-diagram-for-get-search-value). It will return the value to be searched. 
+
+When this search value, a FindPatientCommand will be created and a reference to it will be returned.
+
+##### Sequence Diagram for `finda`
+
+![](images/SD_parser/findp.JPG)
+
+When you provide a `finda` command, an internal method, `getSearchValue(userInput)` is called. The sequence diagram for
+for this method is [here](#sequence-diagram-for-get-search-value). It will return the value to be searched. 
+
+When this search value, a FindAppointmentCommand will be created and a reference to it will be returned.
+
+##### Sequence Diagram for `default [else]`
+
 ![](images/SD_parser/Slide8.JPG)
 
-Sequence Diagram for the creation of the command Object
+As explained [above](#sequence-diagram-when-parsecommanduserinput-is-initially-called), the commands `clearp`, `cleara`, `clearall`, `help` and `exit` 
+will be directed to this branch.
 
-![](images/SD_parser/Slide9.JPG)
+This is because they do not require any additional parsing. 
 
-Sequence Diagram for error checking when `DukeExpcetion` is called
+In addition, unknown commands will be directed here as well. 
 
-![](images/SD_parser/Slide10.JPG)
+##### Sequence Diagram for the creation of the command Object
 
-Sequence Diagram for calling an enum
+![](images/SD_parser/sd_get_command_object.JPG)
+
+Based on the different type of commands, different command object will be return.
+
+For example, a `adda` command will return a `addAppointmentCommandObject`.
+
+All unknown commands will be directed to the `[else]` branch, which will throw an DukeExceptions#unknownCommandException.
+
+##### Sequence Diagram for get search value
+
+![](images/SD_parser/getSearchValue.JPG)
+
+The above Sequence Diagram depicts how the method searchValue(String[]) works. It takes in an array of String and finds
+
+We first trim the userInput to get rid of any excess trailing whitespaces. 
+
+Then, the userInput is spilt on the first whitespace and store in a String array. 
+
+We can pass this String array into this method and find the value of the search value at index 1 of the String Array.
+
+If the length of the String array is 1, this means that the user did not supply any search value. Thus the DukeExceptions#noFieldCommandException 
+will be thrown.
+
+If not, the search value will be located at index 1 and we will return this as the search value. 
+
+##### Sequence Diagram for calling an enum
 
 ![](images/SD_parser/Slide11.JPG)
-
-Sequence Diagram for error checking when `DukeExpcetion` is called
-
-![](images/SD_parser/Slide12.JPG)
 
 >![](images/SD_parser/Capture3.JPG)
 
@@ -870,13 +1012,29 @@ Sequence Diagram for error checking when `DukeExpcetion` is called
 |.|ADDRESS|.|
 |.|CONTACT_NUMBER|.|
 
+Sequence Diagram for error checking when `DukeExpcetion#checkFieldEmpty` is called
+
+![](images/SD_parser/Slide10.JPG)
+
+If all fields are empty, this exception will be thrown
+
+Sequence Diagram for error checking when `DukeExpcetion#checkIndexValidity` is called
+
+![](images/SD_parser/Slide12.JPG)
+
+If the index provided are invalid, this exception will be thrown.
+
+Sequence Diagram for error checking when `DukeException#checkPidEmpty` is called
+
+![](images/SD_parser/checkPidEmpty.JPG)
+
+If the pid field is not provided, this exception will be thrown.
+
 >![](images/SD_parser/Capture4.JPG)
 
-|DukeExceptions|checkFieldEmpty|checkIndexValidity
-|--------|-------|------|
-|.|Based on the above enum table, checks that at least 1 field  is provided. <br><br>Throws NoFieldCommandException if all fields are empty|Check that the index provided is valid. <br><br> If it is less than 0 or not an integer, throw InvalidIndex and IndexNotInteger respectively.|
-
-
+checkFieldEmpty|checkIndexValidity|checkPidEmpty
+---------------|------------------|-------------
+Based on the above enum table, checks that at least 1 field  is provided. <br><br>Throws NoFieldCommandException if all fields are empty|Check that the index provided is valid. <br><br> If it is less than 0 or not an integer, throw InvalidIndex and IndexNotInteger respectively. | Check that pid is provided. <br><br> If no pid is provided, throw checkPidEmptyException. 
 
 ##### 2.2.5.2 Design considerations
 ###### Aspect: Symbol for delimiter
