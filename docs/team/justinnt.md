@@ -87,9 +87,9 @@ maintaining medical records. It is written in Java.
         - Liaise with another team to review their program. 
         
 ## Contributions to the User Guide
-```
-Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
-```
+
+> Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
+
 
 **For 3. Command Format, I ensured that the commands and examples are up to date. I also included in visual hints (pictures) that
 can be useful for Users.**
@@ -161,10 +161,10 @@ front he had a typo. So instead of retyping the commands, he can simply duplicat
 ***
 
 ## Contributions to the Developer Guide
-```
- Provided below are sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
+
+> Provided below are sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
  technical contributions to the project and rationale for technical implementation.
-```
+
 
 **I provided the write up for the introduction part of the Developer Guide as shown below**
 
