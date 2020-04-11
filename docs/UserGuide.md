@@ -104,7 +104,7 @@ A valid input would be `adda \date 22/05/2020 \time 1200 \pid 1`.
 #### 4.1.1 Add a new Patient record
 
 The program allows you to add a new Patient record to the current list of Patient records. Note that patient id
- number (pid) is decided by HAMS and not the user.
+ number (pid) is decided by HAMS and not the user. Pid assigned may **not** be in order.
 
 Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
@@ -451,8 +451,8 @@ Format: `help`
 ### 4.5 Exit HAMS program
 
 This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in
- `/saves/appointments.txt` and `/saves/patients.txt` respectively. Also, the patient id state will also be saved in
-  `/saves/patientId.txt`). These files will be loaded to the program when it is run again subsequently.
+ `/saves/appointments.txt` and `/saves/patients.txt` respectively). Also, the resuable and new patient ids will be saved in
+  `/saves/patientId.txt`. These files will be loaded to the program when it is run again subsequently.
 
 Format: `exit`
 #### Example of usage: 

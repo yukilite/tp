@@ -23,7 +23,13 @@
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
     + [5.1, Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
     + [5.2. Adding a patient](#52-adding-a-patient)
-    + [5.3. Deleting a patient](#53-delete-a-patient)
+    + [5.3. Editing a patient](#53-editing-a-patient)
+    + [5.4. Deleting a patient](#54-delete-a-patient)
+    + [5.5. Adding an appointment](#55-add-an-appointment)
+    + [5.6. Editing an appointment](#56-edit-an-appointment)
+    + [5.7. Deleting an appointment](#57-delete-an-appointment)
+    + [5.8. Finding patients and appointments](#58-find-patients-and-find-appointment)
+    + [5.9. Clearing lists](#59-clear-patient-clear-appointment-clear-all-commands)
         
 <!-- TOC -->
 
@@ -40,7 +46,7 @@ operators and maintenance engineers. The below table summarizes the purposes of 
 audience.
 
 |Role|Purpose|
-|---------|-------|
+|----|-------|
 |Developers & Designers| To understand the architecture and follow the design to build the system|
 |Software testers| To understand the internals of the system so as to test more effectively|
 |Operators| To improve productivity while using the system on a daily basis|
@@ -54,12 +60,14 @@ and delete patients' information and appointments.
 |------------|-----|
 |Patients|Accelerated waiting process|
 |Front-desk administrative staff|Improved organisation in patient and appointment details. Potential automated notification processes |
+|Clinics and hospitals|Reduce occurrences of missed appointments, thus allowing reduced time and money wastage
 
 ### 1.3. Definitions
 |Term|Description|
 |----|-----------|
-|||
-|||
+|fields|Fields refer to what are the accepted formats the Parse will search for in the User Input. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name`. <br><br> View the full list of fields [here](#sequence-diagram-for-calling-an-enum) or on our User Guide [here](UserGuide.md) |
+|field-values| This refers to the value that exists after a field. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name` and its corresponding value will be `23`, `Pasir Ris`, `Justin`.
+
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -1012,19 +1020,19 @@ If not, the search value will be located at index 1 and we will return this as t
 |.|ADDRESS|.|
 |.|CONTACT_NUMBER|.|
 
-Sequence Diagram for error checking when `DukeExpcetion#checkFieldEmpty` is called
+##### Sequence Diagram for error checking when `DukeExpcetion#checkFieldEmpty` is called
 
 ![](images/SD_parser/Slide10.JPG)
 
 If all fields are empty, this exception will be thrown
 
-Sequence Diagram for error checking when `DukeExpcetion#checkIndexValidity` is called
+##### Sequence Diagram for error checking when `DukeExpcetion#checkIndexValidity` is called
 
 ![](images/SD_parser/Slide12.JPG)
 
 If the index provided are invalid, this exception will be thrown.
 
-Sequence Diagram for error checking when `DukeException#checkPidEmpty` is called
+##### Sequence Diagram for error checking when `DukeException#checkPidEmpty` is called
 
 ![](images/SD_parser/checkPidEmpty.JPG)
 
@@ -1067,17 +1075,18 @@ Based on the above enum table, checks that at least 1 field  is provided. <br><b
         -   Decouples commands from method, making the code more modular.
         -   Increases testability, bugs found can be isolated to the individual command and method respectively
         -   Changes to one method will only affect the command calling it and vice-versa.
+        -   Easier to understand code. 
         
     *   Cons: 
     
-        -   Code duplication will increase
- 
+        -   Code duplication may increase.
+
+
 +   Alternative 2: Every command calls a common method to parse the remaining fields. 
     * Pros:
     
         -   Less code duplication
-        
-        -   Easier to understand code. 
+        -   Harder to understand code as different commands call the same method. 
         
     * Cons:
     
@@ -1168,13 +1177,178 @@ appointment list should be saved. In addition, user should be able to manually s
     Expected: Error message is printed. To double check, type `listp` and ensure that the test case
     is **not** inside.
 
-### 5.3 Delete a patient
+### 5.3 Editing a patient
 
-1. Deleting a patient 
-    1. Prerequisites: list all patients using `listp`. Multiple patients in list.
+1. Successfully editing a patient 
+    1. Prerequisites: list all patients using `listp`. Multiple patients already in list.
+    2. Test case: `editp \index 1 \name Emma`
+    
+    Expected: Success message is printed. To double check, type `listp` and compare the changes from the old list.
+    
+2. Unsuccessfully editing a patient
+    1. Prerequisites: list all patients using `listp`. Less than 100 patients already in list.
+    2. Test case 1: `editp \index 100 \name Emma`
+    3. Test case 2: `editp \index 1 \name Emma \age -100`
+    4. Test case 3: `editp \index 1 \name Emma \age String`
+    
+    Expected: For all test cases, error message printed. No patients will be edited. To double check, type `listp` and compare the changes from the old list and ensure
+    that the test cases are **not** being edited.   
+    
+    - Test case 1 fails because the index is greater than the number of patients in the list
+    - Test case 2 and 3 fails because the provided age is of wrong format. 
+    
+    **Note: For test case 1, please ensure that the given index is more than the current patients in the list**
+
+### 5.4 Delete a patient
+
+1. Successful deleting a patient 
+    1. Prerequisites: list all patients using `listp`. Multiple patients already in list.
     2. Test case: `deletep \index 1`
     
     Expected: First patient in the list is deleted. 
     
+2. Unsuccessful deleting a non-existing patient
+    1. Prerequisites: list all patients using `listp`. 10 patients in list.
+    2. Test case: `deletep \index 11`
+    
+    Expected: Error message is printed. No patients will be delete. To double check, type `listp` and compare from the previous list that 
+    no patients is deleted from the list. 
+    
+    **Note: For this test case, please ensure that the given index is more than the current patients in the list**
+
+### 5.5 Add an appointment
+
+1. Successful Adding an appointment
+    1. Run the .jar file.
+    2. Test case: `adda \pid 1 \time 1234 \date 22/05/2020`
+    
+    Expected: Success message is printed. To double check, type `lista` and ensure that the test case
+    is inside. 
+    
+2. Unsuccessful adding an appointment
+    1. Run the .jar file.
+    2. Test case 1: `adda \time 1234 \date 22/05/2020`
+    3. Test case 2: `adda \time 9999 \date 22/05/2020 \pid 1`
+    4. Test case 3: `adda \time 1234 \date 31/02/2020 \pid 1`
+    
+    Expected: Error message is printed for all 3 cases. To double check, type `lista` and ensure that the test case
+    is **not** inside.
+        
+     -  Test case 1 fails because pid is compulsory
+    
+     -  Test case 2 and 3 fails because of invalid time and date respectively. 
+
+### 5.6 Edit an appointment
+
+1. Successfully editing an appointment 
+    1. Prerequisites: list all patients using `lista`. Multiple appointments already in list.
+    2. Test case: `edita \index 1 \time 1234`
+    
+    Expected: Success message is printed. To double check, type `lista` and compare the changes from the old list.
+    
+2. Unsuccessfully editing an appointment
+    1. Prerequisites: list all appointments using `lista`. Less than 100 appointments already in list.
+    2. Test case 1: `editp \index 100 \time 1234`
+    3. Test case 2: `editp \index 1 \date 31/02/2020 \time 1234`
+    4. Test case 3: `editp \index 1 \date 22/05/2020 \time 9999`
+    
+    Expected: For all test cases, error message printed. No appointments will be edited. To double check, type `lista` and compare the changes from the old list and ensure
+    that the test cases are **not** being edited.   
+    
+    - Test case 1 fails because the index is greater than the number of appointments in the list
+    - Test case 2 and 3 fails because the provided time and/or time is invalid. 
+    
+    **Note: For test case 1, please ensure that the given index is more than the current appointments in the list**
+
+### 5.7 Delete an appointment
+
+1. Successful deleting an appointment 
+    1. Prerequisites: list all appointments using `listp`. Multiple appointments already in list.
+    2. Test case: `deletea \index 1`
+    
+    Expected: Success message is printed. First appointment in the list is deleted. To double check, type `lista` and compare the changes from the old list.
+    
+2. Unsuccessful deleting a non-existing appointment
+    1. Prerequisites: list all appointments using `lista`. 10 appointments in list.
+    2. Test case: `deletea \index 11`
+    
+    Expected: Error message is printed. No appointments will be delete. To double check, type `lista` and compare from the previous list that 
+    no appointments is deleted from the list. 
+    
+    **Note: For this test case, please ensure that the given index is more than the current appointments in the list**
+    
+### 5.8 Find patients and Find Appointment
+
+1. Successful finding patients
+    1. Prerequisites: list all patients using `listp`. Multiple patients in the list. The value to be search is also inside the list.
+    2. Test case: `findp Justin`
+    
+    Expected: Success message is printed, all matched patient records will be listed.
+    
+    **Note: For this test case, please ensure that the search value already exist in the patient list.**
+    
+2. Unsuccessful finding patient
+    1. Prerequisites: list all patients using `listp`. Multiple patients in the list. The value to be search is **not** inside the list.
+    2. Test case: `findp abc123123abc123`
+    
+    Expected: Error message stating not records found will be printed. 
+    
+    **Note: For this test case, please ensure that the search value does not exist in the patient list.**
+    
+3. Successful finding appointments
+    1. Prerequisites: list all appointments using `lista`. Multiple appointments in the list. The value to be search is also inside the list.
+    2. Test case: `finda 22/05/2020`
+    
+    Expected: Success message is printed, all matched appointment records will be listed.
+    
+    **Note: For this test case, please ensure that the search value already exist in the patient list.**
+    
+4. Unsuccessful finding appointments
+    1. Prerequisites: list all appointments using `lista`. Multiple appointments in the list. The value to be search is **not** inside the list.
+    2. Test case 1: `finda 22/05/2025`
+    3. Test case 2: `finda 2020/05/22`
+    
+    Expected: Error message printed, no records should be shown.
+    
+    - Test case 1 fails because the date cannot be found in the appointment list.
+    - Test case 2 fails because the provided date format is wrong. 
+
+### 5.9 Clear patient, clear appointment, clear all commands
+
+1. Successful clearing patient list
+    1. Prerequisites: list all patients using `listp`. Multiple patients in the list.
+    2. Test case: `clearp`
+    
+    Expected: Success message is printed, patient list cleared. To double check, type `listp` and ensure the list is empty.
+      
+2. Unsuccessful clearing patient list
+    1. Prerequisites: list all patients using `listp`. It must be a empty
+    2. Test case: `clearp`
+    
+    Expected: Error message stating there is nothing to clear. 
+    
+3. Successful clearing appointment list
+    1. Prerequisites: list all appointments using `lista`. Multiple appointments in the list.
+    2. Test case: `cleara`
+    
+    Expected: Success message is printed, appointments list cleared. To double check, type `lista` and ensure the list is empty.
+
+4. Unsuccessful clearing appointment list
+    1. Prerequisites: list all appointments using `lista`. It must be a empty
+    2. Test case: `cleara`
+    
+    Expected: Error message stating there is nothing to clear.
+      
+5. Successful clear all list
+    1. Prerequisites: list all patients and appointments using `listp` and `lista`. Multiple records in both list.
+    2. Test case: `clearall`
+
+    Expected: Success message printed. Both list cleared. To double check, type `listp` and `lista` to to ensure that both lists are empty.
+    
+6. Unsuccessful clearing of all list
+    1. Prerequisites: list all patients and appointments using `listp` and `lista`. Both list must be empty
+    2. Test case: `clearall`
+    
+    Expected: Error message printed stating that there is nothing to clear. 
 
 ### [Back to top &#x2191;](#table-of-content)
