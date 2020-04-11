@@ -28,6 +28,8 @@
     + [5.5. Adding an appointment](#55-add-an-appointment)
     + [5.6. Editing an appointment](#56-edit-an-appointment)
     + [5.7. Deleting an appointment](#57-delete-an-appointment)
+    + [5.8. Finding patients and appointments](#58-find-patients-and-find-appointment)
+    + [5.9. Clearing lists](#59-clear-patient-clear-appointment-clear-all-commands)
         
 <!-- TOC -->
 
@@ -1181,5 +1183,79 @@ appointment list should be saved. In addition, user should be able to manually s
     no appointments is deleted from the list. 
     
     **Note: For this test case, please ensure that the given index is more than the current appointments in the list**
+    
+### 5.8 Find patients and Find Appointment
+
+1. Successful finding patients
+    1. Prerequisites: list all patients using `listp`. Multiple patients in the list. The value to be search is also inside the list.
+    2. Test case: `findp Justin`
+    
+    Expected: Success message is printed, all matched patient records will be listed.
+    
+    **Note: For this test case, please ensure that the search value already exist in the patient list.**
+    
+2. Unsuccessful finding patient
+    1. Prerequisites: list all patients using `listp`. Multiple patients in the list. The value to be search is **not** inside the list.
+    2. Test case: `findp abc123123abc123`
+    
+    Expected: Error message stating not records found will be printed. 
+    
+    **Note: For this test case, please ensure that the search value does not exist in the patient list.**
+    
+3. Successful finding appointments
+    1. Prerequisites: list all appointments using `lista`. Multiple appointments in the list. The value to be search is also inside the list.
+    2. Test case: `finda 22/05/2020`
+    
+    Expected: Success message is printed, all matched appointment records will be listed.
+    
+    **Note: For this test case, please ensure that the search value already exist in the patient list.**
+    
+4. Unsuccessful finding appointments
+    1. Prerequisites: list all appointments using `lista`. Multiple appointments in the list. The value to be search is **not** inside the list.
+    2. Test case 1: `finda 22/05/2025`
+    3. Test case 2: `finda 2020/05/22`
+    
+    Expected: Error message printed, no records should be shown.
+    
+    - Test case 1 fails because the date cannot be found in the appointment list.
+    - Test case 2 fails because the provided date format is wrong. 
+
+### 5.9 Clear patient, clear appointment, clear all commands
+
+1. Successful clearing patient list
+    1. Prerequisites: list all patients using `listp`. Multiple patients in the list.
+    2. Test case: `clearp`
+    
+    Expected: Success message is printed, patient list cleared. To double check, type `listp` and ensure the list is empty.
+      
+2. Unsuccessful clearing patient list
+    1. Prerequisites: list all patients using `listp`. It must be a empty
+    2. Test case: `clearp`
+    
+    Expected: Error message stating there is nothing to clear. 
+    
+3. Successful clearing appointment list
+    1. Prerequisites: list all appointments using `lista`. Multiple appointments in the list.
+    2. Test case: `cleara`
+    
+    Expected: Success message is printed, appointments list cleared. To double check, type `lista` and ensure the list is empty.
+
+4. Unsuccessful clearing appointment list
+    1. Prerequisites: list all appointments using `lista`. It must be a empty
+    2. Test case: `cleara`
+    
+    Expected: Error message stating there is nothing to clear.
+      
+5. Successful clear all list
+    1. Prerequisites: list all patients and appointments using `listp` and `lista`. Multiple records in both list.
+    2. Test case: `clearall`
+
+    Expected: Success message printed. Both list cleared. To double check, type `listp` and `lista` to to ensure that both lists are empty.
+    
+6. Unsuccessful clearing of all list
+    1. Prerequisites: list all patients and appointments using `listp` and `lista`. Both list must be empty
+    2. Test case: `clearall`
+    
+    Expected: Error message printed stating that there is nothing to clear. 
 
 ### [Back to top &#x2191;](#table-of-content)
