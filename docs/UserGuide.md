@@ -104,7 +104,7 @@ A valid input would be `adda \date 22/05/2020 \time 1200 \pid 1`.
 #### 4.1.1 Add a new Patient record
 
 The program allows you to add a new Patient record to the current list of Patient records. Note that patient id
- number (pid) is decided by HAMS and not the user. Pid assigned may **not** be in order
+ number (pid) is decided by HAMS and not the user. Pid assigned may **not** be in order.
 
 Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
