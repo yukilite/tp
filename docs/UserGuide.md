@@ -258,6 +258,8 @@ Format: `clearp`
 The program allows you to add a new Appointment record to the current list of Appointment records. With the addition 
 of the `pid` field, it allows users to link the appointment to a specific patient. 
 
+The `pid` provided must be linked to a patient that currently exists in the system.
+
 Format: `adda \date [date] \time [time] \pid [patient id]`
 
 * `adda` keyword
@@ -352,7 +354,8 @@ NOT OK | `edita` | <img src ="images/edita_error.PNG" width = "600"> |
 <img src ="images/edita_eg2after.PNG" width = "400">
 
 #### 4.2.5 Find an existing Appointment
-The program allows you to find to an existing Appointment record based on a search value.
+The program allows you to find to an existing Appointment record based on a search value. The search value must follow
+the date format of dd/mm/yyyy or time format of hh:mm a.
 
 Format: `finda [search value]`
 
@@ -376,8 +379,8 @@ Format: `finda [search value]`
 
 Does it exist in list? |   Usage    |   Outcome  |
 :--------------------: | ---------- | ---------- |
-YES | `finda Fri` | <img src="images/UG/finda_fri.JPG" width="600">
-NO | `finda Oct` | <img src="images/UG/finda_nothing.JPG" width="600">
+YES | `finda 22/05/2020` | <img src="images/UG/new_finda.JPG" width="600">
+NO | `finda 23/05/2020` | <img src="images/UG/new_finda2.JPG" width="600">
 
 #### 4.2.6 Clear appointment records
 
