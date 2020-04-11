@@ -11,10 +11,29 @@
 * [2. Design & Implementation](#2-design--implementation)
     * [2.1. Project Overview](#21-project-overview)
         * [2.2. Module Overview](#22-module-overview)
-            * [2.2.1. Record module ](#221-sam-record-module)
+            * [2.2.1. Record module ](#221-record-module)
+				* [2.2.1.1 Process of Object Creation](#2211-process-of-object-creation)
+				* [2.2.1.2 Design Considerations](#2212-design-considerations)
             * [2.2.2. Converter module ](#222-converter-module)
-            * [2.2.3. BRANDON storage module ](#223-brandon-storage-module)
+            * [2.2.3. Storage module ](#223-storage-module)
+				* [2.2.3.1 Process of Object Creation](#2231-process-of-object-creation)
             * [2.2.4. Command module ](#224-command-module)
+				* [2.2.4.1 AddPatientCommand Class](#2241-addpatientcommand-class)
+				* [2.2.4.2 AddAppointmentCommand Class](#2242-addappointmentcommand)
+				* [2.2.4.3 ListPatientCommand Class](#2243-listpatientcommand-class)
+				* [2.2.4.4 ListAppointmentCommand Class](#2244-listappointmentcommand-class)
+				* [2.2.4.5 PatientIdManger Class](#2245-patientidmanger-class)
+				* [2.2.4.6 Design considerations for 2.2.4.1 to 2.2.4.5](#2246-design-considerations-for-2241-to-2245)
+				* [2.2.4.7 EditAppointmentCommand Class](#2247-editappointmentcommand-class)
+				* [2.2.4.8 EditPatientCommand Class](#2248-editpatientcommand-class)
+				* [2.2.4.9 DeleteAppointmentCommand Class](#2249-deleteappointmentcommand-class)
+				* [2.2.4.10 DeletePatientCommand Class](#22410-deletepatientcommand-class)
+				* [2.2.4.11 ClearAllCommand Class](#22411-clearallcommand-class)
+				* [2.2.4.12 ClearAppointmentCommand Class](#22412-clearappointmentcommand-class)
+				* [2.2.4.13 ClearPatientCommand Class](#22413-clearpatientcommand-class)
+				* [2.2.4.14 FindAppointmentCommand Class](#22414-findappointmentcommand-class)
+				* [2.2.4.16 HelpCommand Class](#22416-helpcommand-class)
+				* [2.2.4.17 ExitCommand Class](#22417-exitcommand-class)
             * [2.2.5. Parser Module ](#225-parser-module)
                 * [2.2.5.1. Object creation and input interpretation](#2251-object-creation-and-steps-in-input-interpretation)
                 * [2.2.5.2. Design Considerations ](#2252-design-considerations)
@@ -88,7 +107,7 @@ name and a summarized purpose.
 |---------|-------|
 |Records|Contains and provides access to user information|
 |Converter|Formats user input| 
-|BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **Storage**|?|
+|Storage|Saves existing Records to local file/loads save file data to HAMS|
 |Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
@@ -150,13 +169,15 @@ object constructor.
 
 ### [Back to top &#x2191;](#table-of-content)
 
-#### 2.2.3 BRANDON storage module
+#### 2.2.3 Storage module
 
 The Storage module consists of 3 different classes. 
 The PatientList and AppointmentList classes act as data structures to store the records of Patient and Appointment 
 objects respectively. They function as ADTs, where various commands from Command objects can manipulate the records within.
+
 The Storage class manages the load and save operations involving the PatientList and PatientList class. 
 These operations are usually invoked on startup, whenever changes are made to the ADTs and before exiting the program.
+Additionally, it also works with PatientIdManager class to load pre-existing Patient-PatientId mappings.
 The class diagram for the storage module is as seen below: 
 
 
@@ -164,35 +185,41 @@ The class diagram for the storage module is as seen below:
 
 &nbsp;
 
-On startup, Duke invokes the loadSavedAppointment() and loadSavedPatient() methods in Storage. This allows the program 
+##### 2.2.3.1 Process of Object Creation
+
+On startup, Duke invokes the `loadSavedAppointment()` and `loadSavedPatient()` methods in Storage. This allows the program 
 to retrieve previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
 within the program. 
 
-The Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
-new Appointments, and then add them to an ArrayList called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
-construct the static AppointmentList. The sequence diagram is shown below:
+For Appointments, the Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
+new Appointments, and then add them to an ArrayList of Appointments called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
+construct the static AppointmentList.
+ 
+For Patients, the process is the same as above. The difference is that lines in the .txt files are converted to Patient objects instead.
+They are added to an ArrayList of Patients called `patientListToReturn`. `patientListToReturn` is then passed back to Duke to construct
+the static PatientList.
 
-![](images/loadsavedappt_seq.PNG)
-![](images/loadsavedappt_ref1.PNG)
+The sequence diagrams for both `loadSavedAppointment()` and `loadSavedPatient()` are shown below:
 
-When the static AppointmentList or PatientList has changes, or the program is exiting, saveAppointmentList() or savePatientList() 
+![](images/loadsavedappt_seq1.PNG)
+![](images/loadsavedappt_ref.PNG)
+
+![](images/loadsavedpatient_seq1.PNG)
+![](images/loadsavedpatient_ref.PNG)
+
+When the static AppointmentList or PatientList has changes, or the program is exiting, `saveAppointmentList()` or `savePatientList()` 
 is invoked respectively. This allows the Storage object to back up existing records to a local .txt file.
 
-The Storage object will create a FileWriter object called `fw`. The command will then iterate through the existing AppointmentList
-and parse each Appointment within, converting it to a string. `fw` then writes this string to the .txt file.
-The sequence diagram is shown below:
+For Appointments, the Storage object will create a FileWriter object called `fwAppointmentSave`. The command will then iterate through the existing AppointmentList
+and parse each Appointment within, converting it to a string. `fwAppointmentSave` then writes this string to the .txt file `appointments.txt`.
+
+For Patients, the process is the same as above. The difference is that Storage object creates a FileWriter object called `fwPatientSave` instead.
+`fwPatientSave` writes Patient strings to the file `patients.txt`.
+
+The sequence diagram for `saveAppointmentList()` and `savePatientList()`  is shown below:
 
 ![](images/saveapptlist_seq.PNG)
-
-#####2.2.3.1 FindPatient/FindAppointment
-Design considerations for findPatient:
-- general search
-- include multiple fields in search
-
-Design considerations for findAppointment:
-- using specified formats for date and time, only allow one to be searched at any time
-- general search
-
+![](images/savepatientlist_seq.PNG)
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -218,10 +245,12 @@ To add a patient, the ```AddPatientCommand``` class is used. For this ```AddPati
 façade class for the ```Main```, ```Patient``` , ```PatientList``` and the ```Storage``` class to interact with one 
 another. Also, to uniquely identify a patient, an unique patientId number is assigned to each patient when they are first added into the patient list.
 
+Note that if the patient information given is incorrect due to formatting or value error, ```AddPatientCommand``` will return an exception and ```AddPatientCommand``` will **not** create a patient record.
+
 ![](images/AddPatientDiagram.png)
 
 1. The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
-regarding the patient to be added will be stored in a Map, where the ```AddPatientCommand``` class object would read the Map content and store the information about the patient in said ```AddPatientCommand``` class object. 
+regarding the patient to be added will be stored in a Map, where the ```AddPatientCommand``` class object would read the Map content and store the information about the patient in said ```AddPatientCommand``` class object. It will also check for the format of the information given in the Map and see if the information is valid. If the information is not valid, the ```AddPatientCommand``` object will not be created.
 For the patient Id number, it will call upon the static class ```patientIdManager``` to get its unique patient id number. This unique Id number will be used later in the ```Patient``` object creation too.
 
 2. When the 
@@ -257,11 +286,14 @@ To add an appointment, the ```AddAppointmentCommand``` class is used. For this `
 serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
 interact with one another. 
 
+Note that if the appointment information given is incorrect due to formatting or value error, ```AddAppointmentCommand``` will return an exception and ```AddAppointmentCommand``` will **not** create an appointment record.
+
+
 ![](images/AddAppointmentDiagram.png)
 
 1. Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
 object, where the information of the appointment is again stored in a Map that the ```AddAppoinmentCommand``` object would read from. 
-Said information will be stored in the ```AddAppoinmentCommand``` object
+Said information will be stored in the ```AddAppoinmentCommand``` object.  It will also check for the format of the information given in the Map and see if the information is valid. If the information is not valid, the ```AddAppoinmentCommand``` object will not be created.
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
@@ -430,7 +462,7 @@ Lastly, for ```clearPatientId()```, it resets the value of  ```nextTopNewNumber`
  ```patientIdManager``` state since both commands clears all the current patients in HAMS, which meant that all the
   patient id in HAMS must be reset as there are no patients left.
 
-##### 2.2.4.6 Design considerations
+##### 2.2.4.6 Design considerations for 2.2.4.1 to 2.2.4.5
 
 For the 5 classes listed, there were some other design considerations that was discussed for these 5 classes. Here
 , we will discuss the other choices and the pros and cons for them.
@@ -505,17 +537,19 @@ For the 5 classes listed, there were some other design considerations that was d
         
 ### [Back to top &#x2191;](#table-of-content)
 
-#### 2.2.4.7 EditAppointmentClass
+#### 2.2.4.7 EditAppointmentCommand Class
 
 To edit an appointment, the ```EditAppointmentCommand``` class is used. For this ```EditAppointmentCommand``` class, it 
 serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
 interact with one another. 
 
+Note that if the patient information given is incorrect due to formatting or value error, ```EditAppointmentCommand``` will return an exception and ```EditAppointmentCommand``` will **not** update the patient record.
+
 1. The ```EditAppointmentCommand``` class is processed by ```Parser```
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```EditAppointmentCommand``` class would call upon the 
-```Appointment``` class to make an ```Appointment``` Object. 
+```Appointment``` class to make an ```Appointment``` Object. It will also check the information given for the appointment and see if the information is valid.
 
 3. After which, the ```EditAppoinmentCommand``` object will  call upon the ```AppointmentList``` object to get the record 
 of the record of the appointment based on the index with ```getAppointmentRecord``` .
@@ -536,17 +570,19 @@ Below shows the sequence diagram for ```EditAppointmentCommand``` class.
 
 ![](images/EditAppointmentSequenceDiagram.png)
 
-#### 2.2.4.8 EditPatientCommand CLass
+#### 2.2.4.8 EditPatientCommand Class
 
 To edit an appointment, the ```EditPatientCommand``` class is used. For this ```EditPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Patient```, ```PatientList```, ```Ui``` and the ```Storage``` class to 
 interact with one another. 
 
+Note that if the appointment information given is incorrect due to formatting or value error, ```EditPatientCommand``` will return an exception and ```EditPatientCommand``` will **not** update the patient record.
+
 1. The ```EditPatientCommand``` class is processed by ```Parser```
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```EditPatientCommand``` class would call upon the 
-```Patient``` class to make a ```Patient``` Object. 
+```Patient``` class to make a ```Patient``` Object. It will also check the information given for the patient and see if the information is valid.
 
 3. After which, the ```EditPatientCommand``` object will  call upon the ```PatientList``` object to get the record 
 of the record of the patient based on the index with ```getPatientRecord``` .
@@ -679,7 +715,92 @@ Below shows the sequence diagram for ```ClearPatientCommand``` class.
 
 ![](images/ClearPatientSequenceDiagram.png)
 
-#### 2.2.4.14 HelpCommand
+#### 2.2.4.14 FindAppointmentCommand Class
+
+To search the `AppointmentList` by keyword, the `FindAppointmentCommand` class is used. For this class, it serves as a 
+facade class for the Main, AppointmentList, Ui and the Storage class to interact with one another.
+
+1.	The `FindAppointmentCommand` class is processed by Parser
+
+2.	When the Main calls `execute(Ui ui, Storage storage)`, it creates `searchResults`, a new List to hold `Appointment` objects. 
+
+3.	The `FindAppointmentCommand` class gets the existing list of Appointment objects from AppointmentList using the method 
+`getAppointmentList()`.
+
+4.	After which, the `FindAppointmentCommand` object will iterate through Appointment objects within the list. According
+to the format of the input, this class searches specific fields:
+        * if input was **dd/mm/yyyy**, it searches date fields of each Appointment only.
+        * if input was **hh:mm (am/pm)**, it searches time fields of each Appointment only.
+
+5.	If an Appointment object does contain the search keyword, it will be added to searchResults.
+
+6.	searchResults then invokes the ui method `printAppointmentSearchResults()` to print the matching Appointment results to the console.
+(if searchResults is non-empty). Otherwise, the method outputs a message saying no search results were found.
+
+Below shows the sequence diagram for FindAppointmentCommand class.
+
+![](images/findappt_seq1.PNG)
+![](images/findappt_ref.PNG)
+
+##### 2.2.4.14.1 Design Considerations
+###### Aspect: Format of Search Input
+
++ Alternative 1 (current choice): Search only by Time or Date input
+    * Pros: 
+        - Easier implementation
+        - Greater compatibility with TimeConverter class, able to validate input more easily
+    * Cons:
+        -  Unable to filter existing Appointments more efficiently to find a specific Appointment
+
++ Alternative 2: Support multiple fields with specific delimiters (eg. `finda \date 01/04/2020 \time 01:00 PM`)
+    * Pros:
+        - Allows us to be more specific when filtering and searching for a certain Appointment.
+    * Cons:
+        - Not as compatible with TimeConverter class. Requires more sophisticated methods to parse input, as well 
+        as error handling to handle complicated error cases for multiple input fields.
+
+#### 2.2.4.15 FindPatientCommand Class
+
+To search the `PatientList` by keyword, the `FindPatientCommand` class is used. For this class, it serves as a 
+facade class for the Main, PatientList, Ui and the Storage class to interact with one another.
+
+1.	The `FindPatientCommand` class is processed by Parser
+
+2.	When the Main calls `execute(Ui ui, Storage storage)`, it creates `searchResults`, a new List to hold `Patient` objects. 
+
+3.	The `FindPatientCommand` class gets the existing list of Patient objects from PatientList using the method 
+`getPatientList()`.
+
+4.	After which, the `FindPatientCommand` object will iterate through Patient objects within the list. This class searches
+through every field in the Patient object for the search keyword.
+
+5.	If a Patient object does contain the search keyword, it will be added to searchResults.
+
+6.	searchResults then invokes the ui method `printPatientSearchResults()` to print the matching Patient results to the console.
+(if searchResults is non-empty). Otherwise, the method outputs a message saying no search results were found.
+
+Below shows the sequence diagram for FindPatientCommand class.
+
+![](images/findpatient_seq1.PNG)
+![](images/findpatient_ref.PNG)
+
+##### 2.2.4.15.1 Design Considerations
+###### Aspect: Format of Search Input
+
++ Alternative 1 (current choice): General search (search value across all fields)
+    * Pros: 
+        - Easier implementation
+    * Cons:
+        -  May be relatively slower in obtaining search results due to complexity of this method
+
++ Alternative 2: Support multiple fields with specific delimiters (eg. `findp \name Bob \address Bukit Batok Ave 2`)
+    * Pros:
+        - Allows us to be more specific when filtering and searching for a certain Patient
+    * Cons:
+        - Requires us to manage the different possible combinations of fields in the input (there are 4 fields, resulting in
+        24 possible combinations). We would need additional clauses and exceptions to handle the increased complexity of this input.
+
+#### 2.2.4.16 HelpCommand Class
 
 To see the help usage for the commands in HAMS, the ```HelpCommand``` class is used. For this ```HelpCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact. The purpose of the class is to print out the usage
@@ -689,7 +810,7 @@ Below shows the sequence diagram for ```HelpCommand``` class.
 
 ![](images/HelpSequenceDiagram.png)
  
-#### 2.2.4.15 ExitCommand
+#### 2.2.4.17 ExitCommand Class
  
 To print the bye message for HAMS, the ```HelpCommand``` class is used. For this ```ClearPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact.
