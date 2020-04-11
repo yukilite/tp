@@ -40,10 +40,11 @@ class TimeConverterTest {
             try {
                 String time = TimeConverter.oldTime(wrongUserInput);
             } catch (ParseException e) {
-                    assertTrue(true);
-                }
+                assertTrue(true);
             }
         }
+    }
+    
     @Test
     void testConvertTime_isRightFormat() throws ParseException {
         final String testInput1 = "1:00 PM";
