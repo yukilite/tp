@@ -14,12 +14,10 @@ maintaining medical records. It is written in Java
     - Justification: Each of the other classes are very highly cohesive and isolated from one another. The command
      classes, which acts as facade classes, make use of the other classes methods and properties such that the other
       classes can interact with one another to actually execute the user commands.
-    - Highlights: The add patient and add appointment class has its own checks as well to catch other errors that the
-     parser might has missed out on. The implementation for the commands classes is surprisingly challenging because
+    - Highlights: The implementation for the commands classes is surprisingly challenging because
       not only do I have to understand how every other classes works, what the classes can do and what their
-       intricacies (be it obvious or hidden) are, I also have to figure out how to carefully stitch the different
-        functionalities present in the other
-        classes too so as to execute the user's commands. 
+       intricacies and subtleties are, I also have to figure out how to carefully stitch the different
+        functionalities present in the other classes too so as to execute the user's commands. 
 
 - **Major enhancement 2:**  Added a patient id manager to manage the different patient id.
     - What it does: Able to manage the different patient's patient id such as giving new patients a unique patient id
@@ -39,46 +37,24 @@ maintaining medical records. It is written in Java
 - **Minor enhancement:** Helped in the creation of the abstract command class that all commands inherits from. Also
  fixed bugs in other classes so that it not only interact correctly with the facade class but also the other classes
   too.
-- **Code contributed:** [[tP Code Dashboard]](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#breakdown=true&search=andy-aw-why&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos)
+- **Code contributed:** [tP Code Dashboard](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#breakdown=true&search=andy-aw-why&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos)
 
 - **Other contribution:** 
-    - Wrote extensive tests for my commands classes despite being facade classes
-    - Correct minor typos and formatting issues in the user and developer guide
+	- Project Management:
+		- Fixed issues from PE dry run: issues [#93](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/93), [#109](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/109), [#113](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/113), [#123](https://github.com/AY1920S2-CS2113T-T13-3/tp/issues/123) 
+	
+	- Documentation:
+		- Correct minor typos and formatting issues in the user and developer guide. Also provided the format for the user guide.
+	- Enhancements to existing features:
+		- Wrote extensive tests for my command and patientid classes: Pr [#28](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/28), [#134](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/134)
+	
+	- Community:
+		- Reviewed other groups' DG ([example 1](https://github.com/nus-cs2113-AY1920S2/tp/pull/14),[example 2](https://github.com/nus-cs2113-AY1920S2/tp/pull/24))
+		- Found bugs for other groups' program ([ped report](https://github.com/andy-aw-why/ped/issues))
 
 ### Contributions to the User Guide
-```
-Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
-```
 
-# Table of content
-<!-- TOC -->
-
-* [1. Introduction](#1-introduction)
-    + [1.1. Starting HAMS](#11-starting-hams)
-* [2. Features](#2-features)
-* [3. Command Format](#3-command-format)
-* [4. Command Usage](#4-command-usage)
-    + [4.1. Patient Commands](#41-patient-commands)
-        + [4.1.1 Add new patient record](#411-add-a-new-patient-record)
-        + [4.1.2 List all existing patient records](#412-list-all-existing-patients)
-        + [4.1.3 Delete existing patient record](#413-delete-an-existing-patient)
-        + [4.1.4 Edit existing patient record](#414-edit-an-existing-patient)
-        + [4.1.5 Find existing patient record](#415-find-an-existing-patient)
-        + [4.1.6 Clear all patient records](#416-clear-patient-records)
-    + [4.2. Appointment Commands](#42-appointment-commands)
-        + [4.2.1 Add new appointment record](#421-add-a-new-appointment-record)
-        + [4.2.2 List all existing appointment records](#422-list-all-existing-appointments)
-        + [4.2.3 Delete existing appointment record](#423-delete-an-existing-appointment)
-        + [4.2.4 Edit existing appointment record](#424-edit-an-existing-appointment)
-        + [4.2.5 Find existing appointment record](#425-find-an-existing-appointment)
-        + [4.2.6 Clear all appointment records](#426-clear-appointment-records)
-    + [4.3 Clear all records](#43-clear-all-records)
-    + [4.4. Viewing help](#44-view-help)
-    + [4.5. Exiting the program](#45-exit-hams-program)
-* [5. Command Summary](#5-command-summary)  
-* [6. FAQ](#6-faq)  
-
-<!-- /TOC -->
+> Given below are **some** sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
 
 This document serves as a user guide for HAMS. It teaches the user how to install HAMS, describes the features of HAMS, 
 explains how HAMS can be used and finally answer some frequently asked questions about HAMS.
@@ -97,18 +73,17 @@ This command exits the HAMS program and saves the current Patient/Appointment da
    
   **A**: The age supplied might not be in the correct format (eg age given is a negative number or as a string).
   
-  
-### Back to top &#x2191;
+ 
 
-- My contribution are mostly fixes in typos and aesthetics (such as adding a ```back to top``` link). This is because
- the user guide for HAMS is actually my DUKE ip's user guide only slightly modified to fit HAMS. In a sense
- , I technically created the user guide while my teammates modified it to fit HAMS.
+> My contribution are mostly fixes in typos and aesthetics (such as adding a ```back to top``` link). This is because
+> the user guide for HAMS is actually my DUKE ip's user guide only slightly modified to fit HAMS. In a sense
+> I technically created the user guide while my teammates modified it to fit HAMS.
  
 ### Contributions to the Developer Guide
-```
- Provided below are some sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
- technical contributions to the project and rationale for technical implementation.
-```
+ 
+>  Provided below are **some** sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
+>  technical contributions to the project and rationale for technical implementation.
+
 
 #### 2.2.4 A&D command module 
 
@@ -143,13 +118,6 @@ Below shows the sequence diagram for ```ListPatientCommand``` class
 ##### 2.2.4.4 ListAppointmentCommand Class
 
 ![](../images/ListAppointmentCommandSequence.png)
-
-
-
-##### 2.2.4.6 Design considerations
-
-For the 5 classes listed, there were some other design considerations that was discussed for these 5 classes. Here
-, we will discuss the other choices and the pros and cons for them.
 
 ###### 2.2.4.6.1 Aspect: Facade classes
 + Alternative 1 (current choice): Making all 4 classes facade classes
