@@ -57,36 +57,6 @@ maintaining medical records. It is written in Java
 Given below are some sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
 ```
 
-# Table of content
-<!-- TOC -->
-
-* [1. Introduction](#1-introduction)
-    + [1.1. Starting HAMS](#11-starting-hams)
-* [2. Features](#2-features)
-* [3. Command Format](#3-command-format)
-* [4. Command Usage](#4-command-usage)
-    + [4.1. Patient Commands](#41-patient-commands)
-        + [4.1.1 Add new patient record](#411-add-a-new-patient-record)
-        + [4.1.2 List all existing patient records](#412-list-all-existing-patients)
-        + [4.1.3 Delete existing patient record](#413-delete-an-existing-patient)
-        + [4.1.4 Edit existing patient record](#414-edit-an-existing-patient)
-        + [4.1.5 Find existing patient record](#415-find-an-existing-patient)
-        + [4.1.6 Clear all patient records](#416-clear-patient-records)
-    + [4.2. Appointment Commands](#42-appointment-commands)
-        + [4.2.1 Add new appointment record](#421-add-a-new-appointment-record)
-        + [4.2.2 List all existing appointment records](#422-list-all-existing-appointments)
-        + [4.2.3 Delete existing appointment record](#423-delete-an-existing-appointment)
-        + [4.2.4 Edit existing appointment record](#424-edit-an-existing-appointment)
-        + [4.2.5 Find existing appointment record](#425-find-an-existing-appointment)
-        + [4.2.6 Clear all appointment records](#426-clear-appointment-records)
-    + [4.3 Clear all records](#43-clear-all-records)
-    + [4.4. Viewing help](#44-view-help)
-    + [4.5. Exiting the program](#45-exit-hams-program)
-* [5. Command Summary](#5-command-summary)  
-* [6. FAQ](#6-faq)  
-
-<!-- /TOC -->
-
 This document serves as a user guide for HAMS. It teaches the user how to install HAMS, describes the features of HAMS, 
 explains how HAMS can be used and finally answer some frequently asked questions about HAMS.
  
@@ -104,12 +74,11 @@ This command exits the HAMS program and saves the current Patient/Appointment da
    
   **A**: The age supplied might not be in the correct format (eg age given is a negative number or as a string).
   
-  
-### Back to top &#x2191;
+ 
 
-- My contribution are mostly fixes in typos and aesthetics (such as adding a ```back to top``` link). This is because
- the user guide for HAMS is actually my DUKE ip's user guide only slightly modified to fit HAMS. In a sense
- , I technically created the user guide while my teammates modified it to fit HAMS.
+> My contribution are mostly fixes in typos and aesthetics (such as adding a ```back to top``` link). This is because
+> the user guide for HAMS is actually my DUKE ip's user guide only slightly modified to fit HAMS. In a sense
+> I technically created the user guide while my teammates modified it to fit HAMS.
  
 ### Contributions to the Developer Guide
 ```
