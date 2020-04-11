@@ -4,6 +4,7 @@ import seedu.duke.exceptions.InvalidFormatException;
 
 /**
  * Class to validate age.
+ *
  * @author DUC
  */
 public class Age {

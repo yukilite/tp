@@ -21,12 +21,12 @@ import seedu.duke.enums.AppointmentFieldKeys;
 import seedu.duke.enums.PatientFieldKeys;
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.IndexNotIntegerException;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.NoKeyExistException;
 import seedu.duke.exceptions.PidEmptyException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.exceptions.InvalidFormatException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -168,7 +168,7 @@ public class Parser {
 
         String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
-        DukeExceptions.checkIndexValidity(indexValue, "editp"); //TODO remove magic string
+        DukeExceptions.checkIndexValidity(indexValue, EDIT_PATIENT);
         patientFieldsToEdit.put(PatientFieldKeys.INDEX.toString(), indexValue);
 
         fillPatientFields(fullCommand, patientFieldsToEdit);
@@ -199,9 +199,9 @@ public class Parser {
 
         String index = WHITESPACE + REGEX_BACKSLASH + PatientFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
-        DukeExceptions.checkIndexValidity(indexValue, "deletep"); //TODO remove magic string
-
+        DukeExceptions.checkIndexValidity(indexValue, "deletep");
         patientFieldsToDelete.put(PatientFieldKeys.INDEX.toString(), indexValue);
+
         return patientFieldsToDelete;
     }
 
@@ -274,7 +274,7 @@ public class Parser {
 
         String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
-        DukeExceptions.checkIndexValidity(indexValue, "edita"); //TODO remove magic string
+        DukeExceptions.checkIndexValidity(indexValue, EDIT_APPOINTMENT);
 
         appointmentFieldsToEdit.put(AppointmentFieldKeys.INDEX.toString(), indexValue);
 
@@ -306,7 +306,7 @@ public class Parser {
 
         String index = WHITESPACE + REGEX_BACKSLASH + AppointmentFieldKeys.INDEX.toString() + WHITESPACE;
         String indexValue = findValue(fullCommand, index);
-        DukeExceptions.checkIndexValidity(indexValue, "deletea"); //TODO remove magic string
+        DukeExceptions.checkIndexValidity(indexValue, "deletea");
 
         appointmentFieldsToDelete.put(AppointmentFieldKeys.INDEX.toString(), indexValue);
         return appointmentFieldsToDelete;

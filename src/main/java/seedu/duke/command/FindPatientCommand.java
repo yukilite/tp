@@ -24,6 +24,7 @@ import java.util.List;
  * added into the {@link PatientList} list. Finally, the {@link Storage} class will be used to save the updated
  * list into offline data to reflect the change.
  * </p>
+ *
  * @author Brandon Chong
  * @version v2.0
  * @since 28/3/2020
@@ -54,7 +55,7 @@ public class FindPatientCommand extends Command {
      * For this execution, the existing list of Patient records is searched for a keyword.
      * Records that contain the keyword will be added to a separate List and printed out in a readable format.
      *
-     * @param ui the ui object which can be used to display text
+     * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException this exception is thrown by the {@link Storage} class if it fails to save the current
      *                     Patient list into offline data.

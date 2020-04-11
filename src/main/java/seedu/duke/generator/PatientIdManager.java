@@ -9,6 +9,7 @@ import java.util.Queue;
 /**
  * The class to manage patient id numbers. Also allows patient id to be reused if said patient is deleted from HAMS.
  * All done in 0(1) time.
+ *
  * @author Andy
  */
 public class PatientIdManager {
@@ -22,6 +23,7 @@ public class PatientIdManager {
 
     /**
      * Getter method for the getPatientIdMap (map of the patient id that is currently used).
+     *
      * @return the map of the patientId that is currently used.
      */
     public static Map<Integer, Integer> getPatientIdMap() {
@@ -30,6 +32,7 @@ public class PatientIdManager {
 
     /**
      * Setter Getter method for the getPatientIdMap (map of the patient id that is currently used).
+     *
      * @param patientIdMap the new map to update.
      */
     public static void setPatientIdMap(Map<Integer, Integer> patientIdMap) {
@@ -39,6 +42,7 @@ public class PatientIdManager {
 
     /**
      * Get nextTopNewNumber value.
+     *
      * @return the new nextTopNewNumber.
      */
     public static int getNextTopNewNumber() {
@@ -47,6 +51,7 @@ public class PatientIdManager {
 
     /**
      * Setter method for nextTopNewNumber.
+     *
      * @param nextTopNewNumber the new top number.
      */
     public static void setNextTopNewNumber(int nextTopNewNumber) {
@@ -55,6 +60,7 @@ public class PatientIdManager {
 
     /**
      * Getter method to get the queue of reusable patientID numbers.
+     *
      * @return the queue containing the reusable patientId numbers.
      */
     public static Queue<Integer> getNextNumberQueueThing() {
@@ -63,6 +69,7 @@ public class PatientIdManager {
 
     /**
      * Get a patient ID number, be it a new one or from a deleted patient.
+     *
      * @return the new patient ID number
      */
     public static int getNextPatientId() {
@@ -80,6 +87,7 @@ public class PatientIdManager {
 
     /**
      * Method called when patient is deleted. Ensure that the deleted patient number can be reused.
+     *
      * @param patientID the patient Id from the deleted patient.
      */
     public static void addBackPatientId(int patientID) {
@@ -99,6 +107,7 @@ public class PatientIdManager {
 
     /**
      * Check to see if the patient id actually belongs to any of the patients present.
+     *
      * @param patientID the patient id to check
      * @return True if patient id exist. False if it does not
      */

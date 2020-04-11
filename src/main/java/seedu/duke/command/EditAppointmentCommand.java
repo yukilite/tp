@@ -2,14 +2,12 @@ package seedu.duke.command;
 
 import seedu.duke.converter.TimeConverter;
 import seedu.duke.exceptions.InvalidFormatException;
-import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.util.Map;
 
