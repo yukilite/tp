@@ -582,7 +582,7 @@ Note that if the appointment information given is incorrect due to formatting or
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```EditPatientCommand``` class would call upon the 
-```Patient``` class to make a ```Patient``` Object. 
+```Patient``` class to make a ```Patient``` Object. It will also check the information given for the patient and see if the information is valid.
 
 3. After which, the ```EditPatientCommand``` object will  call upon the ```PatientList``` object to get the record 
 of the record of the patient based on the index with ```getPatientRecord``` .
