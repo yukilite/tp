@@ -45,10 +45,8 @@ maintaining medical records. It is written in Java.
     
 ### Contributions to the User Guide
 
-```
-Provided below are sections I contributed to the User Guide. I took charge of editing the presentation using markdown 
+> Provided below are sections I contributed to the User Guide. I took charge of editing the presentation using markdown 
 features like tables and bulleting in the first version for submission.
-```
 
 #### 6. FAQ
 **Q**: Would my details be captured if I randomize the input order of the keywords?
@@ -77,10 +75,10 @@ to the patient, the pid tag must be present.
 
 ### Contributions to the Developer Guide
 
-```
-Provided below are sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
+
+> Provided below are sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
 technical contributions to the project and rationale for technical implementation.
-```
+
 
 #### 1.2.2. Value Proposition
 We are focused on providing a user-friendly application for front-desk administrative support assistants to quickly create, edit
