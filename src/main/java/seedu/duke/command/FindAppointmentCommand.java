@@ -1,14 +1,13 @@
 package seedu.duke.command;
 
+import seedu.duke.converter.TimeConverter;
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
-import seedu.duke.converter.TimeConverter;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,7 @@ import java.util.List;
  * added into the {@link AppointmentList} list. Finally, the {@link Storage} class will be used to save the updated
  * list into offline data to reflect the change.
  * </p>
+ *
  * @author Brandon Chong
  * @version v2.0
  * @since 28/3/2020
@@ -59,11 +59,12 @@ public class FindAppointmentCommand extends Command {
     /**
      * For this execution, the existing list of Appointment records is searched for a keyword.
      *
-     *<p>
+     * <p>
      * We check the searchValue to see if it is of the correct format (dd/mm/yyyy for date, hh:mm am/pm for time)
      * If input is invalid format, we exit. Else, we search the list of Appointments for the search keyword.
      * Records that contain the keyword will be added to a separate List and printed out in a readable format.
-     *</p>
+     * </p>
+     *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      * @throws IOException this exception is thrown by the {@link Storage} class if it fails to save the current
@@ -74,9 +75,9 @@ public class FindAppointmentCommand extends Command {
         boolean isDateInput = false;
         boolean isTimeInput = false;
         /* the time string hh:mm (am/pm) should have 8 characters in total
-        *  the date string dd/mm/yyyy should have 10 characters in total
-        *  we only check strings of these two lengths if they are in the correct format
-        */
+         *  the date string dd/mm/yyyy should have 10 characters in total
+         *  we only check strings of these two lengths if they are in the correct format
+         */
         if (Integer.valueOf(this.getSearchValue().length()) == TIME_INPUT_LENGTH) {
             if (!checkValidTime(this.getSearchValue())) {
                 ui.printInvalidAppointmentSearchTimeMessage();
@@ -98,7 +99,7 @@ public class FindAppointmentCommand extends Command {
 
         if (isDateInput) {
             try {
-                parsedSearchValue = timeConverter.oldDate(this.getSearchValue());
+                parsedSearchValue = TimeConverter.oldDate(this.getSearchValue());
             } catch (ParseException e) {
                 ui.printSearchValueConversionErrorMessage();
                 return;
@@ -131,7 +132,7 @@ public class FindAppointmentCommand extends Command {
      */
     private boolean checkValidDate(String dateInput) {
         try {
-            this.timeConverter.oldDate(dateInput);
+            TimeConverter.oldDate(dateInput);
         } catch (ParseException e) {
             return false;
         }
@@ -146,7 +147,7 @@ public class FindAppointmentCommand extends Command {
      */
     private boolean checkValidTime(String timeInput) {
         try {
-            this.timeConverter.convertTime(timeInput);
+            TimeConverter.convertTime(timeInput);
         } catch (ParseException e) {
             return false;
         }

@@ -41,6 +41,7 @@ class AddPatientCommandStub extends AddPatientCommand {
 
     /**
      * Just to generate the fake map of information.
+     *
      * @param choice the type of fake map to generate
      * @return the fake map of information
      */
@@ -64,6 +65,7 @@ class AddPatientCommandStub extends AddPatientCommand {
 
     /**
      * To act as a stub for execute.
+     *
      * @param ui      ui object for displaying information
      * @param storage storage object to do auto saving
      */

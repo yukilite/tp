@@ -113,7 +113,8 @@ public class Patient {
      *
      * @return newToString The formatted string
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         String newToString =
                 "{" + "[Name]:" + " " + getName() + " " + "|" + " " + "[Age]:" + " " + getAge() + " " + "|" + " "
                         + "[Address]:" + " " + getAddress() + " " + "|" + " " + "[Contact Number]:" + " "

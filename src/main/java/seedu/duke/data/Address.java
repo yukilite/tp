@@ -4,6 +4,7 @@ import seedu.duke.exceptions.InvalidFormatException;
 
 /**
  * Used to validate the format of address.
+ *
  * @author DUC
  */
 public class Address {

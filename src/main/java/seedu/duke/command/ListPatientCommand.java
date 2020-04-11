@@ -6,6 +6,7 @@ import seedu.duke.ui.Ui;
 
 /**
  * Command class to list the patients.
+ *
  * @author Andy
  */
 public class ListPatientCommand extends Command {

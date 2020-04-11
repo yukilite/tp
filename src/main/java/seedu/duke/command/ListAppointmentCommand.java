@@ -7,6 +7,7 @@ import seedu.duke.ui.Ui;
 
 /**
  * Command class to list the list of appointment.
+ *
  * @author Andy
  */
 public class ListAppointmentCommand extends Command {
@@ -23,6 +24,7 @@ public class ListAppointmentCommand extends Command {
 
     /**
      * For this execution, it shows the list of appointments that are stored.
+     *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
      */

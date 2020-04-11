@@ -2,22 +2,16 @@ package seedu.duke.storage;
 
 
 import seedu.duke.converter.TimeConverter;
+import seedu.duke.exceptions.FileCorruptedException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
 import seedu.duke.ui.Ui;
-import seedu.duke.exceptions.FileCorruptedException;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +50,7 @@ public class Storage {
 
     /**
      * load save file for Appointments list.
+     *
      * @return appointmentListToReturn returns the appointment list in the save file
      * @throws FileNotFoundException this exception occurs when a file is not found
      */
@@ -133,6 +128,7 @@ public class Storage {
 
     /**
      * load save file for Patients list.
+     *
      * @return patientListToReturn the patient list for the save file.
      * @throws FileNotFoundException this exception occurs if a file is not found.
      */
@@ -196,6 +192,7 @@ public class Storage {
 
     /**
      * Load the state of the patient id(s) into our patient id management system.
+     *
      * @param patientIdMap the map of patient id as obtained from patient information.
      * @throws FileNotFoundException if there is an error locating the file to save to.
      */
@@ -247,6 +244,7 @@ public class Storage {
 
     /**
      * This method saves the patient's appointment details from the AppointmentList into the local save file.
+     *
      * @throws IOException this exception occurs if the patient's appointment details are unable to be written
      *                     to the local save file.
      */
@@ -273,6 +271,7 @@ public class Storage {
 
     /**
      * This method saves the patient list into the local save file.
+     *
      * @throws IOException this exception occurs if the patient data was unable to be written to the local save file.
      */
     public void savePatientList() throws IOException {
@@ -301,6 +300,7 @@ public class Storage {
 
     /**
      * Save the patient id management system state.
+     *
      * @throws IOException if the file cannot be written for some reason
      */
     private void savePatientIdState() throws IOException {
