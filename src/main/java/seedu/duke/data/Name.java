@@ -2,15 +2,16 @@ package seedu.duke.data;
 
 import seedu.duke.exceptions.InvalidFormatException;
 
+//@@author thanhduc2000
 /**
  * Class for name's validation.
- * @author DUC
  */
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS = "Name to be added/edited should contain spaces optionally "
             + "and alphabetic characters with length of between 1 and 64";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alpha} ]+";
+    public static final int NAME_STRING_LIMIT = 64;
 
     public String name;
 
@@ -27,8 +28,14 @@ public class Name {
         this.name = name;
     }
 
+    /**
+     * Method to check the validation of patient's name.
+     *
+     * @param validatedString name getting from Parser
+     * @return true if name is not modified or within the limit, false otherwise
+     */
     public static boolean isValidName(String validatedString) {
-        return (validatedString.matches(NAME_VALIDATION_REGEX) && validatedString.length() <= 64)
+        return (validatedString.matches(NAME_VALIDATION_REGEX) && validatedString.length() <= NAME_STRING_LIMIT)
                 || validatedString.isBlank();
     }
 

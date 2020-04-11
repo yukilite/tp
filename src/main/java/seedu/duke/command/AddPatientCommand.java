@@ -4,7 +4,6 @@ import seedu.duke.data.Address;
 import seedu.duke.data.Age;
 import seedu.duke.data.Name;
 import seedu.duke.data.Phone;
-
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Patient;
@@ -25,6 +24,7 @@ import java.util.Map;
  * <p>To elaborate, it converts the output of {@link seedu.duke.parser.Parser} into a {@link Patient} object, after
  * which the {@link Patient} object is then added into the {@link PatientList} list.
  * </p>
+ *
  * @author Andy
  */
 public class AddPatientCommand extends Command {
@@ -46,6 +46,7 @@ public class AddPatientCommand extends Command {
 
     /**
      * Constructor for the AddPatientCommand.
+     *
      * @param patientInfo the map containing the patient information
      * @see PatientIdManager#getNextPatientId
      */
@@ -64,6 +65,7 @@ public class AddPatientCommand extends Command {
 
     /**
      * For this execution, the patient will be added into the patient list.
+     *
      * @param ui      ui object for displaying information
      * @param storage storage object to do auto saving
      * @see PatientList#getPatientList

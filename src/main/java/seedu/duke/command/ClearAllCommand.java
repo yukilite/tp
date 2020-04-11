@@ -12,10 +12,10 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 import java.text.ParseException;
 
+//@@author thanhduc2000
 /**
  * Clear all the patients from patients' list and appointments from appointments' list.
  *
- * @author Nguyen Thanh Duc
  * @version 2.0
  * @since 2020-03-29
  */
@@ -26,6 +26,11 @@ public class ClearAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clear all patients and appointments from both lists.\n"
             + "Example: " + EXAMPLE;
 
+    /**
+     * Empty constructor to throw exception.
+     *
+     * @throws InvalidFormatException inherit from the Command class
+     */
     public ClearAllCommand() throws InvalidFormatException {
 
     }
@@ -73,8 +78,7 @@ public class ClearAllCommand extends Command {
             // Show all items in both lists deleted message
             ui.showAllItemsDeleted();
         } catch (EmptyListsException e) {
-            System.out.println("There is nothing to clear in both lists");
-            // ui.showNothingToClearBothLists(); // TODO Justin
+            ui.showNothingToClearBothLists();
         }
     }
 }

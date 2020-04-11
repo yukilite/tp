@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EditPatientCommandTest {
 
     //Test case 1
-    @Test void execute_1() throws Exception {
+    @Test
+    void execute_1() throws Exception {
         PatientList patientList = new PatientList();
         PatientList.getPatientList().add(new Patient("peony", 33, "clementi road", "61234567", 1312));
         PatientList.getPatientList().add(new Patient("yoshino", 8, "shibuya", "13182371", 1112));
@@ -34,7 +35,8 @@ class EditPatientCommandTest {
     }
 
     //Test case 2
-    @Test void execute_2() throws Exception {
+    @Test
+    void execute_2() throws Exception {
         Map<String, String> fieldsToChange = new HashMap<>();
         fieldsToChange.put("index", "3");
         fieldsToChange.put("name", "");

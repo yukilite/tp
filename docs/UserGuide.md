@@ -104,7 +104,7 @@ A valid input would be `adda \date 22/05/2020 \time 1200 \pid 1`.
 #### 4.1.1 Add a new Patient record
 
 The program allows you to add a new Patient record to the current list of Patient records. Note that patient id
- number (pid) is decided by HAMS and not the user.
+ number (pid) is decided by HAMS and not the user. Pid assigned may **not** be in order.
 
 Format: `addp \name [name] \age [age] \address [address] \phone [phone]`
 
@@ -258,6 +258,8 @@ Format: `clearp`
 The program allows you to add a new Appointment record to the current list of Appointment records. With the addition 
 of the `pid` field, it allows users to link the appointment to a specific patient. 
 
+The `pid` provided must be linked to a patient that currently exists in the system.
+
 Format: `adda \date [date] \time [time] \pid [patient id]`
 
 * `adda` keyword
@@ -343,16 +345,17 @@ Format: `edita \index [index number in list] \date [date] \time [time]`
 **Please refer to the above "Before" list to compare the changes.**
 
 OK? |   Usage    |   Outcome & After |
-------------- | ------------- | --------------- |
-OK | `edita \index 3 \date 20/05/2021 \time 2300` | <img src ="images/edita_eg1.PNG" width = "600"> <img src ="images/edita_eg1after_crop2.PNG" width = "600"> |  |
-OK | `edita \index 1 \time 1300` | <img src ="images/edita_eg2.PNG" width = "600"> <img src ="images/edita_eg2after-crop.png" width = "600"> |  |                       
+--- | ---------- | ----------------- |
+OK | `edita \index 3 \date 20/05/2021 \time 2300` | <img src ="images/edita_eg1.PNG" width = "600"> <img src ="images/edita_eg1after_crop2.PNG" width = "600"> |  
+OK | `edita \index 1 \time 1300` | <img src ="images/edita_eg2.PNG" width = "600"> <img src ="images/edita_eg2after-crop.png" width = "600"> |                         
 NOT OK | `edita` | <img src ="images/edita_error.PNG" width = "600"> |   
                  
 ##### Final list:
 <img src ="images/edita_eg2after.PNG" width = "400">
 
 #### 4.2.5 Find an existing Appointment
-The program allows you to find to an existing Appointment record based on a search value.
+The program allows you to find to an existing Appointment record based on a search value. The search value must follow
+the date format of dd/mm/yyyy or time format of hh:mm a.
 
 Format: `finda [search value]`
 
@@ -376,8 +379,8 @@ Format: `finda [search value]`
 
 Does it exist in list? |   Usage    |   Outcome  |
 :--------------------: | ---------- | ---------- |
-YES | `finda Fri` | <img src="images/UG/finda_fri.JPG" width="600">
-NO | `finda Oct` | <img src="images/UG/finda_nothing.JPG" width="600">
+YES | `finda 22/05/2020` | <img src="images/UG/new_finda.JPG" width="600">
+NO | `finda 23/05/2020` | <img src="images/UG/new_finda2.JPG" width="600">
 
 #### 4.2.6 Clear appointment records
 
@@ -451,8 +454,8 @@ Format: `help`
 ### 4.5 Exit HAMS program
 
 This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in
- `/saves/appointments.txt` and `/saves/patients.txt` respectively. Also, the patient id state will also be saved in
-  `/saves/patientId.txt`). These files will be loaded to the program when it is run again subsequently.
+ `/saves/appointments.txt` and `/saves/patients.txt` respectively). Also, the resuable and new patient ids will be saved in
+  `/saves/patientId.txt`. These files will be loaded to the program when it is run again subsequently.
 
 Format: `exit`
 #### Example of usage: 
