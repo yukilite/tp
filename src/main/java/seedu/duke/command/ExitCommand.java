@@ -6,10 +6,10 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
+//@@author thanhduc2000
 /**
  * Terminate the program when the user's input is "exit".
  *
- * @author Nguyen Thanh Duc
  * @version 1.0
  * @since 2020-03-14
  */

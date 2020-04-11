@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Map;
 
+//@@author thanhduc2000
 /**
  * Delete an appointment's record with certain index in the appointment's list.
  *
- * @author Nguyen Thanh Duc
  * @version 1.0
  * @since 2020-03-14
  */

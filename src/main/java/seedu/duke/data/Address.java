@@ -2,14 +2,15 @@ package seedu.duke.data;
 
 import seedu.duke.exceptions.InvalidFormatException;
 
+//@@author thanhduc2000
 /**
  * Used to validate the format of address.
- * @author DUC
  */
 public class Address {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Patient's addresses is limited to 64 characters "
             + "including of whitespaces";
+    public static final int ADDRESS_STRING_LIMIT = 64;
 
     public String address;
 
@@ -26,8 +27,14 @@ public class Address {
         this.address = address;
     }
 
+    /**
+     * Method to verify whether the address is validated.
+     *
+     * @param address getting from Parser
+     * @return true if the length of address is within the limit or no modification, false otherwise
+     */
     private static boolean isValidAddress(String address) {
-        return address.length() <= 64 || address.isBlank();
+        return address.length() <= ADDRESS_STRING_LIMIT || address.isBlank();
     }
 
     @Override

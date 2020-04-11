@@ -13,10 +13,10 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 import java.util.Map;
 
+//@@author thanhduc2000
 /**
  * Edit the information of the patient existed in the patient's list.
  *
- * @author Nguyen Thanh Duc
  * @version 0.1
  * @since 2020-03-08
  */

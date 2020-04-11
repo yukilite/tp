@@ -224,8 +224,29 @@ public class Ui {
         System.out.println("An error occured when trying to parse the search input. Please try again.");
     }
     
+    //@@author thanhduc2000
     public void showAllItemsDeleted() {
         System.out.println("Both list cleared!");
 
+    }
+
+    public void showNothingToClearBothLists() {
+        System.out.println("There is nothing to clear in both lists");
+    }
+
+    public void showAppointmentsDeleted() {
+        System.out.println("All appointment cleared!");
+    }
+
+    public void showNothingToClearAppointments() {
+        System.out.println("There is nothing to clear in appointments' list");
+    }
+
+    public void showPatientsDeleted() {
+        System.out.println("All patients cleared!");
+    }
+
+    public void showNothingToClearPatients() {
+        System.out.println("There is nothing to clear in patients' list");
     }
 }
