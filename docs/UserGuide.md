@@ -205,8 +205,6 @@ NOT OK | `editp \index a \address Paris Ris \phone 93489678` | <img src ="images
 #### Final List 
 <img src ="images/UG/Patient_list_after.JPG" width="600">
 
-### [Back to top &#x2191;](#table-of-content)
-
 #### 4.1.5 Find an existing patient
 The program allows you to find to an existing Patient record based on a search value.
 
@@ -248,6 +246,8 @@ Format: `clearp`
 |   Usage    |   Outcome & After  |
 -------------| ------------------ |
 `clearp` | <img src="images/UG/clearp.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600">
+
+### [Back to top &#x2191;](#table-of-content)
 
 ***
 
@@ -391,7 +391,7 @@ Format: `cleara`
 #### Example list
  <img src="images/UG/lista_not_empty.JPG" width="600">
  
- #### Example of usage:
+#### Example of usage:
  
  **Please refer to the example list above**
  
@@ -403,7 +403,7 @@ Format: `cleara`
 
 ***
 
-## 4.3 Clear all records
+### 4.3 Clear all records
 The program allows you to clear all lists.
 
 Format: `clearall`
@@ -424,6 +424,11 @@ Format: `clearall`
 Is both list empty? |   Usage    |   Outcome & After  |
 :------------------:| ---------- | ------------------ |
  NO | `clearall` | <img src="images/UG/clearall.JPG" width="600"> <img src="images/UG/clearp_success.JPG" width="600"> <img src ="images/UG/lista_empty.JPG" width="600"> 
+ 
+
+### [Back to top &#x2191;](#table-of-content)
+
+***
 
 ### 4.4 View help
 
@@ -441,6 +446,8 @@ Format: `help`
 
 ### [Back to top &#x2191;](#table-of-content)
 
+***
+
 ### 4.5 Exit HAMS program
 
 This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in
@@ -455,6 +462,10 @@ Format: `exit`
 <img src ="images/exit_eg1.PNG" width = "400">
 
 ### [Back to top &#x2191;](#table-of-content)
+
+&nbsp;
+
+***
 
 ## 5. Command Summary
 
@@ -475,6 +486,12 @@ Format: `exit`
 `editp \index [index number in list] \name [name] \age [age] \address [address] \phone [phone]` | Edit date or time of an appointment by the list's appointment number
 `help` | Give you a manual on a list of valid commands and their usage
 `exit` | Exit the program and save the task into an offline data file (in `/saves/appointments.txt` or `/saves/patients.txt`)
+
+### [Back to top &#x2191;](#table-of-content)
+
+&nbsp;
+
+***
 
 ## 6. FAQ
 **Q**: Would my details be captured if I randomize the input order of the keywords?
@@ -503,6 +520,17 @@ to the patient, the pid tag must be present.
 **Q**: I accidentally put in the wrong Patient ID when adding an appointment using `adda`. How can I change the patientID?
 
 **A**: Unfortunately upon entering the Patient ID in `adda`, there is no way of changing the Patient ID. Please remove the incorrect appointment and add the correct appointment in again.
+
+**Q**: Why when I try to delete a patient in the list, some appointments are being deleted also?
+
+**A**: Because once you delete a patient, all the appointments related to him/her (through an attribute called ```pid```) are deleted also. Only when there are no appointments
+related to the patients, they are not deleted.
+
+**Q**: Why when I try to clear all the patients in the patient list, the appointments are cleared also?
+
+**A**: The reason is that there is a dependency of appointments on patients. Each patient can be assigned to multiple appointments through ```pid```. Like mentioned in the previous
+question, you can realize that once we clear all the patients, the presence of such appointments are no longer valid (All appointments belong to all patients). Hence, they are cleared
+also.
 
 ### [Back to top &#x2191;](#table-of-content)
 
