@@ -11,10 +11,10 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 import java.text.ParseException;
 
+//@@author thanhduc2000
 /**
  * Clear all patients from patients' list.
  *
- * @author Nguyen Thanh Duc
  * @version 2.0
  * @since 2020-03-29
  */
@@ -25,6 +25,11 @@ public class ClearPatientCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clear all patients from the list.\n"
             + "Example: " + EXAMPLE;
 
+    /**
+     * Empty constructor to throw exception.
+     *
+     * @throws InvalidFormatException inherit from the Command class
+     */
     public ClearPatientCommand() throws InvalidFormatException {
 
     }

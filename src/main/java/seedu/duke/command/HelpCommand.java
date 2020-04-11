@@ -6,10 +6,10 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
+//@@author thanhduc2000
 /**
  * Show a list of commands and what is the correct input's format.
  *
- * @author Nguyen Thanh Duc
  * @version 0.1
  * @since 2020-03-08
  */

@@ -14,10 +14,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Map;
 
+//@@author thanhduc2000
 /**
  * Delete a patient's record with certain index in the patient's list.
  *
- * @author Nguyen Thanh Duc
  * @version 0.1
  * @since 2020-03-08
  */

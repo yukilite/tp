@@ -19,7 +19,7 @@
 				* [2.2.3.1 Process of Object Creation](#2231-process-of-object-creation)
             * [2.2.4. Command module ](#224-command-module)
 				* [2.2.4.1 AddPatientCommand Class](#2241-addpatientcommand-class)
-				* [2.2.4.2 AddAppointmentCommand Class](#2242-addappointmentcommand)
+				* [2.2.4.2 AddAppointmentCommand Class](#2242-addappointmentcommand-class)
 				* [2.2.4.3 ListPatientCommand Class](#2243-listpatientcommand-class)
 				* [2.2.4.4 ListAppointmentCommand Class](#2244-listappointmentcommand-class)
 				* [2.2.4.5 PatientIdManger Class](#2245-patientidmanger-class)
@@ -32,6 +32,7 @@
 				* [2.2.4.12 ClearAppointmentCommand Class](#22412-clearappointmentcommand-class)
 				* [2.2.4.13 ClearPatientCommand Class](#22413-clearpatientcommand-class)
 				* [2.2.4.14 FindAppointmentCommand Class](#22414-findappointmentcommand-class)
+				* [2.2.4.15 FindPatientCommand Class](#22415-findpatientcommand-class)
 				* [2.2.4.16 HelpCommand Class](#22416-helpcommand-class)
 				* [2.2.4.17 ExitCommand Class](#22417-exitcommand-class)
             * [2.2.5. Parser Module ](#225-parser-module)
@@ -40,7 +41,7 @@
 * [3. User Stories](#3-user-stories)
 * [4. Non-functional requirements](#4-non-functional-requirements)
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
-    + [5.1, Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
+    + [5.1. Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
     + [5.2. Adding a patient](#52-adding-a-patient)
     + [5.3. Editing a patient](#53-editing-a-patient)
     + [5.4. Deleting a patient](#54-delete-a-patient)
@@ -84,8 +85,8 @@ and delete patients' information and appointments.
 ### 1.3. Definitions
 |Term|Description|
 |----|-----------|
-|fields|Fields refer to what are the accepted formats the Parse will search for in the User Input. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name`. <br><br> View the full list of fields [here](#sequence-diagram-for-calling-an-enum) or on our User Guide [here](UserGuide.md) |
-|field-values| This refers to the value that exists after a field. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name` and its corresponding value will be `23`, `Pasir Ris`, `Justin`.
+fields|Fields refer to what are the accepted formats the Parse will search for in the User Input. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name`. <br><br> View the full list of fields [here](#sequence-diagram-for-calling-an-enum) or on our User Guide [here](UserGuide.md) |
+field-values| This refers to the value that exists after a field. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name` and its corresponding value will be `23`, `Pasir Ris`, `Justin`.
 
 
 ### [Back to top &#x2191;](#table-of-content)
@@ -386,8 +387,10 @@ Other than the getter and the setter methods, the most important methods in ```P
  
  To summarize ```checkPatientIdUsed()```
  
- 1) Get the patient id to check.
- 2) Let the patient id be the key. See the patient id's value in the ```patientIdMap``` hash table. If it is 1
+ 
+ 1. Get the patient id to check.
+ 
+ 2. Let the patient id be the key. See the patient id's value in the ```patientIdMap``` hash table. If it is 1
  , return true (patient currently exist), else return false.
  
  ```checkPatientIdUsed()``` is used by the ```addAppointmentCommand``` class when adding an appointment to check if
@@ -398,11 +401,14 @@ For ```addBackPatientId()```, its purpose is to save the patient id of deleted p
  
  To summarize ```addBackPatientId()```
  
- 1) Get the deleted patient id.
- 2) Check to see if the patient id is a valid id. A valid patient id is an id that does not exist in the reusable
+ 1. Get the deleted patient id.
+ 
+ 2. Check to see if the patient id is a valid id. A valid patient id is an id that does not exist in the reusable
   patient id queue and its value cannot be below 0 and (equal and above) ```nextTopNewNumber```.
- 3) If the patient id is a valid id, then add it in the reusable patient id queue. Else, ignore it.
- 4) Once it is deleted, update the ```patientIdMap``` map to reflect that the patient id now do not belong to any patient currently (set the corresponding value to null in the map).
+  
+ 3. If the patient id is a valid id, then add it in the reusable patient id queue. Else, ignore it.
+ 
+ 4. Once it is deleted, update the ```patientIdMap``` map to reflect that the patient id now do not belong to any patient currently (set the corresponding value to null in the map).
  
  ```addBackPatientId()``` is used by the ```deletePatientClass``` when deleting a patient to store the deleted
   patient id number.
@@ -445,11 +451,14 @@ One property of ```nextTopNewNumber``` is that all patient id numbers in the que
        
 To summarize ```getNextPatientId()```
 
-1) Check if the reusable patient id queue is empty
-2) If it is not empty, we take a patient id from the queue.
-3) On the other hand, if it is empty, we use the value of ```nextTopNewNumber``` for the patient id. We then increase
+1. Check if the reusable patient id queue is empty
+
+2. If it is not empty, we take a patient id from the queue.
+
+3. On the other hand, if it is empty, we use the value of ```nextTopNewNumber``` for the patient id. We then increase
  the value of ```nextTopNewNumber``` by 1.
-4) Once we decided on which patient id to use, update the ```patientIdMap``` map to reflect that the patient id now belongs to a patient (set the corresponding value in the map to 1).
+
+4. Once we decided on which patient id to use, update the ```patientIdMap``` map to reflect that the patient id now belongs to a patient (set the corresponding value in the map to 1).
 
 ```getNextPatientId()``` is used by the ```addPatientCommandClass``` when adding a patient to get a unique patient id
  for the new patient.
@@ -543,7 +552,7 @@ To edit an appointment, the ```EditAppointmentCommand``` class is used. For this
 serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
 interact with one another. 
 
-Note that if the patient information given is incorrect due to formatting or value error, ```EditAppointmentCommand``` will return an exception and ```EditAppointmentCommand``` will **not** update the patient record.
+Note that if the appointment information given is incorrect due to formatting or value error, ```EditAppointmentCommand``` will return an exception and ```EditAppointmentCommand``` will **not** update the appointment record.
 
 1. The ```EditAppointmentCommand``` class is processed by ```Parser```
 
@@ -576,7 +585,7 @@ To edit an appointment, the ```EditPatientCommand``` class is used. For this ```
 serves as a facade class for the ```Main```, ```Patient```, ```PatientList```, ```Ui``` and the ```Storage``` class to 
 interact with one another. 
 
-Note that if the appointment information given is incorrect due to formatting or value error, ```EditPatientCommand``` will return an exception and ```EditPatientCommand``` will **not** update the patient record.
+Note that if the patient information given is incorrect due to formatting or value error, ```EditPatientCommand``` will return an exception and ```EditPatientCommand``` will **not** update the patient record.
 
 1. The ```EditPatientCommand``` class is processed by ```Parser```
 
