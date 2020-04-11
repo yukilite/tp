@@ -497,41 +497,42 @@ Format: `exit`
 ***
 
 ## 6. FAQ
-**Q**: Would my details be captured if I randomize the input order of the keywords?
 
-* `addp \phone 12345678 \address NUS \age 22 \name John Doe`
-* `addp \name John Doe \address NUS \ age 22 \ phone 12345678`
+**Question: Would my details be captured if I randomize the input order of the keywords?**
 
-**A**: Yes. The system is keyword-sensitive. Regardless of the order given, it stores the information within each command used respectively. Both examples provided above would result in the same information stored. 
+ * `addp \phone 12345678 \address NUS \age 22 \name John Doe`
+ * `addp \name John Doe \address NUS \ age 22 \ phone 12345678`
 
-**Q**: Why does my patient list does not display any value in the age field?
+> **Answer**: Yes. The system is keyword-sensitive. Regardless of the order given, it stores the information within each command used respectively. Both examples provided above would result in the same information stored. 
+
+**Question: Why does my patient list does not display any value in the age field?**
 
 * `{[Name]: Tommy | [Age]:  | [Address]:  | [Contact Number]: 92331234}`
 
-**A**: The age supplied might not be in the correct format (eg age given is a negative number or as a string).
+> **Answer**: The age supplied might not be in the correct format (eg age given is a negative number or as a string).
 
-**Q**: Why am I not able to find anything using finda or findp? 
+**Question: Why am I not able to find anything using finda or findp?** 
 
-**A**: Please note that all search values are case-sensitive. For example, `Sam` will not match with `sam`
+> **Answer**: Please note that all search values are case-sensitive. For example, `Sam` will not match with `sam`
 because of the first letter capitalization. 
 
-**Q**: What is `pid` for in the command `adda`?
+**Question: What is `pid` for in the command `adda`?**
 
-**A**: `pid` stands for Patient ID, it is a unique ID tag to each patient. In order to link appointments 
+>**Answer**: `pid` stands for Patient ID, it is a unique ID tag to each patient. In order to link appointments 
 to the patient, the pid tag must be present. 
 
-**Q**: I accidentally put in the wrong Patient ID when adding an appointment using `adda`. How can I change the patientID?
+**Question: I accidentally put in the wrong Patient ID when adding an appointment using `adda`. How can I change the patientID?**
 
-**A**: Unfortunately upon entering the Patient ID in `adda`, there is no way of changing the Patient ID. Please remove the incorrect appointment and add the correct appointment in again.
+>**Answer**: Unfortunately upon entering the Patient ID in `adda`, there is no way of changing the Patient ID. Please remove the incorrect appointment and add the correct appointment in again.
 
-**Q**: Why when I try to delete a patient in the list, some appointments are being deleted also?
+**Question: Why when I try to delete a patient in the list, some appointments are being deleted also?**
 
-**A**: Because once you delete a patient, all the appointments related to him/her (through an attribute called ```pid```) are deleted also. Only when there are no appointments
+>**Answer**: Because once you delete a patient, all the appointments related to him/her (through an attribute called ```pid```) are deleted also. Only when there are no appointments
 related to the patients, they are not deleted.
 
-**Q**: Why when I try to clear all the patients in the patient list, the appointments are cleared also?
+**Question: Why when I try to clear all the patients in the patient list, the appointments are cleared also?**
 
-**A**: The reason is that there is a dependency of appointments on patients. Each patient can be assigned to multiple appointments through ```pid```. Like mentioned in the previous
+>**Answer**: The reason is that there is a dependency of appointments on patients. Each patient can be assigned to multiple appointments through ```pid```. Like mentioned in the previous
 question, you can realize that once we clear all the patients, the presence of such appointments are no longer valid (All appointments belong to all patients). Hence, they are cleared
 also.
 
