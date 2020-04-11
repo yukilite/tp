@@ -184,12 +184,12 @@ public class DukeExceptions {
         }
     }
 
+    //@@author thanhduc2000
     /**
      * Check if both lists are empty.
      * If it is empty, throw EmptyListsException.
      *
      * @throws EmptyListsException when both lists are empty
-     * @author Duc
      */
     public static void checkEmptyLists() throws EmptyListsException {
         if (AppointmentList.getTotalAppointments() == 0 && PatientList.getTotalPatients() == 0) {
@@ -197,12 +197,12 @@ public class DukeExceptions {
         }
     }
 
+    //@@author thanhduc2000
     /**
      * Check if appointment's list is empty.
      * If it is empty, throw EmptyAppointmentsException.
      *
      * @throws EmptyAppointmentsException when appointment's list is empty
-     * @author Duc
      */
     public static void checkEmptyAppointments() throws EmptyAppointmentsException {
         if (AppointmentList.getTotalAppointments() == 0) {
@@ -210,12 +210,12 @@ public class DukeExceptions {
         }
     }
 
+    //@@author thanhduc2000
     /**
      * Check if patient's list is empty.
      * If it is empty, throw EmptyPatientsException.
      *
      * @throws EmptyPatientsException when patient's list is empty
-     * @author Duc
      */
     public static void checkEmptyPatients() throws EmptyPatientsException {
         if (PatientList.getTotalPatients() == 0) {
