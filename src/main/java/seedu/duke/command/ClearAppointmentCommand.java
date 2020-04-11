@@ -39,7 +39,7 @@ public class ClearAppointmentCommand extends Command {
      *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @throws IOException when there is error in the index's input
+     * @throws IOException    when there is error in the index's input
      * @throws ParseException when there is error in the index's input
      * @see IOException
      * @see ParseException
@@ -64,6 +64,7 @@ public class ClearAppointmentCommand extends Command {
 
             // Show all items in both lists deleted message
             ui.showAppointmentsDeleted();
+
         } catch (EmptyAppointmentsException e) {
             ui.showNothingToClearAppointments();
         }

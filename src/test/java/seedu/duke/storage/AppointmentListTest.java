@@ -18,27 +18,27 @@ class AppointmentListTest {
 
     @Test
     void appointmentListTest_Add() {
-        testAppointmentList.getAppointmentList().add(testAppointment1);
-        testAppointmentList.getAppointmentList().add(testAppointment2);
-        testAppointmentList.getAppointmentList().add(testAppointment3);
-        assertEquals(3, testAppointmentList.getTotalAppointments());
+        AppointmentList.getAppointmentList().add(testAppointment1);
+        AppointmentList.getAppointmentList().add(testAppointment2);
+        AppointmentList.getAppointmentList().add(testAppointment3);
+        assertEquals(3, AppointmentList.getTotalAppointments());
     }
 
     @Test
     void appointmentListTest_GetInfo() {
-        testAppointmentList.getAppointmentList().add(testAppointment1);
-        assertEquals("Sun 29 Mar 2020", testAppointmentList.getAppointmentRecord(0).getDate());
-        assertEquals("01:00 PM", testAppointmentList.getAppointmentRecord(0).getTime());
+        AppointmentList.getAppointmentList().add(testAppointment1);
+        assertEquals("Sun 29 Mar 2020", AppointmentList.getAppointmentRecord(0).getDate());
+        assertEquals("01:00 PM", AppointmentList.getAppointmentRecord(0).getTime());
     }
 
     @Test
     void appointmentListTest_Delete() {
-        testAppointmentList.getAppointmentList().add(testAppointment1);
-        testAppointmentList.getAppointmentList().add(testAppointment2);
-        testAppointmentList.getAppointmentList().add(testAppointment3);
+        AppointmentList.getAppointmentList().add(testAppointment1);
+        AppointmentList.getAppointmentList().add(testAppointment2);
+        AppointmentList.getAppointmentList().add(testAppointment3);
         testAppointmentList.removeAppointmentRecord(0);
-        assertEquals(2, testAppointmentList.getTotalAppointments());
-        assertEquals("Sat 28 Mar 2020", testAppointmentList.getAppointmentRecord(0).getDate());
+        assertEquals(2, AppointmentList.getTotalAppointments());
+        assertEquals("Sat 28 Mar 2020", AppointmentList.getAppointmentRecord(0).getDate());
 
     }
 }

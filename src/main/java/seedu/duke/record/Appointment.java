@@ -2,9 +2,7 @@ package seedu.duke.record;
 
 import seedu.duke.converter.TimeConverter;
 
-import java.sql.Time;
 import java.text.ParseException;
-import java.util.Date;
 
 /**
  * This class contains the date and time for each patient.

@@ -5,25 +5,30 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PatientTest {
-    @Test void getName() {
+    @Test
+    void getName() {
         Patient patient = new Patient("peony", 33, "clementi road", "61234567", 12);
         assertEquals("peony", patient.getName());
     }
 
-    @Test void testGetAge() {
+    @Test
+    void testGetAge() {
         Patient patient = new Patient("peony", 33, "clementi road", "61234567", 12);
         assertEquals(33, patient.getAge());
     }
 
-    @Test void testGetAddress() {
+    @Test
+    void testGetAddress() {
         Patient patient = new Patient("peony", 33, "clementi road", "61234567", 12);
         assertEquals("clementi road", patient.getAddress());
     }
 
-    @Test void testGetContactNumber() {
+    @Test
+    void testGetContactNumber() {
         Patient patient = new Patient("peony", 33, "clementi road", "61234567", 12);
         assertEquals("61234567", patient.getContactNumber());
     }
+
 
     @Test void testToString() {
         Patient patient1 = new Patient("john", 45, "jail", "91234567", 12);
@@ -34,35 +39,40 @@ class PatientTest {
                 patient2.toString());
     }
 
-    @Test void testSetName() {
+    @Test
+    void testSetName() {
         Patient patient = new Patient("peony", 33, "clementi road", "91234567", 12);
         patient.setName("peony");
         assertEquals("peony", patient.getName());
     }
 
 
-    @Test void testSetAge() {
+    @Test
+    void testSetAge() {
         Patient patient = new Patient("peony", 33, "clementi road", "91234567", 12);
         patient.setAge(33);
         assertEquals(33, patient.getAge());
     }
 
 
-    @Test void testSetAddress() {
+    @Test
+    void testSetAddress() {
         Patient patient = new Patient("peony", 33, "clementi road", "91234567", 12);
         patient.setAddress("clementi road");
         assertEquals("clementi road", patient.getAddress());
     }
 
 
-    @Test void testSetContactNumber() {
+    @Test
+    void testSetContactNumber() {
         Patient patient = new Patient("peony", 33, "clementi road", "91234567", 12);
         patient.setContactNumber("11111111");
         assertEquals("11111111", patient.getContactNumber());
     }
 
 
-    @Test void testSetPatientInfo() {
+    @Test
+    void testSetPatientInfo() {
         Patient patient = new Patient("peony", 33, "clementi road", "91234567", 12);
         patient.setPatientInfo("chucky", 11, "im going to kill you", "44444444");
         assertEquals("chucky", patient.getName());

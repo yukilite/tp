@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Represents the user interface that will interact with the user.
+ *
  * @author Justin
  */
 public class Ui {
@@ -112,7 +113,7 @@ public class Ui {
     public static void printFileCreationErrorMessage() {
         System.out.println("An error occured while attempting to create the save file.");
     }
-    
+
     public static void showNoPidExist() {
         System.out.println("Patient Id don't exist! No appointment record will be made.");
     }
@@ -120,7 +121,7 @@ public class Ui {
     public static void showWrongAge() {
         System.out.println("Received age seems wrong, setting age to be blank");
     }
-      
+
     public static void printInvalidPhoneNumberMessage() {
         System.out.println("Invalid phone number, phone number field will be set to empty.");
     }
@@ -174,6 +175,7 @@ public class Ui {
     /**
      * This method prints out a list of Appointments containing a specific keyword in a readable format.
      * It is used in the FindAppointmentCommand class.
+     *
      * @param foundAppointments list of Appointment search results
      */
     public void printAppointmentSearchResults(List<Appointment> foundAppointments) {
@@ -191,6 +193,7 @@ public class Ui {
     /**
      * This method prints out a list of Patients containing a specific keyword in a readable format.
      * It is used in the FindPatientCommand class.
+     *
      * @param foundPatients list of Patient search results
      */
     public void printPatientSearchResults(List<Patient> foundPatients) {
@@ -206,18 +209,18 @@ public class Ui {
     }
 
     public void printInvalidAppointmentSearchDateMessage() {
-        System.out.println("The input does not follow the correct time search format: \n\'dd/mm/yyyy\'\n"
+        System.out.println("The input does not follow the correct time search format: \n'dd/mm/yyyy'\n"
                 + "Please try again. ");
     }
 
     public void printInvalidAppointmentSearchTimeMessage() {
         System.out.println("The input does not follow the correct time search format: \n"
-                + "\'hh:mm (am/pm)\'\nPlease try again. ");
+                + "'hh:mm (am/pm)'\nPlease try again. ");
     }
 
     public void printInvalidAppointmentSearchFormatMessage() {
         System.out.println("The input does not follow the correct date or time search format: "
-                + "\n\'dd/mm/yyyy\' for dates\n\'hh:mm (am/pm)\' for times\nPlease try again. ");
+                + "\n'dd/mm/yyyy' for dates\n'hh:mm (am/pm)' for times\nPlease try again. ");
     }
 
     public void printSearchValueConversionErrorMessage() {
@@ -248,5 +251,9 @@ public class Ui {
 
     public void showNothingToClearPatients() {
         System.out.println("There is nothing to clear in patients' list");
+    }
+
+    public void showIoExceptionError() {
+        System.out.print("There is some problem with the save file");
     }
 }

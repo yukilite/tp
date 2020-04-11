@@ -2,12 +2,12 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.FileCorruptedException;
-import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.IndexNotIntegerException;
+import seedu.duke.exceptions.InvalidFormatException;
+import seedu.duke.exceptions.InvalidIndexException;
 import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.exceptions.PidEmptyException;
-import seedu.duke.exceptions.InvalidFormatException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parser.Parser;
 import seedu.duke.record.Appointment;
 import seedu.duke.record.Patient;
@@ -99,7 +99,7 @@ public class Duke {
                 ui.showExceptionError(e.getLocalizedMessage());
 
             } catch (IOException e) {
-                //todo justin ui print error message
+                ui.showIoExceptionError();
 
             } catch (NoSuchElementException e) {
                 break;
