@@ -40,7 +40,7 @@
 * [3. User Stories](#3-user-stories)
 * [4. Non-functional requirements](#4-non-functional-requirements)
 * [5. Instructions for manual testing](#5-instructions-for-manual-testing)
-    + [5.1, Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
+    + [5.1. Startup, shutdown and restart](#51-startup-shutdown-and-restart-with-saved-list)
     + [5.2. Adding a patient](#52-adding-a-patient)
     + [5.3. Editing a patient](#53-editing-a-patient)
     + [5.4. Deleting a patient](#54-delete-a-patient)
@@ -84,8 +84,8 @@ and delete patients' information and appointments.
 ### 1.3. Definitions
 |Term|Description|
 |----|-----------|
-|fields|Fields refer to what are the accepted formats the Parse will search for in the User Input. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name`. <br><br> View the full list of fields [here](#sequence-diagram-for-calling-an-enum) or on our User Guide [here](UserGuide.md) |
-|field-values| This refers to the value that exists after a field. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name` and its corresponding value will be `23`, `Pasir Ris`, `Justin`.
+fields|Fields refer to what are the accepted formats the Parse will search for in the User Input. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name`. <br><br> View the full list of fields [here](#sequence-diagram-for-calling-an-enum) or on our User Guide [here](UserGuide.md) |
+field-values| This refers to the value that exists after a field. <br><br> For example: `addp \name Justin \age 23 \address Pasir Ris` <br><br> The fields in the above command will be `\age`, `\address` and `\name` and its corresponding value will be `23`, `Pasir Ris`, `Justin`.
 
 
 ### [Back to top &#x2191;](#table-of-content)
