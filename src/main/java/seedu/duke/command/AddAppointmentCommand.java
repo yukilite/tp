@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.generator.PatientIdManager;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
@@ -45,11 +46,18 @@ public class AddAppointmentCommand extends Command {
      *
      * @param appointmentInfo the <code>Map</code> that contains the information relating to the appointment.
      */
-    public AddAppointmentCommand(Map<String, String> appointmentInfo) {
+    public AddAppointmentCommand(Map<String, String> appointmentInfo) throws InvalidFormatException {
         this.date = appointmentInfo.get(DATE);
         this.time = appointmentInfo.get(TIME);
         try {
             this.patientId = Integer.parseInt(appointmentInfo.get(PID));
+            if (this.patientId < 0) {
+                this.patientId = -1;
+            }
+            if (!PatientIdManager.checkPatientIdUsed(patientId)) {
+                this.patientId = -2;
+            }
+
         } catch (NumberFormatException e) {
             this.patientId = -1;
         }
@@ -76,6 +84,11 @@ public class AddAppointmentCommand extends Command {
 
         if (this.patientId == -1) {
             Ui.showWrongPid();
+            return;
+        }
+
+        if (this.patientId == -2) {
+            Ui.showNoPidExist();
             return;
         }
 

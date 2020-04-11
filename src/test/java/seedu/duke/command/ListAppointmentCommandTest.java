@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -17,7 +18,7 @@ class ListAppointmentCommandTest {
             + "{[Date]: LSDs |[Time]: Lis}" + System.lineSeparator();
 
     @Test
-    void testListWithPatients() {
+    void testListWithPatients() throws InvalidFormatException {
         Ui ui = null;
         Storage storage = null;
         int savedAppointmentList = 1;
@@ -32,7 +33,7 @@ class ListAppointmentCommandTest {
     }
 
     @Test
-    void testListWithoutPatients() {
+    void testListWithoutPatients() throws InvalidFormatException {
         Ui ui = null;
         Storage storage = null;
 

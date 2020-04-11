@@ -2,6 +2,8 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeExceptions;
 import seedu.duke.exceptions.EmptyListsException;
+import seedu.duke.exceptions.InvalidFormatException;
+import seedu.duke.generator.PatientIdManager;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.PatientList;
 import seedu.duke.storage.Storage;
@@ -24,13 +26,17 @@ public class ClearAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clear all patients and appointments from both lists.\n"
             + "Example: " + EXAMPLE;
 
+    public ClearAllCommand() throws InvalidFormatException {
+
+    }
+
     /**
      * Method to clear all the items in both lists if available, if
      * there is nothing to clear return a warning to users.
      *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @throws IOException when there is error in the index's input
+     * @throws IOException    when there is error in the index's input
      * @throws ParseException when there is error in the index's input
      * @see IOException
      * @see ParseException
@@ -52,6 +58,9 @@ public class ClearAllCommand extends Command {
             // Clear all the items in patients' list
             PatientList.getPatientList().clear();
 
+            // Reset the patient id manager state
+            PatientIdManager.clearPatientId();
+
             // Make sure that the size of both patients' list and appointments' list are 0
             assert AppointmentList.getTotalAppointments() == 0 && PatientList.getTotalPatients() == 0;
 
@@ -62,7 +71,7 @@ public class ClearAllCommand extends Command {
             storage.savePatientList();
 
             // Show all items in both lists deleted message
-            // ui.showAllItemsDeleted(); //TODO Justin
+            ui.showAllItemsDeleted();
         } catch (EmptyListsException e) {
             System.out.println("There is nothing to clear in both lists");
             // ui.showNothingToClearBothLists(); // TODO Justin

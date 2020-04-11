@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -21,7 +22,7 @@ class AddPatientCommandStub extends AddPatientCommand {
     private String patientName;
     private int age;
 
-    public AddPatientCommandStub(Map<String, String> patientInfo) {
+    public AddPatientCommandStub(Map<String, String> patientInfo) throws InvalidFormatException {
         super(patientInfo);
         this.patientName = patientInfo.get(PATIENT_NAME);
         if (patientInfo.get(AGE).isBlank()) {

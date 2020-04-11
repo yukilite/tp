@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import seedu.duke.converter.TimeConverter;
+import seedu.duke.exceptions.InvalidFormatException;
+import seedu.duke.exceptions.NoFieldCommandException;
 import seedu.duke.record.Appointment;
 import seedu.duke.storage.AppointmentList;
 import seedu.duke.storage.Storage;
@@ -42,7 +44,7 @@ public class EditAppointmentCommand extends Command {
      * @param fieldsToChange a hash map which pass all the fields needed to be changed
      *                       as key and content as values
      */
-    public EditAppointmentCommand(Map<String, String> fieldsToChange) {
+    public EditAppointmentCommand(Map<String, String> fieldsToChange) throws InvalidFormatException {
         try {
             this.index = Integer.parseInt(fieldsToChange.get(APPOINTMENT_INDEX));
             if (index > AppointmentList.getTotalAppointments() || index <= 0) {
@@ -101,7 +103,7 @@ public class EditAppointmentCommand extends Command {
      * @see Ui#showUpdateAppointmentSuccess
      */
     @Override
-    public void execute(Ui ui, Storage storage) throws IOException {
+    public void execute(Ui ui, Storage storage) throws IOException, ParseException {
         try {
             // Get the appointment's record based on its index from the list
             Appointment appointment = AppointmentList.getAppointmentRecord(index - 1);
@@ -125,7 +127,7 @@ public class EditAppointmentCommand extends Command {
 
             // Show updated successfully message
             Ui.showUpdateAppointmentSuccess();
-        } catch (IndexOutOfBoundsException | ParseException e) {
+        } catch (IndexOutOfBoundsException e) {
             return;
         }
     }

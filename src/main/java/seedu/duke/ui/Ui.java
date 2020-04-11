@@ -31,7 +31,7 @@ public class Ui {
         } else {
             for (Patient p : patientList) {
                 System.out.println(index + ". " + p); //override Patient class toString by @Sammmmm
-                index ++;
+                index++;
             }
         }
     }
@@ -41,11 +41,13 @@ public class Ui {
      */
     public static void showEntireAppointmentList() {
         List<Appointment> appointmentList = AppointmentList.getAppointmentList();
+        int index = 1;
         if (appointmentList.isEmpty()) {
             System.out.println("No appointment records present!");
         } else {
             for (Appointment a : appointmentList) {
-                System.out.println(a);
+                System.out.println(index + ". " + a);
+                index++;
             }
         }
     }
@@ -101,6 +103,26 @@ public class Ui {
     public static void showWrongPid() {
         System.out.println("Wrong pid. This will not be added to the appointment list.");
 
+    }
+
+    public static void printSaveFileCorruptedMessage() {
+        System.out.println("A save file was corrupted. Clearing save file data...");
+    }
+
+    public static void printFileCreationErrorMessage() {
+        System.out.println("An error occured while attempting to create the save file.");
+    }
+    
+    public static void showNoPidExist() {
+        System.out.println("Patient Id don't exist! No appointment record will be made.");
+    }
+
+    public static void showWrongAge() {
+        System.out.println("Received age seems wrong, setting age to be blank");
+    }
+      
+    public static void printInvalidPhoneNumberMessage() {
+        System.out.println("Invalid phone number, phone number field will be set to empty.");
     }
 
     public void showExceptionError(String localizedMessage) {
@@ -161,7 +183,7 @@ public class Ui {
         }
         int currentIndex = 1;
         for (Appointment result : foundAppointments) {
-            System.out.println(currentIndex + " " + result.toString());
+            System.out.println(currentIndex + ". " + result.toString());
             currentIndex++;
         }
     }
@@ -178,8 +200,32 @@ public class Ui {
         }
         int currentIndex = 1;
         for (Patient result : foundPatients) {
-            System.out.println(currentIndex + " " + result.toString());
+            System.out.println(currentIndex + ". " + result.toString());
             currentIndex++;
         }
+    }
+
+    public void printInvalidAppointmentSearchDateMessage() {
+        System.out.println("The input does not follow the correct time search format: \n\'dd/mm/yyyy\'\n"
+                + "Please try again. ");
+    }
+
+    public void printInvalidAppointmentSearchTimeMessage() {
+        System.out.println("The input does not follow the correct time search format: \n"
+                + "\'hh:mm (am/pm)\'\nPlease try again. ");
+    }
+
+    public void printInvalidAppointmentSearchFormatMessage() {
+        System.out.println("The input does not follow the correct date or time search format: "
+                + "\n\'dd/mm/yyyy\' for dates\n\'hh:mm (am/pm)\' for times\nPlease try again. ");
+    }
+
+    public void printSearchValueConversionErrorMessage() {
+        System.out.println("An error occured when trying to parse the search input. Please try again.");
+    }
+    
+    public void showAllItemsDeleted() {
+        System.out.println("Both list cleared!");
+
     }
 }

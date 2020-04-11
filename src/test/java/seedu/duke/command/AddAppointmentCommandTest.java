@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -60,7 +61,7 @@ class AddAppointmentCommandTest {
     }
 
     @Test
-    void testAddNormalString() throws IOException, ParseException {
+    void testAddNormalString() throws IOException, ParseException, InvalidFormatException {
         Ui ui = null;
         Storage storage = null;
         Map<String, String> tempMap = AddAppointmentCommandStub.generateMap(1);
@@ -74,7 +75,7 @@ class AddAppointmentCommandTest {
     }
 
     @Test
-    void testAddEmptyString() throws IOException {
+    void testAddEmptyString() throws IOException, InvalidFormatException {
         Ui ui = null;
         Storage storage = null;
         Map<String, String> tempMap = AddAppointmentCommandStub.generateMap(2);

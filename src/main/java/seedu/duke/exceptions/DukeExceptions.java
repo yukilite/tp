@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class DukeExceptions {
     private static final String BLANK_STRING = "";
-    public static final String ADD_PATIENT_COMMAND = "addp";
+    private static final String ADD_PATIENT_COMMAND = "addp";
 
     /**
      * This method throws a NoKeyExistException if the key is not found in the input that the user supplied
@@ -27,16 +27,6 @@ public class DukeExceptions {
         if (keyValue.length != 2) {
             throw new NoKeyExistException();
         }
-    }
-
-    /**
-     * This method throws a UnknownCommandException when the user supplied in an unknown command.
-     * All commands available are listed as final Strings in Parser class.
-     *
-     * @throws UnknownCommandException when user supplied command are not amongst the final Strings.
-     */
-    public static void throwUnknownCommand() throws UnknownCommandException {
-        throw new UnknownCommandException();
     }
 
     /**
@@ -150,7 +140,8 @@ public class DukeExceptions {
             String field = af.toString();
 
             assert field != null;
-            if (field.equals(AppointmentFieldKeys.INDEX.toString())) {
+            if (field.equals(AppointmentFieldKeys.INDEX.toString())
+                    || field.equals(AppointmentFieldKeys.PATIENT_ID.toString())) {
                 continue;
             }
 
@@ -197,8 +188,8 @@ public class DukeExceptions {
      * Check if both lists are empty.
      * If it is empty, throw EmptyListsException.
      *
-     * @author Duc
      * @throws EmptyListsException when both lists are empty
+     * @author Duc
      */
     public static void checkEmptyLists() throws EmptyListsException {
         if (AppointmentList.getTotalAppointments() == 0 && PatientList.getTotalPatients() == 0) {
@@ -210,8 +201,8 @@ public class DukeExceptions {
      * Check if appointment's list is empty.
      * If it is empty, throw EmptyAppointmentsException.
      *
-     * @author Duc
      * @throws EmptyAppointmentsException when appointment's list is empty
+     * @author Duc
      */
     public static void checkEmptyAppointments() throws EmptyAppointmentsException {
         if (AppointmentList.getTotalAppointments() == 0) {
@@ -223,12 +214,13 @@ public class DukeExceptions {
      * Check if patient's list is empty.
      * If it is empty, throw EmptyPatientsException.
      *
-     * @author Duc
      * @throws EmptyPatientsException when patient's list is empty
+     * @author Duc
      */
     public static void checkEmptyPatients() throws EmptyPatientsException {
         if (PatientList.getTotalPatients() == 0) {
             throw new EmptyPatientsException();
         }
     }
+
 }
