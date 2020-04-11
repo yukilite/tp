@@ -451,7 +451,7 @@ Format: `help`
 ### 4.5 Exit HAMS program
 
 This command exits the HAMS program and saves the current Patient/Appointment data into separate local save files (in
- `/saves/appointments.txt` and `/saves/patients.txt` respectively). Also, the resuable and new patient ids will also be saved in
+ `/saves/appointments.txt` and `/saves/patients.txt` respectively). Also, the resuable and new patient ids will be saved in
   `/saves/patientId.txt`. These files will be loaded to the program when it is run again subsequently.
 
 Format: `exit`
