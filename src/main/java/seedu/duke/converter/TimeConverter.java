@@ -10,6 +10,9 @@ import java.util.Date;
  * @author Samantha Goh
  */
 public class TimeConverter {
+
+    public static final int MAXLENGTH = 4;
+
     /**
      * This method converts the old date into a new date format.
      *
@@ -35,6 +38,9 @@ public class TimeConverter {
      * @throws ParseException the error occurs if the time is not found.
      */
     public static String oldTime(String oldTime) throws ParseException {
+        if (oldTime.length() > MAXLENGTH) {
+            throw new ParseException("", 1);
+        }
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HHmm");
         simpleDateFormat1.setLenient(false);
         Date time = simpleDateFormat1.parse(oldTime);
