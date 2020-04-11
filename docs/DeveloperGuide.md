@@ -158,27 +158,41 @@ The class diagram for the storage module is as seen below:
 
 &nbsp;
 
-On startup, Duke invokes the loadSavedAppointment() and loadSavedPatient() methods in Storage. This allows the program 
+##### 2.2.3.1 Process of Object Creation
+
+On startup, Duke invokes the `loadSavedAppointment()` and `loadSavedPatient()` methods in Storage. This allows the program 
 to retrieve previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
 within the program. 
 
-##### 2.2.3.1 Process of Object Creation
+For Appointments, the Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
+new Appointments, and then add them to an ArrayList of Appointments called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
+construct the static AppointmentList.
+ 
+For Patients, the process is the same as above. The difference is that lines in the .txt files are converted to Patient objects instead.
+They are added to an ArrayList of Patients called `patientListToReturn`. `patientListToReturn` is then passed back to Duke to construct
+the static PatientList.
 
-The Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
-new Appointments, and then add them to an ArrayList called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
-construct the static AppointmentList. The sequence diagram is shown below:
+The sequence diagrams for both `loadSavedAppointment()` and `loadSavedPatient()` are shown below:
 
 ![](images/loadsavedappt_seq1.PNG)
 ![](images/loadsavedappt_ref.PNG)
 
-When the static AppointmentList or PatientList has changes, or the program is exiting, saveAppointmentList() or savePatientList() 
+![](images/loadsavedpatient_seq1.PNG)
+![](images/loadsavedpatient_ref.PNG)
+
+When the static AppointmentList or PatientList has changes, or the program is exiting, `saveAppointmentList()` or `savePatientList()` 
 is invoked respectively. This allows the Storage object to back up existing records to a local .txt file.
 
-The Storage object will create a FileWriter object called `fw`. The command will then iterate through the existing AppointmentList
-and parse each Appointment within, converting it to a string. `fw` then writes this string to the .txt file.
-The sequence diagram is shown below:
+For Appointments, the Storage object will create a FileWriter object called `fwAppointmentSave`. The command will then iterate through the existing AppointmentList
+and parse each Appointment within, converting it to a string. `fwAppointmentSave` then writes this string to the .txt file `appointments.txt`.
+
+For Patients, the process is the same as above. The difference is that Storage object creates a FileWriter object called `fwPatientSave` instead.
+`fwPatientSave` writes Patient strings to the file `patients.txt`.
+
+The sequence diagram for `saveAppointmentList()` and `savePatientList()`  is shown below:
 
 ![](images/saveapptlist_seq.PNG)
+![](images/savepatientlist_seq.PNG)
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -706,7 +720,7 @@ Below shows the sequence diagram for FindAppointmentCommand class.
     * Pros:
         - Allows us to be more specific when filtering and searching for a certain Appointment.
     * Cons:
-        - Not as comptaible with TimeConverter class. Requires more sophisticated methods to parse input, as well 
+        - Not as compatible with TimeConverter class. Requires more sophisticated methods to parse input, as well 
         as error handling to handle complicated error cases for multiple input fields.
 
 #### 2.2.4.15 FindPatientCommand Class
@@ -748,7 +762,7 @@ Below shows the sequence diagram for FindPatientCommand class.
         - Allows us to be more specific when filtering and searching for a certain Patient
     * Cons:
         - Requires us to manage the different possible combinations of fields in the input (there are 4 fields, resulting in
-        24 possible combinations). We would need  to handle the possible increased complexity of this input.
+        24 possible combinations). We would need additional clauses and exceptions to handle the increased complexity of this input.
 
 #### 2.2.4.16 HelpCommand
 
