@@ -349,7 +349,8 @@ class ParserTest {
                 assertEquals("Please ensure that the index for edita is valid", e.getLocalizedMessage());
 
             } catch (IndexNotIntegerException e) {
-                assertEquals("Please input a valid integer as the index for the command edita",
+                assertEquals("Please input a valid integer that is within range of the list as the index for the "
+                                + "command edita",
                         e.getLocalizedMessage());
 
             } catch (NoFieldCommandException e) {
@@ -417,7 +418,8 @@ class ParserTest {
                 assertEquals("Please ensure that the index for deletea is valid", e.getLocalizedMessage());
 
             } catch (IndexNotIntegerException e) {
-                assertEquals("Please input a valid integer as the index for the command deletea",
+                assertEquals("Please input a valid integer that is within range of the list as the index for the "
+                                + "command deletea",
                         e.getLocalizedMessage());
 
             } catch (Exception e) {
