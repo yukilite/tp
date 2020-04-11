@@ -53,9 +53,8 @@ maintaining medical records. It is written in Java
 		- Found bugs for other groups' program ([ped report](https://github.com/andy-aw-why/ped/issues))
 
 ### Contributions to the User Guide
-```
-Given below are some sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
-```
+
+> Given below are **some** sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
 
 This document serves as a user guide for HAMS. It teaches the user how to install HAMS, describes the features of HAMS, 
 explains how HAMS can be used and finally answer some frequently asked questions about HAMS.
@@ -81,10 +80,10 @@ This command exits the HAMS program and saves the current Patient/Appointment da
 > I technically created the user guide while my teammates modified it to fit HAMS.
  
 ### Contributions to the Developer Guide
-```
- Provided below are some sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
- technical contributions to the project and rationale for technical implementation.
-```
+ 
+>  Provided below are **some** sections I contributed to the Developer Guide. They demonstrate my ability to communicate my 
+>  technical contributions to the project and rationale for technical implementation.
+
 
 #### 2.2.4 A&D command module 
 
@@ -92,11 +91,11 @@ This command exits the HAMS program and saves the current Patient/Appointment da
 
 Below shows the sequence diagram for ```AddPatientCommand``` class
 
-![](../images/AddPatientCommandSequence.png)
+![](../images/AddPatientCommandSequence.png){:height="80%" width="80%"}
 
-![](../images/AddPatientCommandSequenceAddIntoPatientList.png)
+![](../images/AddPatientCommandSequenceAddIntoPatientList.png){:height="80%" width="80%"}
 
-![](../images/AddPatientCommandSequenceAutoSavePatientList.png)
+![](../images/AddPatientCommandSequenceAutoSavePatientList.png){:height="80%" width="80%"}
  
 
 ##### 2.2.4.2 AddAppointmentCommand Class
@@ -104,21 +103,21 @@ Below shows the sequence diagram for ```AddPatientCommand``` class
 
 Below shows the sequence diagram for ```AddAppointmentCommand``` class:
 
-![](../images/AddAppointCommandSequence.png)
+![](../images/AddAppointCommandSequence.png){:height="80%" width="80%"}
 
-![](../images/AddAppointCommandSequenceAddNewAppointment.png)
+![](../images/AddAppointCommandSequenceAddNewAppointment.png){:height="80%" width="80%"}
 
-![](../images/AddAppointCommandSequenceAutoSavingAppointList.png)
+![](../images/AddAppointCommandSequenceAutoSavingAppointList.png){:height="80%" width="80%"}
 
 ##### 2.2.4.3 ListPatientCommand Class
 
 Below shows the sequence diagram for ```ListPatientCommand``` class
 
-![](../images/ListPatientCommandSequence.png)
+![](../images/ListPatientCommandSequence.png){:height="80%" width="80%"}
 
 ##### 2.2.4.4 ListAppointmentCommand Class
 
-![](../images/ListAppointmentCommandSequence.png)
+![](../images/ListAppointmentCommandSequence.png){:height="80%" width="80%"}
 
 
 
