@@ -12,9 +12,28 @@
     * [2.1. Project Overview](#21-project-overview)
         * [2.2. Module Overview](#22-module-overview)
             * [2.2.1. Record module ](#221-record-module)
+				* [2.2.1.1 Process of Object Creation](#2211-process-of-object-creation)
+				* [2.2.1.2 Design Considerations](#2212-design-considerations)
             * [2.2.2. Converter module ](#222-converter-module)
             * [2.2.3. Storage module ](#223-storage-module)
+				* [2.2.3.1 Process of Object Creation](#2231-process-of-object-creation)
             * [2.2.4. Command module ](#224-command-module)
+				* [2.2.4.1 AddPatientCommand Class](#2241-addpatientcommand-class)
+				* [2.2.4.2 AddAppointmentCommand Class](#2242-addappointmentcommand)
+				* [2.2.4.3 ListPatientCommand Class](#2243-listpatientcommand-class)
+				* [2.2.4.4 ListAppointmentCommand Class](#2244-listappointmentcommand-class)
+				* [2.2.4.5 PatientIdManger Class](#2245-patientidmanger-class)
+				* [2.2.4.6 Design considerations for 2.2.4.1 to 2.2.4.5](#2246-design-considerations-for-2241-to-2245)
+				* [2.2.4.7 EditAppointmentCommand Class](#2247-editappointmentcommand-class)
+				* [2.2.4.8 EditPatientCommand Class](#2248-editpatientcommand-class)
+				* [2.2.4.9 DeleteAppointmentCommand Class](#2249-deleteappointmentcommand-class)
+				* [2.2.4.10 DeletePatientCommand Class](#22410-deletepatientcommand-class)
+				* [2.2.4.11 ClearAllCommand Class](#22411-clearallcommand-class)
+				* [2.2.4.12 ClearAppointmentCommand Class](#22412-clearappointmentcommand-class)
+				* [2.2.4.13 ClearPatientCommand Class](#22413-clearpatientcommand-class)
+				* [2.2.4.14 FindAppointmentCommand Class](#22414-findappointmentcommand-class)
+				* [2.2.4.16 HelpCommand Class](#22416-helpcommand-class)
+				* [2.2.4.17 ExitCommand Class](#22417-exitcommand-class)
             * [2.2.5. Parser Module ](#225-parser-module)
                 * [2.2.5.1. Object creation and input interpretation](#2251-object-creation-and-steps-in-input-interpretation)
                 * [2.2.5.2. Design Considerations ](#2252-design-considerations)
@@ -226,10 +245,12 @@ To add a patient, the ```AddPatientCommand``` class is used. For this ```AddPati
 façade class for the ```Main```, ```Patient``` , ```PatientList``` and the ```Storage``` class to interact with one 
 another. Also, to uniquely identify a patient, an unique patientId number is assigned to each patient when they are first added into the patient list.
 
+Note that if the patient information given is incorrect due to formatting or value error, ```AddPatientCommand``` will return an exception and ```AddPatientCommand``` will **not** create a patient record.
+
 ![](images/AddPatientDiagram.png)
 
 1. The ```AddPatientCommand``` class object will first be created by the ```Parser``` object, where the information 
-regarding the patient to be added will be stored in a Map, where the ```AddPatientCommand``` class object would read the Map content and store the information about the patient in said ```AddPatientCommand``` class object. 
+regarding the patient to be added will be stored in a Map, where the ```AddPatientCommand``` class object would read the Map content and store the information about the patient in said ```AddPatientCommand``` class object. It will also check for the format of the information given in the Map and see if the information is valid. If the information is not valid, the ```AddPatientCommand``` object will not be created.
 For the patient Id number, it will call upon the static class ```patientIdManager``` to get its unique patient id number. This unique Id number will be used later in the ```Patient``` object creation too.
 
 2. When the 
@@ -265,11 +286,14 @@ To add an appointment, the ```AddAppointmentCommand``` class is used. For this `
 serves as a façade class for the ```Main```, ```Appointment```, ```AppointmentList``` and the ```Storage``` class to 
 interact with one another. 
 
+Note that if the appointment information given is incorrect due to formatting or value error, ```AddAppointmentCommand``` will return an exception and ```AddAppointmentCommand``` will **not** create an appointment record.
+
+
 ![](images/AddAppointmentDiagram.png)
 
 1. Like the ```AddPatientCommand``` class, the ```AddAppointmentCommand``` object is first created by the ```Parser``` 
 object, where the information of the appointment is again stored in a Map that the ```AddAppoinmentCommand``` object would read from. 
-Said information will be stored in the ```AddAppoinmentCommand``` object
+Said information will be stored in the ```AddAppoinmentCommand``` object.  It will also check for the format of the information given in the Map and see if the information is valid. If the information is not valid, the ```AddAppoinmentCommand``` object will not be created.
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```AddAppointmentCommand``` class would call upon the 
@@ -438,7 +462,7 @@ Lastly, for ```clearPatientId()```, it resets the value of  ```nextTopNewNumber`
  ```patientIdManager``` state since both commands clears all the current patients in HAMS, which meant that all the
   patient id in HAMS must be reset as there are no patients left.
 
-##### 2.2.4.6 Design considerations
+##### 2.2.4.6 Design considerations for 2.2.4.1 to 2.2.4.5
 
 For the 5 classes listed, there were some other design considerations that was discussed for these 5 classes. Here
 , we will discuss the other choices and the pros and cons for them.
@@ -513,17 +537,19 @@ For the 5 classes listed, there were some other design considerations that was d
         
 ### [Back to top &#x2191;](#table-of-content)
 
-#### 2.2.4.7 EditAppointmentClass
+#### 2.2.4.7 EditAppointmentCommand Class
 
 To edit an appointment, the ```EditAppointmentCommand``` class is used. For this ```EditAppointmentCommand``` class, it 
 serves as a facade class for the ```Main```, ```Appointment```, ```AppointmentList```, ```Ui``` and the ```Storage``` class to 
 interact with one another. 
 
+Note that if the patient information given is incorrect due to formatting or value error, ```EditAppointmentCommand``` will return an exception and ```EditAppointmentCommand``` will **not** update the patient record.
+
 1. The ```EditAppointmentCommand``` class is processed by ```Parser```
 
 2. When 
 the ```Main``` calls ```execute(Ui ui, Storage storage)```, the ```EditAppointmentCommand``` class would call upon the 
-```Appointment``` class to make an ```Appointment``` Object. 
+```Appointment``` class to make an ```Appointment``` Object. It will also check the information given for the appointment and see if the information is valid.
 
 3. After which, the ```EditAppoinmentCommand``` object will  call upon the ```AppointmentList``` object to get the record 
 of the record of the appointment based on the index with ```getAppointmentRecord``` .
@@ -544,11 +570,13 @@ Below shows the sequence diagram for ```EditAppointmentCommand``` class.
 
 ![](images/EditAppointmentSequenceDiagram.png)
 
-#### 2.2.4.8 EditPatientCommand CLass
+#### 2.2.4.8 EditPatientCommand Class
 
 To edit an appointment, the ```EditPatientCommand``` class is used. For this ```EditPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Patient```, ```PatientList```, ```Ui``` and the ```Storage``` class to 
 interact with one another. 
+
+Note that if the appointment information given is incorrect due to formatting or value error, ```EditPatientCommand``` will return an exception and ```EditPatientCommand``` will **not** update the patient record.
 
 1. The ```EditPatientCommand``` class is processed by ```Parser```
 
@@ -772,7 +800,7 @@ Below shows the sequence diagram for FindPatientCommand class.
         - Requires us to manage the different possible combinations of fields in the input (there are 4 fields, resulting in
         24 possible combinations). We would need additional clauses and exceptions to handle the increased complexity of this input.
 
-#### 2.2.4.16 HelpCommand
+#### 2.2.4.16 HelpCommand Class
 
 To see the help usage for the commands in HAMS, the ```HelpCommand``` class is used. For this ```HelpCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact. The purpose of the class is to print out the usage
@@ -782,7 +810,7 @@ Below shows the sequence diagram for ```HelpCommand``` class.
 
 ![](images/HelpSequenceDiagram.png)
  
-#### 2.2.4.17 ExitCommand
+#### 2.2.4.17 ExitCommand Class
  
 To print the bye message for HAMS, the ```HelpCommand``` class is used. For this ```ClearPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact.
