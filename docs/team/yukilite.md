@@ -33,7 +33,7 @@ maintaining medical records. It is written in Java.
         * Fixed team's Gradle errors (Pull requests [#34](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/34), [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe))
         
     * Enhancements to existing features: 
-        * Wrote additional tests for existing features to increase coverage from xx% to xx% (Pull requests [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe)).
+        * Wrote additional tests for existing features to increase coverage from 60% to 100% (Pull requests [#62](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/62/commits/8b5646490a91ea72e9396ff436ec06945d935afe)).
     
     * Documentation: 
         * Reorganised content in the User Guide: [#46](https://github.com/AY1920S2-CS2113T-T13-3/tp/pull/46)
