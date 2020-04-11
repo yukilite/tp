@@ -97,9 +97,11 @@ The record module consists of 2 classes which represent the patients information
 As a reflection of real world objects, the Patient's class purpose is to store the particulars of a person while the 
 Appointment's class is to store the date-time data. 
 Thus, the rationale of both classes can be grouped as follows:
+
 >
 > As a reflection of real world entities, to create, store, and retrieve relevant information about the object.
 >
+
 Following the above purpose, both classes consist of only getter and setter methods. This would ensure a contiguous 
 flow in logical executions as these methods can be called whenever necessary.
 
@@ -110,7 +112,7 @@ methods.
 To illustrate, the below example is used:
 * editp \index 1 \name Justin \age 69 \Pasir Panjang
 
-![](images/SD_Patient.png)
+![](images/SD_Patient.PNG)
 
 Upon startup, objects from ui, parser and storage are created. Prompted for user input, Duke receives the "editp"
 command which is forwarded to the parser to be interpreted respectively. Once the `EditPatientCommand` object is 
@@ -133,4 +135,13 @@ also protected.
     * Pros:
         - Has flexibility to parse or format date using existing methods available for use.
     * Cons:
-        - Immutable-value classes mean it is not thread-safe (using Java.util.SimpleDateFormat).    
+        - Immutable-value classes mean it is not thread-safe (using Java.util.SimpleDateFormat).
+
+#### 2.2.2 Converter Module
+The converter module consists of one class which converts the format of date and time using a custom format defined by
+special formatting characters (ie. SimpleDateFormat). This class is primarily used to format a user-input date and time
+in the `Appointment` class. As illustrated below, its methods are called during the creation of the `Appointment`
+object constructor. 
+
+![](images/SD_Converter.PNG)
+
