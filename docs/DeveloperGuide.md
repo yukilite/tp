@@ -80,7 +80,7 @@ name and a summarized purpose.
 |---------|-------|
 |Records|Contains and provides access to user information|
 |Converter|Formats user input| 
-|BRillant Ahead of its time Neat Dainty OrigiNal (BRANDON) **Storage**|?|
+|Storage|Saves existing Records to local file/loads save file data to HAMS|
 |Commands|Facade classes that deals with input so that different classes can interact with each other|
 |Parser|Parses the user input for command execution|
 
@@ -142,13 +142,15 @@ object constructor.
 
 ### [Back to top &#x2191;](#table-of-content)
 
-#### 2.2.3 BRANDON storage module
+#### 2.2.3 Storage module
 
 The Storage module consists of 3 different classes. 
 The PatientList and AppointmentList classes act as data structures to store the records of Patient and Appointment 
 objects respectively. They function as ADTs, where various commands from Command objects can manipulate the records within.
+
 The Storage class manages the load and save operations involving the PatientList and PatientList class. 
 These operations are usually invoked on startup, whenever changes are made to the ADTs and before exiting the program.
+Additionally, it also works with PatientIdManager class to load pre-existing Patient-PatientId mappings.
 The class diagram for the storage module is as seen below: 
 
 
@@ -156,35 +158,41 @@ The class diagram for the storage module is as seen below:
 
 &nbsp;
 
-On startup, Duke invokes the loadSavedAppointment() and loadSavedPatient() methods in Storage. This allows the program 
+##### 2.2.3.1 Process of Object Creation
+
+On startup, Duke invokes the `loadSavedAppointment()` and `loadSavedPatient()` methods in Storage. This allows the program 
 to retrieve previously stored data from a .txt file and convert it into the static AppointmentList and PatientList objects for use
 within the program. 
 
-The Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
-new Appointments, and then add them to an ArrayList called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
-construct the static AppointmentList. The sequence diagram is shown below:
+For Appointments, the Storage object creates a Scanner object that will parse individual lines in the .txt file, convert them into
+new Appointments, and then add them to an ArrayList of Appointments called `appointmentListToReturn`. This `appointmentListToReturn` will be passed back to Duke to
+construct the static AppointmentList.
+ 
+For Patients, the process is the same as above. The difference is that lines in the .txt files are converted to Patient objects instead.
+They are added to an ArrayList of Patients called `patientListToReturn`. `patientListToReturn` is then passed back to Duke to construct
+the static PatientList.
 
-![](images/loadsavedappt_seq.PNG)
-![](images/loadsavedappt_ref1.PNG)
+The sequence diagrams for both `loadSavedAppointment()` and `loadSavedPatient()` are shown below:
 
-When the static AppointmentList or PatientList has changes, or the program is exiting, saveAppointmentList() or savePatientList() 
+![](images/loadsavedappt_seq1.PNG)
+![](images/loadsavedappt_ref.PNG)
+
+![](images/loadsavedpatient_seq1.PNG)
+![](images/loadsavedpatient_ref.PNG)
+
+When the static AppointmentList or PatientList has changes, or the program is exiting, `saveAppointmentList()` or `savePatientList()` 
 is invoked respectively. This allows the Storage object to back up existing records to a local .txt file.
 
-The Storage object will create a FileWriter object called `fw`. The command will then iterate through the existing AppointmentList
-and parse each Appointment within, converting it to a string. `fw` then writes this string to the .txt file.
-The sequence diagram is shown below:
+For Appointments, the Storage object will create a FileWriter object called `fwAppointmentSave`. The command will then iterate through the existing AppointmentList
+and parse each Appointment within, converting it to a string. `fwAppointmentSave` then writes this string to the .txt file `appointments.txt`.
+
+For Patients, the process is the same as above. The difference is that Storage object creates a FileWriter object called `fwPatientSave` instead.
+`fwPatientSave` writes Patient strings to the file `patients.txt`.
+
+The sequence diagram for `saveAppointmentList()` and `savePatientList()`  is shown below:
 
 ![](images/saveapptlist_seq.PNG)
-
-#####2.2.3.1 FindPatient/FindAppointment
-Design considerations for findPatient:
-- general search
-- include multiple fields in search
-
-Design considerations for findAppointment:
-- using specified formats for date and time, only allow one to be searched at any time
-- general search
-
+![](images/savepatientlist_seq.PNG)
 
 ### [Back to top &#x2191;](#table-of-content)
 
@@ -671,7 +679,92 @@ Below shows the sequence diagram for ```ClearPatientCommand``` class.
 
 ![](images/ClearPatientSequenceDiagram.png)
 
-#### 2.2.4.14 HelpCommand
+#### 2.2.4.14 FindAppointmentCommand Class
+
+To search the `AppointmentList` by keyword, the `FindAppointmentCommand` class is used. For this class, it serves as a 
+facade class for the Main, AppointmentList, Ui and the Storage class to interact with one another.
+
+1.	The `FindAppointmentCommand` class is processed by Parser
+
+2.	When the Main calls `execute(Ui ui, Storage storage)`, it creates `searchResults`, a new List to hold `Appointment` objects. 
+
+3.	The `FindAppointmentCommand` class gets the existing list of Appointment objects from AppointmentList using the method 
+`getAppointmentList()`.
+
+4.	After which, the `FindAppointmentCommand` object will iterate through Appointment objects within the list. According
+to the format of the input, this class searches specific fields:
+        * if input was **dd/mm/yyyy**, it searches date fields of each Appointment only.
+        * if input was **hh:mm (am/pm)**, it searches time fields of each Appointment only.
+
+5.	If an Appointment object does contain the search keyword, it will be added to searchResults.
+
+6.	searchResults then invokes the ui method `printAppointmentSearchResults()` to print the matching Appointment results to the console.
+(if searchResults is non-empty). Otherwise, the method outputs a message saying no search results were found.
+
+Below shows the sequence diagram for FindAppointmentCommand class.
+
+![](images/findappt_seq1.PNG)
+![](images/findappt_ref.PNG)
+
+##### 2.2.4.14.1 Design Considerations
+###### Aspect: Format of Search Input
+
++ Alternative 1 (current choice): Search only by Time or Date input
+    * Pros: 
+        - Easier implementation
+        - Greater compatibility with TimeConverter class, able to validate input more easily
+    * Cons:
+        -  Unable to filter existing Appointments more efficiently to find a specific Appointment
+
++ Alternative 2: Support multiple fields with specific delimiters (eg. `finda \date 01/04/2020 \time 01:00 PM`)
+    * Pros:
+        - Allows us to be more specific when filtering and searching for a certain Appointment.
+    * Cons:
+        - Not as compatible with TimeConverter class. Requires more sophisticated methods to parse input, as well 
+        as error handling to handle complicated error cases for multiple input fields.
+
+#### 2.2.4.15 FindPatientCommand Class
+
+To search the `PatientList` by keyword, the `FindPatientCommand` class is used. For this class, it serves as a 
+facade class for the Main, PatientList, Ui and the Storage class to interact with one another.
+
+1.	The `FindPatientCommand` class is processed by Parser
+
+2.	When the Main calls `execute(Ui ui, Storage storage)`, it creates `searchResults`, a new List to hold `Patient` objects. 
+
+3.	The `FindPatientCommand` class gets the existing list of Patient objects from PatientList using the method 
+`getPatientList()`.
+
+4.	After which, the `FindPatientCommand` object will iterate through Patient objects within the list. This class searches
+through every field in the Patient object for the search keyword.
+
+5.	If a Patient object does contain the search keyword, it will be added to searchResults.
+
+6.	searchResults then invokes the ui method `printPatientSearchResults()` to print the matching Patient results to the console.
+(if searchResults is non-empty). Otherwise, the method outputs a message saying no search results were found.
+
+Below shows the sequence diagram for FindPatientCommand class.
+
+![](images/findpatient_seq1.PNG)
+![](images/findpatient_ref.PNG)
+
+##### 2.2.4.15.1 Design Considerations
+###### Aspect: Format of Search Input
+
++ Alternative 1 (current choice): General search (search value across all fields)
+    * Pros: 
+        - Easier implementation
+    * Cons:
+        -  May be relatively slower in obtaining search results due to complexity of this method
+
++ Alternative 2: Support multiple fields with specific delimiters (eg. `findp \name Bob \address Bukit Batok Ave 2`)
+    * Pros:
+        - Allows us to be more specific when filtering and searching for a certain Patient
+    * Cons:
+        - Requires us to manage the different possible combinations of fields in the input (there are 4 fields, resulting in
+        24 possible combinations). We would need additional clauses and exceptions to handle the increased complexity of this input.
+
+#### 2.2.4.16 HelpCommand
 
 To see the help usage for the commands in HAMS, the ```HelpCommand``` class is used. For this ```HelpCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact. The purpose of the class is to print out the usage
@@ -681,7 +774,7 @@ Below shows the sequence diagram for ```HelpCommand``` class.
 
 ![](images/HelpSequenceDiagram.png)
  
-#### 2.2.4.15 ExitCommand
+#### 2.2.4.17 ExitCommand
  
 To print the bye message for HAMS, the ```HelpCommand``` class is used. For this ```ClearPatientCommand``` class, it 
 serves as a facade class for the ```Main```, ```Ui``` class to interact.
