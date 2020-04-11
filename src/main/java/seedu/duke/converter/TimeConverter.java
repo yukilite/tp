@@ -1,11 +1,12 @@
 package seedu.duke.converter;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.text.ParseException;
 
 /**
  * This class converts the String time and date entered by the user into the String of the desired format.
+ *
  * @author Samantha Goh
  */
 public class TimeConverter {
@@ -14,6 +15,7 @@ public class TimeConverter {
 
     /**
      * This method converts the old date into a new date format.
+     *
      * @param oldDate the date entered by the user.
      * @return newDate the date in the desired format.
      * @throws ParseException the error occurs if the date is not found.
@@ -30,6 +32,7 @@ public class TimeConverter {
 
     /**
      * This method converts the old time into a new time format.
+     *
      * @param oldTime the time entered by the user.
      * @return newTime the time in the desired format.
      * @throws ParseException the error occurs if the time is not found.
@@ -49,6 +52,7 @@ public class TimeConverter {
 
     /**
      * This method converts the date back into the format of dd/mm/yyyy.
+     *
      * @param oldDate the time entered by the user.
      * @return convertedDate the time in the desired format.
      * @throws ParseException the error occurs if the time is not found.
@@ -64,6 +68,7 @@ public class TimeConverter {
 
     /**
      * This method converts the old time back into the format of hh:mm.
+     *
      * @param oldTime the time entered by the user.
      * @return convertedTime the time in the desired format.
      * @throws ParseException the error occurs if the time is not found.

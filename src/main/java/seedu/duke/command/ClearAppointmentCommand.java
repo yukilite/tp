@@ -34,7 +34,7 @@ public class ClearAppointmentCommand extends Command {
      *
      * @param ui      the ui object which can be used to display text
      * @param storage the storage object for auto saving function
-     * @throws IOException when there is error in the index's input
+     * @throws IOException    when there is error in the index's input
      * @throws ParseException when there is error in the index's input
      * @see IOException
      * @see ParseException
@@ -58,12 +58,10 @@ public class ClearAppointmentCommand extends Command {
             storage.saveAppointmentsList();
 
             // Show all items in both lists deleted message
-            // ui.showAppointmentsDeleted(); // TODO Justin
-            System.out.println("All appointment cleared!");
+            ui.showAppointmentsDeleted();
 
         } catch (EmptyAppointmentsException e) {
-            System.out.println("There is nothing to clear in appointments' list");
-            // ui.showNothingToClearAppointments() // TODO Justin
+            ui.showNothingToClearAppointments();
         }
     }
 }

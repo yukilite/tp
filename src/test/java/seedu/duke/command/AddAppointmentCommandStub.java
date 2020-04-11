@@ -19,6 +19,7 @@ public class AddAppointmentCommandStub extends AddAppointmentCommand {
 
     /**
      * Constructor thing.
+     *
      * @param appointmentInfo fake map of info.
      */
     public AddAppointmentCommandStub(Map<String, String> appointmentInfo) throws InvalidFormatException {

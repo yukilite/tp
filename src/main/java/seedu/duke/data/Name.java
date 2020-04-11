@@ -4,6 +4,7 @@ import seedu.duke.exceptions.InvalidFormatException;
 
 /**
  * Class for name's validation.
+ *
  * @author DUC
  */
 public class Name {

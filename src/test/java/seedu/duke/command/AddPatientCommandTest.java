@@ -123,14 +123,14 @@ class AddPatientCommandTest {
     void testAddEmptyString() throws IOException, InvalidFormatException {
         Ui ui = null;
         Storage storage = null;
-        Map<String,String> tempMap = AddPatientCommandStub.generateMap(2);
+        Map<String, String> tempMap = AddPatientCommandStub.generateMap(2);
         AddPatientCommand addCommand = new AddPatientCommandStub(tempMap);
-        addCommand.execute(ui,storage);
+        addCommand.execute(ui, storage);
         PatientStub temppatient = PatientListStub.getPatientList().get(PatientListStub.getTotalPatients() - 1);
-        PatientStub newPatient = new PatientStub("", -1,"","");
-        assertEquals(temppatient.getName(),newPatient.getName());
-        assertEquals(temppatient.getAge(),newPatient.getAge());
-        assertEquals(temppatient.getAddress(),newPatient.getAddress());
-        assertEquals(temppatient.getContactNumber(),newPatient.getContactNumber());
+        PatientStub newPatient = new PatientStub("", -1, "", "");
+        assertEquals(temppatient.getName(), newPatient.getName());
+        assertEquals(temppatient.getAge(), newPatient.getAge());
+        assertEquals(temppatient.getAddress(), newPatient.getAddress());
+        assertEquals(temppatient.getContactNumber(), newPatient.getContactNumber());
     }
 }
