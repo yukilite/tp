@@ -752,7 +752,7 @@ below.
 
 We decided to categorize `clearp`, `cleara`, `clearall`, `help` and `exit`, in the `[else]` alt branch. This is because 
 these 4 commands do not require any additional parsing. As such, the default `[else]` will be executed for these commands. 
-You can find the Sequence diagram for default `[else]` ![here](#sequence-diagram-for-default-else).
+You can find the Sequence diagram for default `[else]` [here](#sequence-diagram-for-default-else).
 
 ##### Sequence Diagram for `addp`
 
@@ -762,7 +762,7 @@ When you provide an `addp` command, an internal method, `getPatientFieldAdd(user
 then be created.
 
 We can update the HashMap by calling this method - `fillPatientFields(userInput, HashMap)`. The HashMap
-based on the ![fields](#13-definitions) the user provide.
+based on the [fields](#13-definitions) the user provide.
 
 For example a valid user input: `addp \name Justin \age 23`. `fillPatientFields(userInput, HashMap)` will update the HashMap
 to contain these key value pairs.
@@ -807,7 +807,7 @@ When you provide an `adda` command, an internal method, `getAppointmentFieldAdd(
 then be created.
 
 We can update the HashMap by calling this method - `fillAppointmentFields(userInput, HashMap)`. The HashMap
-based on the ![fields](#13-definitions) the user provide.
+based on the [fields](#13-definitions) the user provide.
 
 For example a valid user input: `adda \time 1234 \date 22/05/2020 \pid 1`. `fillAppointmentFields(userInput, HashMap)` will update the HashMap
 to contain these key value pairs.
@@ -854,7 +854,7 @@ This HashMap will then be returned so that a `DeleteAppointmentCommand` object c
 ![](images/SD_parser/findp.JPG)
 
 When you provide a `findp` command, an internal method, `getSearchValue(userInput)` is called. The sequence diagram for
-for this method is ![here](#sequence-diagram-for-get-search-value). It will return the value to be searched. 
+for this method is [here](#sequence-diagram-for-get-search-value). It will return the value to be searched. 
 
 When this search value, a FindPatientCommand will be created and a reference to it will be returned.
 
@@ -863,7 +863,7 @@ When this search value, a FindPatientCommand will be created and a reference to 
 ![](images/SD_parser/findp.JPG)
 
 When you provide a `finda` command, an internal method, `getSearchValue(userInput)` is called. The sequence diagram for
-for this method is ![here](#sequence-diagram-for-get-search-value). It will return the value to be searched. 
+for this method is [here](#sequence-diagram-for-get-search-value). It will return the value to be searched. 
 
 When this search value, a FindAppointmentCommand will be created and a reference to it will be returned.
 
@@ -871,7 +871,7 @@ When this search value, a FindAppointmentCommand will be created and a reference
 
 ![](images/SD_parser/Slide8.JPG)
 
-As explained ![above](#sequence-diagram-when-parsecommanduserinput-is-initially-called), the commands `clearp`, `cleara`, `clearall`, `help` and `exit` 
+As explained [above](#sequence-diagram-when-parsecommanduserinput-is-initially-called), the commands `clearp`, `cleara`, `clearall`, `help` and `exit` 
 will be directed to this branch.
 
 This is because they do not require any additional parsing. 
