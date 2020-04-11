@@ -91,11 +91,11 @@ This command exits the HAMS program and saves the current Patient/Appointment da
 
 Below shows the sequence diagram for ```AddPatientCommand``` class
 
-![](../images/AddPatientCommandSequence.png){:height="80%" width="80%"}
+![](../images/AddPatientCommandSequence.png)
 
-![](../images/AddPatientCommandSequenceAddIntoPatientList.png){:height="80%" width="80%"}
+![](../images/AddPatientCommandSequenceAddIntoPatientList.png)
 
-![](../images/AddPatientCommandSequenceAutoSavePatientList.png){:height="80%" width="80%"}
+![](../images/AddPatientCommandSequenceAutoSavePatientList.png)
  
 
 ##### 2.2.4.2 AddAppointmentCommand Class
@@ -103,28 +103,21 @@ Below shows the sequence diagram for ```AddPatientCommand``` class
 
 Below shows the sequence diagram for ```AddAppointmentCommand``` class:
 
-![](../images/AddAppointCommandSequence.png){:height="80%" width="80%"}
+![](../images/AddAppointCommandSequence.png)
 
-![](../images/AddAppointCommandSequenceAddNewAppointment.png){:height="80%" width="80%"}
+![](../images/AddAppointCommandSequenceAddNewAppointment.png)
 
-![](../images/AddAppointCommandSequenceAutoSavingAppointList.png){:height="80%" width="80%"}
+![](../images/AddAppointCommandSequenceAutoSavingAppointList.png)
 
 ##### 2.2.4.3 ListPatientCommand Class
 
 Below shows the sequence diagram for ```ListPatientCommand``` class
 
-![](../images/ListPatientCommandSequence.png){:height="80%" width="80%"}
+![](../images/ListPatientCommandSequence.png)
 
 ##### 2.2.4.4 ListAppointmentCommand Class
 
-![](../images/ListAppointmentCommandSequence.png){:height="80%" width="80%"}
-
-
-
-##### 2.2.4.6 Design considerations
-
-For the 5 classes listed, there were some other design considerations that was discussed for these 5 classes. Here
-, we will discuss the other choices and the pros and cons for them.
+![](../images/ListAppointmentCommandSequence.png)
 
 ###### 2.2.4.6.1 Aspect: Facade classes
 + Alternative 1 (current choice): Making all 4 classes facade classes
